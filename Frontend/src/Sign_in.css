@@ -1,0 +1,59 @@
+body {
+    background-color: #E9E9E9;
+}
+/* SignIn.css */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+  }
+  
+  .form-container {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    text-align: center;
+  }
+  .container .form-container h2 {
+    color: #795AAC;
+  }
+  .container .form-container p span {
+    color: #795AAC;
+    margin-left: 5px;
+  }
+  .form-container label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .btn {
+    width: 80px;
+    height: 30px;
+    background: #795AAC;
+    border-radius: 20px;
+    color: #E9E9E9;
+  }
+
+input::placeholder {
+    color: #999; 
+    font-style: italic; 
+  }
+  
+  input:focus::placeholder {
+    color: #666; 
+    font-style: normal;
+  }
+
+  
+  
