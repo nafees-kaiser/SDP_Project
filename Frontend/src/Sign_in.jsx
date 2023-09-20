@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './Sign_in.css'; // Import the external CSS file
+import './Sign_in.css'; 
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 const SignIn = () => {
   const [formData, setFormData] = useState({
@@ -25,6 +26,15 @@ const SignIn = () => {
 
   return (
     <div className="container">
+      <div className="intro">
+        <div className="middle">
+          <h1>Welcome</h1>
+          <p>You are a step away to join our largest Community</p>
+          <h5>Already have an account?</h5>
+          <button type="submit" className='btn5'>Log In</button>
+          <i class="bi bi-facebook"></i>
+        </div>
+      </div>
       <div className="form-container">
         <h2>Register Now!</h2>
         <p>Fill the information carefully</p>
@@ -102,11 +112,12 @@ const SignIn = () => {
             />
           </div>
           <div>
-            <button type="submit" className='btn'>Sign In</button>
+            <button type="submit" className='btn5'>Sign In</button>
           </div>
           <p>Already have an account?<span> LogIn</span></p>
         </form>
       </div>
+      
     </div>
   );
 };

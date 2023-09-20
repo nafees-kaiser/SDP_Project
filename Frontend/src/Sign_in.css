@@ -4,19 +4,27 @@ body {
 /* SignIn.css */
 .container {
     display: flex;
+    width: 700px;
+    height: 82vh;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-image: linear-gradient(#ae00ff,#1690cd);
     
   }
-  
+  .intro {
+    color: #e9dddd;
+
+  }
+
   .form-container {
     width: 400px;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 5px 5px 5px 5px;
     background-color: #fff;
     text-align: center;
+    margin-right: 2px;
   }
   .container .form-container h2 {
     color: #795AAC;
@@ -37,10 +45,10 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
   }
-  .btn {
-    width: 80px;
-    height: 30px;
-    background: #795AAC;
+  .btn5 {
+    width: 150px;
+    height: 40px;
+    background-color: #795AAC;
     border-radius: 20px;
     color: #E9E9E9;
   }
