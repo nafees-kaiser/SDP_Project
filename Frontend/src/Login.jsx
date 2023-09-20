@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Checkbox from './Components/Checkbox';
 import './login.css';
 
 const LogIn = () => {
@@ -20,23 +21,24 @@ const LogIn = () => {
 
     return (
         <div className="container">
-            <div className="logo">
-                <img src="./images/logo.png" alt="Logo" />
-            </div>
+            
             <div className="body-wrapper">
                 <div className="wrapper">
                     <div className="title">
                         <div className="heading">
-                            <h2 className="text-color font-family-header">Welcome</h2>
-                            <span className="text-color">
+                            <div className="logo">
+                                <img src="./images/logo.png" alt="Logo" />
+                            </div>
+                            <h2 className="text-color font-family-header text-alignment">Welcome</h2>
+                            <span className="text-color text-alignment">
                                 To keep connected with us please Login
                             </span>
                         </div>
-                        <p className="text-color">Not have any account?</p>
+                        <p className="text-color text-alignment">Not have any account?</p>
                         <button className="button">Sign up</button>
                     </div>
                     <form onSubmit={formSubmit} className="input">
-                        <h1>User Login</h1>
+                        <h1 className='text-alignment'>User Login</h1>
                         {/* <div class="icons">
                   <a href="#"><img src="#" alt="icon"></a>
                   <a href="#"><img src="#" alt="icon"></a>
@@ -55,6 +57,7 @@ const LogIn = () => {
                                 onChange={changePassword}
                                 value={password}
                             />
+                            <Checkbox name="Remember me"/>
                         </div>
                         <div className="buttons">
                             <button className="button">Log in</button>
