@@ -1,6 +1,7 @@
 body {
-    background-color: #E9E9E9;
+  background-color: #E9E9E9;
 }
+
 /* SignIn.css */
 .container {
     display: flex;
@@ -54,14 +55,11 @@ body {
   }
 
 input::placeholder {
-    color: #999; 
-    font-style: italic; 
-  }
-  
-  input:focus::placeholder {
-    color: #666; 
-    font-style: normal;
-  }
+  color: #999;
+  font-style: italic;
+}
 
-  
-  
+input:focus::placeholder {
+  color: #666;
+  font-style: normal;
+}
