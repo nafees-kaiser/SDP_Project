@@ -114,7 +114,7 @@ const SignIn = () => {
           <div>
             <button type="submit" className='btn5'>Sign In</button>
           </div>
-          <p>Already have an account?<span> LogIn</span></p>
+          <p>Already have an account?<span> Log In</span></p>
         </form>
       </div>
       

@@ -7,8 +7,8 @@ import LogIn from './Login.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <SignIn/>
-    {/* <LogIn/> */}
+    {/* <SignIn/> */}
+    <LogIn/>
    
   </React.StrictMode>,
 )

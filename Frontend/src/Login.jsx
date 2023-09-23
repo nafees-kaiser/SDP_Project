@@ -20,7 +20,7 @@ const LogIn = () => {
     }
 
     return (
-        <div className="container">
+        <div className="container-login">
             
             <div className="body-wrapper">
                 <div className="wrapper">
