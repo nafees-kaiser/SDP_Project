@@ -1,0 +1,5 @@
+cd Backend
+npm init -y
+npm express
+npm i mongoose
+npm i dotenv
