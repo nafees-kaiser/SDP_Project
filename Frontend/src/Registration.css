@@ -2,11 +2,20 @@
     background-color: red;
     position: relative;
 }
-.Middle {
+.middle2 {
     width: 80%;
     height: 600px;
-    background: rgb(174, 0, 255);
-    background: linear-gradient(167deg,rgba(174,0,255,1)0%,rgba(123,73,170,1)43%,rgba(22,144,205,1)100%);
+    border: 2px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: rgb(121,90,172);
+    background: linear-gradient(90deg, rgba(121,90,172,1) 25%, rgba(153,157,238,1) 88%);
+}
+.Middle {
+    width: 90%;
+    height: 500px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -15,9 +24,10 @@
     flex-direction: row;
 }
 .left {
-    width: 30%;
+    width: 20%;
     height: 80%;
-    border: 2px solid red;
+    float: left;
+    margin-top: 50px;
 }
 .left img {
     width: 100px;
@@ -25,7 +35,40 @@
 
 }
 .right {
-    width: 70%;
+    width: 80%;
     height: 80%;
-    border: 2px solid rgb(32, 17, 163);
+    float: right;
+    background-color: white;
+    border-radius: 130px 0px 0px 130px;
+    margin-left: 45px;
 }
+.form {
+    display: flex;
+}
+.leftForm {
+    width: 40%;
+    height: 100%;
+    margin: 0px 0px 0px 40px;
+    
+}
+.rightForm {
+    width: 40%;
+    height: 100%;
+    margin: 0px 0px 0px 100px;
+}
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  input::placeholder {
+    color: #999; 
+    font-style: italic; 
+  }
+  
+  input:focus::placeholder {
+    color: #666; 
+    font-style: normal;
+  }
