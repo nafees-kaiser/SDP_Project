@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Sign_in.css'; // Import the external CSS file
+import signin from './Sign_in.module.css'; // Import the external CSS file
 
 const SignIn = () => {
   const [formData, setFormData] = useState({
@@ -24,8 +24,8 @@ const SignIn = () => {
   };
 
   return (
-    <div className="container">
-      <div className="form-container">
+    <div className={signin.container}>
+      <div className={signin['form-container']}>
         <h2>Register Now!</h2>
         <p>Fill the information carefully</p>
         <form onSubmit={handleSubmit}>
@@ -102,7 +102,7 @@ const SignIn = () => {
             />
           </div>
           <div>
-            <button type="submit" className='btn'>Sign In</button>
+            <button type="submit" className={signin.btn}>Sign In</button>
           </div>
           <p>Already have an account?<span> LogIn</span></p>
         </form>
@@ -110,5 +110,7 @@ const SignIn = () => {
     </div>
   );
 };
+
+document.body.className = signin['sign-in-page'];
 
 export default SignIn;

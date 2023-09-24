@@ -67,3 +67,8 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Hanken+Grotesk:wght@500;700;800&family=Inter&display=swap');
+
+body{
+  font-family: 'Hanken Grotesk', sans-serif;
+}

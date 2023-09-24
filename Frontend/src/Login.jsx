@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Checkbox from './Components/Checkbox';
-import './login.css';
+import style from './login.module.css';
 
+document.body.className = style['log-in-page'];
 const LogIn = () => {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
@@ -20,31 +21,26 @@ const LogIn = () => {
     }
 
     return (
-        <div className="container">
+        <div className={style.container}>
             
-            <div className="body-wrapper">
-                <div className="wrapper">
-                    <div className="title">
-                        <div className="heading">
-                            <div className="logo">
+            <div className={style['body-wrapper']}>
+                <div className={style.wrapper}>
+                    <div className={style.title}>
+                        <div className={style.heading}>
+                            <div className={style.logo}>
                                 <img src="./images/logo.png" alt="Logo" />
                             </div>
-                            <h2 className="text-color font-family-header text-alignment">Welcome</h2>
-                            <span className="text-color text-alignment">
+                            <h2 className={`${style['text-color']} ${style['font-family-header']} ${style['text-alignment']}`}>Welcome</h2>
+                            <span className={`${style['text-color']} ${style['text-alignment']}`}>
                                 To keep connected with us please Login
                             </span>
                         </div>
-                        <p className="text-color text-alignment">Not have any account?</p>
-                        <button className="button">Sign up</button>
+                        <p className={`${style['text-color']} ${style['text-alignment']}`}>Not have any account?</p>
+                        <button className={style.button}>Sign up</button>
                     </div>
-                    <form onSubmit={formSubmit} className="input">
-                        <h1 className='text-alignment'>User Login</h1>
-                        {/* <div class="icons">
-                  <a href="#"><img src="#" alt="icon"></a>
-                  <a href="#"><img src="#" alt="icon"></a>
-                  <a href="#"><img src="#" alt="icon"></a>
-              </div> */}
-                        <div className="textboxes">
+                    <form onSubmit={formSubmit} className={style.input}>
+                        <h1 className={style['text-alignment']}>User Login</h1>
+                        <div className={style.textboxes}>
                             <input
                                 type="text"
                                 placeholder="Enter your Email"
@@ -59,16 +55,15 @@ const LogIn = () => {
                             />
                             <Checkbox name="Remember me"/>
                         </div>
-                        <div className="buttons">
-                            <button className="button">Log in</button>
-                            <button className="button">Forget password</button>
+                        <div className={style.buttons}>
+                            <button className={style.button}>Log in</button>
+                            <button className={style.button}>Forget password</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
     )
 }
 
-export default LogIn
+export default LogIn;
