@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import "./Registration.css"
 
-const Registration = ()=>{
+const Registration = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -12,17 +13,36 @@ const Registration = ()=>{
         password: '',
         confirmPassword: '',
     });
-      
+
     const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
-    
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your form submission logic here
-    };
-    
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          // Send the registration data to the server for processing
+          
+          const response = await axios.post('http://localhost:5172/register', formData, {
+          headers: {
+                'Content-Type': 'application/json',
+            },
+          });
+      
+          if (response.status === 200) {
+            // Registration was successful, you can redirect the user to another page.
+            // Example: window.location.href = '/login';
+            console.log('Registration successful');
+          } else {
+            // Handle registration error, show an error message, etc.
+            console.log(formData);
+            console.error('Registration failed');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
 
     return (
         <>
@@ -36,52 +56,52 @@ const Registration = ()=>{
                         <button className='btn-primary'>LogIn</button>
                     </div>
                     <div className="right">
-                    <h2>Register Now!</h2>
-                    <p>Fill the information carefully</p>
-                    <form onSubmit={handleSubmit}>
-                        <div className="form">
-                            <div className="leftForm">
-                                <div>
-                                    <input 
-                                        name='name'
-                                        placeholder='Name'
-                                        type="text"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                    />
+                        <h2>Register Now!</h2>
+                        <p>Fill the information carefully</p>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form">
+                                <div className="leftForm">
+                                    <div>
+                                        <input
+                                            name='name'
+                                            placeholder='Name'
+                                            type="text"
+                                            value={formData.name}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div>
+                                        <input
+                                            name='email'
+                                            placeholder='Email'
+                                            type="text"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div>
+                                        <input
+                                            name='mobileNumber'
+                                            placeholder='Number'
+                                            type="number"
+                                            value={formData.mobileNumber}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div>
+                                        <input
+                                            name='area'
+                                            placeholder='Area'
+                                            type="text"
+                                            value={formData.area}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
                                 </div>
-                                <div>
-                                    <input 
-                                        name='Email'
-                                        placeholder='Email'
-                                        type="text"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                <div>
-                                    <input 
-                                        name='Number'
-                                        placeholder='Number'
-                                        type="tel"
-                                        value={formData.mobileNumber}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                <div>
-                                    <input 
-                                        name='Area'
-                                        placeholder='Area'
-                                        type="text"
-                                        value={formData.area}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                            </div>
-                            <div className="rightForm">
-                                <div>
-                                        <input 
-                                            name='District'
+                                <div className="rightForm">
+                                    <div>
+                                        <input
+                                            name='district'
                                             placeholder='District'
                                             type="text"
                                             value={formData.district}
@@ -89,8 +109,8 @@ const Registration = ()=>{
                                         />
                                     </div>
                                     <div>
-                                        <input 
-                                            name='Division'
+                                        <input
+                                            name='division'
                                             placeholder='Division'
                                             type="text"
                                             value={formData.division}
@@ -98,8 +118,8 @@ const Registration = ()=>{
                                         />
                                     </div>
                                     <div>
-                                        <input 
-                                            name='Password'
+                                        <input
+                                            name='password'
                                             placeholder='Password'
                                             type="password"
                                             value={formData.password}
@@ -107,8 +127,8 @@ const Registration = ()=>{
                                         />
                                     </div>
                                     <div>
-                                        <input 
-                                            name='Confirm Password'
+                                        <input
+                                            name='confirmPassword'
                                             placeholder='Confirm Password'
                                             type="password"
                                             value={formData.confirmPassword}
@@ -116,21 +136,16 @@ const Registration = ()=>{
                                         />
                                     </div>
                                 </div>
-                                
                             </div>
                             <div>
                                 <button type="submit" className='btn5'>Sign In</button>
                             </div>
-                            
-                        
-                    </form>
-
-
-                        </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        
         </>
     )
 }
+
 export default Registration;
