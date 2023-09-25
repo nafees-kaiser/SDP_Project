@@ -33,7 +33,7 @@ app.post('/register', async (req, res) => {
     const user = await newUser.save();
 
     res.status(201).json(user);
-    console.log('User saved to the database');
+    console.log('User saved to the database(BACKEND)');
   } catch (err) {
     console.error(err);
     res.status(500).send('Error saving user');
@@ -52,5 +52,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+  console.log(`Server is listening on port http://localhost:${PORT}/`);
 });
