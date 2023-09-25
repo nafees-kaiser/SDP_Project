@@ -24,7 +24,7 @@ const Registration = () => {
         try {
           // Send the registration data to the server for processing
           
-          const response = await axios.post('http://localhost:5172/register', formData, {
+          const response = await axios.post('http://localhost:3000/register', formData, {
           headers: {
                 'Content-Type': 'application/json',
             },
@@ -37,10 +37,11 @@ const Registration = () => {
           } else {
             // Handle registration error, show an error message, etc.
             console.log(formData);
-            console.error('Registration failed');
+            console.error('Registration failed(Frontend)');
           }
         } catch (error) {
           console.error('Error:', error);
+          console.error('Registration failed(catch)');
         }
       };
 
