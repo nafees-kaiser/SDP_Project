@@ -37,6 +37,7 @@ const Registration = () => {
           } else {
             // Handle registration error, show an error message, etc.
             console.log(formData);
+            console.log(response.status);
             console.error('Registration failed');
           }
         } catch (error) {
