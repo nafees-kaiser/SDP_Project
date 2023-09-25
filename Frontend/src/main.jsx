@@ -1,17 +1,38 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import './index.css'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
-import SignIn from './Sign_in.jsx';
+
+
 import LogIn from './Login.jsx';
 import ProductListing from './ProductListing.jsx';
-import IndividualProduct from './IndividualProduct.jsx'; 
+import IndividualProduct from './IndividualProduct.jsx';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <LogIn />
+  },
+  {
+    path: '/product-listing',
+    element: <ProductListing />
+  },
+  {
+    path: '/individual-product',
+    element: <IndividualProduct />
+  }
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     {/* <SignIn/> */}
     {/* <LogIn/> */}
     {/* <ProductListing /> */}
-    <IndividualProduct/>
+    {/* <IndividualProduct/> */}
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )

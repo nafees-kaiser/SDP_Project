@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Checkbox from './Components/Checkbox';
 import style from './login.module.css';
 
-document.body.className = style['log-in-page'];
+
 const LogIn = () => {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");

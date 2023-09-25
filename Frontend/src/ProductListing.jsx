@@ -1,10 +1,12 @@
 import React from "react";
 import style from "./ProductListing.module.css"
+import nakshiKathaImage from "./assets/nakshi_katha(1).jpg";
+import Card from "./Components/Card";
 
 
-export default function ProductListing(){
+export default function ProductListing() {
     return (
-        <>
+        <div className={style.container}>
             <div>navbar</div>
             <div className={style['hero-section']}>
                 <h1>Handicraft Products</h1>
@@ -13,100 +15,125 @@ export default function ProductListing(){
             <div className={style['product-list']}>
                 <div className={style['sort-and-filter']}>
                     <p>100 products</p>
-                    <button>Filter</button>
-                    <button>Sort by</button>
+                    {/* <button>Filter</button>
+                        <button>Sort by</button> */}
                 </div>
                 <div className={style['product-cards']}>
-                    <div className="card">
-                        <img src="" alt="" />
-                        <p>Review</p>
-                        <p>Product Name</p>
-                        <p>Location</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card">
-                        <img src="" alt="" />
-                        <p>Review</p>
-                        <p>Product Name</p>
-                        <p>Location</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card">
-                        <img src="" alt="" />
-                        <p>Review</p>
-                        <p>Product Name</p>
-                        <p>Location</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card">
-                        <img src="" alt="" />
-                        <p>Review</p>
-                        <p>Product Name</p>
-                        <p>Location</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card">
-                        <img src="" alt="" />
-                        <p>Review</p>
-                        <p>Product Name</p>
-                        <p>Location</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card">
-                        <img src="" alt="" />
-                        <p>Review</p>
-                        <p>Product Name</p>
-                        <p>Location</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card">
-                        <img src="" alt="" />
-                        <p>Review</p>
-                        <p>Product Name</p>
-                        <p>Location</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card">
-                        <img src="" alt="" />
-                        <p>Review</p>
-                        <p>Product Name</p>
-                        <p>Location</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card">
-                        <img src="" alt="" />
-                        <p>Review</p>
-                        <p>Product Name</p>
-                        <p>Location</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card">
-                        <img src="" alt="" />
-                        <p>Review</p>
-                        <p>Product Name</p>
-                        <p>Location</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card">
-                        <img src="" alt="" />
-                        <p>Review</p>
-                        <p>Product Name</p>
-                        <p>Location</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card">
-                        <img src="" alt="" />
-                        <p>Review</p>
-                        <p>Product Name</p>
-                        <p>Location</p>
-                        <p>Price</p>
-                    </div>
+                    <a href="#">
+                        <Card
+                            image={nakshiKathaImage}
+                            review="review"
+                            productName="Nakshi Katha"
+                            location="Faridpur, Dhaka"
+                            price="220 Tk"
+                        />
+                    </a>
+                    <a href="#">
+                        <Card
+                            image={nakshiKathaImage}
+                            review="review"
+                            productName="Nakshi Katha"
+                            location="Faridpur, Dhaka"
+                            price="220 Tk"
+                        />
+                    </a>
+                    <a href="#">
+                        <Card
+                            image={nakshiKathaImage}
+                            review="review"
+                            productName="Nakshi Katha"
+                            location="Faridpur, Dhaka"
+                            price="220 Tk"
+                        />
+                    </a>
+                    <a href="#">
+                        <Card
+                            image={nakshiKathaImage}
+                            review="review"
+                            productName="Nakshi Katha"
+                            location="Faridpur, Dhaka"
+                            price="220 Tk"
+                        />
+                    </a>
+                    <a href="#">
+                        <Card
+                            image={nakshiKathaImage}
+                            review="review"
+                            productName="Nakshi Katha"
+                            location="Faridpur, Dhaka"
+                            price="220 Tk"
+                        />
+                    </a>
+                    <a href="#">
+                        <Card
+                            image={nakshiKathaImage}
+                            review="review"
+                            productName="Nakshi Katha"
+                            location="Faridpur, Dhaka"
+                            price="220 Tk"
+                        />
+                    </a>
+                    <a href="#">
+                        <Card
+                            image={nakshiKathaImage}
+                            review="review"
+                            productName="Nakshi Katha"
+                            location="Faridpur, Dhaka"
+                            price="220 Tk"
+                        />
+                    </a>
+                    <a href="#">
+                        <Card
+                            image={nakshiKathaImage}
+                            review="review"
+                            productName="Nakshi Katha"
+                            location="Faridpur, Dhaka"
+                            price="220 Tk"
+                        />
+                    </a>
+                    <a href="#">
+                        <Card
+                            image={nakshiKathaImage}
+                            review="review"
+                            productName="Nakshi Katha"
+                            location="Faridpur, Dhaka"
+                            price="220 Tk"
+                        />
+                    </a>
+                    <a href="#">
+                        <Card
+                            image={nakshiKathaImage}
+                            review="review"
+                            productName="Nakshi Katha"
+                            location="Faridpur, Dhaka"
+                            price="220 Tk"
+                        />
+                    </a>
+                    <a href="#">
+                        <Card
+                            image={nakshiKathaImage}
+                            review="review"
+                            productName="Nakshi Katha"
+                            location="Faridpur, Dhaka"
+                            price="220 Tk"
+                        />
+                    </a>
+                    <a href="#">
+                        <Card
+                            image={nakshiKathaImage}
+                            review="review"
+                            productName="Nakshi Katha"
+                            location="Faridpur, Dhaka"
+                            price="220 Tk"
+                        />
+                    </a>
+
                 </div>
-                <button>Load more</button>
-                <footer>
-                    
-                </footer>
+                <button className={style.button}>Load more</button>
             </div>
-        </>
+            <footer>
+                footer
+            </footer>
+        </div>
     );
 }
