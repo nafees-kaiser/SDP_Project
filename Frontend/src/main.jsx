@@ -7,7 +7,7 @@ import Registration from './Registration.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     {/* <SignIn/> */}
-    <LogIn/>
+      <Registration/>
    
   </React.StrictMode>,
 )

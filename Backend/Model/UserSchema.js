@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
         unique: true
     },
     number: {
-        type: Number,
+        type: String,
         require: true
     },
     area: {

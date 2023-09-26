@@ -84,7 +84,7 @@ const Registration = () => {
                                         <input
                                             name='mobileNumber'
                                             placeholder='Number'
-                                            type="number"
+                                            type="text"
                                             value={formData.mobileNumber}
                                             onChange={handleChange}
                                         />
