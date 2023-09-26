@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import style from "./Registration.module.css"; // Import your CSS module
+import Button from './Components/Button';
 
 const Registration = () => {
     const [formData, setFormData] = useState({
@@ -54,7 +55,8 @@ const Registration = () => {
                         <h1>Welcome</h1>
                         <p>Join our largest Community</p>
                         <p>Already have an account?</p>
-                        <button className={style['btn-primary']}>LogIn</button>
+                        {/* <button className={style['btn-primary']}>LogIn</button> */}
+                        <Button text="Login"/>
                     </div>
                     <div className={style.right}>
                         <h2>Register Now!</h2>
@@ -147,7 +149,8 @@ const Registration = () => {
                                 </div>
                             </div>
                             <div>
-                                <button type="submit" className={style.btn5}>Sign In</button>
+                                {/* <button type="submit" className={style.btn5}>Sign In</button> */}
+                                <Button text="Sign in"/>
                             </div>
                         </form>
                     </div>
