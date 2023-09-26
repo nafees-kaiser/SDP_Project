@@ -1,70 +1,69 @@
 import React, { useState } from 'react';
-import './Login.css'; // Import your CSS file
-import loginImage from './assets/react.svg'; // Import your login image
+import Checkbox from './Components/Checkbox';
+import style from './login.module.css';
 
-function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
+const LogIn = () => {
+    let [email, setEmail] = useState("");
+    let [password, setPassword] = useState("");
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+    const changeEmail = (event) =>{
+        setEmail(event.target.value);
+        console.log(event.target.value);
+    }
+    const changePassword = (event) =>{
+        setPassword(event.target.value);
+        console.log(event.target.value);
+    }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your login logic here
-  };
+    const formSubmit = (event) => {
+        event.preventDefault();
+    }
 
-  return (
-    <div className="login-container">
-      <div className="login-content">
-        <div className="left-content">
-          <img src={loginImage} alt="Login" />
-        </div>
-        <div className="right-content">
-          <form onSubmit={handleSubmit}>
-            <h2>LogIn</h2>
-            <div className="input-container">
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={handleEmailChange}
-                required
-              />
-              <label htmlFor="email" className="animated-placeholder">
-                Email
-              </label>
-            </div>
-            <div className="input-container">
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={password}
-                onChange={handlePasswordChange}
-                required
-              />
-              <label htmlFor="password" className="animated-placeholder">
-                Password
-              </label>
-            </div>
-            <div className="btng">
-                <button type="submit">Login</button>
-                <button type="submit">Sign In</button>
-            </div>
+    return (
+        <div className={style.container}>
             
-            
-          </form>
+            <div className={style['body-wrapper']}>
+                <div className={style.wrapper}>
+                    <div className={style.title}>
+                        <div className={style.heading}>
+                            <div className={style.logo}>
+                                <img src="./images/logo.png" alt="Logo" />
+                            </div>
+                            <h2 className={`${style['text-color']} ${style['font-family-header']} ${style['text-alignment']}`}>Welcome</h2>
+                            <span className={`${style['text-color']} ${style['text-alignment']}`}>
+                                To keep connected with us please Login
+                            </span>
+                        </div>
+                        <p className={`${style['text-color']} ${style['text-alignment']}`}>Not have any account?</p>
+                        <button className={style.button}>Sign up</button>
+                    </div>
+                    <form onSubmit={formSubmit} className={style.input}>
+                        <h1 className={style['text-alignment']}>User Login</h1>
+                        <div className={style.textboxes}>
+                            <input
+                                type="text"
+                                placeholder="Enter your Email"
+                                onChange={changeEmail}
+                                value={email}
+                            />
+                            <input
+                                type="password"
+                                placeholder="Enter your password"
+                                onChange={changePassword}
+                                value={password}
+                            />
+                            <Checkbox name="Remember me"/>
+                        </div>
+                        <div className={style.buttons}>
+                            <button className={style.button}>Log in</button>
+                            <button className={style.button}>Forget password</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    )
 }
 
-export default Login;
+export default LogIn;

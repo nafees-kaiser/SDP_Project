@@ -1,5 +1,5 @@
 import React from "react";
-import Know_Nav from "../Components/Know_Nav.jsx"
+import Know_Nav from "./Components/Know_Nav.jsx"
 const Become_seller = ()=>{
     return (
         <>

@@ -1,9 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Become_seller from './Become_seller.jsx'
+import './index.css'
+
+import Registration from './Registration.jsx'
+import LogIn from './Login.jsx'
+import ProductListing from './ProductListing.jsx'
+import IndividualProduct from './IndividualProduct.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-      <Become_seller/>
-  </React.StrictMode>,
+    <React.StrictMode>
+        
+        <LogIn/>
+        {/* <Registration /> */}
+        {/* <ProductListing/> */}
+        {/* <IndividualProduct/> */}
+    </React.StrictMode>,
 )

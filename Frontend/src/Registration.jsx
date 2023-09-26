@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import "./Registration.css"
+import style from "./Registration.module.css"; // Import your CSS module
+import Button from './Components/Button';
 
 const Registration = () => {
     const [formData, setFormData] = useState({
@@ -50,21 +51,22 @@ const Registration = () => {
 
     return (
         <>
-            <div className="middle2">
-                <div className="Middle">
-                    <div className="left">
+            <div className={style.middle2}>
+                <div className={style.Middle}>
+                    <div className={style.left}>
                         <img src="./images/shape.jpg" alt="" />
                         <h1>Welcome</h1>
                         <p>Join our largest Community</p>
                         <p>Already have an account?</p>
-                        <button className='btn-primary'>LogIn</button>
+                        {/* <button className={style['btn-primary']}>LogIn</button> */}
+                        <Button text="Login"/>
                     </div>
-                    <div className="right">
+                    <div className={style.right}>
                         <h2>Register Now!</h2>
                         <p>Fill the information carefully</p>
                         <form onSubmit={handleSubmit}>
-                            <div className="form">
-                                <div className="leftForm">
+                            <div className={style.form}>
+                                <div className={style.leftForm}>
                                     <div>
                                         <input
                                             name='name'
@@ -72,6 +74,7 @@ const Registration = () => {
                                             type="text"
                                             value={formData.name}
                                             onChange={handleChange}
+                                            
                                         />
                                     </div>
                                     <div>
@@ -81,6 +84,7 @@ const Registration = () => {
                                             type="text"
                                             value={formData.email}
                                             onChange={handleChange}
+                                            
                                         />
                                     </div>
                                     <div>
@@ -90,6 +94,7 @@ const Registration = () => {
                                             type="text"
                                             value={formData.mobileNumber}
                                             onChange={handleChange}
+                                           
                                         />
                                     </div>
                                     <div>
@@ -99,10 +104,11 @@ const Registration = () => {
                                             type="text"
                                             value={formData.area}
                                             onChange={handleChange}
+                                            
                                         />
                                     </div>
                                 </div>
-                                <div className="rightForm">
+                                <div className={style.rightForm}>
                                     <div>
                                         <input
                                             name='district'
@@ -110,6 +116,7 @@ const Registration = () => {
                                             type="text"
                                             value={formData.district}
                                             onChange={handleChange}
+                                            
                                         />
                                     </div>
                                     <div>
@@ -119,6 +126,7 @@ const Registration = () => {
                                             type="text"
                                             value={formData.division}
                                             onChange={handleChange}
+                                            
                                         />
                                     </div>
                                     <div>
@@ -128,6 +136,7 @@ const Registration = () => {
                                             type="password"
                                             value={formData.password}
                                             onChange={handleChange}
+                                            
                                         />
                                     </div>
                                     <div>
@@ -137,12 +146,14 @@ const Registration = () => {
                                             type="password"
                                             value={formData.confirmPassword}
                                             onChange={handleChange}
+                                            
                                         />
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <button type="submit" className='btn5'>Sign In</button>
+                                {/* <button type="submit" className={style.btn5}>Sign In</button> */}
+                                <Button text="Sign in"/>
                             </div>
                         </form>
                     </div>
