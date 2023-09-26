@@ -31,14 +31,17 @@ const Registration = () => {
             },
           });
       
-          if (response.status === 200) {
+          if (response.status === 201) {
             // Registration was successful, you can redirect the user to another page.
             // Example: window.location.href = '/login';
+            console.log("FormData: "+formData);
+            
             console.log('Registration successful');
           } else {
             // Handle registration error, show an error message, etc.
             console.log(formData);
-            console.error('Registration failed(Frontend)');
+            console.log(response.status);
+            console.error('Registration failed');
           }
         } catch (error) {
           console.error('Error:', error);

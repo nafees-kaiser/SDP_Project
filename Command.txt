@@ -7,6 +7,7 @@ npm i dotenv
 npm i body-parser
 npm i nodemon
 npm i cors
+npm i nodemailer
 
 Frontend:
 cd ..
