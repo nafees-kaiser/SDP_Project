@@ -1,0 +1,15 @@
+cd Backend
+npm init -y
+npm express
+npm i mongoose
+npm i dotenv
+npm i body-parser
+npm i nodemon
+npm i cors
+cd ..
+cd Frontend
+npm i axios
+
+
+To run Both the server
+npm run dev
