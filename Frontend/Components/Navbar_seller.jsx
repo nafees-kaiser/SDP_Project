@@ -1,5 +1,5 @@
 import React from "react";
-import Style from "./Navbar.module.css";
+import Style from "./Navbar_seller.module.css";
 import Button from '../Components/Button.jsx';
 
 const Navbar = ()=>{
@@ -29,9 +29,9 @@ const Navbar = ()=>{
                     </div>
                     <div className={Style.middle}>
                         <a href="#">Home</a>
-                        <p>Product</p>
-                        <p>Community</p>
-                        <p>Know about craft</p>
+                        <a href="#">Product</a>
+                        <a href="#">Community</a>
+                        <a href="#">Know about craft</a>
                     </div>
                     <div className={Style.right}>
                         <input type="text" className={Style.search} placeholder="Search..."></input>
