@@ -8,8 +8,7 @@
 .navbar {
     margin: auto;
     width: 90%;
-    height: 100px;
-    border: 2px solid red;
+    height: 115px;
     display: flex;
     flex-direction: column;
 }
@@ -81,6 +80,51 @@
     font-size: 1.2em;
     
 }
+/* Navbar.module.css */
+.navbar1 {
+    background-color: #333;
+    padding: 10px;
+  }
+  
+  .nav-list {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+  }
+  
+  .nav-item {
+    position: relative;
+    color: #000000;
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: var(--Background);
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .nav-item:hover .dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown-item {
+    padding: 10px;
+    color: #fff;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #555;
+  }
+  
+
 .lower .middle a {
     text-decoration: none;
     color: black;
