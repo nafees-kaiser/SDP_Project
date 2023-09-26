@@ -9,9 +9,9 @@ import IndividualProduct from './IndividualProduct.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <Registration />
+        {/* <Registration /> */}
         {/* <LogIn/> */}
         {/* <ProductListing/> */}
-        {/* <IndividualProduct/> */}
+        <IndividualProduct/>
     </React.StrictMode>,
 )

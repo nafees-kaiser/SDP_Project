@@ -9,6 +9,8 @@ const app = express();
 dotenv.config({ path: './config.env' });
 require('./Database/conn');
 const User = require('./Model/UserSchema');
+const Products = require('./Model/ProductsSchema');
+
 const PORT = process.env.PORT;
 app.use(bodyParser.json());
 app.use(cors());
