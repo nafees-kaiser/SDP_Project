@@ -41,6 +41,7 @@
     background-color: white;
     border-radius: 130px 0px 0px 130px;
     margin-left: 45px;
+    text-align: center;
 }
 .form {
     display: flex;
