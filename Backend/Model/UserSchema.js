@@ -10,8 +10,8 @@ const userSchema = new mongoose.Schema({
         require: true,
         unique: true
     },
-    number: {
-        type: Number,
+    mobileNumber: {
+        type: String,
         require: true
     },
     area: {
