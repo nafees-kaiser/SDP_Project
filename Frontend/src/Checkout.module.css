@@ -763,7 +763,7 @@ body {
   font-size: var(--paragraph-p-1-size);
   line-height: 20px;
   font-weight: 600;
-  -webkit-text-stroke: 1px #fff;
+  /* -webkit-text-stroke: 1px #fff; */
 }
 .benaroshiSaree {
   top: 24px;
