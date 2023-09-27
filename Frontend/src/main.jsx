@@ -1,18 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import {BrowserRouter} from 'react-router-dom'
 import './index.css'
+import Routing from './Routing'
 
-import Registration from './Registration.jsx'
-import LogIn from './Login.jsx'
-import ProductListing from './ProductListing.jsx'
-import IndividualProduct from './IndividualProduct.jsx'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
+        <BrowserRouter>
+            <Routing/>
+        </BrowserRouter>
         
-        <LogIn/>
-        {/* <Registration /> */}
-        {/* <ProductListing/> */}
-        {/* <IndividualProduct/> */}
     </React.StrictMode>,
 )

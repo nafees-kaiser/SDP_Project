@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import style from "./Registration.module.css"; // Import your CSS module
 import Button from './Components/Button';
+import {useNavigate} from 'react-router-dom';
 
 const Registration = () => {
     const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ const Registration = () => {
         password: '',
         confirmPassword: '',
     });
+    const navigate= useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
