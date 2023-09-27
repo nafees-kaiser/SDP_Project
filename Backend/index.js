@@ -36,7 +36,6 @@ app.post('/register', async (req, res) => {
     // Create a new user document and save it to the database
     const newUser = new User(userData);
     const user = await newUser.save();
-    console.log("User: "+user);
     res.status(201).json(user);
     console.log('User saved to the database(BACKEND)');
   } catch (err) {

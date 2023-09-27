@@ -11,7 +11,7 @@ const Navbar = ()=>{
                         <h4 style={{margin:'1px'}}>Become a Seller</h4>
                     </div>
                     <div className={Style.right}>
-                        <Button text="Log in"/>
+                        <Button name="Log in"/>
                         <div className={Style.icons}>
                             <i class="fa-regular fa-bell"></i>
                             <p>Notifications</p>
@@ -28,10 +28,10 @@ const Navbar = ()=>{
                         <a href="/"><img src="./images/384165997_332969559130939_1111385360839973004_n.png" alt="" /></a>
                     </div>
                     <div className={Style.middle}>
-                        <a href="#">Home</a>
-                        <a href="#">Product</a>
-                        <a href="#">Community</a>
-                        <a href="#">Know about craft</a>
+                        <a href="#">Know About Sellers</a>
+                        <a href="#">Beginner's Guide</a>
+                        <a href="#">Register</a>
+                        
                     </div>
                     <div className={Style.right}>
                         <input type="text" className={Style.search} placeholder="Search..."></input>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import Checkbox from './Components/Checkbox';
 import style from './login.module.css';
-
+import {useNavigate} from 'react-router-dom';
 
 const LogIn = () => {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
+    const navigate= useNavigate();
 
     const changeEmail = (event) =>{
         setEmail(event.target.value);
@@ -36,7 +37,7 @@ const LogIn = () => {
                             </span>
                         </div>
                         <p className={`${style['text-color']} ${style['text-alignment']}`}>Not have any account?</p>
-                        <button className={style.button}>Sign up</button>
+                        <button className={style.button} onClick={()=>navigate(`Reg`)}>Sign up</button>
                     </div>
                     <form onSubmit={formSubmit} className={style.input}>
                         <h1 className={style['text-alignment']}>User Login</h1>
