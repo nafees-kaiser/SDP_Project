@@ -79,7 +79,7 @@
     font-weight: 700;
     font-size: 1.2em;
 }
-.lower .middle a {
+.lower .middle a,link {
     text-decoration: none;
     color: black;
 }
@@ -87,7 +87,12 @@
     width: 20%;
     height: 100%;
 }
-
+.link {
+    text-decoration: none;
+    margin: 1px;
+    color: white;
+    font-size: 1.2em;
+}
 
 /* Style for the search input field */
 .search {
