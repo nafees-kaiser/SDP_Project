@@ -4,7 +4,7 @@ Title Font Size:
 Text color: White
 Background(Heading+Footer):#795AAC
 Background:#E9E9E9
-P. Button:#999DEE
+P. Button: #999DEE
 S. Button:
 Border:#7CD1D0
 
