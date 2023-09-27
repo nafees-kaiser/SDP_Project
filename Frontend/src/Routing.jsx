@@ -17,6 +17,7 @@ const Routing = ()=>{
                 <Route path='/product-listing' element={<ProductListing/>}></Route>
                 <Route path='/individual-product/:id' element={<IndividualProduct/>}></Route>
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
+                
             </Routes>
         </>
     )
