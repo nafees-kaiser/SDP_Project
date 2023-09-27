@@ -9,6 +9,8 @@ const app = express();
 dotenv.config({ path: './config.env' });
 require('./Database/conn');
 const User = require('./Model/UserSchema');
+const Products = require('./Model/ProductsSchema');
+
 const PORT = process.env.PORT;
 app.use(bodyParser.json());
 app.use(cors());
@@ -43,12 +45,6 @@ app.post('/register', async (req, res) => {
   }
 });
 
-
-
-
-
-
-
 app.get('/', async (req, res) => {
   try {
     let testAccount = await nodemailer.createTestAccount();
@@ -78,6 +74,29 @@ app.get('/', async (req, res) => {
     res.status(500).json({ error: "Email could not be sent." });
   }
 });
+
+
+app.get('/product-listing', async(req, res)=>{
+    try {
+        const result = await Products.find();
+        // console.log(`Products are ${result}`)
+        res.json(result)
+    } catch (error) {
+        console.log(`Error while fetching products ${error}`)
+    }
+});
+
+app.get('/individual-product/:id', async(req, res)=>{
+    try {
+        const id = req.params.id;
+        // console.log(id);
+        const result = await Products.findById(id);
+        // console.log(`The singular product is ${result}`)
+        res.json(result);
+    } catch (error) {
+        console.log(`Error while fetching singular product\n ${error}`)
+    }
+})
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port http://localhost:${PORT}/`);

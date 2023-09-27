@@ -22,7 +22,7 @@ body{
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%; */
 
-  --primary-color: #999DEE;
+  --button-color: #999DEE;
   --border-color: #E3E3E3;
   --secondary-background-color: #E9E9E9;
   --font-family: 'Hanken Grotesk', sans-serif;

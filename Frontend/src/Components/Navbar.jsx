@@ -11,7 +11,7 @@ const Navbar = ()=>{
                         <h4 style={{margin:'1px'}}>Become a Seller</h4>
                     </div>
                     <div className={Style.right}>
-                        <Button name="Log in"/>
+                        <Button text="Log in"/>
                         <div className={Style.icons}>
                             <i class="fa-regular fa-bell"></i>
                             <p>Notifications</p>
