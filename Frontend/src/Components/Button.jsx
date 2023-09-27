@@ -1,9 +1,10 @@
 import style from './Button.module.css'
 
-export default function Button({text}){
+export default function Button({text, change = null}){
     return (
         <>
-            <button className={style.button}>{text}</button>
+            {change ? <button className={style.button} onClick={change}>{text}</button> :
+            <button className={style.button}>{text}</button>}
         </>
     );
 }

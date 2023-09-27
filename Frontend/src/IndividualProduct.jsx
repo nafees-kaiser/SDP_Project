@@ -1,10 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import axios from "axios";
 import style from "./IndividualProduct.module.css"
 import nakshikathaImage from './assets/nakshi_katha(1).jpg'
 import Button from "./Components/Button";
 
 
 export default function IndividualProduct() {
+    const {id} = useParams();
+    const [product, setProduct] = useState({})
+    const [amount, setAmount] = useState(0)
+    const navigate = useNavigate();
+    const routeChange = ()=>{
+        if(product){
+            const obj =JSON.stringify({product, amount})
+            navigate(`/checkout/${obj}`);
+        }
+    } 
+    useEffect(()=>{
+        axios.get(`http://localhost:3000/individual-product/${id}`)
+            .then((response) => {
+                // console.log(response.data);
+                setProduct(response.data);
+            })
+    },[]);
+
+    const decrease = ()=>{
+        if(amount){
+            setAmount(amount-1)
+        }
+        else{
+            setAmount(0)
+        }
+    }
+    const increase = ()=>{
+        setAmount(amount+1)
+    }
+
+    const {productName, district, division, price, seller, description} = product
     return (
         <div className={style.container}>
             <div>navbar</div>
@@ -22,27 +55,28 @@ export default function IndividualProduct() {
                     </div>
                     <div className={style['product-info']}>
                         <div className={style['basic-info']}>
-                            <h1>Product Name</h1>
-                            <p>Location</p>
+                            
+                            <h1>{productName}</h1>
+                            <p>{`${district}, ${division}`}</p>
                             <div className={style['seller-info']}>
-                                <p>Seller</p>
+                                <p>{seller}</p>
                                 <a href="#">Chat with seller</a>
                             </div>
-                            <p>Review</p>
-                            <p>Price</p>
-                            <p>Discount price</p>
+                            <p>5 star</p>
+                            <p>{price}</p>
+                            <p></p>
                             <Button text="Wishlist" />
                         </div>
                         <div className={style['buttons-link']}>
                             <div className={style.buttons}>
                                 <div className={style.quantity}>
-                                    <button className={style['cart-button']}>-</button>
+                                    <button className={style['cart-button']} onClick={decrease}>-</button>
                                     {/* <Button text="-" /> */}
-                                    <p>1</p>
+                                    <p>{amount}</p>
                                     {/* <Button text="+" /> */}
-                                    <button className={style['cart-button']}>+</button>
+                                    <button className={style['cart-button']} onClick={increase}>+</button>
                                 </div>
-                                <Button text="Add to cart" />
+                                <Button text="Add to cart" change={routeChange}/>
                             </div>
                             <a href="#">To learn more about this handicraft</a>
                         </div>
@@ -51,7 +85,7 @@ export default function IndividualProduct() {
                 <div className={style['product-description']}>
                     <h2>Description</h2>
                     <div className={style.description}>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias atque ipsa doloribus mollitia illo libero aspernatur tenetur provident adipisci optio corrupti laudantium ducimus voluptate distinctio delectus deleniti hic, beatae eveniet.
+                        {description}
                     </div>
                 </div>
             </div>

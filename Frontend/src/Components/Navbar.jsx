@@ -1,6 +1,7 @@
 import React from "react";
 import Style from "./Navbar.module.css";
-import Button from '../Components/Button.jsx';
+// import Button from './Components/Button.jsx';
+import Button from "./Button";
 
 const Navbar = ()=>{
     return (
@@ -11,7 +12,7 @@ const Navbar = ()=>{
                         <h4 style={{margin:'1px'}}>Become a Seller</h4>
                     </div>
                     <div className={Style.right}>
-                        <Button name="Log in"/>
+                        <Button text="Log in"/>
                         <div className={Style.icons}>
                             <i class="fa-regular fa-bell"></i>
                             <p>Notifications</p>
