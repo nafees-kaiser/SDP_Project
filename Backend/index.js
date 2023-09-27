@@ -10,6 +10,7 @@ dotenv.config({ path: './config.env' });
 require('./Database/conn');
 const User = require('./Model/UserSchema');
 const Products = require('./Model/ProductsSchema');
+const Order = require('./Model/OrderSchema')
 
 const PORT = process.env.PORT;
 app.use(bodyParser.json());

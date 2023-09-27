@@ -192,17 +192,17 @@ const Checkout = () => {
         <span>.</span>
       </div>
       <button className={styles.placeOrderButton} id="place_order_button">
-        <img
+        {/* <img
           className={styles.iconarrowRight4}
           alt=""
           src="/iconarrowright4.svg"
-        />
+        /> */}
         <div className={styles.getStarted5}>Place order</div>
-        <img
+        {/* <img
           className={styles.iconarrowRight4}
           alt=""
           src="/iconarrowright4.svg"
-        />
+        /> */}
       </button>
       <div className={styles.selectedItems} id="items">
         <div className={styles.product1}>
