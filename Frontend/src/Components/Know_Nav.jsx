@@ -12,7 +12,7 @@ const Navbar = ()=>{
                         <Link to="/become_seller" style={{margin:'1px'}}>Become a Seller</Link>
                     </div>
                     <div className={Style.right}>
-                        <Button name="Log in"/>
+                        <Button text="Log in"/>
                         <div className={Style.icons}>
                             <i class="fa-regular fa-bell"></i>
                             <p>Notifications</p>
