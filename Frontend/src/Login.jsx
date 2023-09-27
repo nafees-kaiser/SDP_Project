@@ -17,9 +17,33 @@ const LogIn = () => {
         console.log(event.target.value);
     }
 
-    const formSubmit = (event) => {
+    const formSubmit = async (event) => {
         event.preventDefault();
-    }
+      
+        try {
+          const response = await fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+          });
+      
+          if (response.ok) {
+            // User is authenticated, you can redirect or perform other actions here
+            console.log('Login successful');
+            alert('Login successful');
+            navigate('product-listing'); // Replace '/dashboard' with your desired redirect path
+          } else {
+            // Authentication failed
+            alert('Login failed');
+            console.log('Login failed');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+    };
+      
 
     return (
         <div className={style.container}>
@@ -37,7 +61,7 @@ const LogIn = () => {
                             </span>
                         </div>
                         <p className={`${style['text-color']} ${style['text-alignment']}`}>Not have any account?</p>
-                        <button className={style.button} onClick={()=>navigate(`Reg`)}>Sign up</button>
+                        <button className={style.button} onClick={()=>navigate(`registration`)}>Sign up</button>
                     </div>
                     <form onSubmit={formSubmit} className={style.input}>
                         <h1 className={style['text-alignment']}>User Login</h1>
@@ -54,10 +78,10 @@ const LogIn = () => {
                                 onChange={changePassword}
                                 value={password}
                             />
-                            <Checkbox name="Remember me"/>
-                        </div>
+                            { /*<Checkbox name="Remember me"/> */}
+                         </div>
                         <div className={style.buttons}>
-                            <button className={style.button}>Log in</button>
+                            <button type='submit' className={style.button}>Log in</button>
                             <button className={style.button}>Forget password</button>
                         </div>
                     </form>
