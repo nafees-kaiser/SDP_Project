@@ -6,6 +6,7 @@ import LogIn from './Login.jsx'
 import ProductListing from './ProductListing.jsx'
 import IndividualProduct from './IndividualProduct.jsx'
 import Become_seller from './Become_seller.jsx'
+import Checkout from './Checkout.jsx'
 import { Routes,Route } from "react-router";
 
 const Routing = ()=>{
@@ -16,6 +17,8 @@ const Routing = ()=>{
                 <Route path='/registration' element={<Registration/>}></Route>
                 <Route path='/product-listing' element={<ProductListing/>}></Route>
                 <Route path='/individual-product/:id' element={<IndividualProduct/>}></Route>
+                <Route path='/become_seller' element={<Become_seller/>}></Route>
+                <Route path='/checkout/:obj' element={<Checkout/>}></Route>
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
             </Routes>
         </>

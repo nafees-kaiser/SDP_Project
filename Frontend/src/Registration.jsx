@@ -39,6 +39,7 @@ const Registration = () => {
             console.log("FormData: "+formData);
             
             console.log('Registration successful');
+            navigate('/');
           } else {
             // Handle registration error, show an error message, etc.
             console.log(formData);

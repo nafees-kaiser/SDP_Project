@@ -50,6 +50,7 @@
     border-radius: 130px 0px 0px 130px;
     margin-left: 45px;
     text-align: center;
+    border: 2px solid black;
 }
 .right > * {
     margin: 21px 0px;
