@@ -13,6 +13,7 @@ import {
 import Style from './Home_seller.module.css';
 import Navbar from "./Components/Navbar_seller";
 import Card from "./Components/Card";
+import Footer from "./Components/Footer";
 
 ChartJS.register(
     LineElement,
@@ -216,6 +217,7 @@ const Home_seller = ()=>{
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     );
 }
