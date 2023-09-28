@@ -10,7 +10,6 @@
     margin: auto;
     width: 90%;
     height: 400px;
-    border: 1px solid red;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -20,18 +19,18 @@
     margin-top: 20px;
     width: 37%;
     height: 95%;
-    border: 1px solid green;
     float: left;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
 
 }
 .header .left .box {
     width: 45%;
     height: 45%;
-    border: 1px solid red;
     background-color: var(--secondary-color);
+    border-radius: 10px;
+    box-shadow: 0px 5px 8px 0px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -52,11 +51,18 @@
 }
 
 .header .right {
-    width: 60%;
+    width: 50%;
     height: 100%;
     border: 1px solid rgb(126, 128, 0);
     float: right;
 }
+
+  
+  /* Style for the line graph */
+  .header .right .graph {
+    width: 100%;
+    height: 100%;
+  }
 .line {
     margin: auto;
     width: 90%;
@@ -67,5 +73,114 @@
     margin: auto;
     width: 90%;
     height: 400px;
-    border: 1px solid rgb(0, 255, 68);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: var(--Background);
 }
+.middle .left {
+    width: 62%;
+    height: 95%;
+    margin: auto;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+}
+
+.middle .left  > p,.customer .orders > p,.customer .topcustomer > p {
+    margin: 10px 0px;
+    font-size: 1.6em;
+    font-family: 'Han ken Grotesk', sans-serif;
+    text-align: center;
+    font-weight: 700;
+}
+.middle .left .inner {
+    width: 100%;
+    height: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.middle .right {
+    width: 30%;
+    height: 95%;
+    margin: auto;
+    background-color: var(--secondary-color);
+}
+
+
+
+
+
+
+
+
+
+
+.customer {
+    width: 90%;
+    height: 400px;
+    margin: auto;
+    background-color: var(--Background);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.customer .orders {
+    width: 65%;
+    height: 100%;
+
+}
+.customer .orders .table {
+    margin-top: 10px;
+    width: 100%;
+    height: 85%;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+}
+.customer .orders .table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+.customer .orders .table table, .customer .orders .table th, .customer .orders .table td {
+border: 1px solid #ddd;
+}
+
+.customer .orders .table th, .customer .orders .table td {
+padding: 8px;
+text-align: left;
+}
+
+.customer .orders .table tr:nth-child(even) {
+background-color: #f2f2f2;
+}
+.customer .topcustomer {
+    margin-top: 10px;
+    width: 25%;
+    height: 100%;
+}
+
+.customer .topcustomer .table table {
+    margin: 10px 0px;
+    background-color: var(--secondary-color);
+    border: 10px;
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+.customer .topcustomer .table table, .customer .topcustomer .table th, .customer .topcustomer .table td {
+border: 1px solid #ddd;
+}
+
+.customer .topcustomer .table th, .customer .topcustomer .table td {
+padding: 8px;
+text-align: left;
+}
+
+.customer .topcustomer .table tr:nth-child(even) {
+background-color: #f2f2f2;
+}
+
+
+
