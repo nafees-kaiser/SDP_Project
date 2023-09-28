@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Hanken+Grotesk:wght@500;700;800&family=Inter&display=swap');
+:root {
+    --primary-color: #795AAC;
+    --secondary-color: rgb(226, 222, 230);
+    --button : #999DEE;
+    --Background: #E9E9E9;
+    --text: White;
+}
 .card{
     width: fit-content;
     max-width: 232px;
@@ -8,6 +16,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    background-color: var(--Background);
 }
 .card .div-info{
     max-width: calc(100% - 10px);
