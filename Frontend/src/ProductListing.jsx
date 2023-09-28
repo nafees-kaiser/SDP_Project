@@ -8,6 +8,7 @@ import Card from "./Components/Card";
 import Navbar from './Components/Navbar'
 import { Link } from "react-router-dom";
 import Button from "./Components/Button";
+import Footer from "./Components/Footer";
 
 
 export default function ProductListing() {
@@ -24,7 +25,7 @@ export default function ProductListing() {
     }, [])
     return (
         <>
-            <Navbar/>
+                <Navbar />
             <div className={style.container}>
                 {/* <div>navbar</div> */}
                 <div className={style['hero-section']}>
@@ -54,123 +55,13 @@ export default function ProductListing() {
                                 </Link>
                             );
                         })}
-                        {/* <a href="#">
-                        <Card
-                            image={nakshiKathaImage}
-                            review="5 star"
-                            productName="Nakshi Katha"
-                            location="Faridpur, Dhaka"
-                            price="220 Tk"
-                            />
-                            </a>
-                            <a href="#">
-                            <Card
-                            image={nakshiKathaImage}
-                            review="review"
-                            productName="Nakshi Katha"
-                            location="Faridpur, Dhaka"
-                            price="220 Tk"
-                            />
-                            </a>
-                            <a href="#">
-                            <Card
-                            image={nakshiKathaImage}
-                            review="review"
-                            productName="Nakshi Katha"
-                            location="Faridpur, Dhaka"
-                            price="220 Tk"
-                            />
-                            </a>
-                            <a href="#">
-                            <Card
-                            image={nakshiKathaImage}
-                            review="review"
-                            productName="Nakshi Katha"
-                            location="Faridpur, Dhaka"
-                            price="220 Tk"
-                            />
-                            </a>
-                            <a href="#">
-                            <Card
-                            image={nakshiKathaImage}
-                            review="review"
-                            productName="Nakshi Katha"
-                            location="Faridpur, Dhaka"
-                            price="220 Tk"
-                            />
-                            </a>
-                            <a href="#">
-                            <Card
-                            image={nakshiKathaImage}
-                            review="review"
-                            productName="Nakshi Katha"
-                            location="Faridpur, Dhaka"
-                            price="220 Tk"
-                            />
-                            </a>
-                            <a href="#">
-                            <Card
-                            image={nakshiKathaImage}
-                            review="review"
-                            productName="Nakshi Katha"
-                            location="Faridpur, Dhaka"
-                            price="220 Tk"
-                            />
-                            </a>
-                            <a href="#">
-                            <Card
-                            image={nakshiKathaImage}
-                            review="review"
-                            productName="Nakshi Katha"
-                            location="Faridpur, Dhaka"
-                            price="220 Tk"
-                            />
-                            </a>
-                            <a href="#">
-                            <Card
-                            image={nakshiKathaImage}
-                            review="review"
-                            productName="Nakshi Katha"
-                            location="Faridpur, Dhaka"
-                            price="220 Tk"
-                            />
-                            </a>
-                            <a href="#">
-                            <Card
-                            image={nakshiKathaImage}
-                            review="review"
-                            productName="Nakshi Katha"
-                            location="Faridpur, Dhaka"
-                            price="220 Tk"
-                            />
-                            </a>
-                            <a href="#">
-                            <Card
-                            image={nakshiKathaImage}
-                            review="review"
-                            productName="Nakshi Katha"
-                            location="Faridpur, Dhaka"
-                            price="220 Tk"
-                            />
-                            </a>
-                            <a href="#">
-                            <Card
-                            image={nakshiKathaImage}
-                            review="review"
-                            productName="Nakshi Katha"
-                            location="Faridpur, Dhaka"
-                            price="220 Tk"
-                            />
-                        </a> */}
 
                     </div>
                     {/* <button className={style.button}>Load more</button> */}
-                    <Button text="Load more"/>
+                    <Button text="Load more" />
                 </div>
-                <footer>
-                    footer
-                </footer>
             </div>
+            <Footer />
         </>
     );
 }

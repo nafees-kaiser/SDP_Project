@@ -67,4 +67,7 @@
 }
 .container{
     margin: 0px 100px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }

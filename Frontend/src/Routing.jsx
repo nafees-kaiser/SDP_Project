@@ -7,6 +7,7 @@ import ProductListing from './ProductListing.jsx'
 import IndividualProduct from './IndividualProduct.jsx'
 import Become_seller from './Become_seller.jsx'
 import Checkout from './Checkout.jsx'
+import Footer from "./Components/Footer.jsx";
 import { Routes,Route } from "react-router";
 
 const Routing = ()=>{
@@ -20,6 +21,7 @@ const Routing = ()=>{
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
                 <Route path='/checkout/:obj' element={<Checkout/>}></Route>
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
+                <Route path='/footer-check' element={<Footer/>}></Route>
             </Routes>
         </>
     )

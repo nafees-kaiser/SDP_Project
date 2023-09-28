@@ -25,7 +25,7 @@ const Navbar = ()=>{
                 </div>
                 <div className={Style.lower}>
                     <div className={Style.left}>
-                    <Link to={`/product-listing`}><img src="./images/384165997_332969559130939_1111385360839973004_n.png" alt="" /></Link>
+                    <Link to={`/product-listing`}><img src="/images/384165997_332969559130939_1111385360839973004_n.png" alt="" /></Link>
                     </div>
                     <div className={Style.middle}>
                         <a href="#">Home</a>
