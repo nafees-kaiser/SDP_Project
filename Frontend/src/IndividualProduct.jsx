@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import style from "./IndividualProduct.module.css"
-import nakshikathaImage from './assets/nakshi_katha(1).jpg'
+import nakshikathaImage from '../images/nakshi_katha(1).jpg'
 import Button from "./Components/Button";
 import Navbar from "./Components/Navbar";
 

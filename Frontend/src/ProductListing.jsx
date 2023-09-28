@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import style from "./ProductListing.module.css"
-import nakshiKathaImage from "./assets/nakshi_katha(1).jpg";
+import nakshiKathaImage from '../images/nakshi_katha(1).jpg'
 import Card from "./Components/Card";
 import Navbar from './Components/Navbar'
 import { Link } from "react-router-dom";
