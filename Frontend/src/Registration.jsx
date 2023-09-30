@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import Authentication from './Authentication.jsx'
 import axios from 'axios';
 import style from "./Registration.module.css"; // Import your CSS module
 import Button from './Components/Button';
 import {useNavigate} from 'react-router-dom';
 
 const Registration = () => {
+    const [auth,setAuth]= useState(false);
+    const btn = ()=>{
+
+        setAuth(true);
+    }
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -61,6 +67,8 @@ const Registration = () => {
 
     return (
         <>
+            { auth && <Authentication/>}
+            
             <div className={style.middle2}>
                 <div className={style.Middle}>
                     <div className={style.left}>
@@ -163,12 +171,13 @@ const Registration = () => {
                             </div>
                             <div>
                                 {/* <button type="submit" className={style.btn5}>Sign In</button> */}
-                                <Button text="Sign in"/>
+                                <Button text="Sign in" change={btn} />
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+            
         </>
     )
 }
