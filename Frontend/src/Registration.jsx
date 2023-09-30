@@ -32,6 +32,12 @@ const Registration = () => {
                 'Content-Type': 'application/json',
             },
           });
+          const verify_code = await axios.post('http://localhost:3000/verify', formData, {
+          headers: {
+                'Content-Type': 'application/json',
+            },
+          });
+          
       
           if (response.status === 201) {
             // Registration was successful, you can redirect the user to another page.
@@ -41,8 +47,6 @@ const Registration = () => {
             console.log('Registration successful');
             navigate('/');
           } else {
-            // Handle registration error, show an error message, etc.
-            console.log(formData);
             console.log(response.status);
             console.error('Registration failed');
           }
