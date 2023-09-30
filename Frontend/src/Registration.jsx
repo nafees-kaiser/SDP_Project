@@ -27,29 +27,32 @@ const Registration = () => {
         try {
           // Send the registration data to the server for processing
           
-          const response = await axios.post('http://localhost:3000/register', formData, {
-          headers: {
-                'Content-Type': 'application/json',
-            },
-          });
+          
           const verify_code = await axios.post('http://localhost:3000/verify', formData, {
           headers: {
                 'Content-Type': 'application/json',
             },
           });
-          
+          if(verify_code.status == 200){
+                const response = await axios.post('http://localhost:3000/register', formData, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                if (response.status === 201) {
+                    const code = verify_code.data.data;
+                    console.log(code);
+                    console.log('Registration successful');
+                    navigate('/');
+                  } else {
+                    console.log(response.status);
+                    console.error('Registration failed');
+                  }
+
+           }
+           console.log(verify_code.status);
       
-          if (response.status === 201) {
-            // Registration was successful, you can redirect the user to another page.
-            // Example: window.location.href = '/login';
-            console.log("FormData: "+formData);
-            
-            console.log('Registration successful');
-            navigate('/');
-          } else {
-            console.log(response.status);
-            console.error('Registration failed');
-          }
+          
         } catch (error) {
           console.error('Error:', error);
           console.error('Registration failed(catch)');

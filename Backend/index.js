@@ -85,7 +85,7 @@ app.post('/verify', async (req, res) => {
     });
     console.log("Message sent: %s", info.messageId);
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    res.json(info);
+    res.status(200).json({ data: random });
 
   } catch (error) {
     console.error("Error:", error);
