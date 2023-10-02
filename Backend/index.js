@@ -8,7 +8,7 @@ const app = express();
 
 dotenv.config({ path: './config.env' });
 require('./Database/conn');
-const User = require('./Model/UserSchema');
+const Buyer = require('./Model/BuyerSchema');
 const Products = require('./Model/ProductsSchema');
 const Order = require('./Model/OrderSchema')
 
@@ -21,7 +21,7 @@ app.post('/register', async (req, res) => {
   try {
     const userData = req.body;
     console.log("UserData: "+ userData.mobileNumber);
-    const existingUser = await User.findOne({ email: userData.email });
+    const existingUser = await Buyer.findOne({ email: userData.email });
     // Add validation logic here to ensure data is complete and valid
     if (!userData.name || !userData.email || !userData.password) {
       alert('Incomplete user data');
@@ -33,7 +33,7 @@ app.post('/register', async (req, res) => {
     }
     else 
     {
-      const newUser = new User(userData);
+      const newUser = new Buyer(userData);
       const user = await newUser.save();
       res.status(201).json(user);
       console.log('User saved to the database(BACKEND)');
@@ -49,7 +49,7 @@ app.post('/login', async (req,res)=>{
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email, password });
+    const user = await Buyer.findOne({ email, password });
 
     if (user) {
       // User is found, and the credentials match
