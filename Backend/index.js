@@ -10,6 +10,7 @@ dotenv.config({ path: './config.env' });
 require('./Database/conn');
 const User = require('./Model/UserSchema');
 const Products = require('./Model/ProductsSchema');
+const Order = require('./Model/OrderSchema')
 
 const PORT = process.env.PORT;
 app.use(bodyParser.json());
@@ -20,24 +21,24 @@ app.post('/register', async (req, res) => {
   try {
     const userData = req.body;
     console.log("UserData: "+ userData.mobileNumber);
+    const existingUser = await User.findOne({ email: userData.email });
     // Add validation logic here to ensure data is complete and valid
     if (!userData.name || !userData.email || !userData.password) {
       alert('Incomplete user data');
       return res.status(400).json({ error: 'Incomplete user data' });
     }
-
-    // Check if the user with the given email already exists
-    const existingUser = await User.findOne({ email: userData.email });
-    if (existingUser) {
+    else if (existingUser) {
       alert('User with this email already exists');
       return res.status(400).json({ error: 'User with this email already exists' });
     }
-
-    // Create a new user document and save it to the database
-    const newUser = new User(userData);
-    const user = await newUser.save();
-    res.status(201).json(user);
-    console.log('User saved to the database(BACKEND)');
+    else 
+    {
+      const newUser = new User(userData);
+      const user = await newUser.save();
+      res.status(201).json(user);
+      console.log('User saved to the database(BACKEND)');
+    }
+    
   } catch (err) {
     console.error(err);
     res.status(500).send('Error saving user');
@@ -61,29 +62,30 @@ app.post('/login', async (req,res)=>{
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
-app.get('/', async (req, res) => {
+app.post('/verify', async (req, res) => {
+  const userData = req.body;
+  console.log("SMTP: "+ userData.mobileNumber);
   try {
     let testAccount = await nodemailer.createTestAccount();
 
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       auth: {
-        user: 'shavoddin54@gmail.com',
-        pass: '#Sh@01982711168',
+        user: 'sdpproject74@gmail.com',
+        pass: 'hvog wqha iigv oatn',
       }
     });
-
+    const random = Math.floor(Math.random() * 10001);
     const info = await transporter.sendMail({
-      from: "shavoddin54@gmail.com" , // sender address
-      to: "hridoyshabuddin@gmail.com", // list of receivers
-      subject: "Hello ✔", // Subject line
-      text: "Hello world?", // plain text body
-      html: "<b>Hello world?</b>", // html body
+      from: "sdp_project74@gmail.com" , // sender address
+      to: userData.email , // list of receivers
+      subject: "User Authentication Code from Heritage Craft Connect✔", // Subject line
+      text: `Your Registration Code is ${random}`, // plain text body
+  
     });
-
     console.log("Message sent: %s", info.messageId);
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    res.json(info);
+    res.status(200).json({ data: random });
 
   } catch (error) {
     console.error("Error:", error);

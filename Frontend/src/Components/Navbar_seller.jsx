@@ -17,7 +17,7 @@ const Navbar = () => {
           </div>
           <div className={Style.right}>
           
-            <Button name="Log in"/>
+            <Button text="Log in"/>
             <div className={Style.icons}>
                 <i class="fa-regular fa-bell"></i>
                 <p>Notifications</p>
@@ -48,7 +48,7 @@ const Navbar = () => {
                     </ul>
                   )}
                 </li>
-                <li className={Style['nav-item']}>Notification</li>
+                <li className={Style['nav-item']}>Community</li>
                 <li className={Style['nav-item']}>Orderlist</li>
               </ul>
             </nav>

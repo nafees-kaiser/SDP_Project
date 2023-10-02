@@ -1,14 +1,14 @@
 import React from "react";
 import Style from "./Navbar.module.css";
 import Button from './Button.jsx';
-
+import { Link } from "react-router-dom";
 const Navbar = ()=>{
     return (
         <>
             <div className={Style.navbar}>
                 <div className={Style.upper}>
                     <div className={Style.left}>
-                        <h4 style={{margin:'1px'}}>Become a Seller</h4>
+                        <Link to={`/become_seller`} className={Style.link}>Become a Seller</Link>
                     </div>
                     <div className={Style.right}>
                         <Button text="Log in"/>
@@ -25,11 +25,11 @@ const Navbar = ()=>{
                 </div>
                 <div className={Style.lower}>
                     <div className={Style.left}>
-                        <a href="/"><img src="./images/384165997_332969559130939_1111385360839973004_n.png" alt="" /></a>
+                    <Link to={`/product-listing`}><img src="/images/384165997_332969559130939_1111385360839973004_n.png" alt="" /></Link>
                     </div>
                     <div className={Style.middle}>
                         <a href="#">Home</a>
-                        <a href="#">Product</a>
+                        <Link to={`/product-listing`} className={Style.link}> Product</Link>
                         <a href="#">Community</a>
                         <a href="#">Know about craft</a>
                     </div>

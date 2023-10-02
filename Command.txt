@@ -13,7 +13,6 @@ Frontend:
 cd ..
 cd Frontend
 npm i axios
-npm i react-router-dom
 
 
 To run Both the server

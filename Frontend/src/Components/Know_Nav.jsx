@@ -1,6 +1,7 @@
 import React from "react";
 import Style from "./Navbar.module.css";
 import Button from './Button.jsx';
+import { Link } from "react-router-dom";
 
 const Navbar = ()=>{
     return (
@@ -8,10 +9,10 @@ const Navbar = ()=>{
             <div className={Style.navbar}>
                 <div className={Style.upper}>
                     <div className={Style.left}>
-                        <h4 style={{margin:'1px'}}>Become a Seller</h4>
+                        <Link to="/become_seller" style={{margin:'1px'}}>Become a Seller</Link>
                     </div>
                     <div className={Style.right}>
-                        <Button name="Log in"/>
+                        <Button text="Log in"/>
                         <div className={Style.icons}>
                             <i class="fa-regular fa-bell"></i>
                             <p>Notifications</p>

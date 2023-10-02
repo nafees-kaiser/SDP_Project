@@ -13,3 +13,7 @@ Database
 Username:ABCDE
 pass:ABCDE
 connection:mongodb+srv://ABCDE:ABCDE@firstcluster.9ja0abi.mongodb.net/?retryWrites=true&w=majority
+
+SMTP:
+Email: 'sdpproject74@gmail.com'
+password: 'hvog wqha iigv oatn'

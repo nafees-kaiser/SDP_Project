@@ -6,7 +6,11 @@ import LogIn from './Login.jsx'
 import ProductListing from './ProductListing.jsx'
 import IndividualProduct from './IndividualProduct.jsx'
 import Become_seller from './Become_seller.jsx'
+import Checkout from './Checkout.jsx'
+import Footer from "./Components/Footer.jsx";
 import { Routes,Route } from "react-router";
+import Home_seller from "./Home_seller.jsx";
+import Authentication from "./Authentication.jsx";
 
 const Routing = ()=>{
     return (
@@ -17,7 +21,11 @@ const Routing = ()=>{
                 <Route path='/product-listing' element={<ProductListing/>}></Route>
                 <Route path='/individual-product/:id' element={<IndividualProduct/>}></Route>
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
-                
+                <Route path='/checkout/:obj' element={<Checkout/>}></Route>
+                <Route path='/become_seller' element={<Become_seller/>}></Route>
+                <Route path='/footer-check' element={<Footer/>}></Route>
+                <Route path='/home_seller' element={<Home_seller/>}></Route>
+                <Route path='/auth' element={<Authentication/>}></Route>
             </Routes>
         </>
     )

@@ -1,10 +1,24 @@
 import React, { useState } from 'react';
+import Authentication from './Authentication.jsx'
 import axios from 'axios';
 import style from "./Registration.module.css"; // Import your CSS module
 import Button from './Components/Button';
 import {useNavigate} from 'react-router-dom';
 
 const Registration = () => {
+    const [auth,setAuth]= useState(false);
+    const [code1,setcode]= useState(0);
+    const navigate= useNavigate();
+    const btn = ()=>{
+
+        setAuth(true);
+    }
+    const closemodel =()=>{
+        setAuth(false);
+    }
+    const nev = ()=>{
+        navigate('/');
+    }
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -15,45 +29,52 @@ const Registration = () => {
         password: '',
         confirmPassword: '',
     });
-    const navigate= useNavigate();
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          // Send the registration data to the server for processing
-          
-          const response = await axios.post('http://localhost:3000/register', formData, {
-          headers: {
-                'Content-Type': 'application/json',
-            },
-          });
-      
-          if (response.status === 201) {
-            // Registration was successful, you can redirect the user to another page.
-            // Example: window.location.href = '/login';
-            console.log("FormData: "+formData);
+        // Send the registration data to the server for processing
+        
+            if(formData.email !=='' ){
+                if(formData.password == formData.confirmPassword){
+                    btn();
+                }
+            }
+            const verify_code = await axios.post('http://localhost:3000/verify', formData, {
+            headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            setcode(verify_code.data.data);
+            if(verify_code.status !== 200){
+                    closemodel();
             
-            console.log('Registration successful');
-            navigate('/');
-          } else {
-            // Handle registration error, show an error message, etc.
-            console.log(formData);
-            console.log(response.status);
-            console.error('Registration failed');
-          }
+            }
+        
+    
+        
         } catch (error) {
-          console.error('Error:', error);
-          console.error('Registration failed(catch)');
+            console.error('Error:', error);
+            console.error('Registration failed(catch at registration)');
         }
-      };
+
+        
+            
+    };
+
+
+
 
     return (
         <>
+            { auth && <Authentication closemodel={closemodel} data1={code1} formData={formData}/>}
+            
             <div className={style.middle2}>
                 <div className={style.Middle}>
                     <div className={style.left}>
@@ -62,7 +83,7 @@ const Registration = () => {
                         <p>Join our largest Community</p>
                         <p>Already have an account?</p>
                         {/* <button className={style['btn-primary']}>LogIn</button> */}
-                        <Button text="Login"/>
+                        <Button text="Login" change={nev}/>
                     </div>
                     <div className={style.right}>
                         <h2>Register Now!</h2>
@@ -84,6 +105,7 @@ const Registration = () => {
                                         <input
                                             name='email'
                                             placeholder='Email'
+                                            required
                                             type="text"
                                             value={formData.email}
                                             onChange={handleChange}
@@ -137,6 +159,7 @@ const Registration = () => {
                                             name='password'
                                             placeholder='Password'
                                             type="password"
+                                            required
                                             value={formData.password}
                                             onChange={handleChange}
                                             
@@ -147,6 +170,7 @@ const Registration = () => {
                                             name='confirmPassword'
                                             placeholder='Confirm Password'
                                             type="password"
+                                            required
                                             value={formData.confirmPassword}
                                             onChange={handleChange}
                                             
@@ -155,13 +179,14 @@ const Registration = () => {
                                 </div>
                             </div>
                             <div>
-                                {/* <button type="submit" className={style.btn5}>Sign In</button> */}
-                                <Button text="Sign in"/>
+                                {/* <button type="submit" className={style.btn5}>Sign Up</button> */}
+                                <Button text="Sign Up"  />
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+            
         </>
     )
 }
