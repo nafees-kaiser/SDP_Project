@@ -3,6 +3,7 @@ import Card from './Components/Card.jsx'
 import Know_Nav from "./Components/Know_Nav.jsx"
 import Style from './Become_seller.module.css'
 import Button from "./Components/Button.jsx";
+import Footer from "./Components/Footer.jsx";
 const Become_seller = ()=>{
     return (
         <>
@@ -11,8 +12,8 @@ const Become_seller = ()=>{
                 <div className={Style.image}>
                     <img src="./images/384140578_1344999119451455_8434272048076096664_n.jpg"  alt="" />
                     <div className={Style.text}>
-                        <h4>Craft your Dreams,Share your <br/> Passion:Become a Seller <br /> Today </h4>
-                       
+                        <h4>Craft your Dreams,Share your <br/> Passion:Become a Seller <br /> Today! </h4>
+                        <p>Sell Your HandCrafted Items with us!</p>
                     </div>
                 </div>
             </div>
@@ -128,6 +129,7 @@ const Become_seller = ()=>{
                 </div>
             </div>
             <div className={Style.line}></div>
+            <Footer/>
         
         </>
     );

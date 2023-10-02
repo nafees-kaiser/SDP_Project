@@ -30,7 +30,9 @@
     font-weight: 600;
     font-family: 'Han ken Grotesk', sans-serif;
 }
-
+.upper .image .text > h4 {
+    font-size: 2em;
+}
 .box {
     width: 90%;
     margin: auto;

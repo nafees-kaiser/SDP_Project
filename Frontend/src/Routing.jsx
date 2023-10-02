@@ -11,6 +11,7 @@ import Footer from "./Components/Footer.jsx";
 import { Routes,Route } from "react-router";
 import Home_seller from "./Home_seller.jsx";
 import Authentication from "./Authentication.jsx";
+import Messaging from "./Messaging.jsx";
 
 const Routing = ()=>{
     return (
@@ -26,6 +27,7 @@ const Routing = ()=>{
                 <Route path='/footer-check' element={<Footer/>}></Route>
                 <Route path='/home_seller' element={<Home_seller/>}></Route>
                 <Route path='/auth' element={<Authentication/>}></Route>
+                <Route path='/message' element={<Messaging/>}></Route>
             </Routes>
         </>
     )
