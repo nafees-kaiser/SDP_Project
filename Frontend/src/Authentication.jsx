@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import style from './Authentication.module.css'
 import Button from './Components/Button.jsx'
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const Authentication = ({closemodel,data1})=>{
+const Authentication = ({closemodel,data1,formData})=>{
     let [code,setcode] = useState("");
     
     useEffect(()=>{
@@ -20,10 +21,37 @@ const Authentication = ({closemodel,data1})=>{
     }
     const codesubmit = async (event)=>{
         event.preventDefault();
-        console.log("React_auth: "+data1);
-        console.log("React_auth: "+code);
-        if(code == data1){
-            navigate('/home_seller');
+        try {
+            console.log("React_auth: "+data1);
+            console.log("React_auth: "+code);
+            if(code == data1){
+
+
+                const response = await axios.post('http://localhost:3000/register', formData, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                if (response.status === 201) {
+                    
+                    console.log('Registration successful');
+                    alert("Registration Successful");
+                    navigate('/home_seller');
+                } else {
+                    console.log(response.status);
+                    console.error('Registration failed');
+                }
+
+                
+            }
+            else {
+                closemodel();
+                alert("Wrong Code given");
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+            console.error('Registration failed(catch at Auth)');
         }
         
     }
