@@ -3,26 +3,35 @@ import style from './Authentication.module.css'
 import Button from './Components/Button.jsx'
 import { useNavigate } from "react-router-dom";
 
-const Authentication = ()=>{
+const Authentication = ({closemodel,data1})=>{
     let [code,setcode] = useState("");
-    /*
+    
     useEffect(()=>{
         document.body.style.overflowY = "hidden";
-        document.body.style.filter = "blur(8px)"
+        return ()=>{
+            document.body.style.overflowY = "scroll";
+        }
     },[])
-    */
+    
+
     const navigate = useNavigate();
     const changeCode = (event)=>{
         setcode(event.target.value);
     }
     const codesubmit = async (event)=>{
         event.preventDefault();
+        console.log("React_auth: "+data1);
         console.log("React_auth: "+code);
+        if(code == data1){
+            navigate('/home_seller');
+        }
+        
     }
     return (
         <>
             <div className={style.back}>
                 <div className={style.container}>
+                    <button className={style.bt} onClick={closemodel}>X</button>
                     <div className={style.inner}>
                         <div className={style.image}>
                             <img src="../images/384165997_332969559130939_1111385360839973004_n.png" alt="" />
@@ -39,6 +48,7 @@ const Authentication = ()=>{
                                         />
                             </div>
                             <Button text="Submit"/>
+                            
                         </form>
                     </div>
                 </div>

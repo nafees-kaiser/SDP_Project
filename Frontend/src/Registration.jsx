@@ -7,9 +7,13 @@ import {useNavigate} from 'react-router-dom';
 
 const Registration = () => {
     const [auth,setAuth]= useState(false);
+    const [code1,setcode]= useState(0);
     const btn = ()=>{
 
         setAuth(true);
+    }
+    const closemodel =()=>{
+        setAuth(false);
     }
     const [formData, setFormData] = useState({
         name: '',
@@ -27,47 +31,52 @@ const Registration = () => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          // Send the registration data to the server for processing
-          
-          
-          const verify_code = await axios.post('http://localhost:3000/verify', formData, {
-          headers: {
+        // Send the registration data to the server for processing
+        
+        
+        const verify_code = await axios.post('http://localhost:3000/verify', formData, {
+        headers: {
                 'Content-Type': 'application/json',
             },
-          });
-          if(verify_code.status == 200){
+        });
+        if(verify_code.status == 200){
                 const response = await axios.post('http://localhost:3000/register', formData, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
                 });
                 if (response.status === 201) {
-                    const code = verify_code.data.data;
-                    console.log(code);
+                    setcode(verify_code.data.data);
                     console.log('Registration successful');
-                    navigate('/');
-                  } else {
+                    //navigate('/');
+                } else {
                     console.log(response.status);
                     console.error('Registration failed');
-                  }
+                }
 
-           }
-           console.log(verify_code.status);
-      
-          
-        } catch (error) {
-          console.error('Error:', error);
-          console.error('Registration failed(catch)');
         }
-      };
+        console.log(verify_code.status);
+    
+        
+        } catch (error) {
+        console.error('Error:', error);
+        console.error('Registration failed(catch)');
+        }
+
+        
+            
+    };
+
+
+
 
     return (
         <>
-            { auth && <Authentication/>}
+            { auth && <Authentication closemodel={closemodel} data1={code1}/>}
             
             <div className={style.middle2}>
                 <div className={style.Middle}>
@@ -99,6 +108,7 @@ const Registration = () => {
                                         <input
                                             name='email'
                                             placeholder='Email'
+                                            required
                                             type="text"
                                             value={formData.email}
                                             onChange={handleChange}
@@ -152,6 +162,7 @@ const Registration = () => {
                                             name='password'
                                             placeholder='Password'
                                             type="password"
+                                            required
                                             value={formData.password}
                                             onChange={handleChange}
                                             
@@ -162,6 +173,7 @@ const Registration = () => {
                                             name='confirmPassword'
                                             placeholder='Confirm Password'
                                             type="password"
+                                            required
                                             value={formData.confirmPassword}
                                             onChange={handleChange}
                                             
@@ -171,7 +183,7 @@ const Registration = () => {
                             </div>
                             <div>
                                 {/* <button type="submit" className={style.btn5}>Sign In</button> */}
-                                <Button text="Sign in" change={btn} />
+                                <Button text="Sign Up" change={btn}  />
                             </div>
                         </form>
                     </div>
