@@ -2,8 +2,10 @@ import React from "react";
 import Style from "./Navbar.module.css";
 import Button from './Button.jsx';
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = ()=>{
+    const navigate = useNavigate();
     return (
         <>
             <div className={Style.navbar}>
@@ -12,7 +14,7 @@ const Navbar = ()=>{
                         <Link to="/become_seller" style={{margin:'1px'}}>Become a Seller</Link>
                     </div>
                     <div className={Style.right}>
-                        <Button text="Log in"/>
+                        <Button text="Log in" change={()=> navigate('/seller_login')}/>
                         <div className={Style.icons}>
                             <i className="fa-regular fa-bell"></i>
                             <p>Notifications</p>

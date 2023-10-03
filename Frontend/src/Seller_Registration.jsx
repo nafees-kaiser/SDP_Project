@@ -17,7 +17,7 @@ const Registration = () => {
         setAuth(false);
     }
     const nev = ()=>{
-        navigate('/');
+        navigate('/seller_login');
     }
     const [formData, setFormData] = useState({
         name: '',

@@ -11,18 +11,18 @@ const LogIn = () => {
 
     const changeEmail = (event) =>{
         setEmail(event.target.value);
-        console.log(event.target.value);
+        // console.log(event.target.value);
     }
     const changePassword = (event) =>{
         setPassword(event.target.value);
-        console.log(event.target.value);
+        // console.log(event.target.value);
     }
 
     const formSubmit = async (event) => {
         event.preventDefault();
       
         try {
-          const response = await fetch('http://localhost:3000/login', {
+          const response = await fetch('http://localhost:3000/seller_login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const LogIn = () => {
             // User is authenticated, you can redirect or perform other actions here
             console.log('Login successful');
             alert('Login successful');
-            navigate('product-listing'); // Replace '/dashboard' with your desired redirect path
+            navigate('/home_seller'); // Replace '/dashboard' with your desired redirect path
           } else {
             // Authentication failed
             alert('Login failed');
@@ -58,14 +58,14 @@ const LogIn = () => {
                             </div>
                             <h2 className={`${style['text-color']} ${style['font-family-header']} ${style['text-alignment']}`}>Welcome</h2>
                             <span className={`${style['text-color']} ${style['text-alignment']}`}>
-                                To keep connected with us please Login
+                                To sell your carefully crafted product please Login
                             </span>
                         </div>
                         <p className={`${style['text-color']} ${style['text-alignment']}`}>Not have any account?</p>
                         {/* <button className={style.button} onClick={()=>navigate(`registration`)}>Sign up</button> */}
                         <Button 
                             text="Sign up"
-                            change={()=>navigate('/registration')}
+                            change={()=>navigate('/seller_reg')}
                         />
                     </div>
                     <form onSubmit={formSubmit} className={style.input}>

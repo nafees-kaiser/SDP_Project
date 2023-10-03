@@ -13,6 +13,7 @@ import Home_seller from "./Home_seller.jsx";
 import Authentication from "./Authentication.jsx";
 import Messaging from "./Messaging.jsx";
 import Seller_Registration from "./Seller_Registration.jsx";
+import SellerLogin from "./SellerLogin.jsx"
 
 const Routing = ()=>{
     return (
@@ -29,6 +30,7 @@ const Routing = ()=>{
                 <Route path='/auth' element={<Authentication/>}></Route>
                 <Route path='/message' element={<Messaging/>}></Route>
                 <Route path='/seller_reg' element={<Seller_Registration/>}></Route>
+                <Route path='/seller_login' element={<SellerLogin/>}></Route>
             </Routes>
         </>
     )
