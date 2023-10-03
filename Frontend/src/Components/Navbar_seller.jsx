@@ -19,11 +19,11 @@ const Navbar = () => {
           
             <Button text="Log in"/>
             <div className={Style.icons}>
-                <i class="fa-regular fa-bell"></i>
+                <i className="fa-regular fa-bell"></i>
                 <p>Notifications</p>
             </div>
             <div className={Style.icons}>
-                <i class="fa-solid fa-cart-plus"></i>
+                <i className="fa-solid fa-cart-plus"></i>
                 <p>Cart</p>
             </div>
 

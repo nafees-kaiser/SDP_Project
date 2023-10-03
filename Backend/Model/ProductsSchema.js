@@ -5,6 +5,14 @@ const productsSchema = new mongoose.Schema({
         type:String,
         require: true
     },
+    price: {
+        type: String,
+        require: true
+    },
+    storedQuantity: {
+        type: String,
+        require: true
+    },
     district: {
         type: String,
         require: true
@@ -13,13 +21,13 @@ const productsSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    price: {
-        type: String,
-        require: true
+    wishlist: {
+        type: Boolean,
+        default: false
     },
     seller: {
-        type: String,
-        require: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Seller'
     },
     description: {
         type: String,

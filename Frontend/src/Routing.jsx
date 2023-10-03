@@ -23,7 +23,6 @@ const Routing = ()=>{
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
                 <Route path='/checkout/:obj' element={<Checkout/>}></Route>
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
-                <Route path='/footer-check' element={<Footer/>}></Route>
                 <Route path='/home_seller' element={<Home_seller/>}></Route>
                 <Route path='/auth' element={<Authentication/>}></Route>
             </Routes>
