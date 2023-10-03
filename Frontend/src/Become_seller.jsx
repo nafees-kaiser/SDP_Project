@@ -1,10 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Card from './Components/Card.jsx'
 import Know_Nav from "./Components/Know_Nav.jsx"
 import Style from './Become_seller.module.css'
 import Button from "./Components/Button.jsx";
 import Footer from "./Components/Footer.jsx";
 const Become_seller = ()=>{
+    const navigate= useNavigate();
+    const btn = ()=>{
+        navigate('/seller_reg');
+    }
     return (
         <>
             <Know_Nav/>
@@ -41,7 +46,7 @@ const Become_seller = ()=>{
                     <p>Crafting Dreams? We've got <br />the platform for you</p>
                 </div>
                 <div className={Style.right}>
-                    <Button text={'Register Now'}/>
+                    <Button text={'Register Now'} change={btn} />
                 </div>
             </div>
             <div className={Style.steps}>

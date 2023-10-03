@@ -26,7 +26,7 @@ const Navbar = ()=>{
                 </div>
                 <div className={Style.lower}>
                     <div className={Style.left}>
-                        <a href="/"><img src="./images/384165997_332969559130939_1111385360839973004_n.png" alt="" /></a>
+                        <Link to={`/home_seller`}><img src="./images/384165997_332969559130939_1111385360839973004_n.png" alt="" /></Link>
                     </div>
                     <div className={Style.middle}>
                         <a href="#">Know About Sellers</a>

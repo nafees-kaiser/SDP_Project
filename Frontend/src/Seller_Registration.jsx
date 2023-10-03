@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Authentication from './Authentication.jsx'
+import Authentication from './Auth_seller.jsx'
 import axios from 'axios';
-import style from "./Registration.module.css"; // Import your CSS module
+import style from "./Seller_Registration.module.css"; // Import your CSS module
 import Button from './Components/Button';
 import {useNavigate} from 'react-router-dom';
 
@@ -87,7 +87,7 @@ const Registration = () => {
                         <Button text="Login" change={nev}/>
                     </div>
                     <div className={style.right}>
-                        <h2>Register Now!</h2>
+                        <h2> Seller Registeration </h2>
                         <p>Fill the information carefully</p>
                         <form onSubmit={handleSubmit}>
                             <div className={style.form}>

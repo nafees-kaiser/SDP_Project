@@ -12,6 +12,7 @@ import { Routes,Route } from "react-router";
 import Home_seller from "./Home_seller.jsx";
 import Authentication from "./Authentication.jsx";
 import Messaging from "./Messaging.jsx";
+import Seller_Registration from "./Seller_Registration.jsx";
 
 const Routing = ()=>{
     return (
@@ -23,11 +24,11 @@ const Routing = ()=>{
                 <Route path='/individual-product/:id' element={<IndividualProduct/>}></Route>
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
                 <Route path='/checkout/:obj' element={<Checkout/>}></Route>
-                <Route path='/become_seller' element={<Become_seller/>}></Route>
                 <Route path='/footer-check' element={<Footer/>}></Route>
                 <Route path='/home_seller' element={<Home_seller/>}></Route>
                 <Route path='/auth' element={<Authentication/>}></Route>
                 <Route path='/message' element={<Messaging/>}></Route>
+                <Route path='/seller_reg' element={<Seller_Registration/>}></Route>
             </Routes>
         </>
     )

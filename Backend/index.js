@@ -11,6 +11,7 @@ require('./Database/conn');
 const Buyer = require('./Model/BuyerSchema');
 const Products = require('./Model/ProductsSchema');
 const Order = require('./Model/OrderSchema')
+const Seller = require('./Model/SellerSchema');
 
 const PORT = process.env.PORT;
 app.use(bodyParser.json());
@@ -45,6 +46,42 @@ app.post('/register', async (req, res) => {
     console.log('Error in database');
   }
 });
+
+
+
+app.post('/register_seller', async (req, res) => {
+  try {
+    const userData = req.body;
+    console.log("UserData: "+ userData.mobileNumber);
+    const existingUser = await Seller.findOne({ email: userData.email });
+    // Add validation logic here to ensure data is complete and valid
+    if (!userData.name || !userData.email || !userData.password) {
+      alert('Incomplete user data');
+      return res.status(400).json({ error: 'Incomplete user data' });
+    }
+    else if (existingUser) {
+      alert('User with this email already exists');
+      return res.status(400).json({ error: 'User with this email already exists' });
+    }
+    else 
+    {
+      const newUser = new Seller(userData);
+      const user = await newUser.save();
+      res.status(201).json(user);
+      console.log('User saved to the database(BACKEND)');
+    }
+    
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error saving user');
+    console.log('Error in database');
+  }
+});
+
+
+
+
+
 app.post('/login', async (req,res)=>{
   const { email, password } = req.body;
 
