@@ -8,9 +8,10 @@ const app = express();
 
 dotenv.config({ path: './config.env' });
 require('./Database/conn');
+
 const Buyer = require('./Model/BuyerSchema');
 const Products = require('./Model/ProductsSchema');
-const Order = require('./Model/OrderSchema')
+const Order = require('./Model/OrderSchema');
 const Seller = require('./Model/SellerSchema');
 
 const PORT = process.env.PORT;
