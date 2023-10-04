@@ -1,0 +1,105 @@
+.picture1Icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 747px;
+  height: 700px;
+  object-fit: cover;
+}
+.imagePlaceholder {
+  position: absolute;
+  height: 100%;
+  width: 51.11%;
+  top: 0;
+  right: 48.89%;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+.yourDreamShop {
+  align-self: stretch;
+  position: relative;
+  letter-spacing: -1px;
+  line-height: 58px;
+  font-weight: 500;
+}
+.header {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.keepYourEveryday {
+  align-self: stretch;
+  position: relative;
+  font-size: 18px; 
+  line-height: 30px;
+  font-family: 'Inter', sans-serif; 
+  font-weight: normal;
+}
+.text {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-5xs);
+}
+.iconarrowRight {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: none;
+}
+.getStarted {
+  position: relative;
+  font-size: var(--button-small-size);
+  letter-spacing: -0.4px;
+  line-height: 28px;
+  font-weight: 500;
+  font-family: var(--button-medium);
+  color: var(--black-900);
+  text-align: center;
+}
+.iconarrowRight1 {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+.button,
+.content {
+  display: flex;
+  justify-content: center;
+}
+.button {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-4xs) var(--padding-5xl);
+  background-color: #795aac;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-9xs);
+}
+.content {
+  position: absolute;
+  top: calc(50% - 173px);
+  left: calc(50% + 98px);
+  width: 456px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-9xl);
+}
+.sliderSection {
+  position: absolute;
+  top: 135px;
+  left: 0;
+  background-color: #795aac;
+  width: 100%;
+  height: 700px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--heading-03-size);
+  color: var(--white);
+  font-family: var(--button-medium);
+}

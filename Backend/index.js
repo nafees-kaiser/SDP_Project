@@ -209,6 +209,17 @@ app.get('/individual-product/:id', async(req, res)=>{
         console.log(`Error while fetching singular product\n ${error}`)
     }
 })
+app.get('/buyer_profile', async(req, res)=>{
+    try {
+        const id = "651adc5c7bea3ef7b5ff632f";
+        const result = await Buyer.findById(id);
+        res.json(result);
+    } catch (error) {
+        console.log(`Error while fetching buyer\n ${error}`)
+    }
+})
+
+
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port http://localhost:${PORT}/`);
