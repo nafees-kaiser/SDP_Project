@@ -75,7 +75,7 @@ const Authentication = ({closemodel,data1,formData})=>{
                                     value={code}
                                         />
                             </div>
-                            <Button text="Submit"/>
+                            <Button text="Submit" type='submit' />
                             
                         </form>
                     </div>
