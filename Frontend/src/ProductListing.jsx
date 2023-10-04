@@ -42,7 +42,7 @@ export default function ProductListing() {
                         {products.map((product, index) => {
                             const { _id, productName, district, division, price } = product;
                             return (
-                                <Link to={`/individual-product/${_id}`} key={index}>
+                                <Link to={`/individual-product/${_id}`} key={_id}>
                                     {/* <a href="#" key={index}> */}
                                     <Card
                                         image={nakshiKathaImage}

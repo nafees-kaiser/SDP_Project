@@ -1,9 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Card from './Components/Card.jsx'
 import Know_Nav from "./Components/Know_Nav.jsx"
 import Style from './Become_seller.module.css'
 import Button from "./Components/Button.jsx";
+import Footer from "./Components/Footer.jsx";
 const Become_seller = ()=>{
+    const navigate= useNavigate();
+    const btn = ()=>{
+        navigate('/seller_reg');
+    }
     return (
         <>
             <Know_Nav/>
@@ -11,8 +17,8 @@ const Become_seller = ()=>{
                 <div className={Style.image}>
                     <img src="./images/384140578_1344999119451455_8434272048076096664_n.jpg"  alt="" />
                     <div className={Style.text}>
-                        <h4>Craft your Dreams,Share your <br/> Passion:Become a Seller <br /> Today </h4>
-                       
+                        <h4>Craft your Dreams,Share your <br/> Passion:Become a Seller <br /> Today! </h4>
+                        <p>Sell Your HandCrafted Items with us!</p>
                     </div>
                 </div>
             </div>
@@ -40,7 +46,7 @@ const Become_seller = ()=>{
                     <p>Crafting Dreams? We've got <br />the platform for you</p>
                 </div>
                 <div className={Style.right}>
-                    <Button text={'Register Now'}/>
+                    <Button text={'Register Now'} change={btn} />
                 </div>
             </div>
             <div className={Style.steps}>
@@ -128,6 +134,7 @@ const Become_seller = ()=>{
                 </div>
             </div>
             <div className={Style.line}></div>
+            <Footer/>
         
         </>
     );

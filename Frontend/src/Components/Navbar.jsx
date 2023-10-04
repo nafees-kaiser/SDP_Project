@@ -13,11 +13,11 @@ const Navbar = ()=>{
                     <div className={Style.right}>
                         <Button text="Log in"/>
                         <div className={Style.icons}>
-                            <i class="fa-regular fa-bell"></i>
+                            <i className="fa-regular fa-bell"></i>
                             <p>Notifications</p>
                         </div>
                         <div className={Style.icons}>
-                            <i class="fa-solid fa-cart-plus"></i>
+                            <i className="fa-solid fa-cart-plus"></i>
                             <p>Cart</p>
                         </div>
 
@@ -35,7 +35,7 @@ const Navbar = ()=>{
                     </div>
                     <div className={Style.right}>
                         <input type="text" className={Style.search} placeholder="Search..."></input>
-                        <i class="fa fa-search icon"></i>   
+                        <i className="fa fa-search icon"></i>   
                     </div> 
                 </div>
             </div>

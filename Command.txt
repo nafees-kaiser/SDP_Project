@@ -9,10 +9,21 @@ npm i nodemon
 npm i cors
 npm i nodemailer
 
+
+for shortcut:
+npm i express mongoose dotenv body-parser nodemon cors nodemailer
+
+
 Frontend:
 cd ..
 cd Frontend
 npm i axios
+npm i react-router-dom
+npm install react-chartjs-2 chart.js
+
+
+for shortcut:
+npm i express axios react-router-dom react-chartjs-2 chart.js
 
 
 To run Both the server

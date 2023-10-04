@@ -1,17 +1,33 @@
 const mongoose= require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-    productId: {
-        type:String,
-        require: true
+    product: [{
+        productId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Products'
+        },
+        quantity: {
+            type: Number,
+            require: true
+        }
+
+    },],
+    buyerId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Buyer'
     },
-    amount: {
-        type: String,
+    date:{
+        type: Date,
         require: true
     },
     totalPrice: {
-        type: String,
+        type: Number,
         require: true
+    },
+    orderStatus:{
+        type: String,
+        default: 'not ordered',
+        enum: ['not ordered','cart', 'pending', 'ordered']
     }
 
 })

@@ -8,9 +8,11 @@ const app = express();
 
 dotenv.config({ path: './config.env' });
 require('./Database/conn');
-const User = require('./Model/UserSchema');
+
+const Buyer = require('./Model/BuyerSchema');
 const Products = require('./Model/ProductsSchema');
-const Order = require('./Model/OrderSchema')
+const Order = require('./Model/OrderSchema');
+const Seller = require('./Model/SellerSchema');
 
 const PORT = process.env.PORT;
 app.use(bodyParser.json());
@@ -21,7 +23,7 @@ app.post('/register', async (req, res) => {
   try {
     const userData = req.body;
     console.log("UserData: "+ userData.mobileNumber);
-    const existingUser = await User.findOne({ email: userData.email });
+    const existingUser = await Buyer.findOne({ email: userData.email });
     // Add validation logic here to ensure data is complete and valid
     if (!userData.name || !userData.email || !userData.password) {
       alert('Incomplete user data');
@@ -33,7 +35,7 @@ app.post('/register', async (req, res) => {
     }
     else 
     {
-      const newUser = new User(userData);
+      const newUser = new Buyer(userData);
       const user = await newUser.save();
       res.status(201).json(user);
       console.log('User saved to the database(BACKEND)');
@@ -45,11 +47,47 @@ app.post('/register', async (req, res) => {
     console.log('Error in database');
   }
 });
+
+
+
+app.post('/register_seller', async (req, res) => {
+  try {
+    const userData = req.body;
+    console.log("UserData: "+ userData.mobileNumber);
+    const existingUser = await Seller.findOne({ email: userData.email });
+    // Add validation logic here to ensure data is complete and valid
+    if (!userData.name || !userData.email || !userData.password) {
+      alert('Incomplete user data');
+      return res.status(400).json({ error: 'Incomplete user data' });
+    }
+    else if (existingUser) {
+      alert('User with this email already exists');
+      return res.status(400).json({ error: 'User with this email already exists' });
+    }
+    else 
+    {
+      const newUser = new Seller(userData);
+      const user = await newUser.save();
+      res.status(201).json(user);
+      console.log('User saved to the database(BACKEND)');
+    }
+    
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error saving user');
+    console.log('Error in database');
+  }
+});
+
+
+
+
+
 app.post('/login', async (req,res)=>{
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email, password });
+    const user = await Buyer.findOne({ email, password });
 
     if (user) {
       // User is found, and the credentials match
@@ -62,6 +100,28 @@ app.post('/login', async (req,res)=>{
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
+
+app.post('/seller_login', async (req,res)=>{
+  const { email, password } = req.body;
+
+  try {
+    const user = await Seller.findOne({ email, password });
+
+    if (user) {
+      // User is found, and the credentials match
+      res.json({ success: true, message: 'Login successful' });
+    } else {
+      // User not found or incorrect credentials
+      res.status(401).json({ success: false, message: 'Login failed' });
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+
+
 app.post('/verify', async (req, res) => {
   const userData = req.body;
   console.log("SMTP: "+ userData.mobileNumber);

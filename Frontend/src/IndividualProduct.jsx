@@ -67,7 +67,7 @@ export default function IndividualProduct() {
                                     <a href="#">Chat with seller</a>
                                 </div>
                                 <p>5 star</p>
-                                <p>{price}</p>
+                                <p>{`${price} Tk`}</p>
                                 <p></p>
                                 <Button text="Wishlist" />
                             </div>

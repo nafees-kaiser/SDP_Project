@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Hanken+Grotesk:wght@500;700;800&family=Inter&display=swap');
+:root {
+    --primary-color: #795AAC;
+    --button : #999DEE;
+    --Background: #E9E9E9;
+    --text-color: White;
+    --text: 'Han ken Grotesk', sans-serif;
+}
+
+.container {
+    width: 400px;
+    height: 600px;
+    border: 1px solid red;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(100%,-34%);
+    background-color: var(--Background);
+    border-radius: 10px;
+}
+.container .top {
+    width: 95%;
+    height: 8%;
+    margin: auto;
+    border: 1px solid blue;
+    background-color: var(--text-color);
+}
+.container .top > p {
+    font-family: var(--text);
+    font-size: 1.3em;
+    font-weight: 700;
+    float: right;
+    margin: 10px 0px;
+}
+.container .middle {
+    width: 95%;
+    height: 87%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -48%);
+    display: flex;
+    flex-direction: row;
+    background-color: var(--text-color);
+}
+.container .middle .left {
+    width: 17%;
+    height: 100%;
+    border: 1px solid black;
+}
+.container .middle .left .image {
+    width: 80%;
+    height: 10%;
+    margin: 10px 5px;
+    
+}
+.container .middle .left .image > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px
+}
+.container .middle .right {
+    width: 83%;
+    height: 100%;
+    border: 1px solid rgb(210, 30, 30);
+}
+.container .middle .right .up {
+    width: 100%;
+    height: 90%;
+    border: 1px solid black;
+}
+.container .middle .right .down {
+    width: 100%;
+    height: 10%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.container .middle .right .down > input {
+    width: 76%;
+    height: 60%;
+    border-radius: 20px;
+    margin: auto;
+    border: 1px solid rgb(0, 0, 0);
+}
+.container .middle .right .down > button {
+    margin: auto;
+    width: 20%;
+    height: 60%;
+    border-radius: 10px;
+    background-color: var(--button);
+    color: var(--text-color);
+}

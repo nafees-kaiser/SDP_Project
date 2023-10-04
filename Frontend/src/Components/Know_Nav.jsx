@@ -2,8 +2,10 @@ import React from "react";
 import Style from "./Navbar.module.css";
 import Button from './Button.jsx';
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = ()=>{
+    const navigate = useNavigate();
     return (
         <>
             <div className={Style.navbar}>
@@ -12,13 +14,13 @@ const Navbar = ()=>{
                         <Link to="/become_seller" style={{margin:'1px'}}>Become a Seller</Link>
                     </div>
                     <div className={Style.right}>
-                        <Button text="Log in"/>
+                        <Button text="Log in" change={()=> navigate('/seller_login')}/>
                         <div className={Style.icons}>
-                            <i class="fa-regular fa-bell"></i>
+                            <i className="fa-regular fa-bell"></i>
                             <p>Notifications</p>
                         </div>
                         <div className={Style.icons}>
-                            <i class="fa-solid fa-cart-plus"></i>
+                            <i className="fa-solid fa-cart-plus"></i>
                             <p>Cart</p>
                         </div>
 
@@ -26,7 +28,7 @@ const Navbar = ()=>{
                 </div>
                 <div className={Style.lower}>
                     <div className={Style.left}>
-                        <a href="/"><img src="./images/384165997_332969559130939_1111385360839973004_n.png" alt="" /></a>
+                        <Link to={`/home_seller`}><img src="./images/384165997_332969559130939_1111385360839973004_n.png" alt="" /></Link>
                     </div>
                     <div className={Style.middle}>
                         <a href="#">Know About Sellers</a>
@@ -36,7 +38,7 @@ const Navbar = ()=>{
                     </div>
                     <div className={Style.right}>
                         <input type="text" className={Style.search} placeholder="Search..."></input>
-                        <i class="fa fa-search icon"></i>   
+                        <i className="fa fa-search icon"></i>   
                     </div> 
                 </div>
             </div>
