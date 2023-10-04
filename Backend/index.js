@@ -124,7 +124,7 @@ app.post('/seller_login', async (req,res)=>{
 
 app.post('/verify', async (req, res) => {
   const userData = req.body;
-  console.log("SMTP: "+ userData.mobileNumber);
+
   try {
     let testAccount = await nodemailer.createTestAccount();
 
@@ -152,8 +152,42 @@ app.post('/verify', async (req, res) => {
     res.status(500).json({ error: "Email could not be sent." });
   }
 });
+/*
+app.get('/order',async (req,res)=>{
+  try {
+    const order = await Order.aggregate([
+      {
+        $lookup: {
+          from: "product",
+          localField: "product",
+          foreignField: "productId",
+          as: "productInfo"
+        }
+      },
+      {
+        $unwind: "$productInfo" // Unwind the productInfo array
+      },
+      {
+        $group: {
+          _id: "$_id", // Group by the original document's _id
+          product: { $first: "$product" },
+          buyerId: { $first: "$buyerId" },
+          date: { $first: "$date" },
+          totalPrice: { $first: "$totalPrice" },
+          orderStatus: { $first: "$orderStatus" },
+          productInfo: { $push: "$productInfo" }
+        }
+      }
+    ]);
+    
+    
+    console.log(order);
 
-
+  } catch(error){
+    console.error("ERROR: "+error);
+  }
+});
+*/
 app.get('/product-listing', async(req, res)=>{
     try {
         const result = await Products.find();
