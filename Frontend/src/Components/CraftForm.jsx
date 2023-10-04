@@ -1,6 +1,6 @@
 import React from "react";
-import Style from "./Navbar.module.css";
-// import Button from './Button.jsx';
+import Style from "./CraftsForm.module.css";
+import Button from './Button.jsx';
 import { Link } from "react-router-dom";
 const Navbar = () =>{
     return (
@@ -9,17 +9,17 @@ const Navbar = () =>{
             <div className={Style.navbar}>
                 <div className={Style.upper}>
                     <div className={Style.left}>
-                        <Link to={`/become_seller`} className={Style.link}>Become a Seller</Link>
+                        
                     </div>
                     <div className={Style.right}>
-                    <Link to={`/login`} className={Style.link}> Login</Link>
-                        {/* <Button text="Log in"/> */}
+                    {/* <Link to={`/login`} className={Style.link}> Login</Link> */}
+                        <Button text="Logged in"/>
                         <div className={Style.icons}>
-                            <i className="fa-regular fa-bell"></i>
+                            <i class="fa-regular fa-bell"></i>
                             <p>Notifications</p>
                         </div>
                         <div className={Style.icons}>
-                            <i className="fa-solid fa-cart-plus"></i>
+                            <i class="fa-solid fa-cart-plus"></i>
                             <p>Cart</p>
                         </div>
 
@@ -35,12 +35,12 @@ const Navbar = () =>{
                         {/* <button onClick={scrollToCommunity}>Community</button> */}
                         {/* <button className={Style.link} onClick="document.getElementById('middle').scrollIntoView();"> Community</button> */}
                         {/*<Link to={`/community`} className={Style.link}> Community</Link>*/}
-                        <a href="#com" >Community</a>
-                        <a href="#craft">Know about craft</a>
+                        <a href="#">Community</a>
+                        <a href="#">Know about craft</a>
                     </div>
                     <div className={Style.right}>
                         <input type="text" className={Style.search} placeholder="Search..."></input>
-                        <i className="fa fa-search icon"></i>   
+                        <i class="fa fa-search icon"></i>   
                     </div> 
                 </div>
             </div>

@@ -1,0 +1,134 @@
+.emmanuelOyiboke {
+  border: 0;
+  font-weight: 500;
+  font-family: var(--font-raleway);
+  font-size: var(--font-size-xl);
+  background-color: transparent;
+  position: absolute;
+  top: 254px;
+  left: 19px;
+  text-transform: capitalize;
+  color: var(--color-black);
+  text-align: left;
+  display: inline-block;
+  width: 216px;
+  height: 30px;
+}
+.pictureNameChild {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  width: 179.09px;
+  height: 195.76px;
+  object-fit: cover;
+}
+.changePhoto,
+.div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 27.66px;
+  letter-spacing: -0.6px;
+  line-height: 23.96px;
+  font-weight: 500;
+  font-family: var(--font-poppins);
+  color: var(--color-darkslategray-100);
+  text-align: left;
+  display: inline-block;
+  width: 20.82px;
+}
+.changePhoto {
+  left: 35.5px;
+  font-size: 18.44px;
+  width: 131px;
+}
+.parent {
+  position: relative;
+  width: 166.5px;
+  height: 24px;
+}
+.pictureNameInner {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-xs);
+  background-color: rgba(22, 80, 105, 0.21);
+  position: absolute;
+  top: 200px;
+  left: calc(50% - 117.5px);
+  border-radius: var(--br-7xs);
+  width: 218.61px;
+  height: 39.51px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.pictureName {
+  position: absolute;
+  top: 292px;
+  left: 217px;
+  width: 235px;
+  height: 284px;
+}
+.pageTitle {
+  position: relative;
+  top: 55px;
+  letter-spacing: -1px;
+  line-height: 58px;
+  font-weight: 500;
+  font-size: 80px;
+  display: inline-block;
+  width: 880px;
+}
+.content {
+  height: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.border,
+.border1,
+.pageHeader {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+.pageHeader {
+  top: 142px;
+  background-color: #f9f8f8;
+  height: 112px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-33xl) 0;
+  box-sizing: border-box;
+}
+.border,
+.border1 {
+  top: 137px;
+  background-color: #795AAC;
+  height: 5px;
+}
+.border1 {
+  top: 254px;
+}
+.footer {
+  position: absolute;
+  top: 909px;
+  left: 0px;
+}
+.buyerProfile {
+  position: relative;
+  background-color: #fcfcfc;
+  width: 100%;
+  height: 1327px;
+  overflow: hidden;
+  text-align: center;
+  font-size: var(--font-size-5xl);
+  color: var(--color-black);
+  font-family: var(--button-medium);
+}

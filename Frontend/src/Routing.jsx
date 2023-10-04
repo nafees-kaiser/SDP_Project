@@ -14,12 +14,18 @@ import Authentication from "./Authentication.jsx";
 import Messaging from "./Messaging.jsx";
 import Seller_Registration from "./Seller_Registration.jsx";
 import SellerLogin from "./SellerLogin.jsx"
+import LandingPage from "./LandingPage.jsx";
+import ProfileBox from "./ProfileBox.jsx";
+import BuyerProfile from "./BuyerProfile.jsx";
+
+
 
 const Routing = ()=>{
     return (
         <>
             <Routes>
-                <Route path='/' element={<LogIn/>}></Route>
+                <Route path='/' element={<LandingPage/>}></Route>
+                <Route path='/login' element={<LogIn/>}></Route>
                 <Route path='/registration' element={<Registration/>}></Route>
                 <Route path='/product-listing' element={<ProductListing/>}></Route>
                 <Route path='/individual-product/:id' element={<IndividualProduct/>}></Route>
@@ -31,6 +37,9 @@ const Routing = ()=>{
                 <Route path='/message' element={<Messaging/>}></Route>
                 <Route path='/seller_reg' element={<Seller_Registration/>}></Route>
                 <Route path='/seller_login' element={<SellerLogin/>}></Route>
+                <Route path='/profile_box' element={<ProfileBox/>}></Route>
+                <Route path='/buyer_profile' element={<BuyerProfile/>}></Route>
+
             </Routes>
         </>
     )

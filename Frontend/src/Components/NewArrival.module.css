@@ -1,0 +1,221 @@
+.newArrivalsIn {
+  position: relative;
+  letter-spacing: -0.6px;
+  line-height: 38px;
+  display: inline-block;
+  width: 618px;
+  flex-shrink: 0;
+}
+.carouselTitle {
+  background-color: var(--color-darkslateblue);
+  width: 1336px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 var(--padding-13xl);
+  box-sizing: border-box;
+}
+.nomadsHandFan1507545247338Icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 310px;
+  height: 413px;
+  object-fit: cover;
+}
+.imagePlaceholder {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+.image {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  align-self: stretch;
+  height: 413px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.div,
+.haatpakha,
+.image {
+  position: relative;
+}
+.haatpakha {
+  align-self: stretch;
+  letter-spacing: -0.4px;
+  line-height: 28px;
+  font-weight: 500;
+}
+.div {
+  line-height: 22px;
+  font-weight: 600;
+}
+.price {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: var(--button-xsmall-size);
+  font-family: var(--text-18px-regular);
+}
+.textprice {
+  align-self: stretch;
+  gap: var(--gap-9xs);
+}
+.content,
+.elementscard,
+.textprice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.content {
+  align-self: stretch;
+}
+.elementscard {
+  flex: 1;
+  overflow: hidden;
+  gap: var(--gap-xs);
+}
+.div4,
+.ratingratingGroupIcon {
+  position: relative;
+  display: none;
+}
+.ratingratingGroupIcon {
+  width: 88px;
+  height: 16px;
+}
+.div4 {
+  text-decoration: line-through;
+  line-height: 22px;
+  color: var(--black-400);
+}
+.price3 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-xs);
+  font-size: var(--button-xsmall-size);
+  font-family: var(--text-18px-regular);
+}
+.elementsswatchessinglecolorIcon {
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.elementsswatchessinglecolorIcon,
+.elementsswatchessinglecolorIcon1 {
+  position: relative;
+  border-radius: var(--br-81xl);
+  width: 14px;
+  height: 14px;
+}
+.items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-5xs);
+}
+.content7,
+.elementsswatchesgroupcolor {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.elementsswatchesgroupcolor {
+  display: none;
+  justify-content: center;
+}
+.content7 {
+  align-self: stretch;
+  gap: var(--gap-xs);
+}
+.cards,
+.carouselbutton,
+.content7,
+.newArrival {
+  display: flex;
+  justify-content: flex-start;
+}
+.cards {
+  background-color: var(--color-darkslateblue);
+  width: 1336px;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--gap-13xl);
+}
+.carouselbutton,
+.newArrival {
+  flex-direction: column;
+  align-items: center;
+  font-size: var(--button-small-size);
+}
+.newArrival {
+  position: absolute;
+  top: 1634px;
+  left: 0;
+  background-color: #795aac;;
+  width: 100%;
+  height: 629px;
+  justify-content: center;
+  padding: 0 var(--padding-xl);
+  box-sizing: border-box;
+  mix-blend-mode: normal;
+  text-align: left;
+  font-size: var(--font-size-15xl);
+  color: var(--text);
+  font-family: var(--button-medium);
+}
+
+.iconarrowRight {
+  position: absolute;
+  top: calc(50% - 16px);
+  left: calc(50% - 16px);
+  width: 32px;
+  height: 32px;
+}
+.button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: var(--white);
+  top: calc(50% - 26px);
+  right: 28px;
+  border-radius: var(--br-81xl);
+  box-shadow: var(--shadow-01);
+  width: 52px;
+}
+.arrows,
+.button,
+.button1 {
+  position: absolute;
+  height: 52px;
+}
+.button1 {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: var(--white);
+  top: calc(50% - 26px);
+  left: 28px;
+  border-radius: var(--br-81xl);
+  box-shadow: var(--shadow-01);
+  width: 52px;
+}
+.arrows {
+  width: calc(100% - 3px);
+  top: 302px;
+  right: 0;
+  left: 3px;
+}

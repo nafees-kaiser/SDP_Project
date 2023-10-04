@@ -17,7 +17,7 @@ const Registration = () => {
         setAuth(false);
     }
     const nev = ()=>{
-        navigate('/');
+        navigate('/login');
     }
     const [formData, setFormData] = useState({
         name: '',

@@ -4,6 +4,7 @@ import style from './SellerLogin.module.css';
 import {useNavigate} from 'react-router-dom';
 import Button from './Components/Button';
 
+
 const LogIn = () => {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
