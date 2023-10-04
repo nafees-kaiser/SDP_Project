@@ -22,10 +22,10 @@ const BuyerProfile = () => {
       <div className={styles.pictureName}>
         <input
           className={styles.emmanuelOyiboke}
-          value="Emmanuel Oyiboke"
-          placeholder="Emmanuel Oyiboke"
+          value="Shahabuddin Akhon"
+          placeholder="Shahabuddin Akhon"
           type="text"
-          defaultValue="Emmanuel Oyiboke"
+          defaultValue="Shahabuddin Akhon"
         />
         <img
           className={styles.pictureNameChild}

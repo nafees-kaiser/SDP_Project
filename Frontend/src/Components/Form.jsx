@@ -4,7 +4,7 @@ import axios from "axios";
 import styles from "./Form.module.css";
 
 
-const EditableInput = ({ defaultValue, onSave }) => {
+const EditableInput = ({ defaultValue }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(defaultValue);
 
@@ -17,6 +17,7 @@ const EditableInput = ({ defaultValue, onSave }) => {
   };
 
   const handleChange = (event) => {
+    event.preventDefault();
     setValue(event.target.value);
   };
 
@@ -32,7 +33,7 @@ const EditableInput = ({ defaultValue, onSave }) => {
           className={styles.input}
           value={value}
           onChange={handleChange}
-          onBlur={handleBlur}
+          // onBlur={handleBlur}
         />
         
         { <button onClick={handleBlur} className={styles.edit}>Save</button> }
@@ -41,7 +42,7 @@ const EditableInput = ({ defaultValue, onSave }) => {
        <div>
         <div
           className={styles.inputValue}
-          onDoubleClick={handleDoubleClick}
+          // onDoubleClick={handleDoubleClick}
         >
           {value}
         </div>
@@ -66,7 +67,9 @@ const Form = () => {
   useEffect(() => {
     axios.get('http://localhost:3000/buyer_profile')
       .then((response) => {
+        console.log(response.data.email)
         setData(response.data);
+        
       })
       .catch((error) => {
         console.error(error);
@@ -110,7 +113,11 @@ const Form = () => {
           <div className={styles.emailAddress1}>Email Address</div>
           <div className={styles.rectangleGroup}>
             <div className={styles.groupItem} />
-            <EditableInput className={styles.abcgmailcom} defaultValue={data.email} />
+             <EditableInput className={styles.abcgmailcom} defaultValue="shavoddin54@gmail.com" />
+            {/* <input type="text"
+              className={styles.abcgmailcom}
+              placeholder={data.email}
+            /> */}
             
           </div>
         </div>
@@ -123,7 +130,7 @@ const Form = () => {
               defaultValue={data.email}
             /> */}
           
-            <EditableInput className={styles.khulna} defaultValue="Khulna" />
+            <EditableInput className={styles.khulna} defaultValue="Mirpur, Dhaka, Dhaka" />
             
           </div>
         </div>
@@ -131,7 +138,7 @@ const Form = () => {
           <div className={styles.mobileNumber}>Mobile Number</div>
           <div className={styles.groupDiv}>
             <div className={styles.groupInner} />
-            <EditableInput className={styles.frameInput} defaultValue="01823445276" />
+            <EditableInput className={styles.frameInput} defaultValue="01722334455" />
             
           </div>
         </div>
@@ -139,7 +146,7 @@ const Form = () => {
           <div className={styles.lastName1}>Last Name</div>
           <div className={styles.groupDiv}>
             <div className={styles.groupInner} />
-            <EditableInput className={styles.oyiboke} defaultValue="Oyiboke" />
+            <EditableInput className={styles.oyiboke} defaultValue="Akhon" />
             
           </div>
         </div>
@@ -148,7 +155,7 @@ const Form = () => {
           <div className={styles.rectangleGroup}>
             <div className={styles.groupItem} />
             
-            <EditableInput className={styles.emmanuel} defaultValue="Emmanuel" />
+            <EditableInput className={styles.emmanuel} defaultValue="Shahabuddin" />
             
           </div>
         </div>
