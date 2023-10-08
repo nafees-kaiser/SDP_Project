@@ -35,7 +35,7 @@ const LogIn = () => {
             // User is authenticated, you can redirect or perform other actions here
             console.log('Login successful');
             alert('Login successful');
-            navigate('product-listing'); // Replace '/dashboard' with your desired redirect path
+            navigate('/product-listing'); // Replace '/dashboard' with your desired redirect path
           } else {
             // Authentication failed
             alert('Login failed');

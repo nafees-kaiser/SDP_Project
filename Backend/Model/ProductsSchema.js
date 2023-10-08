@@ -1,25 +1,25 @@
-const mongoose= require('mongoose');
+const mongoose = require('mongoose');
 
 const productsSchema = new mongoose.Schema({
     productName: {
-        type:String,
-        require: true
+        type: String,
+        required: true // Corrected from "require" to "required"
     },
     price: {
-        type: String,
-        require: true
+        type: Number, // Corrected data type
+        required: true
     },
     storedQuantity: {
-        type: String,
-        require: true
+        type: Number, // Corrected data type
+        required: true
     },
     district: {
         type: String,
-        require: true
+        required: true
     },
     division: {
         type: String,
-        require: true
+        required: true
     },
     wishlist: {
         type: Boolean,
@@ -31,10 +31,9 @@ const productsSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        require: false
-
+        required: false
     }
+});
 
-})
-const Products = mongoose.model("PRODUCTS",productsSchema);
+const Products = mongoose.model("Products", productsSchema); // Corrected model name
 module.exports = Products;

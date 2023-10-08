@@ -1,4 +1,4 @@
-const mongoose= require('mongoose');
+const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
     product: [{
@@ -8,28 +8,27 @@ const orderSchema = new mongoose.Schema({
         },
         quantity: {
             type: Number,
-            require: true
+            required: true
         }
-
-    },],
-    buyerId:{
+    }],
+    buyerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Buyer'
     },
-    date:{
+    date: {
         type: Date,
-        require: true
+        required: true // Modified to be required
     },
     totalPrice: {
         type: Number,
-        require: true
+        required: true
     },
-    orderStatus:{
+    orderStatus: {
         type: String,
         default: 'not ordered',
-        enum: ['not ordered','cart', 'pending', 'ordered']
+        enum: ['not ordered', 'cart', 'pending', 'ordered']
     }
+});
 
-})
-const Order = mongoose.model("ORDER",orderSchema);
+const Order = mongoose.model("Order", orderSchema);
 module.exports = Order;
