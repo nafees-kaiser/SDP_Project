@@ -88,10 +88,11 @@ app.post('/login', async (req,res)=>{
 
   try {
     const user = await Buyer.findOne({ email, password });
-
+    console.log(user.id);
     if (user) {
       // User is found, and the credentials match
-      res.json({ success: true, message: 'Login successful' });
+      res.status(200).json({ success: true, message: 'Login successful', id:user.id });
+      
     } else {
       // User not found or incorrect credentials
       res.status(401).json({ success: false, message: 'Login failed' });

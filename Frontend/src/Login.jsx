@@ -8,6 +8,7 @@ import Button from './Components/Button';
 const LogIn = () => {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
+    let [id,setid] = useState("");
     const navigate= useNavigate();
 
     const changeEmail = (event) =>{
@@ -30,12 +31,16 @@ const LogIn = () => {
             },
             body: JSON.stringify({ email, password }),
           });
-      
+          
           if (response.ok) {
             // User is authenticated, you can redirect or perform other actions here
+            const data = await response.json();
+            setid(data.id);
+            sessionStorage.setItem("uid",data.id);
+            //console.log("using hook: "+id);
             console.log('Login successful');
             alert('Login successful');
-            navigate('/product-listing'); // Replace '/dashboard' with your desired redirect path
+            navigate('/product-listing'); 
           } else {
             // Authentication failed
             alert('Login failed');

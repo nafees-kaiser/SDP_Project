@@ -21,6 +21,7 @@ export default function ProductListing() {
                 // console.log(response.data);
                 setProducts(response.data);
                 setCount(response.data.length);
+                console.log("from product:"+sessionStorage.getItem("uid"));
             })
     }, [])
     return (
