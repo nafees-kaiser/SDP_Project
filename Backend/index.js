@@ -111,7 +111,7 @@ app.post('/seller_login', async (req,res)=>{
 
     if (user) {
       // User is found, and the credentials match
-      res.json({ success: true, message: 'Login successful' });
+      res.status(200).json({ success: true, message: 'Login successful', id:user.id });
     } else {
       // User not found or incorrect credentials
       res.status(401).json({ success: false, message: 'Login failed' });
@@ -162,15 +162,7 @@ app.post('/verify', async (req, res) => {
         quantity: order.product[0]?.quantity 
       }), null, 2)));
 
-    */
-
-app.get('/order',async (req,res)=>{
-  try {
-    const order = await Order.find();
-    const orders = await Order.find().populate('product.productId');
-    //res.json(orders);
-   
-    res.json(
+    console.log(
       await Promise.all(
         orders.map(async (order, index) => {
           const user = await Buyer.findById(order.buyerId).exec();
@@ -180,19 +172,61 @@ app.get('/order',async (req,res)=>{
             quantity: order.product[index].quantity,
             price: order.product[index].productId.price,
             Date: order.date,
-            Buyer: user,
+            Buyer: user
           };
         })
       )
     );
       
+    */
 
-  } catch(error){
-    console.error("ERROR: "+error);
-    res.status(500).json({ error: "Error retrieving orders" });
-  }
-});
+  app.get('/order_seller/:id', async (req, res) => {
+    try {
+      const id = req.params.id;
+      const orders = await Order.find({sellerId: id}).populate('product.productId').exec();
+      ///res.json(orders);
+      res.json(
+        await Promise.all(
+          orders.map(async (order, index) => {
+            const buyer = await Buyer.findById(order.buyerId).exec();
+            const seller = await Seller.findById(order.sellerId).exec();
+            return {
+              buyerId: order.buyerId,
+              productName: order.product[index]?.productId?.productName,
+              quantity: order.product[index]?.quantity,
+              price: order.product[index]?.productId?.price,
+              Date: order.date,
+              Buyer: buyer,
+              Seller: seller
+            };
+          })
+        )
+      );
+  
+      
+    } catch (error) {
+      console.error("ERROR: " + error);
+      res.status(500).json({ error: "Error retrieving orders" });
+    }
+  });
+    
 
+  app.get('/practice', async (req, res) => {
+    try {
+        let id = "6522dd2596de6399e643219a";
+        const result = await Order.find({buyerId: id}).exec();
+        if (!result) {
+            console.log("No results found.");
+            res.status(404).json({ message: "No results found." });
+        } else {
+            console.log("Found results:", result);
+            res.json(result);
+        }
+    } catch (error) {
+        console.error(`Error while fetching products: ${error}`);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
 
 
 

@@ -36,7 +36,7 @@ const LogIn = () => {
             // User is authenticated, you can redirect or perform other actions here
             const data = await response.json();
             setid(data.id);
-            sessionStorage.setItem("uid",data.id);
+            sessionStorage.setItem("buyer_id",data.id);
             //console.log("using hook: "+id);
             console.log('Login successful');
             alert('Login successful');

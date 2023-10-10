@@ -2,10 +2,11 @@ import React, {useRef} from "react";
 import styles from "./ProfileBox.module.css";
 import { Link } from "react-router-dom";
 
-const BuyerProfileDropdown = () => {
+const BuyerProfileDropdown = ({closemodel}) => {
   return (
-    <body>
+    
     <div className={styles.buyerProfileDropdown}>
+      <button className={styles.b}onClick={closemodel}>X</button>
       <div className={styles.border} />
       <Link to={`/buyer_profile`} className={styles.header}>
         <img className={styles.pictureIcon} alt="" src="./images/picture.svg" />
@@ -76,7 +77,7 @@ const BuyerProfileDropdown = () => {
         <div className={styles.signOut1}>Sign Out</div>
       </button>
     </div>
-    </body>
+    
   );
 };
 

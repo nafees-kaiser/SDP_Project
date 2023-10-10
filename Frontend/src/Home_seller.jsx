@@ -1,5 +1,7 @@
-import React,{ useState } from "react";
+import React,{ useState,useEffect } from "react";
 import { Line, Pie } from 'react-chartjs-2';
+import axios from 'axios';
+import ProfileBox from "./ProfileBox.jsx";
 import {
     Chart as ChartJS,
     LineElement,
@@ -25,12 +27,30 @@ ChartJS.register(
     Legend
 )
 const Home_seller = ()=>{
+    const [auth,setAuth]= useState(false);
     const [salesData] = useState([
         { no: 1, customerName: 'Customer 1', productName: 'Product A', quantity: 5, price: 10 },
         { no: 2, customerName: 'Customer 2', productName: 'Product B', quantity: 3, price: 15 },
         { no: 3, customerName: 'Customer 2', productName: 'Product B', quantity: 3, price: 15 },
         { no: 4, customerName: 'Customer 2', productName: 'Product B', quantity: 3, price: 15 },
     ]);
+    const openmodel = ()=>{
+        setAuth(true);
+    }
+    const closemodel = ()=>{
+        setAuth(false);
+    }
+    useEffect(() => {
+        const id = sessionStorage.getItem("buyer_id");
+        axios.get(`http://localhost:3000/order_seller/${id}`)
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.error("Error while fetching data:", error);
+            });
+    }, []);
+    
     const data = {
         labels: ['January', 'February', 'March', 'April', 'May','June','July','August','September','October','November','December'],
         datasets: [
@@ -68,7 +88,8 @@ const Home_seller = ()=>{
 
     return (
         <>
-            <Navbar/>
+            <Navbar openmodel={openmodel}/>
+            { auth && <ProfileBox closemodel={closemodel}/> }
             <div className={Style.line}></div>
             <div className={Style.header}>
                 <div className={Style.left}>
