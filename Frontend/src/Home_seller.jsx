@@ -29,6 +29,7 @@ ChartJS.register(
 const Home_seller = ()=>{
     const [auth,setAuth]= useState(false);
     const [salesDatatable, setSalesData] = useState([]);
+    const [salescount, setSalescount] = useState([]);
     const [salesData] = useState([
         { no: 1, customerName: 'Customer 1', productName: 'Product A', quantity: 5, price: 10 },
         { no: 2, customerName: 'Customer 2', productName: 'Product B', quantity: 3, price: 15 },
@@ -61,7 +62,23 @@ const Home_seller = ()=>{
           .catch((error) => {
             console.error("Error while fetching data:", error);
           });
-      }, []);
+        
+        axios.get(`http://localhost:3000/count_customer/${id}`)
+            .then((response) => {
+                const mappedData = response.data.map((order, index) => ({
+                    no: index + 1,
+                    BuyerName: order.buyerName,
+                    count: order.orderCount
+                }));
+                console.log(mappedData);
+                setSalescount(mappedData);
+            })
+            .catch((error) => {
+                console.error("Error while fetching data:", error);
+            });
+
+
+    }, []);
     
     const data = {
         labels: ['January', 'February', 'March', 'April', 'May','June','July','August','September','October','November','December'],
@@ -238,11 +255,11 @@ const Home_seller = ()=>{
                                 </tr>
                             </thead>
                             <tbody>
-                            {salesData.map((sale, index) => (
+                            {salescount.map((sale, index) => (
                                 <tr key={index}>
                                     <td>{sale.no}</td>
-                                    <td>{sale.customerName}</td>
-                                    <td>{sale.quantity}</td>
+                                    <td>{sale.BuyerName}</td>
+                                    <td>{sale.count}</td>
                                 </tr>
                             ))}
                             </tbody>

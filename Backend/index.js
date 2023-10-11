@@ -216,54 +216,52 @@ app.post('/verify', async (req, res) => {
       res.status(500).json({ error: "Error retrieving orders" });
     }
   });
-    
+  
+  
+
+
+
+
+
+
+
+
 
   app.get('/practice', async (req, res) => {
     try {
-      const id = "651c5377783c0719018cd17f";
+      const id = "651c5377783c0719018cd17f";  
       const orders = await Order
         .find({ sellerId: id })
         .populate('product.productId')
         .sort({ Date: 0 })
         .exec();
-        
+  
       if (!orders) {
         console.log("No results found.");
         return res.status(404).json({ message: "No results found." });
       }
   
-      const promises = orders.map(async (order, index) => {
-        console.log(`Processing order ${index}`);
-        console.log("order.product"+order.product);
-        console.log(order.product[0].productId);
+      // Create an object to store unique buyer names and the number of orders
+      const buyerOrderCount = {};
   
-        const product = order.product[0].productId;
-  
-        if (!product || !product.productName || !product.price) {
-          console.log(`${index}: Product data is missing for this order`);
-          return null;
-        }
-  
+      for (const order of orders) {
         const buyer = await Buyer.findById(order.buyerId).exec();
-        const seller = await Seller.findById(order.sellerId).exec();
-  
-        return {
-          buyerId: order.buyerId,
-          productName: product.productName || "N/A",
-          quantity: order.product[0].quantity || "N/A",
-          price: product.price || "N/A",
-          Date: order.date,
-          Buyer: buyer,
-          Seller: seller
-        };
-      });
-  
-      const results = await Promise.all(promises);
+        
+        const buyerName = buyer.name; // Assuming the name property exists in the buyer model
+        if (!buyerOrderCount[buyerName]) {
+          buyerOrderCount[buyerName] = 1;
+        } else {
+          buyerOrderCount[buyerName]++;
+        }
+      }
       
-      // Filter out null entries (orders with missing or incomplete product data)
-      //const filteredResults = results.filter(result => result !== null);
-  
-      res.json(results);
+      // Convert the object into an array of objects for response
+      const uniqueBuyers = Object.keys(buyerOrderCount).map((buyerName) => ({
+        buyerName,
+        orderCount: buyerOrderCount[buyerName],
+      }));
+      console.log(uniqueBuyers);
+      res.json(uniqueBuyers);
     } catch (error) {
       console.error(`Error while fetching products: ${error}`);
       res.status(500).json({ message: "Internal Server Error" });
@@ -271,8 +269,68 @@ app.post('/verify', async (req, res) => {
   });
   
   
+
+
+
+
+
+
   
   
+  
+  app.get('/count_customer/:id', async (req, res) => {
+    try {
+      const id = req.params.id;
+    // Find and populate the orders
+    const orders = await Order
+      .find({ sellerId: id })
+      .populate('product.productId')
+      .exec();
+
+    if (!orders) {
+      console.log("No results found.");
+      return res.status(404).json({ message: "No results found." });
+    }
+
+    // Create an object to store unique buyer names and the number of orders
+    const buyerOrderCount = {};
+
+    for (const order of orders) {
+      const buyer = await Buyer.findById(order.buyerId).exec();
+      const buyerName = buyer.name; // Assuming the name property exists in the buyer model
+      if (!buyerOrderCount[buyerName]) {
+        buyerOrderCount[buyerName] = 1;
+      } else {
+        buyerOrderCount[buyerName]++;
+      }
+    }
+
+    // Convert the object into an array of objects for response
+    const uniqueBuyers = Object.keys(buyerOrderCount).map((buyerName) => ({
+      buyerName,
+      orderCount: buyerOrderCount[buyerName],
+    }));
+
+    // Sort the uniqueBuyers array by orderCount in descending order
+    uniqueBuyers.sort((a, b) => b.orderCount - a.orderCount);
+
+    // Get the top 5 buyers
+    const topBuyers = uniqueBuyers.slice(0, 5);
+
+    res.json(topBuyers);
+  } catch (error) {
+    console.error(`Error while fetching products: ${error}`);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+
+
+
+
+
+
+
   
 
 
