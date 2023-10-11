@@ -68,8 +68,8 @@ app.post('/register_seller', async (req, res) => {
     {
       const newUser = new Seller(userData);
       const user = await newUser.save();
-      res.status(201).json(user);
-      console.log('User saved to the database(BACKEND)');
+      res.status(200).json({ success: true, message: 'Login successful', id:user.id });
+      console.log('User saved to the database(BACKEND)'+ user.id);
     }
     
   } catch (err) {
@@ -183,18 +183,25 @@ app.post('/verify', async (req, res) => {
   app.get('/order_seller/:id', async (req, res) => {
     try {
       const id = req.params.id;
-      const orders = await Order.find({sellerId: id}).populate('product.productId').exec();
-      ///res.json(orders);
+      const orders = await Order
+      .find({ sellerId: id })
+      .populate('product.productId')
+      .sort({ Date: -1 })
+      .exec();
+
+      console.log(orders);
       res.json(
         await Promise.all(
           orders.map(async (order, index) => {
+            const product = await Products.findById(order.product[index]?.productId).exec();
+            console.log(index +": "+order.product[0]?.productId);
             const buyer = await Buyer.findById(order.buyerId).exec();
             const seller = await Seller.findById(order.sellerId).exec();
             return {
               buyerId: order.buyerId,
-              productName: order.product[index]?.productId?.productName,
-              quantity: order.product[index]?.quantity,
-              price: order.product[index]?.productId?.price,
+              productName: order.product[0]?.productId.productName,
+              quantity: order.product[0]?.quantity,
+              price: order.product[0]?.productId.price,
               Date: order.date,
               Buyer: buyer,
               Seller: seller
@@ -213,21 +220,60 @@ app.post('/verify', async (req, res) => {
 
   app.get('/practice', async (req, res) => {
     try {
-        let id = "6522dd2596de6399e643219a";
-        const result = await Order.find({buyerId: id}).exec();
-        if (!result) {
-            console.log("No results found.");
-            res.status(404).json({ message: "No results found." });
-        } else {
-            console.log("Found results:", result);
-            res.json(result);
+      const id = "651c5377783c0719018cd17f";
+      const orders = await Order
+        .find({ sellerId: id })
+        .populate('product.productId')
+        .sort({ Date: 0 })
+        .exec();
+        
+      if (!orders) {
+        console.log("No results found.");
+        return res.status(404).json({ message: "No results found." });
+      }
+  
+      const promises = orders.map(async (order, index) => {
+        console.log(`Processing order ${index}`);
+        console.log("order.product"+order.product);
+        console.log(order.product[0].productId);
+  
+        const product = order.product[0].productId;
+  
+        if (!product || !product.productName || !product.price) {
+          console.log(`${index}: Product data is missing for this order`);
+          return null;
         }
+  
+        const buyer = await Buyer.findById(order.buyerId).exec();
+        const seller = await Seller.findById(order.sellerId).exec();
+  
+        return {
+          buyerId: order.buyerId,
+          productName: product.productName || "N/A",
+          quantity: order.product[0].quantity || "N/A",
+          price: product.price || "N/A",
+          Date: order.date,
+          Buyer: buyer,
+          Seller: seller
+        };
+      });
+  
+      const results = await Promise.all(promises);
+      
+      // Filter out null entries (orders with missing or incomplete product data)
+      //const filteredResults = results.filter(result => result !== null);
+  
+      res.json(results);
     } catch (error) {
-        console.error(`Error while fetching products: ${error}`);
-        res.status(500).json({ message: "Internal Server Error" });
+      console.error(`Error while fetching products: ${error}`);
+      res.status(500).json({ message: "Internal Server Error" });
     }
   });
-
+  
+  
+  
+  
+  
 
 
 app.get('/product-listing', async(req, res)=>{

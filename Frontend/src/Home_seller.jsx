@@ -28,6 +28,7 @@ ChartJS.register(
 )
 const Home_seller = ()=>{
     const [auth,setAuth]= useState(false);
+    const [salesDatatable, setSalesData] = useState([]);
     const [salesData] = useState([
         { no: 1, customerName: 'Customer 1', productName: 'Product A', quantity: 5, price: 10 },
         { no: 2, customerName: 'Customer 2', productName: 'Product B', quantity: 3, price: 15 },
@@ -40,16 +41,27 @@ const Home_seller = ()=>{
     const closemodel = ()=>{
         setAuth(false);
     }
+
     useEffect(() => {
-        const id = sessionStorage.getItem("buyer_id");
+        const id = sessionStorage.getItem("seller_id");
+        console.log(id);
         axios.get(`http://localhost:3000/order_seller/${id}`)
-            .then((response) => {
-                console.log(response.data);
-            })
-            .catch((error) => {
-                console.error("Error while fetching data:", error);
-            });
-    }, []);
+          .then((response) => {
+            console.log(response.data);
+            const mappedData = response.data.map((order, index) => ({
+                no: index + 1,
+                customerName: order.Buyer.name,
+                productName: order.productName,
+                quantity: order.quantity,
+                price: order.price,
+              }));
+            setSalesData(mappedData);
+            console.log("Hook :"+salesDatatable);
+          })
+          .catch((error) => {
+            console.error("Error while fetching data:", error);
+          });
+      }, []);
     
     const data = {
         labels: ['January', 'February', 'March', 'April', 'May','June','July','August','September','October','November','December'],
@@ -189,28 +201,28 @@ const Home_seller = ()=>{
                     <p>latest orders</p>
                     <div className={Style.table}>
 
-                    <table>
-                        <thead>
-                            <tr>
+                        <table>
+                            <thead>
+                                <tr>
                                 <th>No</th>
                                 <th>Customer Name</th>
                                 <th>Product Name</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {salesData.map((sale, index) => (
-                            <tr key={index}>
-                                <td>{sale.no}</td>
-                                <td>{sale.customerName}</td>
-                                <td>{sale.productName}</td>
-                                <td>{sale.quantity}</td>
-                                <td>{sale.price}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {salesDatatable.map((sale) => (
+                                <tr key={sale.no}>
+                                    <td>{sale.no}</td>
+                                    <td>{sale.customerName}</td>
+                                    <td>{sale.productName}</td>
+                                    <td>{sale.quantity}</td>
+                                    <td>{sale.price}</td>
+                                </tr>
+                                ))}
+                            </tbody>
+                        </table>
 
                     </div>
                 </div>
