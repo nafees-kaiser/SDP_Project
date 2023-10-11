@@ -17,6 +17,7 @@ import SellerLogin from "./SellerLogin.jsx"
 import LandingPage from "./LandingPage.jsx";
 import ProfileBox from "./ProfileBox.jsx";
 import BuyerProfile from "./BuyerProfile.jsx";
+import ViewWishlist from "./Wishlist.jsx";
 
 
 
@@ -39,6 +40,7 @@ const Routing = ()=>{
                 <Route path='/seller_login' element={<SellerLogin/>}></Route>
                 <Route path='/profile_box' element={<ProfileBox/>}></Route>
                 <Route path='/buyer_profile' element={<BuyerProfile/>}></Route>
+                <Route path='/Wishlist' element={<ViewWishlist/>}></Route>
 
             </Routes>
         </>
