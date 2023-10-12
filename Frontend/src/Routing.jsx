@@ -17,6 +17,7 @@ import SellerLogin from "./SellerLogin.jsx"
 import LandingPage from "./LandingPage.jsx";
 import ProfileBox from "./ProfileBox.jsx";
 import BuyerProfile from "./BuyerProfile.jsx";
+import KnowTheCraft from "./KnowTheCraft.jsx";
 
 
 
@@ -28,7 +29,7 @@ const Routing = ()=>{
                 <Route path='/login' element={<LogIn/>}></Route>
                 <Route path='/registration' element={<Registration/>}></Route>
                 <Route path='/product-listing' element={<ProductListing/>}></Route>
-                <Route path='/individual-product/:id' element={<IndividualProduct/>}></Route>
+                <Route path='/product-listing/:id' element={<IndividualProduct/>}></Route>
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
                 <Route path='/checkout/:obj' element={<Checkout/>}></Route>
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
@@ -39,6 +40,7 @@ const Routing = ()=>{
                 <Route path='/seller_login' element={<SellerLogin/>}></Route>
                 <Route path='/profile_box' element={<ProfileBox/>}></Route>
                 <Route path='/buyer_profile' element={<BuyerProfile/>}></Route>
+                <Route path='/know-the-craft' element={<KnowTheCraft/>}></Route>
 
             </Routes>
         </>

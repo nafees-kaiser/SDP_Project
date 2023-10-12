@@ -4,7 +4,7 @@ import style from './SellerLogin.module.css';
 import {useNavigate} from 'react-router-dom';
 import Button from './Components/Button';
 
-const LogIn = () => {
+const SellerLogin = () => {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
     const navigate= useNavigate();
@@ -69,7 +69,7 @@ const LogIn = () => {
                         />
                     </div>
                     <form onSubmit={formSubmit} className={style.input}>
-                        <h1 className={style['text-alignment']}>User Login</h1>
+                        <h1 className={style['text-alignment']}>Seller Login</h1>
                         <div className={style.textboxes}>
                             <input
                                 type="text"
@@ -101,4 +101,4 @@ const LogIn = () => {
     )
 }
 
-export default LogIn;
+export default SellerLogin;
