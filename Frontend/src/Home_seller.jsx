@@ -51,7 +51,7 @@ const Home_seller = ()=>{
             console.log(response.data);
             const mappedData = response.data.map((order, index) => ({
                 no: index + 1,
-                customerName: order.Buyer.name,
+                customerName: order.Buyer?.name,
                 productName: order.productName,
                 quantity: order.quantity,
                 price: order.price,
