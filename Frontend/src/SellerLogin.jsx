@@ -32,6 +32,7 @@ const SellerLogin = () => {
       
           if (response.ok) {
             const data = await response.json();
+            console.log(`The seller of ${data.id} has logged in`);
             sessionStorage.setItem("seller_id",data.id);
             // User is authenticated, you can redirect or perform other actions here
             console.log('Login successful');
