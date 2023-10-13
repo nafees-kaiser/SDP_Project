@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import style from "./ProductListing.module.css"
+import style from "./KnowTheCraft.module.css"
 import nakshiKathaImage from '../images/nakshi_katha(1).jpg'
 import Card from "./Components/Card";
 import Navbar from './Components/Navbar'
@@ -11,7 +11,7 @@ import Button from "./Components/Button";
 import Footer from "./Components/Footer";
 
 
-export default function ProductListing() {
+export default function KnowTheCraft() {
     const [productCount, setCount] = useState(0)
     const [products, setProducts] = useState([])
 
@@ -21,20 +21,26 @@ export default function ProductListing() {
                 // console.log(response.data);
                 setProducts(response.data);
                 setCount(response.data.length);
-                console.log("from product:"+sessionStorage.getItem("uid"));
             })
     }, [])
     return (
         <>
-                <Navbar />
+            <Navbar />
             <div className={style.container}>
                 {/* <div>navbar</div> */}
                 <div className={style['hero-section']}>
-                    <h1>Handicraft Products</h1>
-                    <p>Buy the traditional handicraft items from various categories.</p>
+                    <div className={style['hero-heading']}><h1>Find the traditional art and crafts of different districts in Bangladesh</h1></div>
+                    {/* <p>Buy the traditional handicraft items from various categories.</p> */}
+                    <div className={style['hero-search']}>
+                        <input type="text" placeholder="Search by district or name of the product" />
+                        <button className={style.button}>
+                            <i className="fa-solid fa-magnifying-glass fa-lg" style={{color: "#ffffff",}}></i>
+                        </button>
+                    </div>
                 </div>
                 <div className={style['product-list']}>
                     <div className={style['sort-and-filter']}>
+                        <p>Faridpur</p>
                         <p>{`${productCount} Products`}</p>
                         {/* <button>Filter</button>
                         <button>Sort by</button> */}
@@ -43,8 +49,7 @@ export default function ProductListing() {
                         {products.map((product, index) => {
                             const { _id, productName, district, division, price } = product;
                             return (
-                                <Link to={`/product-listing/${_id}`} key={_id}>
-                                    {/* <a href="#" key={index}> */}
+                                <Link to={`/individual-product/${_id}`} key={_id}>
                                     <Card
                                         image={nakshiKathaImage}
                                         review="5 star"
@@ -52,14 +57,13 @@ export default function ProductListing() {
                                         location={`${district}, ${division}`}
                                         price={`${price} Tk`}
                                     />
-                                    {/* </a> */}
                                 </Link>
                             );
                         })}
 
                     </div>
-                    {/* <button className={style.button}>Load more</button> */}
-                    <Button text="Load more" />
+                    {productCount > 12 && <Button text="Load more" />}
+
                 </div>
             </div>
             <Footer />
