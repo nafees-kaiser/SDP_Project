@@ -44,7 +44,8 @@ const Home_seller = ()=>{
     }
 
     useEffect(() => {
-        const id = sessionStorage.getItem("seller_id");
+        // const id = sessionStorage.getItem("seller_id");
+        const id = "651c5377783c0719018cd17f";
         console.log(id);
         axios.get(`http://localhost:3000/order_seller/${id}`)
           .then((response) => {
