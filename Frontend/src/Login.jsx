@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Checkbox from './Components/Checkbox';
-import style from './SellerLogin.module.css';
+import style from './login.module.css';
 import {useNavigate} from 'react-router-dom';
 import Button from './Components/Button';
 
