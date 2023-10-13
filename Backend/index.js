@@ -1,85 +1,27 @@
 const dotenv = require('dotenv');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
-const nodemailer = require("nodemailer");
 const app = express();
 
 dotenv.config({ path: './config.env' });
 require('./Database/conn');
 
-const Buyer = require('./Model/BuyerSchema');
-const Products = require('./Model/ProductsSchema');
-const Order = require('./Model/OrderSchema');
-const Seller = require('./Model/SellerSchema');
-
 const PORT = process.env.PORT;
 app.use(bodyParser.json());
 app.use(cors());
 
-// Handle user registration
-app.post('/register', async (req, res) => {
-  try {
-    const userData = req.body;
-    console.log("UserData: "+ userData.mobileNumber);
-    const existingUser = await Buyer.findOne({ email: userData.email });
-    // Add validation logic here to ensure data is complete and valid
-    if (!userData.name || !userData.email || !userData.password) {
-      alert('Incomplete user data');
-      return res.status(400).json({ error: 'Incomplete user data' });
-    }
-    else if (existingUser) {
-      alert('User with this email already exists');
-      return res.status(400).json({ error: 'User with this email already exists' });
-    }
-    else 
-    {
-      const newUser = new Buyer(userData);
-      const user = await newUser.save();
-      res.status(201).json(user);
-      console.log('User saved to the database(BACKEND)');
-    }
-    
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error saving user');
-    console.log('Error in database');
-  }
-});
+
+const registerRouter = require('./routes/register');
+app.use("/register",registerRouter);
 
 
-
-app.post('/register_seller', async (req, res) => {
-  try {
-    const userData = req.body;
-    console.log("UserData: "+ userData.mobileNumber);
-    const existingUser = await Seller.findOne({ email: userData.email });
-    // Add validation logic here to ensure data is complete and valid
-    if (!userData.name || !userData.email || !userData.password) {
-      alert('Incomplete user data');
-      return res.status(400).json({ error: 'Incomplete user data' });
-    }
-    else if (existingUser) {
-      alert('User with this email already exists');
-      return res.status(400).json({ error: 'User with this email already exists' });
-    }
-    else 
-    {
-      const newUser = new Seller(userData);
-      const user = await newUser.save();
-      res.status(200).json({ success: true, message: 'Login successful', id:user.id });
-      console.log('User saved to the database(BACKEND)'+ user.id);
-    }
-    
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error saving user');
-    console.log('Error in database');
-  }
-});
+const registerSellerRouter = require('./routes/register_seller');
+app.use("/register_seller",registerSellerRouter);
 
 
+const loginRouter = require('./routes/login');
+app.use("/login",loginRouter);
 
 
 
@@ -324,47 +266,24 @@ app.post('/verify', async (req, res) => {
   }
 });
 
+const sellerLoginRouter = require('./routes/seller_login');
+app.use("/seller_login", sellerLoginRouter);
 
 
+const verifyRouter = require('./routes/verify');
+app.use("/verify", verifyRouter);
 
 
+const orderRouter = require('./routes/order');
+app.use("/order", orderRouter);
 
 
+const productListingRouter = require('./routes/productListing');
+app.use("/product-listing", productListingRouter);
 
-  
 
-
-app.get('/product-listing', async(req, res)=>{
-    try {
-        const result = await Products.find();
-        // console.log(`Products are ${result}`)
-        res.json(result)
-    } catch (error) {
-        console.log(`Error while fetching products ${error}`)
-    }
-});
-
-app.get('/individual-product/:id', async(req, res)=>{
-    try {
-        const id = req.params.id;
-        // console.log(id);
-        const result = await Products.findById(id);
-        // console.log(`The singular product is ${result}`)
-        res.json(result);
-    } catch (error) {
-        console.log(`Error while fetching singular product\n ${error}`)
-    }
-})
-app.get('/buyer_profile', async(req, res)=>{
-    try {
-        const id = "651adc5c7bea3ef7b5ff632f";
-        const result = await Buyer.findById(id);
-        res.json(result);
-    } catch (error) {
-        console.log(`Error while fetching buyer\n ${error}`)
-    }
-})
-
+const buyerProfileRouter = require('./routes/buyer_profile');
+app.use("/buyer_profile", buyerProfileRouter);
 
 
 app.listen(PORT, () => {

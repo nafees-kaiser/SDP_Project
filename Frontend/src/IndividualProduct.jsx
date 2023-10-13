@@ -20,7 +20,7 @@ export default function IndividualProduct() {
         }
     }
     useEffect(() => {
-        axios.get(`http://localhost:3000/individual-product/${id}`)
+        axios.get(`http://localhost:3000/product-listing/${id}`)
             .then((response) => {
                 // console.log(response.data);
                 setProduct(response.data);
