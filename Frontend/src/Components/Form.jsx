@@ -1,12 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { useCallback } from "react";
+// import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+// import { useCallback } from "react";
 import axios from "axios";
 import styles from "./Form.module.css";
+import {useNavigate} from 'react-router-dom';
+import Button from './Button';
 
 
-const EditableInput = ({ defaultValue }) => {
+// eslint-disable-next-line react/prop-types
+const EditableInput = ({ defaultValue, onSave }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(defaultValue);
+
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
 
   const handleDoubleClick = () => {
     setIsEditing(true);
@@ -21,11 +29,14 @@ const EditableInput = ({ defaultValue }) => {
     setValue(event.target.value);
   };
 
+  const handleSave = () => {
+    // Send the updated data to the server
+    onSave(value);
+    setIsEditing(false);
+    window.location.reload();
+  };
+
   return (
-    // <div className={styles.rectangleGroup}>
-    //         <div className={styles.groupItem} />
-            
-    //       </div>
     <div className={styles.inputContainer}>
       {isEditing ? (
         <div>
@@ -36,7 +47,7 @@ const EditableInput = ({ defaultValue }) => {
           // onBlur={handleBlur}
         />
         
-        { <button onClick={handleBlur} className={styles.edit}>Save</button> }
+        { <button onClick={handleSave} className={styles.edit}>Save</button> }
         </div>
       ) : (
        <div>
@@ -48,7 +59,7 @@ const EditableInput = ({ defaultValue }) => {
         </div>
         <button onClick={handleDoubleClick} className={styles.edit}>
             Edit
-            {/* <img className={styles.vectoricon} alt="" src="./images/vector.svg" /> */}
+           
           </button>
        
         </div>
@@ -62,36 +73,55 @@ const EditableInput = ({ defaultValue }) => {
 const Form = () => {
 
   const [data, setData] = useState({});
+  const [isSaving, setIsSaving] = useState(false);
+  const navigate= useNavigate();
+  const buyerId = sessionStorage.getItem("buyer_id");
 
 
   useEffect(() => {
-    axios.get('http://localhost:3000/buyer_profile')
+    axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
       .then((response) => {
-        console.log(response.data.email)
+        // console.log(response.data.email)
         setData(response.data);
         
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [buyerId]);
+
+
+  const handleSaveData = (fieldName, updatedValue) => {
+    // Send the updated data to the server
+    const newData = { [fieldName]: updatedValue };
+
+    setIsSaving(true);
+
+    axios.put(`http://localhost:3000/buyer_profile/${buyerId}`, newData)
+    // axios.put(`http://localhost:3000/buyer_profile`, newData)
+      .then((response) => {
+        setIsSaving(false);
+        setData(response.data);
+      })
+      .catch((error) => {
+        setIsSaving(false);
+        console.error(error);
+      });
+  };
 
 
   return (
-    <div className={styles.changePassButtonParent}>
-      <button className={styles.changePassButton}>
-        <div className={styles.changePass} />
-        <div className={styles.changePassword}>Change Password</div>
-      </button>
-      {/* <button className={styles.save} onClick={onSaveClick}>
-        <div className={styles.rectangle} />
-        <div className={styles.button}>Save</div>
-      </button> */}
+    <div className={styles.form}>
+      <div className={styles.changePassButton}>
+        <Button 
+          text="Change Password"
+          change={()=>navigate('/registration')}
+      />
+      </div>
       <div className={styles.information}>
         <div className={styles.password}>
-          <div className={styles.mobileNumber}>Password</div>
+          <h3>Password</h3>
           <div className={styles.rectangleParent}>
-            <div className={styles.groupChild} />
             <input
               className={styles.input}
               value="******"
@@ -109,56 +139,71 @@ const Form = () => {
         </div>
 
 
-        <div className={styles.emailAddress}>
-          <div className={styles.emailAddress1}>Email Address</div>
+        <div className={styles.division}>
+          <h3>Division</h3>
           <div className={styles.rectangleGroup}>
-            <div className={styles.groupItem} />
-             <EditableInput className={styles.abcgmailcom} defaultValue="shavoddin54@gmail.com" />
-            {/* <input type="text"
-              className={styles.abcgmailcom}
-              placeholder={data.email}
-            /> */}
-            
+             
+             <EditableInput
+              className={styles.divi}
+              defaultValue={data.division}
+              onSave={(updatedValue) => handleSaveData('division', updatedValue)}
+            />
           </div>
         </div>
+
+
         <div className={styles.address}>
-          <div className={styles.address1}>Address</div>
+          <h3>District</h3>
           <div className={styles.rectangleContainer}>
-            <div className={styles.groupInner} />
             
-            {/* <EditableInput
-              defaultValue={data.email}
-            /> */}
-          
-            <EditableInput className={styles.khulna} defaultValue="Mirpur, Dhaka, Dhaka" />
-            
+            <EditableInput
+              className={styles.khulna}
+              defaultValue={data.district}
+              onSave={(updatedValue) => handleSaveData('district', updatedValue)}
+            />
           </div>
         </div>
-        <div className={styles.mobileNo}>
-          <div className={styles.mobileNumber}>Mobile Number</div>
+
+
+        <div className={styles.area}>
+          <h3>Area</h3>
           <div className={styles.groupDiv}>
-            <div className={styles.groupInner} />
-            <EditableInput className={styles.frameInput} defaultValue="01722334455" />
-            
+
+            <EditableInput
+              className={styles.frameInput}
+              defaultValue={data.area}
+              onSave={(updatedValue) => handleSaveData('area', updatedValue)}
+            />
           </div>
         </div>
-        <div className={styles.lastName}>
-          <div className={styles.lastName1}>Last Name</div>
+
+
+        <div className={styles.mobile}>
+          <h3>Mobile Number</h3>
           <div className={styles.groupDiv}>
-            <div className={styles.groupInner} />
-            <EditableInput className={styles.oyiboke} defaultValue="Akhon" />
-            
+
+            <EditableInput
+              className={styles.oyiboke}
+              defaultValue={data.mobileNumber}
+              onSave={(updatedValue) => handleSaveData('mobileNumber', updatedValue)}
+            />
           </div>
         </div>
+
+
         <div className={styles.firstName}>
-          <div className={styles.emailAddress1}>First Name</div>
+          <h3>Name</h3>
           <div className={styles.rectangleGroup}>
-            <div className={styles.groupItem} />
-            
-            <EditableInput className={styles.emmanuel} defaultValue="Shahabuddin" />
-            
+
+            <EditableInput
+              className={styles.emmanuel}
+              defaultValue={data.name}
+              onSave={(updatedValue) => handleSaveData('name', updatedValue)}
+            />
           </div>
         </div>
+
+
       </div>
     </div>
   );

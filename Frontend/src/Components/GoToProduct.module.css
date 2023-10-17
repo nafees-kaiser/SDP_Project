@@ -33,18 +33,18 @@
 .keepYourEveryday {
   align-self: stretch;
   position: relative;
-  font-size: 18px; 
+  font-size: 15px; 
   line-height: 30px;
   font-family: 'Inter', sans-serif; 
   font-weight: normal;
 }
 .text {
-  align-self: stretch;
+  /* align-self: stretch; */
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: var(--gap-5xs);
+  /* align-items: flex-start; */
+  /* justify-content: flex-start; */
+  gap: 5px;
 }
 .iconarrowRight {
   position: relative;
@@ -54,12 +54,12 @@
 }
 .getStarted {
   position: relative;
-  font-size: var(--button-small-size);
-  letter-spacing: -0.4px;
-  line-height: 28px;
-  font-weight: 500;
-  font-family: var(--button-medium);
-  color: var(--black-900);
+  /* font-size: var(--button-small-size); */
+  /* letter-spacing: -0.4px; */
+  /* line-height: 28px; */
+  /* font-weight: 500; */
+  /* font-family: var(--button-medium); */
+  /* color: var(--black-900); */
   text-align: center;
 }
 .iconarrowRight1 {
@@ -67,36 +67,37 @@
   width: 20px;
   height: 20px;
 }
-.button,
-.content {
-  display: flex;
-  justify-content: center;
-}
 .button {
   cursor: pointer;
   border: 0;
-  padding: var(--padding-4xs) var(--padding-5xl);
+  /* padding: var(--padding-4xs) var(--padding-5xl); */
   background-color: #795aac;
   flex-direction: row;
   align-items: center;
-  gap: var(--gap-9xs);
+  display: flex;
+  justify-content: center;
+  /* gap: var(--gap-9xs); */
 }
 .content {
   position: absolute;
-  top: calc(50% - 173px);
-  left: calc(50% + 98px);
-  width: 456px;
+  top: 25%;
+  left: 55%;
+  /* top: calc(50% - 173px); */
+  /* left: calc(50% + 98px); */
+  width: 550px;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--gap-9xl);
+  gap: 10px;
+  display: flex;
+  justify-content: center;
 }
 .sliderSection {
   position: absolute;
-  top: 135px;
+  top: 0px;
   left: 0;
   background-color: #795aac;
   width: 100%;
-  height: 700px;
+  height: 550px;
   overflow: hidden;
   text-align: left;
   font-size: var(--heading-03-size);

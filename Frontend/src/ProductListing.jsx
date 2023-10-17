@@ -5,7 +5,8 @@ import axios from "axios";
 import style from "./ProductListing.module.css"
 import nakshiKathaImage from '../images/nakshi_katha(1).jpg'
 import Card from "./Components/Card";
-import Navbar from './Components/Navbar'
+import Navbar from './Components/Navbar';
+import CraftForm from "./Components/CraftForm";
 import { Link } from "react-router-dom";
 import Button from "./Components/Button";
 import Footer from "./Components/Footer";
@@ -14,6 +15,7 @@ import Footer from "./Components/Footer";
 export default function ProductListing() {
     const [productCount, setCount] = useState(0)
     const [products, setProducts] = useState([])
+    const buyerId = sessionStorage.getItem("buyer_id");
 
     useEffect(() => {
         axios.get('http://localhost:3000/product-listing')
@@ -26,7 +28,8 @@ export default function ProductListing() {
     }, [])
     return (
         <>
-                <Navbar />
+            {buyerId ? <CraftForm /> : <Navbar />}
+                {/* <Navbar /> */}
             <div className={style.container}>
                 {/* <div>navbar</div> */}
                 <div className={style['hero-section']}>

@@ -2,7 +2,7 @@
   position: absolute;
   left: 0;
   width: 100%;
-  top: 915px;
+  top: 770px;
   height: 719px;
   font-size: 64px;
   color: var(--white);
@@ -200,6 +200,7 @@
 }
 .category {
   width: 100%;
+  top: 628px;
   height: 719px;
   text-align: center;
   font-size: var(--font-size-45xl);
