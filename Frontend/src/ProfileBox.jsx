@@ -1,8 +1,46 @@
-import React, {useRef} from "react";
+import React, {useEffect, useRef,useState} from "react";
 import styles from "./ProfileBox.module.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const BuyerProfileDropdown = ({closemodel}) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    mobileNumber: '',
+    area: '',
+    district: '',
+    division: '',
+    password: '',
+  });
+  
+  useEffect(() => {
+    const seller_id = sessionStorage.getItem('seller_id');
+    axios.get(`http://localhost:3000/seller_profile/${seller_id}`)
+      .then((response) => {
+        const responseData = response.data;
+  
+        // Make sure keys in formData match keys in responseData exactly
+        setFormData({
+          name: responseData.name,
+          email: responseData.email,
+          mobileNumber: responseData.mobileNumber,
+          area: responseData.area,
+          district: responseData.district,
+          division: responseData.division,
+          password: responseData.password,
+          // Add other fields as needed
+        });
+        console.log(formData);
+        // Do not expect formData to be updated immediately, as it's asynchronous
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+  
+  
+  
   return (
     
     <div className={styles.buyerProfileDropdown}>
@@ -11,11 +49,12 @@ const BuyerProfileDropdown = ({closemodel}) => {
       <Link to={`/buyer_profile`} className={styles.header}>
         <img className={styles.pictureIcon} alt="" src="./images/picture.svg" />
         </Link>
-        <div className={styles.name}>Emmanuel Oyiboke</div>
+        <div className={styles.name}>{formData.name}</div>
         <div className={styles.welcome}>
           Welcome to the world of passionate craft enthusiasts – let's embark on
           a journey of discovering your unique preferences in crafts
         </div>
+      
       <button className={styles.cart}>
         <div className={styles.cartChild} />
         <img
@@ -34,6 +73,7 @@ const BuyerProfileDropdown = ({closemodel}) => {
         />
         <div className={styles.wishlist1}>Wishlist</div>
       </button>
+      
       <button className={styles.chat}>
         <div className={styles.cartChild} />
         <img
