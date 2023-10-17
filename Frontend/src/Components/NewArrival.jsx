@@ -2,7 +2,7 @@ import styles from "./NewArrival.module.css";
 
 const NewArrival = () => {
   return (
-    <div className={styles.newArrival}>
+  <div className={styles.newArrival}>
       <div className={styles.carouselTitle}>
         <b className={styles.newArrivalsIn}>
           New Arrivals in Creative Craftsmanship

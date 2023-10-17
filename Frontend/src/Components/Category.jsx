@@ -7,9 +7,12 @@ const Category = () => {
       <div className={styles.rectangleParent}>
 
         <b className={styles.shopByCategoryContainer}>
-          <p className={styles.shopBy}>Shop By</p>
+          {/* <p className={styles.shopBy}><h4>Shop By</h4></p>
           <p className={styles.shopBy}>&nbsp;</p>
-          <p className={styles.shopBy}> Category</p>
+          <p className={styles.shopBy}> Category</p> */}
+          <h1>Shop By</h1>
+          <br/>
+          <h1>Category</h1>
         </b>
       </div>
       <div className={styles.categoryyyy}>

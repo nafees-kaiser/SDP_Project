@@ -1,7 +1,11 @@
 import styles from "./GoToProduct.module.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import Button from './Button.jsx';
+import {useNavigate} from 'react-router-dom';
 
 const GoToProduct = () => {
+  const navigate= useNavigate();
+
   return (
     <div className={styles.sliderSection}>
       <div className={styles.imagePlaceholder}>
@@ -9,25 +13,28 @@ const GoToProduct = () => {
       </div>
       <div className={styles.content}>
         <div className={styles.text}>
-          <div className={styles.header}>
-            <div className={styles.yourDreamShop}>
-              Crafting Dreams, Connecting Hearts.
-            </div>
-          </div>
+              <h5>Crafting Dreams, Connecting Hearts.</h5>
+            
           <div className={styles.keepYourEveryday}>
             Explore our curated collection of heritage-rich and innovative
-            crafts, lovingly crafted by skilled artisans from around the country
+            crafts, lovingly crafted by skilled artisans from around the country.
           </div>
         </div>
 
-        <Link to={`/product-listing`} className={styles.button}>
-          <div className={styles.getStarted}>See Collection</div>
-          <img
+        {/* <Link to={`/product-listing`} className={styles.button}> */}
+          <div className={styles.getStarted}>
+          <Button 
+          text="See Collection"
+          change={()=>navigate('/product-listing')}
+          />
+            {/* See Collection */}
+          </div>
+          {/* <img
             className={styles.iconarrowRight1}
             alt=""
             src="./images/iconarrowright6.svg"
-          />
-        </Link>
+          /> */}
+        {/* </Link> */}
       </div>
     </div>
   );

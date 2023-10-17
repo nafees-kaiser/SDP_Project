@@ -9,7 +9,7 @@ const JoinCommunity = () => {
           <div className={styles.createYourMessaing}>Join Our Community</div>
           <div className={styles.joinOurVibrant}>
             Join our vibrant community, where creativity knows no bounds.
-            Together, we're crafting a world of inspiration
+            Together, we are crafting a world of inspiration
           </div>
         </div>
       </div>
