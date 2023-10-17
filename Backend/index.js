@@ -11,6 +11,8 @@ const PORT = process.env.PORT;
 app.use(bodyParser.json());
 app.use(cors());
 
+const Sells = require('./Model/SellsSchema');
+
 
 const registerRouter = require('./routes/register');
 app.use("/register",registerRouter);
@@ -51,6 +53,13 @@ app.use("/product-listing", productListingRouter);
 const buyerProfileRouter = require('./routes/buyer_profile');
 app.use("/buyer_profile", buyerProfileRouter);
 
+
+const checkoutRouter = require('./routes/checkout');
+app.use("/checkout", checkoutRouter);
+
+
+const getBuyerInfoRouter = require('./routes/getBuyerInfo');
+app.use("/get-buyer-info", getBuyerInfoRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port http://localhost:${PORT}/`);

@@ -32,7 +32,8 @@ const Routing = ()=>{
                 <Route path='/product-listing' element={<ProductListing/>}></Route>
                 <Route path='/product-listing/:id' element={<IndividualProduct/>}></Route>
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
-                <Route path='/checkout/:obj' element={<Checkout/>}></Route>
+                {/* <Route path='/checkout/:obj' element={<Checkout/>}></Route> */}
+                <Route path='/checkout' element={<Checkout/>}></Route>
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
                 <Route path='/home_seller' element={<Home_seller/>}></Route>
                 <Route path='/auth' element={<Authentication/>}></Route>
