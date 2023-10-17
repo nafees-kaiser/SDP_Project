@@ -1,11 +1,18 @@
 const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
+const nodemailer = require("nodemailer");
 const app = express();
 
 dotenv.config({ path: './config.env' });
 require('./Database/conn');
+
+const Buyer = require('./Model/BuyerSchema');
+const Products = require('./Model/ProductsSchema');
+const Order = require('./Model/OrderSchema');
+const Seller = require('./Model/SellerSchema');
 const Reviews = require('./Model/ProductReviewSchema');
 const Wishlist = require('./Model/WishlistSchema');
 const Notifications = require('./Model/NotificationSchema');
@@ -13,6 +20,9 @@ const Notifications = require('./Model/NotificationSchema');
 const PORT = process.env.PORT;
 app.use(bodyParser.json());
 app.use(cors());
+
+
+
 
 
 const registerRouter = require('./routes/register');
