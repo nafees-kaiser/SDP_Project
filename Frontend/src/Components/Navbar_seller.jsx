@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Style from "./Navbar_seller.module.css"; // Import your CSS module
 import Button from "./Button";
-const Navbar = () => {
+const Navbar = ({openmodel}) => {
   const [isProductMenuOpen, setProductMenuOpen] = useState(false);
 
   const toggleProductMenu = () => {
@@ -13,11 +13,13 @@ const Navbar = () => {
       <div className={Style.navbar}> {/* Use CSS module class name */}
         <div className={Style.upper}>
           <div className={Style.left}>
-            <h4 style={{ margin: '1px' }}>Become a Seller</h4>
+            <h4 style={{ margin: '1px' }}></h4>
           </div>
           <div className={Style.right}>
           
-            <Button text="Log in"/>
+            <div className={Style.profile}>
+              <img src="./images/icons8-male-user-50.png" alt="" onClick={openmodel} />
+            </div>
             <div className={Style.icons}>
                 <i className="fa-regular fa-bell"></i>
                 <p>Notifications</p>

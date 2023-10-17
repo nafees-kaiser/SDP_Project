@@ -356,14 +356,23 @@
   width: 411px;
   height: 56px;
 }
-.buyerProfileDropdown {
-  border: 1px solid black;
-  box-shadow: 1px 2px 1px 4px rgb(194, 192, 192);
-  border-radius: 10px;
+.buyerProfileDropdown .b {
+  width: 30px;
+  height: 30px;
   float: right;
-  position: relative;
-  background-color: var(--white);
-  width: 400px;
-  height: 579px;
-  overflow: hidden;
+}
+.buyerProfileDropdown {
+    border: 1px solid black;
+    box-shadow: 1px 2px 1px 4px rgb(194, 192, 192);
+    border-radius: 10px;
+    float: right;
+    position: fixed;
+    background-color: var(--white);
+    width: 400px;
+    height: 579px;
+    overflow: hidden;
+    z-index: 100;
+    left: 74%;
+    transform: translate(8%, -9%);
+    
 }

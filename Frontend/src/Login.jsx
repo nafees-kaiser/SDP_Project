@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Checkbox from './Components/Checkbox';
-import style from './SellerLogin.module.css';
+import style from './login.module.css';
 import {useNavigate} from 'react-router-dom';
 import Button from './Components/Button';
 
@@ -36,7 +36,7 @@ const LogIn = () => {
             // User is authenticated, you can redirect or perform other actions here
             const data = await response.json();
             setid(data.id);
-            sessionStorage.setItem("uid",data.id);
+            sessionStorage.setItem("buyer_id",data.id);
             //console.log("using hook: "+id);
             console.log('Login successful');
             alert('Login successful');

@@ -15,6 +15,10 @@ const orderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Buyer'
     },
+    sellerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Seller'
+    },
     date: {
         type: Date,
         required: true // Modified to be required

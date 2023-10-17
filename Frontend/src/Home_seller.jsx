@@ -1,5 +1,7 @@
-import React,{ useState } from "react";
+import React,{ useState,useEffect } from "react";
 import { Line, Pie } from 'react-chartjs-2';
+import axios from 'axios';
+import ProfileBox from "./ProfileBox.jsx";
 import {
     Chart as ChartJS,
     LineElement,
@@ -25,12 +27,60 @@ ChartJS.register(
     Legend
 )
 const Home_seller = ()=>{
+    const [auth,setAuth]= useState(false);
+    const [salesDatatable, setSalesData] = useState([]);
+    const [salescount, setSalescount] = useState([]);
     const [salesData] = useState([
         { no: 1, customerName: 'Customer 1', productName: 'Product A', quantity: 5, price: 10 },
         { no: 2, customerName: 'Customer 2', productName: 'Product B', quantity: 3, price: 15 },
         { no: 3, customerName: 'Customer 2', productName: 'Product B', quantity: 3, price: 15 },
         { no: 4, customerName: 'Customer 2', productName: 'Product B', quantity: 3, price: 15 },
     ]);
+    const openmodel = ()=>{
+        setAuth(true);
+    }
+    const closemodel = ()=>{
+        setAuth(false);
+    }
+
+    useEffect(() => {
+        const id = sessionStorage.getItem("seller_id");
+        // const id = "651c5377783c0719018cd17f";
+        console.log(id);
+        axios.get(`http://localhost:3000/order_seller/${id}`)
+          .then((response) => {
+            console.log(response.data);
+            const mappedData = response.data.map((order, index) => ({
+                no: index + 1,
+                customerName: order.Buyer?.name,
+                productName: order.productName,
+                quantity: order.quantity,
+                price: order.price,
+              }));
+            setSalesData(mappedData);
+            console.log("Hook :"+salesDatatable);
+          })
+          .catch((error) => {
+            console.error("Error while fetching data:", error);
+          });
+        
+        axios.get(`http://localhost:3000/count_customer/${id}`)
+            .then((response) => {
+                const mappedData = response.data.map((order, index) => ({
+                    no: index + 1,
+                    BuyerName: order.buyerName,
+                    count: order.orderCount
+                }));
+                console.log(mappedData);
+                setSalescount(mappedData);
+            })
+            .catch((error) => {
+                console.error("Error while fetching data:", error);
+            });
+
+
+    }, []);
+    
     const data = {
         labels: ['January', 'February', 'March', 'April', 'May','June','July','August','September','October','November','December'],
         datasets: [
@@ -68,7 +118,8 @@ const Home_seller = ()=>{
 
     return (
         <>
-            <Navbar/>
+            <Navbar openmodel={openmodel}/>
+            { auth && <ProfileBox closemodel={closemodel}/> }
             <div className={Style.line}></div>
             <div className={Style.header}>
                 <div className={Style.left}>
@@ -168,28 +219,28 @@ const Home_seller = ()=>{
                     <p>latest orders</p>
                     <div className={Style.table}>
 
-                    <table>
-                        <thead>
-                            <tr>
+                        <table>
+                            <thead>
+                                <tr>
                                 <th>No</th>
                                 <th>Customer Name</th>
                                 <th>Product Name</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {salesData.map((sale, index) => (
-                            <tr key={index}>
-                                <td>{sale.no}</td>
-                                <td>{sale.customerName}</td>
-                                <td>{sale.productName}</td>
-                                <td>{sale.quantity}</td>
-                                <td>{sale.price}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {salesDatatable.map((sale) => (
+                                <tr key={sale.no}>
+                                    <td>{sale.no}</td>
+                                    <td>{sale.customerName}</td>
+                                    <td>{sale.productName}</td>
+                                    <td>{sale.quantity}</td>
+                                    <td>{sale.price}</td>
+                                </tr>
+                                ))}
+                            </tbody>
+                        </table>
 
                     </div>
                 </div>
@@ -205,11 +256,11 @@ const Home_seller = ()=>{
                                 </tr>
                             </thead>
                             <tbody>
-                            {salesData.map((sale, index) => (
+                            {salescount.map((sale, index) => (
                                 <tr key={index}>
                                     <td>{sale.no}</td>
-                                    <td>{sale.customerName}</td>
-                                    <td>{sale.quantity}</td>
+                                    <td>{sale.BuyerName}</td>
+                                    <td>{sale.count}</td>
                                 </tr>
                             ))}
                             </tbody>

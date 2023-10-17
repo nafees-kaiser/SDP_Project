@@ -36,7 +36,7 @@ const Authentication = ({closemodel,data1,formData})=>{
                     
                     console.log('Registration successful');
                     alert("Registration Successful");
-                    navigate('/product-listing');
+                    navigate('/login');
                 } else {
                     console.log(response.status);
                     console.error('Registration failed');

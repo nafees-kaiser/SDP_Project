@@ -8,11 +8,12 @@ const KnowAboutCrafts = () => {
           <div className={styles.text}>
             <div className={styles.header}>
               <div className={styles.knowAboutCrafts1}>Know About Crafts</div>
-              <div className={styles.craftingLegaciesIgniting}>
-                Crafting Legacies, Igniting Inspiration
-              </div>
+              {/* <div className={styles.craftingLegaciesIgniting}> */}
+               <h1>Crafting Legacies, Igniting Inspiration</h1> 
+              {/* </div> */}
             </div>
             <div className={styles.areYouCurious}>
+            
               Are you curious about the world of crafts and tradition? Join us
               on a journey of discovery where every creation tells a story, and
               every artisan is a guardian of culture. Immerse yourself in the

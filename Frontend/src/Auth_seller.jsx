@@ -31,11 +31,16 @@ const Authentication = ({closemodel,data1,formData})=>{
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    responseType: 'json',
                 });
-                if (response.status === 201) {
+                if (response.status === 200) {
                     
                     console.log('Registration successful');
                     alert("Registration Successful");
+                    //const data = await response.json();
+                    //sessionStorage.setItem("seller_id",data.id);
+                    sessionStorage.setItem("seller_id",response.data.id);
+                    console.log(response.data.id);
                     navigate('/home_seller');
                 } else {
                     console.log(response.status);

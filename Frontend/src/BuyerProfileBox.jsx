@@ -1,19 +1,38 @@
-import React, {useRef} from "react";
-import styles from "./ProfileBox.module.css";
+// import React, {useState, useEffect} from "react";
+import {useState, useEffect} from "react";
+import styles from "./BuyerProfileBox.module.css";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
-const ProfileBox = ({closemodel}) => {
+const BuyerProfileBox = () => {
+
+    const [data, setData] = useState({});
+    const buyerId = sessionStorage.getItem("buyer_id");
+
+
+  useEffect(() => {
+    axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
+      .then((response) => {
+        setData(response.data);
+        
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [buyerId]);
+
+
   return (
     
     <div className={styles.buyerProfileDropdown}>
-      <button className={styles.b}onClick={closemodel}>X</button>
+      {/* <button className={styles.b}onClick={closemodel}>X</button> */}
       <div className={styles.border} />
       <Link to={`/buyer_profile`} className={styles.header}>
         <img className={styles.pictureIcon} alt="" src="./images/picture.svg" />
         </Link>
-        <div className={styles.name}>Emmanuel Oyiboke</div>
+        <div className={styles.name}>{data.name}</div>
         <div className={styles.welcome}>
-          Welcome to the world of passionate craft enthusiasts – let's embark on
+          Welcome to the world of passionate craft enthusiasts – let us embark on
           a journey of discovering your unique preferences in crafts
         </div>
       <button className={styles.cart}>
@@ -81,4 +100,4 @@ const ProfileBox = ({closemodel}) => {
   );
 };
 
-export default ProfileBox;
+export default BuyerProfileBox;

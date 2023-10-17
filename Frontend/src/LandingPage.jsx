@@ -1,5 +1,6 @@
-import React, {useRef} from "react";
+// import React, {useRef} from "react";
 import Navbar from "./Components/Navbar.jsx"
+import CraftForm from "./Components/CraftForm";
 import Footer from "./Components/Footer.jsx"
 import styles from "./LandingPage.module.css"
 // import Button from "./Components/Button.jsx"
@@ -11,6 +12,8 @@ import Category from "./components/Category";
 import GoToProduct from "./components/GoToProduct";
 
 const LandingPageFinal = () => {
+  
+  const buyerId = sessionStorage.getItem("buyer_id");
 
   // const communityRef = useRef(null);
 
@@ -23,24 +26,31 @@ const LandingPageFinal = () => {
 
 
     return (
+
+      <>
+      {buyerId ? <CraftForm /> : <Navbar />}
+      {/* <Navbar /> */}
       <div className={styles.landingPageFinal}>
         
-        <Navbar />
+       
+        
+        
+        <GoToProduct />
         <div className={styles.productsHeading}>
           <div className={styles.productsHeadingChild} />
           <b className={styles.enjoyOurFeatured}>Enjoy Our Featured Products</b>
         </div>
-        
-        <GoToProduct />
         <Category />
         <NewArrival />
         <KnowAboutCrafts />
         <Community />
         <JoinCommunity />
-        <div className={styles.footer}>
+        {/* <div className={styles.footer}>
           <Footer />
-        </div>
+        </div> */}
       </div>
+      <Footer />
+      </>
     );
   };
   
