@@ -19,7 +19,7 @@ router.get('/:id', async (req, res) => {
       console.log("No results found.");
       return res.status(404).json({ message: "No results found." });
     }
-
+    console.log(orders);
     // Create an object to store unique buyer names and the number of orders
     const buyerOrderCount = {};
     const count=0;
@@ -47,7 +47,7 @@ router.get('/:id', async (req, res) => {
     // Get the top 5 buyers
     const topBuyers = uniqueBuyers.slice(0, 5);
 
-    res.json(topBuyers);
+    res.json(buyerOrderCount);
   } catch (error) {
     console.error(`Error while fetching products: ${error}`);
     res.status(500).json({ message: "Internal Server Error" });

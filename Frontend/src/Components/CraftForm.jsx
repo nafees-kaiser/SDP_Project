@@ -37,7 +37,7 @@ const Navbar = () =>{
             <div className={Style.navbar}>
                 <div className={Style.upper}>
                     <div className={Style.left}>
-                        
+                        <Link to={`/become_seller`} className={Style.link}>Become a Seller</Link>
                     </div>
                     <div className={Style.right}>
                     {/* <Link to={`/login`} className={Style.link}> Login</Link> */}
