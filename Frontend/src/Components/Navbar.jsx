@@ -1,70 +1,12 @@
-import React from "react";
-import { useState, useEffect } from 'react';
+import React, { useState,useEffect } from "react";
 import Style from "./Navbar.module.css";
-// import axios from "axios";
-// import Button from './Button.jsx';
 import { Link } from "react-router-dom";
-import BuyerProfileBox from '../BuyerProfileBox';
+import axios from "axios";
 
-
-const Navbar = () =>{ 
-
-    const [data, setData] = useState({});
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    // const buyerId = sessionStorage.getItem("buyer_id");
-
-
-    // useEffect(() => {
-    //     if (buyerId && buyerId !== "null") {
-    //       axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
-    //         .then((response) => {
-    //           setData(response.data);
-    //         })
-    //         .catch((error) => {
-    //           console.error(error);
-    //         });
-    //     }
-    //   }, [buyerId]);
-    
-    
-      const toggleModal = () => {
-        setIsModalOpen(!isModalOpen);
-    
-        document.body.style.overflow = isModalOpen ? 'auto' : 'hidden';
-      };
-    return (
-
-        <>
-            <div className={Style.navbar}>
-                <div className={Style.upper}>
-                    <div className={Style.left}>
-                    {/* {buyerId ? (
-                        <div></div>
-                        ) : (
-                            <Link to={`/become_seller`} className={Style.link}>Become a Seller</Link>
-                         )} */}
-                        <Link to={`/become_seller`} className={Style.link}>Become a Seller</Link>
-                    </div>
-                    <div className={Style.right}>
-                    {/* {buyerId ? (
-                        <button className={Style.icons} onClick={toggleModal}>
-                        <i class="fas fa-user"></i>
-                        <p>{data.name}</p>
-                        </button>
-                      
-                        ) : (
-                            <Link to={`/login`} className={Style.link}> Login</Link>
-                         )} */}
-                    <Link to={`/login`} className={Style.link}> Login</Link>
-                        {/* <Button text="Log in"/> */}
-                        <div className={Style.icons}>
-                            <i className="fa-regular fa-bell"></i>
-                            <p>Notifications</p>
-                        </div>
-                        <div className={Style.icons}>
-                            <i className="fa-solid fa-cart-plus"></i>
-                            <p>Cart</p>
-                        </div>
+const Navbar = () => {
+    const [showNotification, setShowNotification] = useState(false);
+    const uid = sessionStorage.getItem('uid');
+    const [Notifications, setNotification] = useState([]);
 
     const toggleNotification = () => {
         setShowNotification(!showNotification);
