@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Navbar = () => {
     const [showNotification, setShowNotification] = useState(false);
-    const uid = sessionStorage.getItem('uid');
+    const buyerId = sessionStorage.getItem("buyer_id");
     const [Notifications, setNotification] = useState([]);
 
     const toggleNotification = () => {
@@ -14,8 +14,8 @@ const Navbar = () => {
     };
 
     useEffect(() => {
-        console.log(uid);
-        axios.get(`http://localhost:3000/get/notifications/${uid}`)
+        console.log(buyerId);
+        axios.get(`http://localhost:3000/get/notifications/${buyerId}`)
             .then((response) => {
                 console.log(response.data);
                 if(response.data.notifications != 0)
@@ -38,7 +38,7 @@ const Navbar = () => {
 
 
     const clearNotification = async () => {
-        axios.delete(`http://localhost:3000/delete/notifications/${uid}`)
+        axios.delete(`http://localhost:3000/delete/notifications/${buyerId}`)
             .then((response) => {
                 window.location.reload();
             })
@@ -87,29 +87,30 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className={Style.lower}>
-        <div className={Style.left}>
-          <Link to={`/product-listing`}>
-            <img
-              src="/images/384165997_332969559130939_1111385360839973004_n.png"
-              alt=""
-            />
-          </Link>
-        </div>
-        <div className={Style.middle}>
-          <Link to={`/`} className={Style.link}>
-            Home
-          </Link>
-          <Link to={`/product-listing`} className={Style.link}>
-            Product
-          </Link>
-          <a href="#com">Community</a>
-          <a href="#craft">Know about craft</a>
-        </div>
-        <div className={Style.right}>
-          <input type="text" className={Style.search} placeholder="Search..." />
-          <i className="fa fa-search icon"></i>
+      
+        <div className={Style.lower}>
+          <div className={Style.left}>
+            <Link to={`/product-listing`}>
+              <img
+                src="/images/384165997_332969559130939_1111385360839973004_n.png"
+                alt=""
+              />
+            </Link>
+          </div>
+          <div className={Style.middle}>
+            <Link to={`/`} className={Style.link}>
+              Home
+            </Link>
+            <Link to={`/product-listing`} className={Style.link}>
+              Product
+            </Link>
+            <a href="#com">Community</a>
+            <a href="#craft">Know about craft</a>
+          </div>
+          <div className={Style.right}>
+            <input type="text" className={Style.search} placeholder="Search..." />
+            <i className="fa fa-search icon"></i>
+          </div>
         </div>
       </div>
     </>

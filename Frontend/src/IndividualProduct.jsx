@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import style from "./IndividualProduct.module.css"
+import CraftForm from "./Components/CraftForm";
 import nakshikathaImage from '../images/nakshi_katha(1).jpg'
 import Button from "./Components/Button";
 import Navbar from "./Components/Navbar";
@@ -16,7 +17,7 @@ export default function IndividualProduct() {
     const [amount, setAmount] = useState(0);
     const [reviewDescription, setReviewData] = useState();
     const navigate = useNavigate();
-    const uid = sessionStorage.getItem('uid');
+    const buyerId = sessionStorage.getItem('buyer_id');
 
     const routeChange = () => {
         if (product) {
@@ -42,7 +43,7 @@ export default function IndividualProduct() {
     function setWishlist()
     {
         const productData ={
-            'buyerid': uid,
+            'buyerid': buyerId,
             'productid' : id
             };
             return productData;
@@ -92,14 +93,14 @@ export default function IndividualProduct() {
         axios.post('http://localhost:3000/create/wishlist', wishlistData)
             .then((response) => {
                 alert('Product added to wishlist successfully');
-                //console.log(response.data);
+                console.log(response.data);
             })
     }
 
     const { productName, district, division, price, seller, description } = product
     return (
         <>
-            <Navbar/>
+            {buyerId ? <CraftForm /> : <Navbar />}
             <div className={style.container}>
                 {/* <div>navbar</div> */}
                 <div className={style['product-wrapper']}>
