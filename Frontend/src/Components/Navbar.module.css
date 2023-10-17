@@ -106,3 +106,13 @@
     border: 1px solid #ccc;
     border-radius: 30px;
 }
+
+
+
+
+.notificationContainer {
+    position: absolute;
+    top: 60px; /* Adjust the distance from the navbar as needed */
+    right: 0;
+    z-index: 10000;
+  }

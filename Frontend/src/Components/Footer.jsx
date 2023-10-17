@@ -1,5 +1,6 @@
 import style from './Footer.module.css'
 import { Link } from 'react-router-dom';
+import ViewWishlist from '../Wishlist';
 
 export default function Footer() {
     return (
@@ -30,14 +31,14 @@ export default function Footer() {
                         <div className={style.links}>
                             <Link to="#">Profile</Link>
                             <Link to="#">Log in</Link>
-                            <Link to="#">Wishlist</Link>
+                            <Link to={`/Wishlist`}>Wishlist</Link>
                             <Link to="#">Checkout</Link>
                         </div>
                     </div>
                     <div className={style['shop-company']}>
                         <h3>Company</h3>
                         <div className={style.links}>
-                            <Link to="#">Wishlist</Link>
+                            <Link to={`/Wishlist`}>Wishlist</Link>
                             <Link to="#">Checkout</Link>
                         </div>
                     </div>

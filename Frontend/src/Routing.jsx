@@ -18,6 +18,7 @@ import LandingPage from "./LandingPage.jsx";
 import ProfileBox from "./ProfileBox.jsx";
 import BuyerProfile from "./BuyerProfile.jsx";
 import KnowTheCraft from "./KnowTheCraft.jsx";
+import ViewWishlist from "./Wishlist.jsx";
 
 
 
@@ -41,6 +42,7 @@ const Routing = ()=>{
                 <Route path='/profile_box' element={<ProfileBox/>}></Route>
                 <Route path='/buyer_profile' element={<BuyerProfile/>}></Route>
                 <Route path='/know-the-craft' element={<KnowTheCraft/>}></Route>
+                <Route path='/Wishlist' element={<ViewWishlist/>}></Route>
 
             </Routes>
         </>
