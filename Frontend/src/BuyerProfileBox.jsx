@@ -1,60 +1,40 @@
-import React, {useEffect, useRef,useState} from "react";
-import styles from "./ProfileBox.module.css";
-import { Link } from "react-router-dom";
+// import React, {useState, useEffect} from "react";
+import {useState, useEffect} from "react";
+import styles from "./BuyerProfileBox.module.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-const BuyerProfileDropdown = ({closemodel}) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    mobileNumber: '',
-    area: '',
-    district: '',
-    division: '',
-    password: '',
-  });
-  
+const BuyerProfileBox = () => {
+
+    const [data, setData] = useState({});
+    const buyerId = sessionStorage.getItem("buyer_id");
+
+
   useEffect(() => {
-    const seller_id = sessionStorage.getItem('seller_id');
-    axios.get(`http://localhost:3000/seller_profile/${seller_id}`)
+    axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
       .then((response) => {
-        const responseData = response.data;
-  
-        // Make sure keys in formData match keys in responseData exactly
-        setFormData({
-          name: responseData.name,
-          email: responseData.email,
-          mobileNumber: responseData.mobileNumber,
-          area: responseData.area,
-          district: responseData.district,
-          division: responseData.division,
-          password: responseData.password,
-          // Add other fields as needed
-        });
-        console.log(formData);
-        // Do not expect formData to be updated immediately, as it's asynchronous
+        setData(response.data);
+        
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
+        console.error(error);
       });
-  }, []);
-  
-  
-  
+  }, [buyerId]);
+
+
   return (
     
     <div className={styles.buyerProfileDropdown}>
-      <button className={styles.b}onClick={closemodel}>X</button>
+      {/* <button className={styles.b}onClick={closemodel}>X</button> */}
       <div className={styles.border} />
       <Link to={`/buyer_profile`} className={styles.header}>
         <img className={styles.pictureIcon} alt="" src="./images/picture.svg" />
         </Link>
-        <div className={styles.name}>{formData.name}</div>
+        <div className={styles.name}>{data.name}</div>
         <div className={styles.welcome}>
-          Welcome to the world of passionate craft enthusiasts – let's embark on
+          Welcome to the world of passionate craft enthusiasts – let us embark on
           a journey of discovering your unique preferences in crafts
         </div>
-      
       <button className={styles.cart}>
         <div className={styles.cartChild} />
         <img
@@ -73,7 +53,6 @@ const BuyerProfileDropdown = ({closemodel}) => {
         />
         <div className={styles.wishlist1}>Wishlist</div>
       </button>
-      
       <button className={styles.chat}>
         <div className={styles.cartChild} />
         <img
@@ -121,4 +100,4 @@ const BuyerProfileDropdown = ({closemodel}) => {
   );
 };
 
-export default ProfileBox;
+export default BuyerProfileBox;

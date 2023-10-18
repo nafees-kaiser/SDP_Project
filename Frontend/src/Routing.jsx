@@ -16,6 +16,7 @@ import Seller_Registration from "./Seller_Registration.jsx";
 import SellerLogin from "./SellerLogin.jsx"
 import LandingPage from "./LandingPage.jsx";
 import ProfileBox from "./ProfileBox.jsx";
+import BuyerProfileBox from "./BuyerProfileBox.jsx";
 import BuyerProfile from "./BuyerProfile.jsx";
 import KnowTheCraft from "./KnowTheCraft.jsx";
 import ViewWishlist from "./Wishlist.jsx";
@@ -40,6 +41,7 @@ const Routing = ()=>{
                 <Route path='/seller_reg' element={<Seller_Registration/>}></Route>
                 <Route path='/seller_login' element={<SellerLogin/>}></Route>
                 <Route path='/profile_box' element={<ProfileBox/>}></Route>
+                <Route path='/buyer_profile_box' element={<BuyerProfileBox/>}></Route>
                 <Route path='/buyer_profile' element={<BuyerProfile/>}></Route>
                 <Route path='/know-the-craft' element={<KnowTheCraft/>}></Route>
                 <Route path='/Wishlist' element={<ViewWishlist/>}></Route>

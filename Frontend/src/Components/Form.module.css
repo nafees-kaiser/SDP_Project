@@ -1,32 +1,10 @@
-.changePass {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: var(--br-8xs);
-  background-color: var(--color-gainsboro-200);
-  width: 132px;
-  height: 18px;
-}
-.changePassword {
-  position: absolute;
-  top: 3px;
-  left: 24px;
-  font-size: var(--font-size-3xs);
-  font-weight: 600;
-  font-family: var(--font-raleway);
-  color: var(--color-black);
-  text-align: left;
-}
 .changePassButton {
   cursor: pointer;
-  border: 0;
-  padding: 0;
-  background-color: transparent;
-  position: absolute;
   top: 455px;
-  left: 449px;
-  width: 132px;
-  height: 18px;
+  left: 400px;
+  display: flex;
+  gap: 7px;
+  position: absolute;
 }
 .rectangle {
   position: absolute;
@@ -177,12 +155,12 @@
   width: 10px;
   height: 9.76px;
 }
-.abcgmailcom,
+.divi,
 .rectangleGroup {
   position: absolute;
   height: 34.15px;
 }
-.abcgmailcom {
+.divi {
   border: 0;
   font-weight: 500;
   font-family: var(--font-poppins);
@@ -202,13 +180,13 @@
   left: 0;
   width: 641px;
 }
-.emailAddress {
+.division {
   top: 305.4px;
   width: 641px;
   height: 59.52px;
 }
 .address1,
-.emailAddress,
+.division,
 .groupInner {
   position: absolute;
   left: 0;
@@ -290,7 +268,7 @@
 }
 .groupDiv,
 .lastName1,
-.mobileNo {
+.area {
   position: absolute;
   top: 26.34px;
   left: 0;
@@ -298,7 +276,7 @@
   height: 36.1px;
 }
 .lastName1,
-.mobileNo {
+.area {
   top: 151.24px;
   height: 62.45px;
 }
@@ -334,7 +312,7 @@
   width: 10px;
   height: 9.76px;
 }
-.lastName {
+.mobile {
   position: absolute;
   top: 74.15px;
   left: 0;
@@ -365,8 +343,11 @@
   display: inline-block;
   width: 513px;
   height: 34.15px;
+  border: 0;
+  background-color: transparent;
+  position: absolute;
 }
-.changePassButtonParent,
+
 .firstName,
 .information {
   position: absolute;
@@ -375,18 +356,21 @@
   width: 641px;
   height: 59.52px;
 }
-.changePassButtonParent,
 .information {
   height: 442.1px;
 }
-.changePassButtonParent {
-  top: 342px;
+.form {
+  top: 180px;
   left: 519px;
-  height: 600px;
+  /* height: 600px; */
   text-align: left;
   font-size: var(--text-16px-regular-size);
   color: var(--b2b2b);
   font-family: var(--font-raleway);
+  height: 500px;
+  position: absolute;
+  width: 641px;
+  /* height: 59.52px; */
 }
 
 .edit {

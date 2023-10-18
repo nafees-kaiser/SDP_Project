@@ -1,48 +1,76 @@
-import React, { useState,useEffect } from "react";
+import React from "react";
+import { useState, useEffect } from 'react';
 import Style from "./Navbar.module.css";
-import { Link } from "react-router-dom";
 import axios from "axios";
+// import Button from './Button.jsx';
+import { Link } from "react-router-dom";
+import BuyerProfileBox from '../BuyerProfileBox';
 
-const Navbar = () => {
+
+const Navbar = () =>{
     const [showNotification, setShowNotification] = useState(false);
-    const uid = sessionStorage.getItem('uid');
+    const buyer_id = sessionStorage.getItem('buyer_id');
     const [Notifications, setNotification] = useState([]);
+    const [data, setData] = useState({});
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    // const buyerId = sessionStorage.getItem("buyer_id");
 
+
+    // useEffect(() => {
+    //     if (buyerId && buyerId !== "null") {
+    //       axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
+    //         .then((response) => {
+    //           setData(response.data);
+    //         })
+    //         .catch((error) => {
+    //           console.error(error);
+    //         });
+    //     }
+    //   }, [buyerId]);
     const toggleNotification = () => {
-        setShowNotification(!showNotification);
+      setShowNotification(!showNotification);
 
-    };
+     };
 
-    useEffect(() => {
-        console.log(uid);
-        axios.get(`http://localhost:3000/get/notifications/${uid}`)
-            .then((response) => {
-                console.log(response.data);
-                if(response.data.notifications != 0)
-                {
-                    setNotification(response.data.notifications);
-                }
-                else
-                {
-                    const data = {
-                        notifications: [
-                          {
-                            notificationDescription: 'No Notification',
-                          }
-                        ],
-                      };                    
-                    setNotification(data.notifications);
-                }
-            })
-    }, [])
+      useEffect(() => {
+          console.log(uid);
+          axios.get(`http://localhost:3000/get/notifications/${buyer_id}`)
+              .then((response) => {
+                  console.log(response.data);
+                  if(response.data.notifications != 0)
+                  {
+                      setNotification(response.data.notifications);
+                  }
+                  else
+                  {
+                      const data = {
+                          notifications: [
+                            {
+                              notificationDescription: 'No Notification',
+                            }
+                          ],
+                        };                    
+                      setNotification(data.notifications);
+                  }
+              })
+      }, [])
 
 
-    const clearNotification = async () => {
-        axios.delete(`http://localhost:3000/delete/notifications/${uid}`)
-            .then((response) => {
-                window.location.reload();
-            })
-    }
+      const clearNotification = async () => {
+          axios.delete(`http://localhost:3000/delete/notifications/${buyer_id}`)
+              .then((response) => {
+                  window.location.reload();
+              })
+      }
+    
+      const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
+    
+        document.body.style.overflow = isModalOpen ? 'auto' : 'hidden';
+      };
+                  
+
+    
   
 
   return (
