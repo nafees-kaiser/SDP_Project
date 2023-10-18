@@ -21,6 +21,8 @@ const PORT = process.env.PORT;
 app.use(bodyParser.json());
 app.use(cors());
 
+const Sells = require('./Model/SellsSchema');
+
 
 
 
@@ -306,6 +308,13 @@ app.delete('/delete/notifications/:userID', async (req, res) => {
 
 
 
+
+const checkoutRouter = require('./routes/checkout');
+app.use("/checkout", checkoutRouter);
+
+
+const getBuyerInfoRouter = require('./routes/getBuyerInfo');
+app.use("/get-buyer-info", getBuyerInfoRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port http://localhost:${PORT}/`);

@@ -21,14 +21,6 @@ const productsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    wishlist: {
-        type: Boolean,
-        default: false
-    },
-    seller: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Seller'
-    },
     description: {
         type: String,
         required: false

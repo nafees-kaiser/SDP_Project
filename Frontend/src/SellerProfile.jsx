@@ -2,18 +2,18 @@ import { useState, useEffect } from 'react';
 // import { useCallback } from "react";
 import axios from "axios";
 import Footer from "./Components/Footer";
-import CraftForm from "./Components/CraftForm.jsx"
-import Form from "./Components/Form";
-import styles from "./BuyerProfile.module.css";
+import LoginNav from "./Components/LoginNav"
+import SellerForm from "./Components/SellerForm";
+import styles from "./SellerProfile.module.css";
 
-const BuyerProfile = () => {
+const SellerProfile = () => {
 
   
   const [data, setData] = useState({});
-  const buyerId = sessionStorage.getItem("buyer_id");
+  const sellerId = sessionStorage.getItem("seller_id");
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
+    axios.get(`http://localhost:3000/seller_profile/${sellerId}`)
       .then((response) => {
         setData(response.data);
         
@@ -21,13 +21,13 @@ const BuyerProfile = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, [buyerId]);
+  }, [sellerId]);
 
 
   return (
 
     <>
-    <CraftForm />
+    <LoginNav />
     <div className={styles.buyerProfile}>
       
       <div className={styles.border} />
@@ -35,14 +35,13 @@ const BuyerProfile = () => {
       <div className={styles.border1} />
       <div className={styles.pageHeader}>
           <div className={styles.pageTitle}>
-            <h1
-            style={
+            <h1 style={
               {fontSize: '2em'}
             }>Your Profile</h1>
           </div>
       </div>
 
-      <Form />
+      <SellerForm />
       
       <div className={styles.pictureName}>
         <input
@@ -50,6 +49,8 @@ const BuyerProfile = () => {
           value={data.email}
           type="email"
         />
+        
+        {/* <i className="fas fa-user"></i> */}
         <img
           className={styles.picture}
           alt=""
@@ -66,4 +67,4 @@ const BuyerProfile = () => {
   );
 };
 
-export default BuyerProfile;
+export default SellerProfile;

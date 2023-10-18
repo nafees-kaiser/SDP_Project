@@ -163,8 +163,8 @@
 .divi {
   border: 0;
   font-weight: 500;
-  font-family: var(--font-poppins);
-  font-size: var(--button-xsmall-size);
+  /* font-family: var(--font-poppins); */
+  /* font-size: var(--button-xsmall-size); */
   background-color: transparent;
   top: 0;
   left: 27px;
@@ -407,11 +407,11 @@
   background-color: transparent;
   position: absolute;
   top: calc(50% - 18.5px);
-  left: calc(50% - 293.5px);
+  left: 0px;
   color: var(--color-black);
   text-align: left;
   display: flex;
   align-items: center;
-  width: 503px;
+  width: 517px;
   height: 37px;
 }

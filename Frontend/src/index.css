@@ -37,6 +37,10 @@ a:hover {
   cursor: pointer;
   text-decoration: underline;
 }
+h1{
+  font-size: 2em;
+  font-weight: 700;
+}
 
 /*
 body {

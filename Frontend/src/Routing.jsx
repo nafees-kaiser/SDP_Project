@@ -19,6 +19,8 @@ import ProfileBox from "./ProfileBox.jsx";
 import BuyerProfileBox from "./BuyerProfileBox.jsx";
 import BuyerProfile from "./BuyerProfile.jsx";
 import KnowTheCraft from "./KnowTheCraft.jsx";
+import SellerProfile from "./SellerProfile.jsx";
+import LoginNav from "./Components/LoginNav.jsx";
 import ViewWishlist from "./Wishlist.jsx";
 
 
@@ -33,7 +35,8 @@ const Routing = ()=>{
                 <Route path='/product-listing' element={<ProductListing/>}></Route>
                 <Route path='/product-listing/:id' element={<IndividualProduct/>}></Route>
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
-                <Route path='/checkout/:obj' element={<Checkout/>}></Route>
+                {/* <Route path='/checkout/:obj' element={<Checkout/>}></Route> */}
+                <Route path='/checkout' element={<Checkout/>}></Route>
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
                 <Route path='/home_seller' element={<Home_seller/>}></Route>
                 <Route path='/auth' element={<Authentication/>}></Route>
@@ -44,6 +47,8 @@ const Routing = ()=>{
                 <Route path='/buyer_profile_box' element={<BuyerProfileBox/>}></Route>
                 <Route path='/buyer_profile' element={<BuyerProfile/>}></Route>
                 <Route path='/know-the-craft' element={<KnowTheCraft/>}></Route>
+                <Route path='/seller_profile' element={<SellerProfile/>}></Route>
+                <Route path='/login_nav' element={<LoginNav/>}></Route>
                 <Route path='/Wishlist' element={<ViewWishlist/>}></Route>
 
             </Routes>
