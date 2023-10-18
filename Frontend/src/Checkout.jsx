@@ -22,11 +22,19 @@ const Checkout = () => {
                     // setProducts(response.data.products[0]);
                     // const extractedProducts = response.data.products.map(item => item.product);
                     setBuyerProducts(response.data.cartProducts);
-                    console.log(response.data.cartProducts);
+                    // console.log(response.data.cartProducts);
                 }
 
             })
     }, []);
+    let total = 0
+    buyerProducts.forEach(p=>{
+        total += p.productId.price * p.quantity;
+    })
+    useEffect(()=>{
+        console.log(total);
+        setTotalPrice(total);
+    },[total])
 
     // const buyerProducts = extractedProducts[0];
     // console.log(buyerProducts[0]);
@@ -36,24 +44,37 @@ const Checkout = () => {
         // const order = {}
         buyerProducts.forEach(p => {
             product.push({ productId: p.productId._id, quantity: p.quantity });
-            total += p.productId.price * quantity;
+            total += p.productId.price * p.quantity;
         })
         const orderData = {
             product: product,
             buyerId: id,
             totalPrice: total
         }
-        axios.post(`http://localhost:3000/get-buyer-info/${id}`, orderData, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((response) => {
-                // if (response) navigate('/confirmation');
+        console.log("a")
+        console.log(orderData);
+        const saveData = async () => {
+
+            const response = await axios.post(`http://localhost:3000/get-buyer-info/${id}`, orderData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             })
-            .catch((error) => {
-                console.log(error);
-            });
+            return response.status;
+            // .then((response) => {
+            //     // if (response) navigate('/confirmation');
+            // })
+            // .catch((error) => {
+            //     console.log(error);
+            // });
+        }
+        const deleteData = async () => {
+            const response = await axios.delete(`http://localhost:3000/get-buyer-info/${id}`);
+            return response.status;
+        }
+        if (saveData() === 200) {
+            navigate('/confirmation');
+        }
     }
 
     return (
@@ -138,7 +159,7 @@ const Checkout = () => {
                     <span className={styles.privacyPolicy}>privacy policy</span>
                     <span>.</span>
                 </div>
-                <Link className={styles.placeOrderButton} to='#' onClick={updateProduct}>
+                <button className={styles.placeOrderButton} onClick={updateProduct}>
                     <img
                         className={styles.iconarrowRight}
                         alt=""
@@ -150,7 +171,11 @@ const Checkout = () => {
                         alt=""
                         src="/images/iconarrowright4.svg"
                     />
-                </Link>
+                </button>
+                {/* <Button
+                    text="Place order"
+                    onClick = {updateProduct}
+                /> */}
                 <div className={styles.selectedItems} id="items">
                     {buyerProducts && buyerProducts.map(item => {
                         const { productId, quantity } = item;

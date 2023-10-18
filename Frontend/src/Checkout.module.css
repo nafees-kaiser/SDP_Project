@@ -331,6 +331,7 @@ body {
 .placeOrderButton {
   cursor: pointer;
   text-decoration: none;
+  border: transparent;
   bottom: 111px;
   left: calc(50% - 589px);
   border-radius: var(--br-7xs);
@@ -548,7 +549,7 @@ body {
   font-family: var(--regular-12);
 }
 .product2 {
-  position: absolute;
+  position: relative;
   top: 29px;
   left: 27px;
   width: 376px;

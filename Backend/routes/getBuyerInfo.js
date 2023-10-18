@@ -26,7 +26,8 @@ router.get("/:id", async(req, res)=>{
 });
 router.post("/:id",async(req, res)=>{
     const id = req.params.id;
-    console.log(req.body);
+    // console.log(req.body);
+    const { product, buyerId, totalPrice } = req.body;
     // const { _id } = req.body;
     try {
         // const order = await Order.findById(_id);
@@ -35,8 +36,37 @@ router.post("/:id",async(req, res)=>{
         // const savedData = await order.save();
         // // console.log(savedData);
         // res.send(true);
+        const order = new Order({
+            product: product,
+            buyerId: buyerId,
+            sellerId: new ObjectId("652abef997985bc50914d046"),
+            date: new Date(),
+            totalPrice: totalPrice,
+            orderStatus: 'pending'
+        });
+        const savedData = await order.save();
+        // console.log("saved data");
+        // console.log(savedData);
+        res.status(200).json({message:true});
+
     } catch (error) {
         console.log(error);
     }
-})
+});
+
+// router.delete("/:id", async(req, res)=>{
+//     const id = req.params;
+//     try {
+//         const deletedCart = await Cart.deleteMany({buyerId: id});
+//         console.log(deletedCart);
+//         if(deletedCart.deletedCount > 0){
+//             res.status(200).json({message:true});
+//         }
+//         else{
+//             res.status(500);
+//         }
+//     } catch (error) {
+//         console.log(error);
+//     }
+// });
 module.exports = router;
