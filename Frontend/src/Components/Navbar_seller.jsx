@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Style from "./Navbar_seller.module.css"; // Import your CSS module
+import { Link } from "react-router-dom";
 import Button from "./Button";
 const Navbar = ({openmodel}) => {
   const [isProductMenuOpen, setProductMenuOpen] = useState(false);
@@ -34,7 +35,7 @@ const Navbar = ({openmodel}) => {
         </div>
         <div className={Style.lower}>
           <div className={Style.left}>
-            <a href="/"><img src="./images/384165997_332969559130939_1111385360839973004_n.png" alt="" /></a>
+            <Link to={`/home_seller`}><img src="./images/384165997_332969559130939_1111385360839973004_n.png" alt="" /></Link>
           </div>
           <div className={Style.middle}>
             <nav className={Style.navbar}>

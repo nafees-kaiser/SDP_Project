@@ -3,8 +3,10 @@ import styles from "./Checkout.module.css";
 import { useEffect, useState } from "react";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
+import CraftForm from "./Components/CraftForm";
 
 const Checkout = () => {
+  const buyerId = sessionStorage.getItem("buyer_id");
   const { obj } = useParams()
   const { product, amount } = JSON.parse(obj);
   const [count, setCount] = useState(amount)
@@ -15,7 +17,7 @@ const Checkout = () => {
   }, [count])
   return (
     <>
-      <Navbar />
+      {buyerId ? <CraftForm /> : <Navbar />}
       <div className={styles.checkout}>
         <div className={styles.checkoutChild} />
         <div className={styles.navbar20Wrapper}>

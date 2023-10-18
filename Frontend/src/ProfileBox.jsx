@@ -33,6 +33,7 @@ const ProfileBox = () => {
         Welcome to the realm of dedicated artisans – together, we'll uncover
         the distinctive charm of your craft creations
         </div>
+      
       <button className={styles.cart}>
         <div className={styles.cartChild} />
         <img
@@ -51,6 +52,7 @@ const ProfileBox = () => {
         />
         <div className={styles.wishlist1}>My Products</div>
       </button>
+      
       <button className={styles.chat}>
         <div className={styles.cartChild} />
         <img

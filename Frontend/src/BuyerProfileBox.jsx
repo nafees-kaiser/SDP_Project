@@ -53,7 +53,7 @@ const BuyerProfileBox = () => {
           alt=""
           src="./images/-icon-action-heart-love-like-romantic-icon.svg"
         />
-        <div className={styles.wishlist1}>Wishlist</div>
+        <div className={styles.wishlist1}><Link to={`/Wishlist`}>Wishlist</Link></div>
       </button>
       <button className={styles.chat}>
         <div className={styles.cartChild} />

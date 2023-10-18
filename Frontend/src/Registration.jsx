@@ -52,6 +52,7 @@ const Registration = () => {
                 },
             });
             setcode(verify_code.data.data);
+            
             if(verify_code.status !== 200){
                     alert('Error to send verification code');
                     closemodel();

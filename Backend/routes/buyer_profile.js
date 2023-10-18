@@ -5,10 +5,9 @@ const Buyer = require('../Model/BuyerSchema');
 
 
 router.get('/:id', async (req, res) => {
-    const { id } = req.params; 
-    
     try {
-        // const id = "651adc5c7bea3ef7b5ff632f";
+        //const id = "651adc5c7bea3ef7b5ff632f";
+        const id= req.params.id;
         const result = await Buyer.findById(id);
         res.json(result);
     } catch (error) {
