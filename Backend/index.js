@@ -51,6 +51,8 @@ app.use("/product-listing", productListingRouter);
 const buyerProfileRouter = require('./routes/buyer_profile');
 app.use("/buyer_profile", buyerProfileRouter);
 
+const sellerProfileRouter = require('./routes/seller_profile');
+app.use("/seller_profile", sellerProfileRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port http://localhost:${PORT}/`);

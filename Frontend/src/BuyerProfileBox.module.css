@@ -300,6 +300,7 @@
     max-width: 100%;
     overflow: hidden;
     max-height: 100%;
+    filter: invert(100%);
   }
   .goToCraft {
     position: absolute;
@@ -370,7 +371,7 @@
       position: fixed;
       background-color: var(--white);
       width: 380px;
-      height: 579px;
+      height: 523px;
       overflow: hidden;
       z-index: 100;
       top: 92px;

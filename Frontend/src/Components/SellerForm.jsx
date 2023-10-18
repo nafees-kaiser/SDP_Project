@@ -20,9 +20,9 @@ const EditableInput = ({ defaultValue, onSave }) => {
     setIsEditing(true);
   };
 
-  // const handleBlur = () => {
-  //   setIsEditing(false);
-  // };
+//   const handleBlur = () => {
+//     setIsEditing(false);
+//   };
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -70,12 +70,12 @@ const EditableInput = ({ defaultValue, onSave }) => {
 
 
 
-const Form = () => {
+const SellerForm = () => {
 
   const [data, setData] = useState({});
   const [isSaving, setIsSaving] = useState(false);
-  // const navigate= useNavigate();
-  const buyerId = sessionStorage.getItem("buyer_id");
+//   const navigate= useNavigate();
+  const sellerId = sessionStorage.getItem("seller_id");
   const [showPassword, setShowPassword] = useState(false);
   // const [data, setData] = useState({ password: '' });
 
@@ -85,7 +85,7 @@ const Form = () => {
 
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
+    axios.get(`http://localhost:3000/seller_profile/${sellerId}`)
       .then((response) => {
         // console.log(response.data.email)
         setData(response.data);
@@ -94,7 +94,7 @@ const Form = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, [buyerId]);
+  }, [sellerId]);
 
 
   const handleSaveData = (fieldName, updatedValue) => {
@@ -103,7 +103,7 @@ const Form = () => {
 
     setIsSaving(true);
 
-    axios.put(`http://localhost:3000/buyer_profile/${buyerId}`, newData)
+    axios.put(`http://localhost:3000/seller_profile/${sellerId}`, newData)
     // axios.put(`http://localhost:3000/buyer_profile`, newData)
       .then((response) => {
         setIsSaving(false);
@@ -218,4 +218,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default SellerForm;

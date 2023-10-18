@@ -14,6 +14,7 @@ import {
 } from 'chart.js'
 import Style from './Home_seller.module.css';
 import Navbar from "./Components/Navbar_seller";
+import LoginNav from "./Components/LoginNav";
 import Card from "./Components/Card";
 import Footer from "./Components/Footer";
 
@@ -42,6 +43,8 @@ const Home_seller = ()=>{
     const closemodel = ()=>{
         setAuth(false);
     }
+
+    // const sellerId = sessionStorage.getItem("seller_id");
 
     useEffect(() => {
         const id = sessionStorage.getItem("seller_id");
@@ -118,7 +121,9 @@ const Home_seller = ()=>{
 
     return (
         <>
-            <Navbar openmodel={openmodel}/>
+            {/* {sellerId ? <LoginNav /> :<Navbar /> } */}
+            <LoginNav />
+            {/* <Navbar openmodel={openmodel}/> */}
             { auth && <ProfileBox closemodel={closemodel}/> }
             <div className={Style.line}></div>
             <div className={Style.header}>
