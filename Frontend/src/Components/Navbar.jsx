@@ -1,76 +1,48 @@
-import React from "react";
-import { useState, useEffect } from 'react';
+import React, { useState,useEffect } from "react";
 import Style from "./Navbar.module.css";
-import axios from "axios";
-// import Button from './Button.jsx';
 import { Link } from "react-router-dom";
-import BuyerProfileBox from '../BuyerProfileBox';
+import axios from "axios";
 
-
-const Navbar = () =>{
+const Navbar = () => {
     const [showNotification, setShowNotification] = useState(false);
-    const buyer_id = sessionStorage.getItem('buyer_id');
+    const buyerId = sessionStorage.getItem("buyer_id");
     const [Notifications, setNotification] = useState([]);
-    const [data, setData] = useState({});
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    // const buyerId = sessionStorage.getItem("buyer_id");
 
-
-    // useEffect(() => {
-    //     if (buyerId && buyerId !== "null") {
-    //       axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
-    //         .then((response) => {
-    //           setData(response.data);
-    //         })
-    //         .catch((error) => {
-    //           console.error(error);
-    //         });
-    //     }
-    //   }, [buyerId]);
     const toggleNotification = () => {
-      setShowNotification(!showNotification);
+        setShowNotification(!showNotification);
 
-     };
+    };
 
-      useEffect(() => {
-          console.log(uid);
-          axios.get(`http://localhost:3000/get/notifications/${buyer_id}`)
-              .then((response) => {
-                  console.log(response.data);
-                  if(response.data.notifications != 0)
-                  {
-                      setNotification(response.data.notifications);
-                  }
-                  else
-                  {
-                      const data = {
-                          notifications: [
-                            {
-                              notificationDescription: 'No Notification',
-                            }
-                          ],
-                        };                    
-                      setNotification(data.notifications);
-                  }
-              })
-      }, [])
+    useEffect(() => {
+        console.log(buyerId);
+        axios.get(`http://localhost:3000/get/notifications/${buyerId}`)
+            .then((response) => {
+                console.log(response.data);
+                if(response.data.notifications != 0)
+                {
+                    setNotification(response.data.notifications);
+                }
+                else
+                {
+                    const data = {
+                        notifications: [
+                          {
+                            notificationDescription: 'No Notification',
+                          }
+                        ],
+                      };                    
+                    setNotification(data.notifications);
+                }
+            })
+    }, [])
 
 
-      const clearNotification = async () => {
-          axios.delete(`http://localhost:3000/delete/notifications/${buyer_id}`)
-              .then((response) => {
-                  window.location.reload();
-              })
-      }
-    
-      const toggleModal = () => {
-        setIsModalOpen(!isModalOpen);
-    
-        document.body.style.overflow = isModalOpen ? 'auto' : 'hidden';
-      };
-                  
-
-    
+    const clearNotification = async () => {
+        axios.delete(`http://localhost:3000/delete/notifications/${buyerId}`)
+            .then((response) => {
+                window.location.reload();
+            })
+    }
   
 
   return (
@@ -115,29 +87,30 @@ const Navbar = () =>{
             </div>
           </div>
         </div>
-      </div>
-      <div className={Style.lower}>
-        <div className={Style.left}>
-          <Link to={`/product-listing`}>
-            <img
-              src="/images/384165997_332969559130939_1111385360839973004_n.png"
-              alt=""
-            />
-          </Link>
-        </div>
-        <div className={Style.middle}>
-          <Link to={`/`} className={Style.link}>
-            Home
-          </Link>
-          <Link to={`/product-listing`} className={Style.link}>
-            Product
-          </Link>
-          <a href="#com">Community</a>
-          <a href="#craft">Know about craft</a>
-        </div>
-        <div className={Style.right}>
-          <input type="text" className={Style.search} placeholder="Search..." />
-          <i className="fa fa-search icon"></i>
+      
+        <div className={Style.lower}>
+          <div className={Style.left}>
+            <Link to={`/product-listing`}>
+              <img
+                src="/images/384165997_332969559130939_1111385360839973004_n.png"
+                alt=""
+              />
+            </Link>
+          </div>
+          <div className={Style.middle}>
+            <Link to={`/`} className={Style.link}>
+              Home
+            </Link>
+            <Link to={`/product-listing`} className={Style.link}>
+              Product
+            </Link>
+            <a href="#com">Community</a>
+            <a href="#craft">Know about craft</a>
+          </div>
+          <div className={Style.right}>
+            <input type="text" className={Style.search} placeholder="Search..." />
+            <i className="fa fa-search icon"></i>
+          </div>
         </div>
       </div>
     </>

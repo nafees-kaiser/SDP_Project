@@ -129,7 +129,6 @@
     top: 60px; /* Adjust the distance from the navbar as needed */
     right: 0;
     z-index: 10000;
-
 }
 .overlay {
     position: fixed;

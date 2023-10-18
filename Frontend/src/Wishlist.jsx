@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Components/Navbar";
+import CraftForm from "./Components/CraftForm";
 import Footer from "./Components/Footer";
 import axios from "axios";
 
 
 export default function ViewWishlist() {
-    const uid = sessionStorage.getItem('uid');
+    const buyerId = sessionStorage.getItem("buyer_id");
 
     const [wishProducts, setwishProducts] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/wishlist/${uid}`)
+        axios.get(`http://localhost:3000/wishlist/${buyerId}`)
             .then((response) => {
-                //console.log(response.data);
+                console.log(response.data.wishlistItems);
                 setwishProducts(response.data.wishlistItems);
             })
     }, [])
 
 
     const clearWishlist = async () => {
-        axios.delete(`http://localhost:3000/delete/wishlist/${uid}`)
+        axios.delete(`http://localhost:3000/delete/wishlist/${buyerId}`)
             .then((response) => {
                 window.location.reload();
             })
@@ -27,7 +28,7 @@ export default function ViewWishlist() {
 
     return (
         <>
-            <Navbar/>
+            {buyerId ? <CraftForm /> : <Navbar />}
             
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 

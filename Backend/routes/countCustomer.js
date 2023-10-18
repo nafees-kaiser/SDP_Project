@@ -22,13 +22,15 @@ router.get('/:id', async (req, res) => {
 
     // Create an object to store unique buyer names and the number of orders
     const buyerOrderCount = {};
-
+    const count=0;
     for (const order of orders) {
       const buyer = await Buyer.findById(order.buyerId).exec();
       const buyerName = buyer.name; // Assuming the name property exists in the buyer model
       if (!buyerOrderCount[buyerName]) {
+        
         buyerOrderCount[buyerName] = 1;
       } else {
+        
         buyerOrderCount[buyerName]++;
       }
     }

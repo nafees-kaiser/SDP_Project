@@ -56,6 +56,8 @@ app.use("/practice", practiceRouter);
 const countCustomerRouter = require('./routes/countCustomer');
 app.use("/count_customer", countCustomerRouter);
 
+const count_price = require('./routes/count_price_customer');
+app.use("/count_price_customer", count_price);
 
 const productListingRouter = require('./routes/productListing');
 app.use("/product-listing", productListingRouter);
