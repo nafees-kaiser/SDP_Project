@@ -121,4 +121,4 @@ const BuyerProfileDropdown = ({closemodel}) => {
   );
 };
 
-export default ProfileBox;
+export default BuyerProfileDropdown;
