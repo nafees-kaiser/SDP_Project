@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 // import { useCallback } from "react";
 import axios from "axios";
 import styles from "./Form.module.css";
-import {useNavigate} from 'react-router-dom';
+// import {useNavigate} from 'react-router-dom';
 import Button from './Button';
 
 
@@ -20,9 +20,9 @@ const EditableInput = ({ defaultValue, onSave }) => {
     setIsEditing(true);
   };
 
-  const handleBlur = () => {
-    setIsEditing(false);
-  };
+  // const handleBlur = () => {
+  //   setIsEditing(false);
+  // };
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -74,8 +74,14 @@ const Form = () => {
 
   const [data, setData] = useState({});
   const [isSaving, setIsSaving] = useState(false);
-  const navigate= useNavigate();
+  // const navigate= useNavigate();
   const buyerId = sessionStorage.getItem("buyer_id");
+  const [showPassword, setShowPassword] = useState(false);
+  // const [data, setData] = useState({ password: '' });
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
 
   useEffect(() => {
@@ -115,7 +121,7 @@ const Form = () => {
       <div className={styles.changePassButton}>
         <Button 
           text="Change Password"
-          change={()=>navigate('/registration')}
+          // change={()=>navigate('/registration')}
       />
       </div>
       <div className={styles.information}>
@@ -124,17 +130,20 @@ const Form = () => {
           <div className={styles.rectangleParent}>
             <input
               className={styles.input}
-              value="******"
-              type="password"
-              defaultValue="******"
+              value={data.password}
+              type={showPassword ? 'text' : 'password'}
+              // type="password"
+              // defaultValue="******"
             />
 
+          <button className={styles.group} onClick={togglePasswordVisibility}>
+            {showPassword ? (
+              <i className="fas fa-eye"></i> 
+              ) : (
+              <i className="fas fa-eye-slash"></i> 
+              )}
+          </button>
 
-            <button className={styles.group}>
-              <img className={styles.vectorIcon} alt="" src="./images/vector.svg" />
-              <img className={styles.vectorIcon1} alt="" src="./images/vector1.svg" />
-              <img className={styles.vectorIcon2} alt="" src="./images/vector2.svg" />
-            </button>
           </div>
         </div>
 

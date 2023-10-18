@@ -1,5 +1,5 @@
 // import React from "react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Style from "./CraftsForm.module.css";
 import axios from "axios";
 // import Button from './Button.jsx';
@@ -11,7 +11,7 @@ const Navbar = () =>{
     const [data, setData] = useState({});
     const [isModalOpen, setIsModalOpen] = useState(false);
     const buyerId = sessionStorage.getItem("buyer_id");
-
+    const overlayRef = useRef(null);
 
   useEffect(() => {
     axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
@@ -27,7 +27,16 @@ const Navbar = () =>{
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
 
-    document.body.style.overflow = isModalOpen ? 'auto' : 'hidden';
+    if (!isModalOpen) {
+        document.body.style.overflow = 'auto';
+      }
+    // document.body.style.overflow = isModalOpen ? 'auto' : 'hidden';
+  };
+
+  const handleOverlayClick = (e) => {
+    if (e.target === overlayRef.current) {
+      toggleModal();
+    }
   };
 
     
@@ -37,7 +46,7 @@ const Navbar = () =>{
             <div className={Style.navbar}>
                 <div className={Style.upper}>
                     <div className={Style.left}>
-                        
+                        <Link to={`/become_seller`} className={Style.link}>Become a Seller</Link>
                     </div>
                     <div className={Style.right}>
                     {/* <Link to={`/login`} className={Style.link}> Login</Link> */}
@@ -77,12 +86,18 @@ const Navbar = () =>{
                 </div>
             </div>
             {isModalOpen && (
+                <div className={Style.overlay} onClick={handleOverlayClick} ref={overlayRef}>
+                 <BuyerProfileBox />
+                </div>
+            )}
+
+            {/* {isModalOpen && (
                 <div className={Style.overlay} onClick={toggleModal}>
-                    {/* <BuyerProfileBox closemodel={toggleModal} /> */}
+                    <BuyerProfileBox closemodel={toggleModal} />
                     <BuyerProfileBox />
                 </div>
              
-            )}
+            )} */}
         </>
     );
 }

@@ -46,6 +46,7 @@ const BuyerProfileBox = () => {
         />
         <div className={styles.myCart}>My Cart</div>
       </button>
+      {/* </Link> */}
       <button className={styles.wishlist}>
         <div className={styles.cartChild} />
         <img
@@ -53,7 +54,7 @@ const BuyerProfileBox = () => {
           alt=""
           src="./images/-icon-action-heart-love-like-romantic-icon.svg"
         />
-        <div className={styles.wishlist1}>Wishlist</div>
+        <div className={styles.wishlist1}><Link to={`/Wishlist`}>Wishlist</Link></div>
       </button>
       <button className={styles.chat}>
         <div className={styles.cartChild} />
@@ -78,24 +79,24 @@ const BuyerProfileBox = () => {
         />
         <div className={styles.myOrders1}>My Orders</div>
       </button>
-      <button className={styles.track}>
+      {/* <button className={styles.track}>
         <div className={styles.trackChild} />
         <img className={styles.iconZoomPan} alt="" src="./images/-icon-zoom-pan.svg" />
         <div className={styles.trackingOrders}>Tracking Orders</div>
-      </button>
-      <button className={styles.community}>
-        <div className={styles.myOrdersChild} />
+      </button> */}
+      <button className={styles.track}>
+        <div className={styles.trackChild} />
         <img
           className={styles.iconPeopleCommunity}
           alt=""
           src="./images/-icon-people-community.svg"
         />
-        <div className={styles.goToCraft}>Go to Craft Community</div>
+        <div className={styles.trackingOrders}>Go to Craft Community</div>
       </button>
-      <button className={styles.signOut}>
-        <div className={styles.trackChild} />
-        <img className={styles.iconLogout} alt="" src="./images/-icon-logout.svg" />
-        <div className={styles.signOut1}>Sign Out</div>
+      <button className={styles.community}>
+        <div className={styles.myOrdersChild} />
+        <img className={styles.iconPeopleCommunity} alt="" src="./images/-icon-logout.svg" />
+        <div className={styles.goToCraft}>Sign Out</div>
       </button>
     </div>
 

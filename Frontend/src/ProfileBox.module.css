@@ -29,7 +29,8 @@
   text-align: left;
 }
 .name {
-  top: 0;
+  font-weight: 700;
+  top: 10px;
   font-size: var(--font-size-5xl);
   color: #010101;
 }
@@ -94,7 +95,7 @@
   background-color: transparent;
   border-radius: 10px;
   top: 170px;
-  left: 57px;
+  left: 35px;
   width: 142px;
   height: 69px;
 }
@@ -128,7 +129,7 @@
   background-color: transparent;
   position: absolute;
   top: 170px;
-  left: 230px;
+  left: 205px;
   width: 142px;
   height: 69px;
 }
@@ -168,7 +169,7 @@
   padding: 0;
   background-color: transparent;
   top: 265px;
-  left: 57px;
+  left: 35px;
   width: 142px;
   height: 69px;
 }
@@ -186,7 +187,7 @@
 .notification1 {
   position: absolute;
   top: 23px;
-  left: 40px;
+  left: 46px;
   font-size: var(--text-18px-regular-size);
   text-transform: capitalize;
   font-weight: 600;
@@ -201,7 +202,7 @@
   background-color: transparent;
   position: absolute;
   top: 265px;
-  left: 230px;
+  left: 205px;
   width: 142px;
   height: 69px;
 }
@@ -224,6 +225,7 @@
   max-width: 100%;
   overflow: hidden;
   max-height: 100%;
+  filter: invert(100%);
 }
 .myOrders1 {
   position: absolute;
@@ -299,6 +301,7 @@
   max-width: 100%;
   overflow: hidden;
   max-height: 100%;
+  filter: invert(100%);
 }
 .goToCraft {
   position: absolute;
@@ -363,16 +366,17 @@
 }
 .buyerProfileDropdown {
     border: 1px solid black;
-    box-shadow: 1px 2px 1px 4px rgb(194, 192, 192);
-    border-radius: 10px;
+    /* box-shadow: 1px 2px 1px 4px rgb(194, 192, 192); */
+    border-radius: 5px;
     float: right;
     position: fixed;
     background-color: var(--white);
-    width: 400px;
-    height: 579px;
+    width: 380px;
+    height: 523px;
     overflow: hidden;
     z-index: 100;
-    left: 74%;
+    top: 92px;
+    left: 73%;
     transform: translate(8%, -9%);
-    
+
 }

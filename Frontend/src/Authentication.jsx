@@ -24,6 +24,7 @@ const Authentication = ({closemodel,data1,formData})=>{
         try {
             console.log("React_auth: "+data1);
             console.log("React_auth: "+code);
+            
             if(code == data1){
 
 

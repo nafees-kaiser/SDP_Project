@@ -35,7 +35,10 @@ const BuyerProfile = () => {
       <div className={styles.border1} />
       <div className={styles.pageHeader}>
           <div className={styles.pageTitle}>
-            <h1>Your Profile</h1>
+            <h1
+            style={
+              {fontSize: '2em'}
+            }>Your Profile</h1>
           </div>
       </div>
 
