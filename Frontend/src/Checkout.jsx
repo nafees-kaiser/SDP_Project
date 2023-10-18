@@ -5,7 +5,6 @@ import axios from "axios";
 import Navbar from "./Components/Navbar";
 import CraftForm from "./Components/CraftForm"
 import Footer from "./Components/Footer";
-import CraftForm from "./Components/CraftForm";
 
 const Checkout = () => {
     const [buyer, setBuyer] = useState({});

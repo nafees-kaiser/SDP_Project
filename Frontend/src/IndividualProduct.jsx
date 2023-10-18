@@ -6,7 +6,6 @@ import CraftForm from "./Components/CraftForm";
 import nakshikathaImage from '../images/nakshi_katha(1).jpg'
 import Button from "./Components/Button";
 import Navbar from "./Components/Navbar";
-import CraftForm from "./Components/CraftForm"
 import Footer from "./Components/Footer";
 
 
@@ -15,8 +14,32 @@ export default function IndividualProduct() {
     const { id } = useParams();
     const buyerId = sessionStorage.getItem("buyer_id");
     let [product, setProduct] = useState({})
+    const [reviewDescription, setReviewData] = useState();
+    const [reviews, setreview] = useState([]);
     const [amount, setAmount] = useState(0)
     const navigate = useNavigate();
+    const handleChange= (e) => 
+    {
+        setReviewData(e.target.value);
+    };
+
+    function setvalue()
+    {
+        const DataofForm ={
+        'reviewDescription':reviewDescription,
+        'productId' : id
+        };
+        return DataofForm;
+    }
+
+    function setWishlist()
+    {
+        const productData ={
+            'buyerid': buyerId,
+            'productid' : id
+            };
+            return productData;
+    }
     useEffect(() => {
         axios.get(`http://localhost:3000/product-listing/${id}`)
             .then((response) => {
@@ -34,7 +57,7 @@ export default function IndividualProduct() {
     }, []);
     const routeChange = () => {
         if (product) {
-            const buyerId = sessionStorage.getItem("buyer_id");
+            // const buyerId = sessionStorage.getItem("buyer_id");
             product = {
                 ...product,
                 amount,
@@ -48,6 +71,7 @@ export default function IndividualProduct() {
                 });
             }
             saveData();
+            alert("Data added to cart");
             // navigate(`/checkout`);
         }
     }

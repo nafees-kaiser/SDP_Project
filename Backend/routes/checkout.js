@@ -53,7 +53,7 @@ router.post("/", async (req, res) => {
         //     // console.log(savedData);
 
         // }
-        const cart1 = await Cart.find({productId: _id});
+        const cart1 = await Cart.find({buyerId: buyerId, productId: _id});
         if(!cart1.length){
             const cart = new Cart({
                 productId: new ObjectId(_id),
@@ -61,6 +61,7 @@ router.post("/", async (req, res) => {
                 quantity: amount
             })
             const data = await cart.save();
+            console.log(data);
         }
 
     } catch (error) {
