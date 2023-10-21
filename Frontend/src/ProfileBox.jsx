@@ -100,4 +100,4 @@ const ProfileBox = () => {
   );
 };
 
-export default BuyerProfileDropdown;
+export default ProfileBox;

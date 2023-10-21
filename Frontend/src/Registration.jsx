@@ -45,7 +45,11 @@ const Registration = () => {
                 if(formData.password == formData.confirmPassword){
                     btn();
                 }
+                else {
+                    alert("password mismatched ");
+                }
             }
+            
             const verify_code = await axios.post('http://localhost:3000/verify', formData, {
             headers: {
                     'Content-Type': 'application/json',
