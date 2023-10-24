@@ -30,7 +30,7 @@ const BuyerProfileBox = () => {
       {/* <button className={styles.b}onClick={closemodel}>X</button> */}
       <div className={styles.border} />
       <Link to={`/buyer_profile`} className={styles.header}>
-        <img className={styles.pictureIcon} alt="" src="./images/picture.svg" />
+        <img className={styles.pictureIcon} alt="" src="/images/picture.svg" />
       </Link>
       <div className={styles.name}>{data.name}</div>
       <div className={styles.welcome}>
@@ -42,7 +42,7 @@ const BuyerProfileBox = () => {
         <img
           className={styles.iconShoppingBag}
           alt=""
-          src="./images/-icon-shoppingbag.svg"
+          src="/images/-icon-shoppingbag.svg"
         />
         <div className={styles.myCart}>My Cart</div>
       </button>
@@ -52,7 +52,7 @@ const BuyerProfileBox = () => {
         <img
           className={styles.iconActionHeartLoveLikeR}
           alt=""
-          src="./images/-icon-action-heart-love-like-romantic-icon.svg"
+          src="/images/-icon-action-heart-love-like-romantic-icon.svg"
         />
         <div className={styles.wishlist1}><Link to={`/Wishlist`}>Wishlist</Link></div>
       </button>
@@ -61,13 +61,13 @@ const BuyerProfileBox = () => {
         <img
           className={styles.iconCommunicationBubbleTex}
           alt=""
-          src="./images/-icon-communication-bubble-texting-chat-comment-talk-speech-icon.svg"
+          src="/images/-icon-communication-bubble-texting-chat-comment-talk-speech-icon.svg"
         />
         <div className={styles.messages}>Messages</div>
       </button>
       <button className={styles.notification}>
         <div className={styles.cartChild} />
-        <img className={styles.iconBell} alt="" src="./images/-icon-bell.svg" />
+        <img className={styles.iconBell} alt="" src="/images/-icon-bell.svg" />
         <div className={styles.notification1}>Notification</div>
       </button>
       <button className={styles.myOrders}>
@@ -75,13 +75,13 @@ const BuyerProfileBox = () => {
         <img
           className={styles.iconNavIconListA}
           alt=""
-          src="./images/-icon-nav-icon-list-a.svg"
+          src="/images/-icon-nav-icon-list-a.svg"
         />
         <div className={styles.myOrders1}>My Orders</div>
       </button>
       {/* <button className={styles.track}>
         <div className={styles.trackChild} />
-        <img className={styles.iconZoomPan} alt="" src="./images/-icon-zoom-pan.svg" />
+        <img className={styles.iconZoomPan} alt="" src="/images/-icon-zoom-pan.svg" />
         <div className={styles.trackingOrders}>Tracking Orders</div>
       </button> */}
       <button className={styles.track}>
@@ -89,13 +89,13 @@ const BuyerProfileBox = () => {
         <img
           className={styles.iconPeopleCommunity}
           alt=""
-          src="./images/-icon-people-community.svg"
+          src="/images/-icon-people-community.svg"
         />
         <div className={styles.trackingOrders}>Go to Craft Community</div>
       </button>
       <button className={styles.community}>
         <div className={styles.myOrdersChild} />
-        <img className={styles.iconPeopleCommunity} alt="" src="./images/-icon-logout.svg" />
+        <img className={styles.iconPeopleCommunity} alt="" src="/images/-icon-logout.svg" />
         <div className={styles.goToCraft}>Sign Out</div>
       </button>
     </div>
