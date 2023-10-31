@@ -8,10 +8,10 @@ npm i body-parser
 npm i nodemon
 npm i cors
 npm i nodemailer
-
+npm i multer path
 
 for shortcut:
-npm i express mongoose dotenv body-parser nodemon cors nodemailer
+npm i express mongoose dotenv body-parser nodemon cors nodemailer multer path
 
 
 Frontend:
@@ -20,10 +20,11 @@ cd Frontend
 npm i axios
 npm i react-router-dom
 npm install react-chartjs-2 chart.js
+npm i redux react-redux
 
 
 for shortcut:
-npm i express axios react-router-dom react-chartjs-2 chart.js
+npm i express axios react-router-dom react-chartjs-2 chart.js redux react-redux
 
 
 To run Both the server
