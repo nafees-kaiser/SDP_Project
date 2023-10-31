@@ -50,7 +50,7 @@ const Routing = ()=>{
                 <Route path='/seller_profile' element={<SellerProfile/>}></Route>
                 <Route path='/login_nav' element={<LoginNav/>}></Route>
                 <Route path='/Wishlist' element={<ViewWishlist/>}></Route>
-
+                
             </Routes>
         </>
     )

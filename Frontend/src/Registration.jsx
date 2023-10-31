@@ -1,24 +1,32 @@
-import React, { useState } from 'react';
-import Authentication from './Authentication.jsx'
+import React, { useState,useRef, useEffect } from 'react';
+import Authentication from './Authentication.jsx';
 import axios from 'axios';
-import style from "./Registration.module.css"; // Import your CSS module
+import style from './Registration.module.css'; // Import your CSS module
 import Button from './Components/Button';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Registration = () => {
-    const [auth,setAuth]= useState(false);
-    const [code1,setcode]= useState(0);
-    const navigate= useNavigate();
-    const btn = ()=>{
+    const [auth, setAuth] = useState(false);
+    const [code1, setcode] = useState(0);
+    const [prp,setformDataToSend] = useState("");
+    const inputRef = useRef(null)
+    const navigate = useNavigate();
 
+    const btn = () => {
         setAuth(true);
-    }
-    const closemodel =()=>{
+    };
+
+    const closemodel = () => {
         setAuth(false);
-    }
-    const nev = ()=>{
+    };
+
+    const nev = () => {
         navigate('/login');
+    };
+    const imageClick = ()=>{
+        inputRef.current.click();
     }
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -27,60 +35,115 @@ const Registration = () => {
         district: '',
         division: '',
         password: '',
-        confirmPassword: '',
+        confirmPassword: ''
     });
-    
+    const [img,setimg] = useState("")
+    const handleChange2 = (e) => {
+        const files = e.target.files[0];
+        setimg(files);
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-    
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+    const formDataToSend = new FormData();
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-        // Send the registration data to the server for processing
-        
-            if(formData.email !=='' ){
-                if(formData.password == formData.confirmPassword){
+            
+            formDataToSend.append('name', formData.name);
+            formDataToSend.append('email', formData.email);
+            formDataToSend.append('mobileNumber', formData.mobileNumber);
+            formDataToSend.append('area', formData.area);
+            formDataToSend.append('division', formData.division);
+            formDataToSend.append('district', formData.district);
+            formDataToSend.append('password', formData.password);
+            formDataToSend.append('confirmPassword', formData.confirmPassword);
+            formDataToSend.append('img', img);
+            setformDataToSend(formDataToSend);
+            for (const pair of prp.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
+            if (formData.email !== '') {
+                if (formData.password === formData.confirmPassword) {
                     btn();
-                }
-                else {
-                    alert("password mismatched ");
+                } else {
+                    alert('Password mismatched');
                 }
             }
-            
+
             const verify_code = await axios.post('http://localhost:3000/verify', formData, {
-            headers: {
+                headers: {
                     'Content-Type': 'application/json',
                 },
             });
             setcode(verify_code.data.data);
-            
-            if(verify_code.status !== 200){
-                    alert('Error to send verification code');
-                    closemodel();
-            
+
+            if (verify_code.status !== 200) {
+                alert('Error sending verification code');
+                closemodel();
             }
-        
-    
-        
         } catch (error) {
             console.error('Error:', error);
             console.error('Registration failed(catch at registration)');
         }
-
-        
-            
     };
 
-
-
+    const divisions = [
+        {
+            name: 'Dhaka',
+            districts: ["Dhaka", "Gazipur", "Tangail", "Narayanganj", "Manikganj", "Munshiganj", "Faridpur"],
+        },
+        {
+            name: 'Chittagong',
+            districts: ["Chittagong", "Cox's Bazar", "Feni","Bandarban", "Rangamati", "Khagrachari", "Chandpur","Noakhali", "Lakshmipur"],
+        },
+        {
+            name: 'Rajshahi',
+            districts: ["Rajshahi", "Bogra", "Pabna", "Natore", "Joypurhat", "Sirajganj"],
+        },
+        {
+            name: 'Khulna',
+            districts: ["Khulna", "Bagerhat", "Jessore", "Satkhira", "Magura", "Narail", "Khustia"],
+        },
+        {
+            name: 'Barishal',
+            districts: ["Barishal", "Bhola", "Patuakhali", "Pirojpur", "Jhalokati", "Barguna"],
+        },
+        {
+            name: 'Sylhet',
+            districts: ["Sylhet", "Moulvibazar", "Habiganj", "Sunamganj"],
+        },
+        {
+            name: 'Rangpur',
+            districts: ["Rangpur", "Dinajpur", "Kurigram", "Thakurgaon", "Lalmonirhat", "Panchagarh", "Nilphamari"],
+        },
+        {
+            name: 'Mymensingh',
+            districts: ["Mymensingh", "Jamalpur", "Netrokona", "Sherpur"],
+        }
+        
+    ];
+    
 
     return (
         <>
-            { auth && <Authentication closemodel={closemodel} data1={code1} formData={formData}/>}
-            
+            {auth && <Authentication closemodel={closemodel} data1={code1} formDataToSend={prp} />}
+
             <div className={style.middle2}>
                 <div className={style.Middle}>
                     <div className={style.left}>
@@ -88,113 +151,134 @@ const Registration = () => {
                         <h1>Welcome</h1>
                         <p>Join our largest Community</p>
                         <p>Already have an account?</p>
-                        {/* <button className={style['btn-primary']}>LogIn</button> */}
-                        <Button text="Login" change={nev}/>
+                        <Button text="Login" change={nev} />
                     </div>
                     <div className={style.right}>
                         <h2>Register Now!</h2>
-                        <p>Fill the information carefully</p>
+                        <p>Fill in the information carefully</p>
                         <form onSubmit={handleSubmit}>
                             <div className={style.form}>
                                 <div className={style.leftForm}>
                                     <div>
                                         <input
-                                            name='name'
-                                            placeholder='Name'
+                                            name="name"
+                                            placeholder="Name"
                                             type="text"
                                             value={formData.name}
                                             onChange={handleChange}
-                                            
                                         />
                                     </div>
                                     <div>
                                         <input
-                                            name='email'
-                                            placeholder='Email'
+                                            name="email"
+                                            placeholder="Email"
                                             required
                                             type="text"
                                             value={formData.email}
                                             onChange={handleChange}
-                                            
                                         />
                                     </div>
                                     <div>
                                         <input
-                                            name='mobileNumber'
-                                            placeholder='Number'
+                                            name="mobileNumber"
+                                            placeholder="Number"
                                             type="text"
                                             value={formData.mobileNumber}
                                             onChange={handleChange}
-                                           
                                         />
                                     </div>
                                     <div>
                                         <input
-                                            name='area'
-                                            placeholder='Area'
+                                            name="area"
+                                            placeholder="Area"
                                             type="text"
                                             value={formData.area}
                                             onChange={handleChange}
-                                            
                                         />
                                     </div>
                                 </div>
-                                <div className={style.rightForm}>
-                                    <div>
-                                        <input
-                                            name='district'
-                                            placeholder='District'
-                                            type="text"
-                                            value={formData.district}
-                                            onChange={handleChange}
-                                            
-                                        />
+                                <div className={style.middle} onClick={imageClick}>
+                                    <input
+                                        name="img"
+                                        className={style.imgbox}
+                                        type="file"
+                                        ref={inputRef}
+                                       
+                                        onChange={handleChange2}
+                                    />
+                                    <div className={style.pic}>
+                                        {img? <img src={URL.createObjectURL(img)} alt=''  />          :<i className="fa-solid fa-cloud-arrow-up" style={{ transform: "translate(0%, 112%)" }}></i>}
                                     </div>
+                                    
+                                    
+                                    
+                                </div>
+                                <div className={style.rightForm}>
+
                                     <div>
-                                        <input
-                                            name='division'
-                                            placeholder='Division'
-                                            type="text"
+                                        <select
+                                            name="division"
                                             value={formData.division}
                                             onChange={handleChange}
-                                            
-                                        />
+                                        >
+                                            <option value="">Select Division</option>
+                                            {divisions.map((division) => (
+                                                <option key={division.name} value={division.name}>
+                                                    {division.name}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
+                                    {formData.division && (
+                                        <div>
+                                            <select
+                                                name="district"
+                                                value={formData.district}
+                                                onChange={handleChange}
+                                            >
+                                                <option value="">Select District</option>
+                                                {divisions.find((div) => div.name === formData.division)?.districts.map(
+                                                    (district) => (
+                                                        <option key={district} value={district}>
+                                                            {district}
+                                                        </option>
+                                                    )
+                                                )}
+                                            </select>
+                                        </div>
+                                    )}
+
                                     <div>
                                         <input
-                                            name='password'
-                                            placeholder='Password'
+                                            name="password"
+                                            placeholder="Password"
                                             type="password"
                                             required
                                             value={formData.password}
                                             onChange={handleChange}
-                                            
                                         />
                                     </div>
                                     <div>
                                         <input
-                                            name='confirmPassword'
-                                            placeholder='Confirm Password'
+                                            name="confirmPassword"
+                                            placeholder="Confirm Password"
                                             type="password"
                                             required
                                             value={formData.confirmPassword}
                                             onChange={handleChange}
-                                            
                                         />
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                {/* <button type="submit" className={style.btn5}>Sign Up</button> */}
-                                <Button text="Sign Up" type='submit' />
+                                <Button text="Sign Up" type="submit" />
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            
         </>
-    )
-}
+    );
+};
 
 export default Registration;

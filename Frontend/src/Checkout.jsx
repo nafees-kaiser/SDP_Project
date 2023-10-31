@@ -60,13 +60,14 @@ const Checkout = () => {
                     'Content-Type': 'application/json',
                 },
             })
-            return response.status;
-            // .then((response) => {
-            //     // if (response) navigate('/confirmation');
-            // })
-            // .catch((error) => {
-            //     console.log(error);
-            // });
+            .then((response) => {
+                alert("Order Done");
+                return response.status;
+             })
+            .catch((error) => {
+                console.log(error);
+            });
+            
         }
         const deleteData = async () => {
             const response = await axios.delete(`http://localhost:3000/get-buyer-info/${id}`);
