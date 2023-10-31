@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Hanken+Grotesk:wght@500;700;800&family=Inter&display=swap');
+:root {
+    --primary-color: #795AAC;
+    --button : #999DEE;
+    --Background: #E9E9E9;
+    --text: White;
+}
+.top {
+    width: 90%;
+    height: auto;
+    margin: 20px auto;
+}
+.main {
+    width: 90%;
+    height: 1300px;
+    margin: 10px auto;
+    
+    display: flex;
+    flex-direction: row;
+
+}
+.main .left {
+    width: 60%;
+    height: 100%;
+    margin: 5px;
+    background-color: var(--Background);
+    padding: 20px 100px 20px 20px;
+}
+.main .left .text {
+    margin-top: 5px;
+    margin-bottom: 30px;
+    
+}
+.main .left .type {
+    width: 100%;
+    max-height: 250px;
+}
+.main .left .form .type > p {
+    font-size: 1.3em;
+    font-weight: 300;
+    margin: 10px 0px;
+    word-spacing: 5px;
+}
+.main .left .form .type p > span {
+    color: red;
+    margin: 0px 4px;
+    font-size: 1.3em;
+}
+.main .left .type .resize {
+    width: 90%;
+    min-height: 150px;
+}
+
+.main .left .text > h3 {
+    font-size: 1.5em;
+    font-weight: 700;
+    word-spacing: 10px;
+    margin-bottom: 5px;
+}
+
+.main .right {
+    width: 38%;
+    height: 100%;
+    margin: 5px;
+    background-color: var(--Background);
+    padding: 20px 100px 20px 20px;
+}
+.main .right .text {
+    width: 110%;
+
+    margin-top: 5px;
+    margin-bottom: 30px;
+    
+}
+.main .right .text > h3 {
+    font-size: 1.5em;
+    font-weight: 700;
+    word-spacing: 10px;
+    margin-bottom: 10px;
+    
+}
+.main .right .text > p {
+    font-size: 1.1em;
+    font-weight: 300;
+    word-wrap: break-word;
+}
+.main .right .image {
+    margin: 0px auto;
+    width: 115%;
+    height: 500px;
+    background-color: white;
+}

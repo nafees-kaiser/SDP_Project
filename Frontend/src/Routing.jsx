@@ -22,6 +22,7 @@ import KnowTheCraft from "./KnowTheCraft.jsx";
 import SellerProfile from "./SellerProfile.jsx";
 import LoginNav from "./Components/LoginNav.jsx";
 import ViewWishlist from "./Wishlist.jsx";
+import Add_Know from "./Add_Know.jsx";
 
 
 
@@ -50,7 +51,7 @@ const Routing = ()=>{
                 <Route path='/seller_profile' element={<SellerProfile/>}></Route>
                 <Route path='/login_nav' element={<LoginNav/>}></Route>
                 <Route path='/Wishlist' element={<ViewWishlist/>}></Route>
-                
+                <Route path='/Add_know' element={<Add_Know/>}></Route>
             </Routes>
         </>
     )
