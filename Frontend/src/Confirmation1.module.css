@@ -1,0 +1,74 @@
+.duotonecheckcircleIcon {
+  position: absolute;
+  top: 147px;
+  left: calc(50% - 34px);
+  width: 88px;
+  height: 88px;
+}
+.thanksForPurchasing,
+.yourOrderIs {
+  position: relative;
+  line-height: 32px;
+  display: inline-block;
+  width: 1320px;
+}
+.thanksForPurchasing {
+  font-size: var(--heading-07-size);
+  line-height: 20px;
+  color: var(--color-dimgray-400);
+  width: 424px;
+}
+.yourOrderIsConfirmedParent {
+  position: absolute;
+  top: 240px;
+  left: calc(50% - 640px);
+  width: 1300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-xs);
+}
+.regularstackIcon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.label {
+  position: relative;
+  font-size: var(--heading-07-size);
+  letter-spacing: 0.01em;
+  line-height: 48px;
+  text-transform: uppercase;
+  font-family: var(--font-actor);
+  color: var(--primary-500);
+  text-align: left;
+}
+.button {
+  cursor: pointer;
+  border: 2px solid var(--primary-100);
+  padding: 0 var(--padding-5xl);
+  background-color: transparent;
+  position: absolute;
+  top: 349px;
+  left: calc(50% - 94px);
+  border-radius: var(--br-11xs);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-5xs);
+}
+.confirmation {
+  position: relative;
+  background-color: var(--white);
+  width: 100%;
+  height: 793px;
+  overflow: hidden;
+  text-align: center;
+  font-size: var(--font-size-5xl);
+  color: var(--gray-900);
+  font-family: var(--font-actor);
+}

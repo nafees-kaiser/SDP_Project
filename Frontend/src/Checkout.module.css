@@ -571,7 +571,7 @@ body {
   font-weight: 500;
 }
 .selectedItems1 {
-  top: 220px;
+  top: 190px;
   left: calc(50% + 192px);
   font-size: var(--body-title-t-2-size);
   line-height: 24px;

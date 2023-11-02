@@ -53,16 +53,20 @@ const Checkout = () => {
         }
         console.log("a")
         console.log(orderData);
+        let order;
         const saveData = async () => {
 
-            const response = await axios.post(`http://localhost:3000/get-buyer-info/${id}`, orderData, {
+            axios.post(`http://localhost:3000/get-buyer-info/${id}`, orderData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             })
             .then((response) => {
                 alert("Order Done");
-                return response.status;
+                console.log("Confirmed order");
+                console.log(response.data);
+                order = response.data;
+                return response.data;
              })
             .catch((error) => {
                 console.log(error);
@@ -73,9 +77,11 @@ const Checkout = () => {
             const response = await axios.delete(`http://localhost:3000/get-buyer-info/${id}`);
             return response.status;
         }
-        if (saveData() === 200) {
-            navigate('/confirmation');
-        }
+        
+        const v = saveData();
+        console.log("The saves data is is\n"+order);
+        navigate(`/Confirmation1/${v}`);
+        
     }
 
     return (
