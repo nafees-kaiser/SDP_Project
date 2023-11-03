@@ -12,6 +12,9 @@
     width: 90%;
     height: 80px;
 }
+.type input {
+    border-radius: 10px;
+}
 .type > p {
     font-size: 1.3em;
     font-weight: 300;

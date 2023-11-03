@@ -40,14 +40,23 @@ const Registration = () => {
     const [img,setimg] = useState("")
     const handleChange2 = (e) => {
         const files = e.target.files[0];
-        setimg(files);
+        const image = imagebase64(files)
+        setimg(image);
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-      
+    const imagebase64 = async (file)=>{
+        const reader= new FileReader()
+        await reader.readAsDataURL(file)
+        const data = new Promise((resolve,reject)=>{
+            reader.onload = ()=> resolve(reader.result)
+            reader.onerror = (err)=> reject(err)
+        })
+        return data
+    }  
       
       
 
@@ -207,7 +216,7 @@ const Registration = () => {
                                         onChange={handleChange2}
                                     />
                                     <div className={style.pic}>
-                                        {img? <img src={URL.createObjectURL(img)} alt=''  />          :<i className="fa-solid fa-cloud-arrow-up" style={{ transform: "translate(0%, 112%)" }}></i>}
+                                        {img? <img src={img} alt=''  />          :<i className="fa-solid fa-cloud-arrow-up" style={{ transform: "translate(0%, 112%)" }}></i>}
                                     </div>
                                     
                                     

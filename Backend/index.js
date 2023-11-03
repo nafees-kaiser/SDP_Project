@@ -8,6 +8,7 @@ const app = express();
 
 dotenv.config({ path: './config.env' });
 require('./Database/conn');
+const cloudinary = require('./cloudinary')
 
 const Buyer = require('./Model/BuyerSchema');
 const Products = require('./Model/ProductsSchema');
@@ -20,6 +21,8 @@ const Notifications = require('./Model/NotificationSchema');
 const PORT = process.env.PORT;
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.json({limit: '100mb'}));
+app.use(express.urlencoded({extended: true, limit: '100mb'}));
 
 const Sells = require('./Model/SellsSchema');
 
@@ -70,6 +73,9 @@ app.use("/buyer_profile", buyerProfileRouter);
 
 const sellerProfileRouter = require('./routes/seller_profile');
 app.use("/seller_profile", sellerProfileRouter);
+
+const knowNavSellerRouter = require('./routes/Know_nav_seller');
+app.use("/know_nav_seller", knowNavSellerRouter);
 
 //----APIs for Review----
 //code for add review for product

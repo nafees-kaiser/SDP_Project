@@ -89,7 +89,7 @@ const Navbar = () =>{
                         <ul className={Style['dropdown-menu']}>
                         <li className={Style['dropdown-item']}>View Product</li>
                         <li className={Style['dropdown-item']}>Add Product</li>
-                        <li className={Style['dropdown-item']}>About Craft</li>
+                        <Link to={`/Add_Know`}><li className={Style['dropdown-item']}>Add Craft</li></Link>
                         </ul>
                         )}
                         </li>
