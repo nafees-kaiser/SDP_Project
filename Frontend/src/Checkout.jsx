@@ -14,7 +14,7 @@ const Checkout = () => {
         let yPos = 20;
     
         // Add image
-        const imgData = "./images/384165997_332969559130939_1111385360839973004_n.png"; 
+        const imgData = "./images/384165997_332969559130939_1111385360839973004_n.png";
         const imgWidth = 50;
         const imgHeight = 20;
         const imgX = (doc.internal.pageSize.getWidth() - imgWidth) / 2;
@@ -22,12 +22,14 @@ const Checkout = () => {
     
         // Adjust the yPos after adding the image
         yPos += imgHeight + 10;
-      
+    
         // Add Title and Subtitle
         doc.setFont("helvetica", "bold");
-        doc.setFontSize(18);
+        doc.setTextColor("#4285F4"); // Set text color to blue
+        doc.setFontSize(26);
         doc.text("Heritage Craft Connect", 105, yPos, null, null, "center");
-        doc.setFontSize(14);
+        doc.setFontSize(18);
+        doc.setTextColor("#707070"); // Set text color to grey
         yPos += 10;
         doc.text("Product Bill", 105, yPos, null, null, "center");
         doc.setFont("helvetica", "normal");
@@ -37,64 +39,68 @@ const Checkout = () => {
         const now = new Date();
         const date = `Date: ${now.toLocaleDateString()}`;
         const time = `Time: ${now.toLocaleTimeString()}`;
-        doc.setFontSize(12);
-        doc.text(20, yPos, date);
+        doc.setFontSize(14);
+        doc.setTextColor("#707070"); // Set text color to grey
+        doc.text(15, yPos, date);
         yPos += 10;
-        doc.text(20, yPos, time);
+        doc.text(15, yPos, time);
         yPos += 20;
-      
+    
         // Add buyer information
         doc.setFont("helvetica", "bold");
-        doc.text(20, yPos, "Buyer Information");
+        doc.setTextColor("#4285F4"); // Set text color to blue
+        doc.text(15, yPos, "Buyer Information");
         doc.setFont("helvetica", "normal");
         yPos += 10;
-        doc.text(20, yPos, `Name: ${buyer.name}`);
+        doc.setTextColor("#707070"); // Set text color to grey
+        doc.text(15, yPos, `Name: ${buyer.name}`);
+        doc.text(150, yPos, `Area: ${buyer.area}`);
         yPos += 10;
-        doc.text(20, yPos, `Email: ${buyer.email}`);
+        doc.text(15, yPos, `Email: ${buyer.email}`);
+        doc.text(150, yPos, `District: ${buyer.district}`);
         yPos += 10;
-        doc.text(20, yPos, `Phone: ${buyer.mobileNumber}`);
-        yPos += 10;
-        doc.text(20, yPos, `Area: ${buyer.area}`);
-        yPos += 10;
-        doc.text(20, yPos, `District: ${buyer.district}`);
-        yPos += 10;
-        doc.text(20, yPos, `Division: ${buyer.division}`);
-        
+        doc.text(15, yPos, `Phone: ${buyer.mobileNumber}`);
+        doc.text(150, yPos, `Division: ${buyer.division}`);
         yPos += 20;
-      
+    
         // Add buyer products
         doc.setFont("helvetica", "bold");
-        doc.text(20, yPos, "Buyer Products");
+        doc.setTextColor("#4285F4"); // Set text color to blue
+        doc.text(15, yPos, "Buyer Products");
         doc.setFont("helvetica", "normal");
         yPos += 10;
-
+    
         doc.autoTable({
             startY: yPos,
             head: [['Product Name', 'Quantity', 'Price']],
             body: buyerProducts.map(item => [item.productId.productName, item.quantity, item.productId.price]),
+            styles: {
+                fontSize: 14, 
+            }
         });
     
         // Adjust the yPos after adding the table
         yPos = doc.lastAutoTable.finalY + 10;
     
         // Add sub-total and delivery charge
-        doc.setFont("helvetica", "bold");
-        doc.text(20, yPos, `Sub Total: ${totalPrice} TK`);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor("#4285F4"); // Set text color to blue
+        doc.text(145, yPos, `Sub Total: ${totalPrice} TK`);
         yPos += 10;
-        doc.text(20, yPos, `Delivery Charge: ${60} TK`);
+        doc.text(145, yPos, `Delivery Charge: ${60} TK`);
     
         // Adjust the yPos after adding sub-total and delivery charge
         yPos += 10;
     
         // Add total bill
-        doc.setFont("helvetica", "bold");
+        doc.setFont("helvetica", "normal");
         doc.setTextColor("#008000"); // Set text color to green
-        doc.text(20, yPos, `Total Bill: ${totalPrice + 60} TK`);
-       
-      
+        doc.text(145, yPos, `Total Bill: ${totalPrice + 60} TK`);
+    
         // Save the PDF
         doc.save("Bill.pdf");
-      };
+    };
+    
 
 
 
