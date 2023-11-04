@@ -9,9 +9,10 @@ npm i nodemon
 npm i cors
 npm i nodemailer
 npm i multer path
+npm install cloudinary
 
 for shortcut:
-npm i express mongoose dotenv body-parser nodemon cors nodemailer multer path
+npm i express mongoose cloudinary dotenv body-parser nodemon cors nodemailer multer path
 
 
 Frontend:

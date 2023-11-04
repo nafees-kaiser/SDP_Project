@@ -40,6 +40,7 @@ const Registration = () => {
     const [img,setimg] = useState("")
     const handleChange2 = (e) => {
         const files = e.target.files[0];
+        const image = imagebase64(files)
         setimg(files);
     };
 
@@ -47,7 +48,15 @@ const Registration = () => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-      
+    const imagebase64 = async (file)=>{
+        const reader= new FileReader()
+        await reader.readAsDataURL(file)
+        const data = new Promise((resolve,reject)=>{
+            reader.onload = ()=> resolve(reader.result)
+            reader.onerror = (err)=> reject(err)
+        })
+        return data
+    }  
       
       
 
@@ -75,9 +84,7 @@ const Registration = () => {
             formDataToSend.append('confirmPassword', formData.confirmPassword);
             formDataToSend.append('img', img);
             setformDataToSend(formDataToSend);
-            for (const pair of prp.entries()) {
-                console.log(pair[0] + ': ' + pair[1]);
-            }
+
             if (formData.email !== '') {
                 if (formData.password === formData.confirmPassword) {
                     btn();

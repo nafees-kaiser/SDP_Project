@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 
 router.post('/', async (req, res) => {
     const userData = req.body;
-
+    console.log(userData.email)
     try {
         let testAccount = await nodemailer.createTestAccount();
 
@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
             host: 'smtp.gmail.com',
             auth: {
                 user: 'sdpproject74@gmail.com',
-                pass: 'hvog wqha iigv oatn',
+                pass: 'qyva gdbc jkoa srdj',
             }
         });
         const random = Math.floor(Math.random() * 10001);

@@ -31,7 +31,7 @@ const buyerSchema = new mongoose.Schema({
         required: true
     },
     img: {
-        type: String // This field will store the image file path
+        type: String 
     }
 });
 
