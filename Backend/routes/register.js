@@ -23,7 +23,7 @@ router.post('/', upload.single('img'), async (req, res) => {
   try {
     const userData = req.body;
     const existingUser = await Buyer.findOne({ email: userData.email });
-    
+    //console.log(existingUser)
     if (!userData.name || !userData.email || !userData.password) {
       return res.status(400).json({ error: 'Incomplete user data' });
     } else if (existingUser) {
