@@ -4,7 +4,7 @@ import Button from './Components/Button.jsx'
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const PassChangeVerify = ({closemodel,data1,formData})=>{
+const PassChangeVerify = ({closemodel,formData})=>{
     let [code,setcode] = useState("");
     
     useEffect(()=>{

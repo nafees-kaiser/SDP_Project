@@ -78,6 +78,10 @@ const Form = () => {
   // const navigate= useNavigate();
   const buyerId = sessionStorage.getItem("buyer_id");
   const [showPassword, setShowPassword] = useState(false);
+
+  const [auth, setAuth] = useState(false); // State for controlling the authentication page
+  const [code1, setCode1] = useState(0);
+  const [formData, setFormData] = useState({});
   // const [data, setData] = useState({ password: '' });
 
   
@@ -99,7 +103,7 @@ const Form = () => {
       });
   }, [buyerId]);
 
-  const mail = data.email;
+  // const mail = data.email;
 
 
   const handleSaveData = (fieldName, updatedValue) => {
@@ -121,16 +125,41 @@ const Form = () => {
       });
   };
 
+//   const btn = () => {
+//     setAuth(true);
+// };
+
+const closemodel = () => {
+    setAuth(false);
+};
+
+  // const handlePasswordChange = () => {
+  //   // Send the email to the backend for sending OTP
+  //   const email = data.email;
+  //   setFormData({ email });
+
+  //   // Display the authentication page
+  //   setAuth(true);
+  //   console.log('Password change initiated');
+  // };
+
 
   return (
 
     <>
-    { auth && <PassChangeVerify closemodel={closemodel} data1={code1} formData={formData}/>}
+    {auth && <PassChangeVerify closemodel={closemodel} formData={formData} />}
     <div className={styles.form}>
       <div className={styles.changePassButton}>
         <Button 
           text="Change Password" type='submit'
+          //  onClick={handlePasswordChange}
           // change={()=>navigate('/registration')}
+          change={()=>{const email = data.email;
+            setFormData({ email });
+        
+            // Display the authentication page
+            setAuth(true);
+            console.log('Password change initiated');}}
       />
       </div>
       <div className={styles.information}>
