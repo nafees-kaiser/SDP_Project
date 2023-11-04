@@ -2,14 +2,16 @@
   align-self: stretch;
   position: relative;
   line-height: 26px;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 35px;
 }
 .craftingLegaciesIgniting {
   position: relative;
-  font-size: var(--heading-03-size);
+  /* font-size: var(--heading-03-size); */
+  font-size: 30px;
   letter-spacing: -1px;
   line-height: 58px;
-  font-weight: 500;
+  font-weight: 600;
   font-family: var(--button-medium);
   display: inline-block;
   width: 485px;
@@ -25,7 +27,8 @@
 .areYouCurious {
   align-self: stretch;
   position: relative;
-  font-size: var(--button-medium-size);
+  /* font-size: var(--button-medium-size); */
+  font-size: 18px;
   line-height: 30px;
   color: var(--text-blue);
 }
@@ -40,7 +43,8 @@
 .getStarted {
   position: relative;
   font-weight: bold;
-  font-size: var(--button-large-size);
+  /* font-size: var(--button-large-size); */
+  font-size: 16x;
   line-height: 34px;
   font-weight: 500;
   font-family: var(--button-medium);
@@ -57,6 +61,7 @@
 .iconarrowRight {
   position: relative;
   font-weight: bold;
+  font-size: 16px;
   width: 28px;
   height: 28px;
 }

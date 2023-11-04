@@ -22,7 +22,9 @@ import KnowTheCraft from "./KnowTheCraft.jsx";
 import SellerProfile from "./SellerProfile.jsx";
 import LoginNav from "./Components/LoginNav.jsx";
 import ViewWishlist from "./Wishlist.jsx";
-
+import AddAProductPage from "./AddAProductPage.jsx";
+import Forgotpass from "./Forgotpass.jsx";
+import PassChangeVerify from "./PassChangeVerify.jsx";
 
 
 const Routing = ()=>{
@@ -49,6 +51,9 @@ const Routing = ()=>{
                 <Route path='/seller_profile' element={<SellerProfile/>}></Route>
                 <Route path='/login_nav' element={<LoginNav/>}></Route>
                 <Route path='/Wishlist' element={<ViewWishlist/>}></Route>
+                <Route path='/AddAProductPage' element={<AddAProductPage/>}></Route>
+                <Route path='/forgotpass' element={<Forgotpass/>}></Route>
+                <Route path='/passChangeVerify' element={<PassChangeVerify/>}></Route>
 
             </Routes>
         </>

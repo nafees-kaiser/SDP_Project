@@ -14,8 +14,9 @@ const JoinCommunity = () => {
         </div>
       </div>
       <button className={styles.muiButton}>
-        <div className={styles.rectangle} />
+        <div className={styles.rectangle} >
         <Link to={`/login`} className={styles.button}>Login</Link>
+        </div>      
       </button>
     </div>
   );

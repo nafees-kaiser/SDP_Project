@@ -48,10 +48,10 @@
 }
 .button {
   position: absolute;
-  top: 14px;
-  left: 42px;
-  font-size: 24px;
-  font-family: var(--text-18px-regular);
+  top: 10px;
+  left: 50px;
+  font-size: 20px;
+  /* font-family: var(--text-18px-regular); */
   color: var(--white);
   text-align: left;
 }

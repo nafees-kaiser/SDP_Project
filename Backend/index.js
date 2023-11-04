@@ -69,6 +69,10 @@ app.use("/buyer_profile", buyerProfileRouter);
 const sellerProfileRouter = require('./routes/seller_profile');
 app.use("/seller_profile", sellerProfileRouter);
 
+const changePass = require('./routes/forgotpass');
+app.use("/forgotpass", changePass);
+
+
 //----APIs for Review----
 //code for add review for product
 app.post('/add/review', async (req, res) => {

@@ -40,6 +40,7 @@
 }
 .text {
   /* align-self: stretch; */
+  width: 500px;
   display: flex;
   flex-direction: column;
   /* align-items: flex-start; */
@@ -54,6 +55,7 @@
 }
 .getStarted {
   position: relative;
+  top: 10px;
   /* font-size: var(--button-small-size); */
   /* letter-spacing: -0.4px; */
   /* line-height: 28px; */
@@ -80,11 +82,11 @@
 }
 .content {
   position: absolute;
-  top: 25%;
+  top: 20%;
   left: 55%;
   /* top: calc(50% - 173px); */
   /* left: calc(50% + 98px); */
-  width: 550px;
+  width: 600px;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
@@ -104,3 +106,53 @@
   color: var(--white);
   font-family: var(--button-medium);
 }
+
+.marqueeContainer {
+  /* width: 100%; */
+  width: 500px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marqueeText {
+  color: white;
+  font-weight: 600;
+  font-size: 30px;
+  padding-top: 3px;
+  margin: 0;
+  display: inline-block;
+  width: 720px;
+  /* width: 100%; */
+  /* animation: move-rtl 10s linear infinite; */
+  animation: marquee 10s linear infinite;
+  /* animation-delay: -9s; */
+  /* animation: marquee 10s steps(1) infinite; */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    /* transform: translateX(calc(-100% - 500px)); */
+    transform: translateX(-100%);
+  }
+}
+
+
+/* .scrollingText {
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 40px;
+  width: 100%;
+  animation: scrollText 10s linear infinite;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+} */

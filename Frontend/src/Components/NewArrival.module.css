@@ -1,18 +1,23 @@
 .newArrivalsIn {
   position: relative;
+  /* position: absolute; */
+  /* align-items: center;
+  justify-content: center; */
   letter-spacing: -0.6px;
   line-height: 38px;
   display: inline-block;
   width: 618px;
   flex-shrink: 0;
+  text-align: center;
+  font-size: 35px;
 }
 .carouselTitle {
   background-color: var(--color-darkslateblue);
   width: 1336px;
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 0 var(--padding-13xl);
   box-sizing: border-box;
 }

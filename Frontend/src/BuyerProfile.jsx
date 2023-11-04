@@ -38,7 +38,9 @@ const BuyerProfile = () => {
             <h1
             style={
               {fontSize: '2em'}
-            }>Your Profile</h1>
+            }
+            >
+            Your Profile</h1>
           </div>
       </div>
 

@@ -5,6 +5,7 @@ import axios from "axios";
 import styles from "./Form.module.css";
 // import {useNavigate} from 'react-router-dom';
 import Button from './Button';
+import PassChangeVerify from '../PassChangeVerify';
 
 
 // eslint-disable-next-line react/prop-types
@@ -79,6 +80,8 @@ const Form = () => {
   const [showPassword, setShowPassword] = useState(false);
   // const [data, setData] = useState({ password: '' });
 
+  
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -96,10 +99,13 @@ const Form = () => {
       });
   }, [buyerId]);
 
+  const mail = data.email;
+
 
   const handleSaveData = (fieldName, updatedValue) => {
     // Send the updated data to the server
     const newData = { [fieldName]: updatedValue };
+    
 
     setIsSaving(true);
 
@@ -117,10 +123,13 @@ const Form = () => {
 
 
   return (
+
+    <>
+    { auth && <PassChangeVerify closemodel={closemodel} data1={code1} formData={formData}/>}
     <div className={styles.form}>
       <div className={styles.changePassButton}>
         <Button 
-          text="Change Password"
+          text="Change Password" type='submit'
           // change={()=>navigate('/registration')}
       />
       </div>
@@ -215,6 +224,7 @@ const Form = () => {
 
       </div>
     </div>
+    </>
   );
 };
 
