@@ -30,7 +30,7 @@ router.post('/', upload.single('img'), async (req, res) => {
       return res.status(400).json({ error: 'User with this email already exists' });
     } else {
       // Check if 'req.file' exists to determine if the user uploaded an image
-      const imgPath = req.file ? req.file.path : './images/383718348_883324090001131_6322558451816880116_n.jpg';
+      const imgPath = req.file ? req.file.path : './images/gettyimages-1065743784-2048x2048.jpg';
       async function run(img) {
         try {
           const response = await cloudinary.uploader.upload(img);
