@@ -41,7 +41,7 @@ const Registration = () => {
     const handleChange2 = (e) => {
         const files = e.target.files[0];
         const image = imagebase64(files)
-        setimg(image);
+        setimg(files);
     };
 
     const handleChange = (e) => {
@@ -84,9 +84,7 @@ const Registration = () => {
             formDataToSend.append('confirmPassword', formData.confirmPassword);
             formDataToSend.append('img', img);
             setformDataToSend(formDataToSend);
-            for (const pair of prp.entries()) {
-                console.log(pair[0] + ': ' + pair[1]);
-            }
+
             if (formData.email !== '') {
                 if (formData.password === formData.confirmPassword) {
                     btn();
@@ -216,7 +214,7 @@ const Registration = () => {
                                         onChange={handleChange2}
                                     />
                                     <div className={style.pic}>
-                                        {img? <img src={img} alt=''  />          :<i className="fa-solid fa-cloud-arrow-up" style={{ transform: "translate(0%, 112%)" }}></i>}
+                                        {img? <img src={URL.createObjectURL(img)} alt=''  />          :<i className="fa-solid fa-cloud-arrow-up" style={{ transform: "translate(0%, 112%)" }}></i>}
                                     </div>
                                     
                                     

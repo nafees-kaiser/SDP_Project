@@ -67,24 +67,20 @@
 }
 
 .container .middle .left {
-    width: 17%; /* Set the initial width */
+    width: 17%;
     height: 100%;
     border: 1px solid black;
-    z-index: 100;
-    transition: width 0.3s; /* Add a transition for smooth animation */
+    cursor: pointer;
 }
 
-.container .middle .left:hover {
-    width: 40%; /* Set the expanded width on hover */
-    height: 100%;
-    border: 1px solid black;
-    transition: width 0.3s; /* Add a transition for smooth animation */
-}
 
 .container .middle .left .image {
-    width: 80%;
-    height: 10%;
+    width: 60px;
+    height: 60px;
     margin: 10px 5px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid red;
 }
 
 .container .middle .left .image > img {
@@ -92,27 +88,26 @@
     height: 100%;
     border-radius: 30px;
 }
-
+.container .middle .left .image > p {
+    font-size: 1.7em;
+    text-align: center;
+    word-wrap: break-word;
+    margin-top: 8px;
+}
 .container .middle .right {
-    width: 83%; /* Set the initial width */
+    width: 83%;
     height: 100%;
     border: 1px solid rgb(210, 30, 30);
-    transition: width 0.3s; /* Add a transition for smooth animation */
+    background-color: aliceblue;
 }
 
-.container .middle .right:hover {
-    width: 60%; /* Set the narrowed width on hover */
-    height: 100%;
-    border: 1px solid rgb(210, 30, 30);
-    transition: width 0.3s; /* Add a transition for smooth animation */
-}
+
 
 .container .middle .right .up {
     width: 100%;
     height: 90%;
     border: 1px solid black;
-    display: flex;
-    flex-direction: column;
+
 }
 
 .container .middle .right .down {

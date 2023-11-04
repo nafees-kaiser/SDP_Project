@@ -4,6 +4,7 @@ const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require("nodemailer");
+
 const app = express();
 
 dotenv.config({ path: './config.env' });
@@ -80,6 +81,9 @@ app.use("/forgotpass", changePass);
 
 const knowNavSellerRouter = require('./routes/Know_nav_seller');
 app.use("/know_nav_seller", knowNavSellerRouter);
+
+const Message = require('./routes/message');
+app.use("/message", Message);
 
 //----APIs for Review----
 //code for add review for product
