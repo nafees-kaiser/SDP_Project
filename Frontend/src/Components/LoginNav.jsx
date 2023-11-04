@@ -1,6 +1,7 @@
 // import React from "react";
 import { useState, useEffect, useRef } from 'react';
 import Style from "./Navbar_seller.module.css";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 // import Button from './Button.jsx';
 // import { Link } from "react-router-dom";
@@ -76,7 +77,7 @@ const Navbar = () =>{
             </div>
             <div className={Style.lower}>
                 <div className={Style.left}>
-                    <a href="/"><img src="./images/384165997_332969559130939_1111385360839973004_n.png" alt="" /></a>
+                    <Link to={`/home_seller`}><img src="./images/384165997_332969559130939_1111385360839973004_n.png" alt="" /></Link>
                 </div>
                 <div className={Style.middle}>
                     <nav className={Style.navbar}>
@@ -88,7 +89,7 @@ const Navbar = () =>{
                         <ul className={Style['dropdown-menu']}>
                         <li className={Style['dropdown-item']}>View Product</li>
                         <li className={Style['dropdown-item']}>Add Product</li>
-                        <li className={Style['dropdown-item']}>About Craft</li>
+                        <Link to={`/Add_Know`}><li className={Style['dropdown-item']}>Add Craft</li></Link>
                         </ul>
                         )}
                         </li>

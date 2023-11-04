@@ -8,6 +8,7 @@ const app = express();
 
 dotenv.config({ path: './config.env' });
 require('./Database/conn');
+const cloudinary = require('./cloudinary')
 
 const Buyer = require('./Model/BuyerSchema');
 const Products = require('./Model/ProductsSchema');
@@ -20,6 +21,10 @@ const Notifications = require('./Model/NotificationSchema');
 const PORT = process.env.PORT;
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.json({limit: '100mb'}));
+app.use(express.urlencoded({extended: true, limit: '100mb'}));
+
+const Sells = require('./Model/SellsSchema');
 
 
 
@@ -72,6 +77,9 @@ app.use("/seller_profile", sellerProfileRouter);
 const changePass = require('./routes/forgotpass');
 app.use("/forgotpass", changePass);
 
+
+const knowNavSellerRouter = require('./routes/Know_nav_seller');
+app.use("/know_nav_seller", knowNavSellerRouter);
 
 //----APIs for Review----
 //code for add review for product
@@ -310,6 +318,13 @@ app.delete('/delete/notifications/:userID', async (req, res) => {
 
 
 
+
+const checkoutRouter = require('./routes/checkout');
+app.use("/checkout", checkoutRouter);
+
+
+const getBuyerInfoRouter = require('./routes/getBuyerInfo');
+app.use("/get-buyer-info", getBuyerInfoRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port http://localhost:${PORT}/`);

@@ -12,20 +12,12 @@ import Footer from "./Components/Footer";
 
 export default function IndividualProduct() {
     const { id } = useParams();
-    const [product, setProduct] = useState({});
-    const [reviews, setreview] = useState([]);
-    const [amount, setAmount] = useState(0);
+    const buyerId = sessionStorage.getItem("buyer_id");
+    let [product, setProduct] = useState({})
     const [reviewDescription, setReviewData] = useState();
+    const [reviews, setreview] = useState([]);
+    const [amount, setAmount] = useState(0)
     const navigate = useNavigate();
-    const buyerId = sessionStorage.getItem('buyer_id');
-
-    const routeChange = () => {
-        if (product) {
-            const obj = JSON.stringify({ product, amount })
-            navigate(`/checkout/${obj}`);
-        }
-    }
-
     const handleChange= (e) => 
     {
         setReviewData(e.target.value);
@@ -48,7 +40,6 @@ export default function IndividualProduct() {
             };
             return productData;
     }
-
     useEffect(() => {
         axios.get(`http://localhost:3000/product-listing/${id}`)
             .then((response) => {
@@ -64,6 +55,26 @@ export default function IndividualProduct() {
                 }
             })
     }, []);
+    const routeChange = () => {
+        if (product) {
+            // const buyerId = sessionStorage.getItem("buyer_id");
+            product = {
+                ...product,
+                amount,
+                buyerId
+            }
+            const saveData = async ()=>{
+                const savedData = await axios.post(`http://localhost:3000/checkout`, product, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+            }
+            saveData();
+            alert("Data added to cart");
+            // navigate(`/checkout`);
+        }
+    }
 
     const decrease = () => {
         if (amount) {
@@ -100,6 +111,7 @@ export default function IndividualProduct() {
     const { productName, district, division, price, seller, description } = product
     return (
         <>
+            {/* <Navbar/> */}
             {buyerId ? <CraftForm /> : <Navbar />}
             <div className={style.container}>
                 {/* <div>navbar</div> */}

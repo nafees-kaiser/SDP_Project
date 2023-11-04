@@ -109,7 +109,7 @@
 }
 /* Navbar.module.css */
 .navbar1 {
-    background-color: #333;
+    background-color: #1f1c1f;
     padding: 10px;
   }
   
@@ -148,7 +148,7 @@
   }
   
   .dropdown-item:hover {
-    background-color: #555;
+    background-color: #000000;
   }
   
 

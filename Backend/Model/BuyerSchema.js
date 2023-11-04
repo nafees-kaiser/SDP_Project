@@ -1,36 +1,39 @@
-const mongoose= require('mongoose');
+const mongoose = require('mongoose');
 
 const buyerSchema = new mongoose.Schema({
     name: {
-        type:String,
-        require: true
+        type: String,
+        required: true
     },
     email: {
         type: String,
-        require: true,
+        required: true,
         unique: true
     },
     mobileNumber: {
         type: String,
-        require: true
+        required: true
     },
     area: {
         type: String,
-        require: false
+        required: false
     },
     district: {
         type: String,
-        require: false
+        required: false
     },
     division: {
         type: String,
-        require: false
+        required: false
     },
     password: {
         type: String,
-        require: true
+        required: true
+    },
+    img: {
+        type: String 
     }
+});
 
-})
-const Buyer = mongoose.model("BUYER",buyerSchema);
+const Buyer = mongoose.model("BUYER", buyerSchema);
 module.exports = Buyer;
