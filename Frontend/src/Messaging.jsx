@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Style from "./Messaging.module.css";
 import Button from "./Components/Button.jsx";
 import Message from "./Components/messagebox.jsx";
 import Message2 from "./Components/messagebox_2";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 /*
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3000")
 */
 const Messaging = () => {
   
+  useEffect(()=>{
+    try {
+      axios.get("http://localhost:3000/practice")
+      .then((res)=>{
+        console.log(res.data.rows.columns)
+      })
+    } catch (error) {
+      
+    }
+  },[])
+
 
   const [isLeftHovered, setIsLeftHovered] = useState(false);
 

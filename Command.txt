@@ -12,7 +12,7 @@ npm i multer path
 npm install cloudinary
 
 for shortcut:
-npm i express mongoose cloudinary dotenv body-parser nodemon cors nodemailer multer path
+npm i express mongoose cloudinary dotenv body-parser nodemon cors nodemailer multer path http socket.io 
 
 
 Frontend:
@@ -25,7 +25,7 @@ npm i redux react-redux
 
 
 for shortcut:
-npm i express axios react-router-dom react-chartjs-2 chart.js redux react-redux
+npm i express axios react-router-dom react-chartjs-2 chart.js redux react-redux socket.io-client
 
 
 To run Both the server
