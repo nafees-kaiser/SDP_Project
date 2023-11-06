@@ -571,7 +571,7 @@ body {
   font-weight: 500;
 }
 .selectedItems1 {
-  top: 220px;
+  top: 190px;
   left: calc(50% + 192px);
   font-size: var(--body-title-t-2-size);
   line-height: 24px;
@@ -646,10 +646,14 @@ body {
   font-size: var(--heading-03-size);
   color: var(--black-900);
 }
+
+
+
+
 .label,
 .totalBill {
   position: absolute;
-  line-height: 30px;
+  line-height: 220px;
   font-weight: 600;
 }
 .label {
@@ -662,6 +666,47 @@ body {
   color: var(--color-limegreen);
   text-align: right;
 }
+
+
+.label2,
+.totalBill2 {
+  position: absolute;
+  line-height: 140px;
+  font-weight: 600;
+}
+.label2 {
+  top: 0;
+  left: 0;
+}
+.totalBill2 {
+  top: calc(50% - 13px);
+  right: 0;
+  color: var(--color-black);
+  text-align: right;
+}
+
+
+
+
+
+.label1,
+.totalBill1 {
+  position: absolute;
+  line-height: 60px;
+  font-weight: 600;
+}
+.label1 {
+  top: 0;
+  left: 0;
+}
+.totalBill1 {
+  top: calc(50% - 13px);
+  right: 0;
+  color: var(--color-black);
+  text-align: right;
+}
+
+
 .titleamount {
   flex: 1;
   position: relative;
@@ -684,6 +729,14 @@ body {
   position: absolute;
   font-size: var(--text-18px-semibold-size);
 }
+.tk1 {
+  position: absolute;
+  font-size: var(--text-18px-semibold-size);
+}
+.tk2 {
+  position: absolute;
+  font-size: var(--text-18px-semibold-size);
+}
 .fields {
   top: 724px;
   left: calc(50% + 190px);
@@ -697,7 +750,21 @@ body {
 .tk {
   top: 735px;
   left: calc(50% + 570px);
-  line-height: 30px;
+  line-height: 220px;
+  font-weight: 600;
+  text-align: right;
+}
+.tk1 {
+  top: 735px;
+  left: calc(50% + 570px);
+  line-height: 140px;
+  font-weight: 600;
+  text-align: right;
+}
+.tk2 {
+  top: 735px;
+  left: calc(50% + 570px);
+  line-height: 60px;
   font-weight: 600;
   text-align: right;
 }
