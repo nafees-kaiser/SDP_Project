@@ -5,6 +5,7 @@ import axios from "axios";
 // import Button from './Button.jsx';
 import { Link } from "react-router-dom";
 import BuyerProfileBox from '../BuyerProfileBox';
+import {FaSearch} from 'react-icons/fa'
 
 const Navbar = () =>{
 
@@ -81,7 +82,8 @@ const Navbar = () =>{
                     </div>
                     <div className={Style.right}>
                         <input type="text" className={Style.search} placeholder="Search..."></input>
-                        <i class="fa fa-search icon"></i>   
+                        {/* <i className="fa fa-search icon"></i>    */}
+                        <button><FaSearch/></button>
                     </div> 
                 </div>
             </div>

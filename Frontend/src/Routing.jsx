@@ -30,7 +30,7 @@ import SendMail from "./SendMail.jsx";
 import SendMailSeller from "./SendMailSeller.jsx";
 import ForgotpassSeller from "./ForgotpassSeller.jsx";
 import PassChangeVerifySeller from "./PassChangeVerifySeller.jsx";
-
+// import {RatingStar} from "./Components/RatingStars.jsx";
 
 
 const Routing = ()=>{
@@ -67,6 +67,7 @@ const Routing = ()=>{
                 <Route path='/passChangeVerify_seller' element={<PassChangeVerifySeller/>}></Route>
 
                 <Route path='/Add_know' element={<Add_Know/>}></Route>
+                {/* <Route path='/star' element={<RatingStar/>}></Route> */}
             </Routes>
         </>
     )

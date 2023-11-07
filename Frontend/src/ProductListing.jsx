@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import Button from "./Components/Button";
 import Footer from "./Components/Footer";
 import Division from "./Classes/divisionDistrict";
+import { ShowStar } from "./Components/RatingStars";
 
 
 export default function ProductListing() {
@@ -27,8 +28,6 @@ export default function ProductListing() {
     const [divisionValue, setDivisionValue] = useState('');
     const [districtValue, setDistrictValue] = useState('');
 
-    const buyerId = sessionStorage.getItem("buyer_id");
-
     const toggleCategory = () => {
         setCategoryOpen(!isCategoryOpen);
     }
@@ -44,6 +43,40 @@ export default function ProductListing() {
     const togglePrice = () => {
         setPriceOpen(!isPriceOpen);
     }
+    // For the categories
+    const categories = [
+        "Cap/Hat/Pagri",
+        "Mufler/Scurf",
+        "Kurta/Punjabi",
+        "Fotua/Salware Kameez",
+        "Saree",
+        "Pant/Pajama",
+        "Lungi",
+        "Footwear",
+        "Bags",
+        "Mats and Rugs",
+        "Beadsheets and Katha",
+        "Flower Vase",
+        "Pottery",
+        "Utensils",
+        "Jewelry",
+        "Furniture",
+        "Musical Instrument",
+        "Painting",
+        "Home Decor",
+        "WoodBlock Printing",
+        "Conch Shell Craft"
+    ];
+    const [categoryCheckbox, setCategoryCheckbox] = useState(new Array(categories.length).fill(false));
+
+    // Min price and max price
+    const [minPrice, setMinPrice] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
+
+    // For rating checkbox
+    const [ratingCheckbox, setRatingCheckbox] = useState(new Array(5).fill(false));
+    const buyerId = sessionStorage.getItem("buyer_id");
+
 
     useEffect(() => {
         axios.get('http://localhost:3000/product-listing')
@@ -63,53 +96,129 @@ export default function ProductListing() {
                     <p>Buy the traditional handicraft items from various categories.</p>
                 </div>
                 <div className={style['filter-and-products']}>
-
                     <div className={style['filter']}>
                         <p className={style['filter-heading']}>Filter</p>
-                        <div style={{ cursor: "pointer", marginBottom: "5px" }} onClick={toggleCategory}>{isCategoryOpen ? '˅ Categories' : '> Categories'}</div>
-                        {isCategoryOpen &&
+                        <div className={style['collapsible-menu']}>
+                            <div style={{ cursor: "pointer", marginBottom: "5px" }} onClick={toggleCategory}>
+                                {isCategoryOpen ?
+                                    <div>
+                                        <img src="/images/down.svg" alt="down" style={{ display: "inline" }} />
+                                        <div style={{ display: "inline" }}>Categories</div>
+                                    </div>
+                                    : <div>
+                                        <img src="/images/right.svg" alt="down" style={{ display: "inline" }} />
+                                        <div style={{ display: "inline" }}>Categories</div>
+                                    </div>}
+                            </div>
+                            {isCategoryOpen &&
 
-                            <ul className={style['categories-list']}>
-                                <li><label style={{ cursor: "pointer" }}><input type="checkbox" name="clothing" id="clothing" /> Clothing</label></li>
-                                <li><label style={{ cursor: "pointer" }}><input type="checkbox" name="shoes" id="shoes" /> Shoes</label></li>
-                                <li><label style={{ cursor: "pointer" }}><input type="checkbox" name="accessories" id="accessories" /> Accessories</label></li>
-                            </ul>
-                        }
-                        <div style={{ cursor: "pointer", marginBottom: "5px" }} onClick={toggleLocation}>{isLocationOpen ? '˅ Location' : '> Location'}</div>
-                        {isLocationOpen &&
-                            <>
-                                <select onChange={(e) => setDivisionValue(e.target.value)} value={divisionValue}>
-                                    <option value="">Select a division</option>
-                                    {Division.getDivision()?.map(div => {
-                                        return <option value={div}>{div}</option>
+                                <ul className={style['categories-list']}>
+                                    {categories.map((cat, index) => {
+                                        const styling = {
+                                            cursor: "pointer",
+                                            gap: "5px",
+                                            margin: "5px 0px"
+                                        }
+                                        return <li key={index}>
+                                            <label style={styling}>
+                                                <input type="checkbox" checked={categoryCheckbox[index]} onChange={() => {
+                                                    const updatedCheckbox = [...categoryCheckbox];
+                                                    updatedCheckbox[index] = !categoryCheckbox[index];
+                                                    // console.log("Checkbox state updated:", updatedCheckbox);
+                                                    setCategoryCheckbox(updatedCheckbox);
+                                                }} />
+                                                {'  ' + cat}
+                                            </label>
+                                        </li>
                                     })}
-                                </select>
-                                <select value={districtValue} onChange={(e) => setDistrictValue(e.target.value)}>
-                                    <option value="">Select a district</option>
-                                    {Division.getDistrict(divisionValue)?.map((dist) => {
-                                        return <option value={dist}>{dist}</option>
+                                </ul>
+                            }
+                            <div style={{ cursor: "pointer", marginBottom: "5px" }} onClick={toggleLocation}>
+                                {isLocationOpen ?
+                                    <div>
+                                        <img src="/images/down.svg" alt="down" style={{ display: "inline" }} />
+                                        <div style={{ display: "inline" }}>Location</div>
+                                    </div>
+                                    : <div>
+                                        <img src="/images/right.svg" alt="down" style={{ display: "inline" }} />
+                                        <div style={{ display: "inline" }}>Location</div>
+                                    </div>}
+                            </div>
+                            {isLocationOpen &&
+                                <>
+                                    <select onChange={(e) => setDivisionValue(e.target.value)} value={divisionValue}>
+                                        <option value="">Select a division</option>
+                                        {Division.getDivision()?.map(div => {
+                                            return <option value={div}>{div}</option>
+                                        })}
+                                    </select>
+                                    <select value={districtValue} onChange={(e) => setDistrictValue(e.target.value)}>
+                                        <option value="">Select a district</option>
+                                        {Division.getDistrict(divisionValue)?.map((dist) => {
+                                            return <option value={dist}>{dist}</option>
+                                        })}
+                                    </select>
+                                </>
+                            }
+                            <div style={{ cursor: "pointer", marginBottom: "5px" }} onClick={toggleRating}>
+                                {isRatingOpen ?
+                                    <div>
+                                        <img src="/images/down.svg" alt="down" style={{ display: "inline" }} />
+                                        <div style={{ display: "inline" }}>Rating</div>
+                                    </div>
+                                    : <div>
+                                        <img src="/images/right.svg" alt="down" style={{ display: "inline" }} />
+                                        <div style={{ display: "inline" }}>Rating</div>
+                                    </div>}
+                            </div>
+                            {isRatingOpen &&
+                                <ul className={style['categories-list']}>
+                                    {[...Array(5)].map((star, index) => {
+                                        const styling = {
+                                            cursor: "pointer",
+                                            display: "flex",
+                                            gap: "5px",
+                                            margin: "5px 0px"
+                                        }
+                                        return <li>
+                                            <label style={styling}>
+                                                <input type="checkbox"
+                                                    checked={ratingCheckbox[index]}
+                                                    onChange={() => {
+                                                        const updatedCheckbox = [...ratingCheckbox];
+                                                        updatedCheckbox[index] = !ratingCheckbox[index];
+                                                        setRatingCheckbox(updatedCheckbox);
+                                                    }}
+                                                />
+                                                <ShowStar rating={5 - index} sz={20} />
+                                            </label>
+                                        </li>
                                     })}
-                                </select>
-                            </>
-                        }
-                        <div style={{ cursor: "pointer", marginBottom: "5px" }} onClick={toggleRating}>{isRatingOpen ? '˅ Rating' : '> Rating'}</div>
-                        {isRatingOpen &&
-                            <ul className={style['categories-list']}>
-                                <li><label style={{ cursor: "pointer" }}><input type="checkbox" name="clothing" id="clothing" /> 5 star</label></li>
-                                <li><label style={{ cursor: "pointer" }}><input type="checkbox" name="shoes" id="shoes" /> 4 star</label></li>
-                                <li><label style={{ cursor: "pointer" }}><input type="checkbox" name="accessories" id="accessories" /> 3 star</label></li>
-                                <li><label style={{ cursor: "pointer" }}><input type="checkbox" name="accessories" id="accessories" /> 2 star</label></li>
-                                <li><label style={{ cursor: "pointer" }}><input type="checkbox" name="accessories" id="accessories" /> 1 star</label></li>
-                            </ul>
+                                </ul>
 
-                        }
-                        <div style={{ cursor: "pointer", marginBottom: "5px" }} onClick={togglePrice}>{isPriceOpen ? '˅ Price Range' : '> Price Range'}</div>
-                        {isPriceOpen &&
-                            <>
-                                <input type="text" placeholder="Min" />
-                                <input type="text" placeholder="Max" />
-                            </>
-                        }
+                            }
+                            <div style={{ cursor: "pointer", marginBottom: "5px" }} onClick={togglePrice}>
+                                {isPriceOpen ?
+                                    <div>
+                                        <img src="/images/down.svg" alt="down" style={{ display: "inline" }} />
+                                        <div style={{ display: "inline" }}>Price Range</div>
+                                    </div>
+                                    : <div>
+                                        <img src="/images/right.svg" alt="down" style={{ display: "inline" }} />
+                                        <div style={{ display: "inline" }}>Price Range</div>
+                                    </div>}
+                            </div>
+                            {isPriceOpen &&
+                                <div className={style['price-range']}>
+                                    <input type="text" placeholder="Min" value={minPrice} onChange={(e) => {
+                                        setMinPrice(e.target.value);
+                                    }} />
+                                    <input type="text" placeholder="Max" value={maxPrice} onChange={(e) => {
+                                        setMaxPrice(e.target.value);
+                                    }} />
+                                </div>
+                            }
+                        </div>
                         <Button
                             text="Apply"
                         />
@@ -127,7 +236,7 @@ export default function ProductListing() {
                                     <Link to={`/product-listing/${_id}`} key={_id}>
                                         <Card
                                             image={nakshiKathaImage}
-                                            review="5 star"
+                                            rating={4}
                                             productName={productName}
                                             location={`${district}, ${division}`}
                                             price={`${price} Tk`}

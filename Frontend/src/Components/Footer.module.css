@@ -46,3 +46,7 @@
     display: flex;
     gap: 70px;
 }
+.icons *{
+    display: inline;
+    /* border: 2px solid red; */
+}
