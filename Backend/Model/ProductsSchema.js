@@ -24,7 +24,13 @@ const productsSchema = new mongoose.Schema({
     description: {
         type: String,
         required: false
-    }
+    },
+    category: {
+        type: String,
+        required: true
+    },
+    size: String,
+    color: String
 });
 
 const Products = mongoose.model("Products", productsSchema); // Corrected model name
