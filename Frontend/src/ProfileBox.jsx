@@ -3,11 +3,13 @@ import {useState, useEffect} from "react";
 import styles from "./ProfileBox.module.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProfileBox = () => {
 
   const [data, setData] = useState({});
   const sellerId = sessionStorage.getItem("seller_id");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`http://localhost:3000/seller_profile/${sellerId}`)
@@ -20,13 +22,24 @@ const ProfileBox = () => {
       });
   }, [sellerId]);
 
+  const handleChange = ()=>{
+      navigate('/AddAProductPage');
+  }
+
+  const handleSignOut = () => {
+    // Clear sessionStorage when the "Sign Out" button is clicked
+    sessionStorage.clear();
+    // navigate('/become_seller');
+    navigate('/');
+  };
+
   return (
     
     <div className={styles.buyerProfileDropdown}>
       {/* <button className={styles.b}onClick={closemodel}>X</button> */}
       <div className={styles.border} />
       <Link to={`/seller_profile`} className={styles.header}>
-        <img className={styles.pictureIcon} alt="" src="./images/picture.svg" />
+        <img className={styles.pictureIcon} alt="" src="./images/avatar.jpg" />
         </Link>
         <div className={styles.name}>{data.name}</div>
         <div className={styles.welcome}>
@@ -34,7 +47,7 @@ const ProfileBox = () => {
         the distinctive charm of your craft creations
         </div>
       
-      <button className={styles.cart}>
+      <button className={styles.cart} onClick={handleChange}>
         <div className={styles.cartChild} />
         <img
           className={styles.iconShoppingBag}
@@ -90,7 +103,7 @@ const ProfileBox = () => {
         />
         <div className={styles.trackingOrders}>Go to Craft Community</div>
       </button>
-      <button className={styles.community}>
+      <button className={styles.community} onClick={handleSignOut}>
         <div className={styles.myOrdersChild} />
         <img className={styles.iconPeopleCommunity} alt="" src="./images/-icon-logout.svg" />
         <div className={styles.goToCraft}>Sign Out</div>

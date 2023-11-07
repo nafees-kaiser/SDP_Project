@@ -23,6 +23,12 @@ const BuyerProfileBox = () => {
       });
   }, [buyerId]);
 
+  const handleSignOut = () => {
+    // Clear sessionStorage when the "Sign Out" button is clicked
+    sessionStorage.clear();
+    navigate('/');
+  };
+
 
   return (
 
@@ -30,7 +36,7 @@ const BuyerProfileBox = () => {
       {/* <button className={styles.b}onClick={closemodel}>X</button> */}
       <div className={styles.border} />
       <Link to={`/buyer_profile`} className={styles.header}>
-        <img className={styles.pictureIcon} alt="" src="/images/picture.svg" />
+        <img className={styles.pictureIcon} alt="" src="/images/avatar.jpg" />
       </Link>
       <div className={styles.name}>{data.name}</div>
       <div className={styles.welcome}>
@@ -93,7 +99,7 @@ const BuyerProfileBox = () => {
         />
         <div className={styles.trackingOrders}>Go to Craft Community</div>
       </button>
-      <button className={styles.community}>
+      <button className={styles.community} onClick={handleSignOut}>
         <div className={styles.myOrdersChild} />
         <img className={styles.iconPeopleCommunity} alt="" src="/images/-icon-logout.svg" />
         <div className={styles.goToCraft}>Sign Out</div>

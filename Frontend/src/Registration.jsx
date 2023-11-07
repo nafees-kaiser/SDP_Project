@@ -1,4 +1,4 @@
-import React, { useState,useRef, useEffect } from 'react';
+import { useState,useRef } from 'react';
 import Authentication from './Authentication.jsx';
 import axios from 'axios';
 import style from './Registration.module.css'; // Import your CSS module
@@ -40,7 +40,7 @@ const Registration = () => {
     const [img,setimg] = useState("")
     const handleChange2 = (e) => {
         const files = e.target.files[0];
-        const image = imagebase64(files)
+        const image = imagebase64(files);
         setimg(files);
     };
 

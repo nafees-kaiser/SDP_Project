@@ -17,21 +17,21 @@ const Forgotpass = () => {
 }, [email]);
 
   const handleChange = () => {
-    navigate('/buyer_profile');
+    navigate('/seller_profile');
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (newPassword === confirmPassword) {
-      axios.put(`http://localhost:3000/forgotpass/${email}`, { password: newPassword })
+      axios.put(`http://localhost:3000/forgotpass_seller/${email}`, { password: newPassword })
           // password: newPassword,
         // )
         .then((response) => {
           if (response.data.Status === "Success") {
             console.log("Password reset successfully.");
             // toast.success("Password reset successfully.");
-            navigate("/login");
+            navigate("/seller_login");
           } else {
             console.log("Password reset failed:", response.data.Status);
           }

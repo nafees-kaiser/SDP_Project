@@ -4,7 +4,7 @@ import Button from './Components/Button.jsx'
 import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 
-const PassChangeVerify = (props)=>{
+const PassChangeVerifySeller = (props)=>{
     const [code,setcode] = useState("");
     const closemodel = props.closemodel;
     const data1 = props.data1;
@@ -36,7 +36,7 @@ const PassChangeVerify = (props)=>{
  
                     console.log('code matching successful');
                     alert("You are authentic");
-                    navigate('/forgotpass');
+                    navigate('/forgotpass_seller');
                 
             }
             else {
@@ -79,4 +79,4 @@ const PassChangeVerify = (props)=>{
         </>
     )
 }
-export default PassChangeVerify;
+export default PassChangeVerifySeller;

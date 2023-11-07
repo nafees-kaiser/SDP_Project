@@ -55,7 +55,8 @@ const BuyerProfile = () => {
         <img
           className={styles.picture}
           alt=""
-          src="./images/ellipse-909@2x.png"
+          src="./images/avatar.jpg"
+          // src="./images/ellipse-909@2x.png"
         />
         <button className={styles.pictureNameInner}> + Change photo</button>
       </div>

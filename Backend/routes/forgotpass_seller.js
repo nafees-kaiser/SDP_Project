@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Buyer = require('../Model/BuyerSchema');
+const Seller = require('../Model/SellerSchema');
 
 router.put('/:email', async (req, res) => {
   try {
@@ -9,7 +9,7 @@ router.put('/:email', async (req, res) => {
     const { password } = req.body;
     console.log(email);
     console.log(password);
-    const result = await Buyer.findOne({ email });
+    const result = await Seller.findOne({ email });
     if (!result) {
       return res.status(404).json({ Status: "User not found." });
     }

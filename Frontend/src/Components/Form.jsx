@@ -1,14 +1,11 @@
-// import React, { useState, useEffect } from 'react';
 import { useState, useEffect } from 'react';
-// import { useCallback } from "react";
 import axios from "axios";
 import styles from "./Form.module.css";
-// import {useNavigate} from 'react-router-dom';
 import Button from './Button';
 import PassChangeVerify from '../PassChangeVerify';
 
 
-// eslint-disable-next-line react/prop-types
+
 const EditableInput = ({ defaultValue, onSave }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(defaultValue);
@@ -20,10 +17,6 @@ const EditableInput = ({ defaultValue, onSave }) => {
   const handleDoubleClick = () => {
     setIsEditing(true);
   };
-
-  // const handleBlur = () => {
-  //   setIsEditing(false);
-  // };
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -45,7 +38,6 @@ const EditableInput = ({ defaultValue, onSave }) => {
           className={styles.input}
           value={value}
           onChange={handleChange}
-          // onBlur={handleBlur}
         />
         
         { <button onClick={handleSave} className={styles.edit}>Save</button> }
@@ -54,7 +46,6 @@ const EditableInput = ({ defaultValue, onSave }) => {
        <div>
         <div
           className={styles.inputValue}
-          // onDoubleClick={handleDoubleClick}
         >
           {value}
         </div>
@@ -75,14 +66,11 @@ const Form = () => {
 
   const [data, setData] = useState({});
   const [isSaving, setIsSaving] = useState(false);
-  // const navigate= useNavigate();
   const buyerId = sessionStorage.getItem("buyer_id");
   const [showPassword, setShowPassword] = useState(false);
 
-  const [auth, setAuth] = useState(false); // State for controlling the authentication page
-  const [code1, setCode1] = useState(0);
-  const [formData, setFormData] = useState({});
-  // const [data, setData] = useState({ password: '' });
+  const [auth, setAuth] = useState(false);
+  const [code1, setCode] = useState(0);
 
   
 
@@ -94,7 +82,6 @@ const Form = () => {
   useEffect(() => {
     axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
       .then((response) => {
-        // console.log(response.data.email)
         setData(response.data);
         
       })
@@ -103,18 +90,17 @@ const Form = () => {
       });
   }, [buyerId]);
 
-  // const mail = data.email;
+  const email = data.email;
 
 
   const handleSaveData = (fieldName, updatedValue) => {
-    // Send the updated data to the server
+
     const newData = { [fieldName]: updatedValue };
     
 
     setIsSaving(true);
 
     axios.put(`http://localhost:3000/buyer_profile/${buyerId}`, newData)
-    // axios.put(`http://localhost:3000/buyer_profile`, newData)
       .then((response) => {
         setIsSaving(false);
         setData(response.data);
@@ -125,41 +111,51 @@ const Form = () => {
       });
   };
 
-//   const btn = () => {
-//     setAuth(true);
-// };
-
 const closemodel = () => {
     setAuth(false);
 };
 
-  // const handlePasswordChange = () => {
-  //   // Send the email to the backend for sending OTP
-  //   const email = data.email;
-  //   setFormData({ email });
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
 
-  //   // Display the authentication page
-  //   setAuth(true);
-  //   console.log('Password change initiated');
-  // };
+          console.log(email);
+            const verify_code = await axios.post(`http://localhost:3000/verify2/${email}`, {
+                
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            setCode(verify_code.data.data);
 
+            if (verify_code.status !== 200) {
+                alert('Error sending verification code');
+                closemodel();
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            console.error('Registration failed(catch at registration)');
+        }
+    };
 
   return (
 
     <>
-    {auth && <PassChangeVerify closemodel={closemodel} formData={formData} />}
+    {auth && <PassChangeVerify closemodel={closemodel} data1={code1} mail={email} />}
     <div className={styles.form}>
       <div className={styles.changePassButton}>
         <Button 
-          text="Change Password" type='submit'
-          //  onClick={handlePasswordChange}
-          // change={()=>navigate('/registration')}
-          change={()=>{const email = data.email;
-            setFormData({ email });
-        
-            // Display the authentication page
+          text="Change Password"
+           type='submit'
+          change={()=>{
+            
             setAuth(true);
-            console.log('Password change initiated');}}
+            console.log('Password change initiated');
+
+            handleSubmit({ preventDefault: () => {} }); 
+          }
+          }
+
       />
       </div>
       <div className={styles.information}>
@@ -170,8 +166,6 @@ const closemodel = () => {
               className={styles.input}
               value={data.password}
               type={showPassword ? 'text' : 'password'}
-              // type="password"
-              // defaultValue="******"
             />
 
           <button className={styles.group} onClick={togglePasswordVisibility}>

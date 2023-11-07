@@ -26,6 +26,10 @@ import AddAProductPage from "./AddAProductPage.jsx";
 import Forgotpass from "./Forgotpass.jsx";
 import PassChangeVerify from "./PassChangeVerify.jsx";
 import Add_Know from "./Add_Know.jsx";
+import SendMail from "./SendMail.jsx";
+import SendMailSeller from "./SendMailSeller.jsx";
+import ForgotpassSeller from "./ForgotpassSeller.jsx";
+import PassChangeVerifySeller from "./PassChangeVerifySeller.jsx";
 
 
 
@@ -57,6 +61,10 @@ const Routing = ()=>{
                 <Route path='/AddAProductPage' element={<AddAProductPage/>}></Route>
                 <Route path='/forgotpass' element={<Forgotpass/>}></Route>
                 <Route path='/passChangeVerify' element={<PassChangeVerify/>}></Route>
+                <Route path='/sendmail' element={<SendMail/>}></Route>
+                <Route path='/sendmailseller' element={<SendMailSeller/>}></Route>
+                <Route path='/forgotpass_seller' element={<ForgotpassSeller/>}></Route>
+                <Route path='/passChangeVerify_seller' element={<PassChangeVerifySeller/>}></Route>
 
                 <Route path='/Add_know' element={<Add_Know/>}></Route>
             </Routes>

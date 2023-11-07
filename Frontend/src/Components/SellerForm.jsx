@@ -5,6 +5,7 @@ import axios from "axios";
 import styles from "./Form.module.css";
 // import {useNavigate} from 'react-router-dom';
 import Button from './Button';
+import PassChangeVerify from '../PassChangeVerifySeller';
 
 
 // eslint-disable-next-line react/prop-types
@@ -79,6 +80,10 @@ const SellerForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   // const [data, setData] = useState({ password: '' });
 
+
+  const [auth, setAuth] = useState(false);
+  const [code1, setCode] = useState(0);
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -95,6 +100,9 @@ const SellerForm = () => {
         console.error(error);
       });
   }, [sellerId]);
+
+
+  const email = data.email;
 
 
   const handleSaveData = (fieldName, updatedValue) => {
@@ -115,12 +123,52 @@ const SellerForm = () => {
       });
   };
 
+  const closemodel = () => {
+    setAuth(false);
+};
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+
+          console.log(email);
+            const verify_code = await axios.post(`http://localhost:3000/verify2/${email}`, {
+                
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            setCode(verify_code.data.data);
+
+            if (verify_code.status !== 200) {
+                alert('Error sending verification code');
+                closemodel();
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            console.error('Registration failed(catch at registration)');
+        }
+    };
+
 
   return (
+    <>
+    {auth && <PassChangeVerify closemodel={closemodel} data1={code1} mail={email} />}
+    
     <div className={styles.form}>
       <div className={styles.changePassButton}>
         <Button 
           text="Change Password"
+          type='submit'
+          change={()=>{
+            
+            setAuth(true);
+            console.log('Password change initiated');
+
+            handleSubmit({ preventDefault: () => {} }); 
+          }
+          }
+
           // change={()=>navigate('/registration')}
       />
       </div>
@@ -215,6 +263,7 @@ const SellerForm = () => {
 
       </div>
     </div>
+    </>
   );
 };
 

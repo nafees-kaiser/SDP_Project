@@ -78,12 +78,23 @@ app.use("/seller_profile", sellerProfileRouter);
 const changePass = require('./routes/forgotpass');
 app.use("/forgotpass", changePass);
 
-
 const knowNavSellerRouter = require('./routes/Know_nav_seller');
 app.use("/know_nav_seller", knowNavSellerRouter);
 
 const Message = require('./routes/message');
 app.use("/message", Message);
+
+const verifyRouter2 = require('./routes/verify2');
+app.use("/verify2", verifyRouter2);
+
+const matchmail = require('./routes/matchemail');
+app.use("/matchemail", matchmail);
+
+const matchmail2 = require('./routes/matchemailseller');
+app.use("/matchemailseller", matchmail2);
+
+const changePass2 = require('./routes/forgotpass_seller');
+app.use("/forgotpass_seller", changePass2);
 
 //----APIs for Review----
 //code for add review for product

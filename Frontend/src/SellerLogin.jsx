@@ -95,7 +95,10 @@ const SellerLogin = () => {
                                 text='Log in'
                             />
                             {/* <button className={style.button}>Forget password</button> */}
-                            <Button text="Forget password" />
+                            <Button 
+                               text="Forget password" 
+                               change={()=>navigate('/sendmailseller')}
+                            />
                         </div>
                     </form>
                 </div>
