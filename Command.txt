@@ -22,10 +22,13 @@ npm i axios
 npm i react-router-dom
 npm install react-chartjs-2 chart.js
 npm i redux react-redux
+npm install jspdf
+npm install jspdf-autotable
+
 
 
 for shortcut:
-npm i express axios react-router-dom react-chartjs-2 chart.js redux react-redux
+npm i express axios react-router-dom react-chartjs-2 chart.js redux react-redux jspdf jspdf-autotable
 
 
 To run Both the server
