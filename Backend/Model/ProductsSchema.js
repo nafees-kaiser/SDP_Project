@@ -29,8 +29,20 @@ const productsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    size: String,
-    color: String
+    size: {
+        dimention: [{
+            length: String,
+            width: String,
+            height: String,
+            diameter: String
+        }],
+        other: {
+            type: [String],
+            default: null,
+            enum: ["XXS", "XS", "S", "M", "L", "XXL", "XL","5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+        }
+    },
+    color: [String]
 });
 
 const Products = mongoose.model("Products", productsSchema); // Corrected model name
