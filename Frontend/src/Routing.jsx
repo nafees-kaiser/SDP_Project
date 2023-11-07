@@ -23,6 +23,7 @@ import SellerProfile from "./SellerProfile.jsx";
 import LoginNav from "./Components/LoginNav.jsx";
 import ViewWishlist from "./Wishlist.jsx";
 import Add_Know from "./Add_Know.jsx";
+import Confirmation1 from "./Confirmation1.jsx";
 
 
 
@@ -52,6 +53,7 @@ const Routing = ()=>{
                 <Route path='/login_nav' element={<LoginNav/>}></Route>
                 <Route path='/Wishlist' element={<ViewWishlist/>}></Route>
                 <Route path='/Add_know' element={<Add_Know/>}></Route>
+                <Route path='/Confirmation1/:order_id?' element={<Confirmation1/>}></Route>
             </Routes>
         </>
     )

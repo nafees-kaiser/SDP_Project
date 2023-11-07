@@ -150,16 +150,20 @@ const Checkout = () => {
         }
         console.log("a")
         console.log(orderData);
+        let order;
         const saveData = async () => {
 
-            const response = await axios.post(`http://localhost:3000/get-buyer-info/${id}`, orderData, {
+            axios.post(`http://localhost:3000/get-buyer-info/${id}`, orderData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             })
             .then((response) => {
                 alert("Order Done");
-                return response.status;
+                console.log("Confirmed order");
+                console.log(response.data);
+                order = response.data;
+                return response.data;
              })
             .catch((error) => {
                 console.log(error);

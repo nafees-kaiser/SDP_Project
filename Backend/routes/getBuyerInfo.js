@@ -30,12 +30,7 @@ router.post("/:id",async(req, res)=>{
     const { product, buyerId, totalPrice } = req.body;
     // const { _id } = req.body;
     try {
-        // const order = await Order.findById(_id);
-        // // console.log(order);
-        // order.orderStatus = 'pending';
-        // const savedData = await order.save();
-        // // console.log(savedData);
-        // res.send(true);
+       
         const order = new Order({
             product: product,
             buyerId: buyerId,
@@ -45,9 +40,9 @@ router.post("/:id",async(req, res)=>{
             orderStatus: 'pending'
         });
         const savedData = await order.save();
-        // console.log("saved data");
-        // console.log(savedData);
-        res.status(200).json({message:true});
+         console.log("saved data");
+        console.log(savedData);
+        res.json(savedData);
 
     } catch (error) {
         console.log(error);
