@@ -2,26 +2,31 @@ import React, { useEffect, useState } from "react";
 import Style from "./Messaging.module.css";
 import Button from "./Components/Button.jsx";
 import Message from "./Components/messagebox.jsx";
-import Message2 from "./Components/messagebox_2";
+import Message2 from "./Components/messagebox_2.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import { io } from "socket.io-client";
+
 /*
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3000")
 */
 const Messaging = () => {
-  
+  const [socket,setsocket] = useState(null);
+  const [UserId,setUser] = useState(sessionStorage.getItem("seller_id"));
+  const id = "651c5377783c0719018cd17f"
   useEffect(()=>{
-    try {
-      axios.get("http://localhost:3000/practice")
-      .then((res)=>{
-        console.log(res.data.rows.columns)
-      })
-    } catch (error) {
-      
-    }
+    setsocket(io("http://localhost:8080"))
+    console.log(UserId)
   },[])
-
+  useEffect(()=>{
+    
+    socket?.emit('addUser',UserId)
+    socket?.on('getUsers',users =>{
+      console.log('Seller_activeUsers:  ',users)
+    })
+    
+  },[socket])
 
   const [isLeftHovered, setIsLeftHovered] = useState(false);
 
@@ -82,7 +87,7 @@ const Messaging = () => {
                 <div className={Style.up}>
                 <Message text={"Hello"} />
                 <Message2 text={"Hi"} />
-                <Message2 text={"Hi"} />
+
                 <Message
                     text={
                     "nglknfkldhnlhglnjhnglbnrojrphgipe'wprgjr'ghjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"

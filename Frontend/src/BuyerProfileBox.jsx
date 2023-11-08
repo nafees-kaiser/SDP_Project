@@ -63,7 +63,7 @@ const BuyerProfileBox = () => {
           alt=""
           src="/images/-icon-communication-bubble-texting-chat-comment-talk-speech-icon.svg"
         />
-        <div className={styles.messages}>Messages</div>
+        <div className={styles.messages}><Link to={`/message_buyer`}>Messages</Link></div>
       </button>
       <button className={styles.notification}>
         <div className={styles.cartChild} />

@@ -11,7 +11,8 @@ import Footer from "./Components/Footer.jsx";
 import { Routes,Route } from "react-router";
 import Home_seller from "./Home_seller.jsx";
 import Authentication from "./Authentication.jsx";
-import Messaging from "./Messaging.jsx";
+import Messaging_sell from "./Messaging_seller.jsx";
+import Messaging_buyer from "./Messaging_buyer.jsx";
 import Seller_Registration from "./Seller_Registration.jsx";
 import SellerLogin from "./SellerLogin.jsx"
 import LandingPage from "./LandingPage.jsx";
@@ -41,7 +42,8 @@ const Routing = ()=>{
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
                 <Route path='/home_seller' element={<Home_seller/>}></Route>
                 <Route path='/auth' element={<Authentication/>}></Route>
-                <Route path='/message' element={<Messaging/>}></Route>
+                <Route path='/message_seller' element={<Messaging_sell/>}></Route>
+                <Route path='/message_buyer' element={<Messaging_buyer/>}></Route>
                 <Route path='/seller_reg' element={<Seller_Registration/>}></Route>
                 <Route path='/seller_login' element={<SellerLogin/>}></Route>
                 <Route path='/profile_box' element={<ProfileBox/>}></Route>
