@@ -54,6 +54,23 @@ router.post("/:id",async(req, res)=>{
     }
 });
 
+router.put("/:id", async (req, res) => {
+    const cartItemId = req.params.id;
+    console.log(cartItemId, "shovo");
+    try {
+        const validId = new mongoose.Types.ObjectId(cartItemId);
+        const deletedCart = await Cart.findOneAndDelete({ productId: validId });
+        if (deletedCart) {
+            res.status(200).json({ message: 'Item removed from the cart.' });
+        } else {
+            res.status(404).json({ message: 'Item not found in the cart.' });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 // router.delete("/:id", async(req, res)=>{
 //     const id = req.params;
 //     try {

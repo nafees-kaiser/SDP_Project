@@ -6,6 +6,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import BuyerProfileBox from '../BuyerProfileBox';
 import {FaSearch} from 'react-icons/fa'
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = () =>{
 
@@ -52,6 +53,7 @@ const Navbar = () =>{
                     <div className={Style.right}>
                     {/* <Link to={`/login`} className={Style.link}> Login</Link> */}
                         {/* <Button text="Logged in"/> */}
+                        <LanguageSwitcher />
                         <button className={Style.icons} onClick={toggleModal}>
                             <i class="fas fa-user"></i>
                             <p>{data.name}</p>
