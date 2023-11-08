@@ -10,6 +10,7 @@ import KnowAboutCrafts from "./components/KnowAboutCrafts";
 import NewArrival from "./components/NewArrival";
 import Category from "./components/Category";
 import GoToProduct from "./components/GoToProduct";
+// import LanguageSwitcher from "./Components/LanguageSwitcher.jsx";
 
 const LandingPageFinal = () => {
   
@@ -28,6 +29,7 @@ const LandingPageFinal = () => {
     return (
 
       <>
+      {/* <LanguageSwitcher /> */}
       {buyerId ? <CraftForm /> : <Navbar />}
       {/* <Navbar /> */}
       <div className={styles.landingPageFinal}>

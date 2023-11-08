@@ -5,6 +5,7 @@ import axios from "axios";
 // import Button from './Button.jsx';
 import { Link } from "react-router-dom";
 import BuyerProfileBox from '../BuyerProfileBox';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = () =>{
 
@@ -46,11 +47,13 @@ const Navbar = () =>{
             <div className={Style.navbar}>
                 <div className={Style.upper}>
                     <div className={Style.left}>
+                        {/* <LanguageSwitcher /> */}
                         <Link to={`/become_seller`} className={Style.link}>Become a Seller</Link>
                     </div>
                     <div className={Style.right}>
                     {/* <Link to={`/login`} className={Style.link}> Login</Link> */}
                         {/* <Button text="Logged in"/> */}
+                        <LanguageSwitcher />
                         <button className={Style.icons} onClick={toggleModal}>
                             <i class="fas fa-user"></i>
                             <p>{data.name}</p>

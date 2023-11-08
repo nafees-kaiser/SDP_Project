@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 
 
@@ -24,6 +25,7 @@ import LoginNav from "./Components/LoginNav.jsx";
 import ViewWishlist from "./Wishlist.jsx";
 import Add_Know from "./Add_Know.jsx";
 import Confirmation1 from "./Confirmation1.jsx";
+import Translate from "./Components/LanguageSwitcher.jsx";
 
 
 
@@ -54,6 +56,7 @@ const Routing = ()=>{
                 <Route path='/Wishlist' element={<ViewWishlist/>}></Route>
                 <Route path='/Add_know' element={<Add_Know/>}></Route>
                 <Route path='/Confirmation1/:order_id?' element={<Confirmation1/>}></Route>
+                {/* <Route path='/translate' element={<Translate/>}></Route> */}
             </Routes>
         </>
     )
