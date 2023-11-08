@@ -52,7 +52,13 @@ const Authentication = (props) => {
                     console.log('Registration successful');
                     alert("Registration Successful");
                     navigate('/login');
-                } else {
+                }
+                else if(response.status === 400){
+                    closemodel();
+                    alert("User with this email already exists");
+                    
+                }
+                else {
                     console.error('Registration failed');
                 }
             } else {

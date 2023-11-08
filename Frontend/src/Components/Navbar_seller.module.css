@@ -135,6 +135,7 @@
     display: none;
     background-color: var(--Background);
     list-style-type: none;
+    
     padding: 0;
   }
   
@@ -144,11 +145,12 @@
   
   .dropdown-item {
     padding: 10px;
-    color: #fff;
+    color: #000000;
   }
   
   .dropdown-item:hover {
     background-color: #000000;
+    color: #fff;
   }
   
 
