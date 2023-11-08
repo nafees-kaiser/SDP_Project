@@ -39,7 +39,7 @@ const ProfileBox = () => {
       {/* <button className={styles.b}onClick={closemodel}>X</button> */}
       <div className={styles.border} />
       <Link to={`/seller_profile`} className={styles.header}>
-        <img className={styles.pictureIcon} alt="" src="./images/avatar.jpg" />
+        <img className={styles.pictureIcon} alt="" src={data.img} />
         </Link>
         <div className={styles.name}>{data.name}</div>
         <div className={styles.welcome}>

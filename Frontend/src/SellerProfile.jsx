@@ -54,7 +54,7 @@ const SellerProfile = () => {
         <img
           className={styles.picture}
           alt=""
-          src="./images/avatar.jpg"
+          src={data.img}
         />
         <button className={styles.pictureNameInner}> + Change photo</button>
       </div>

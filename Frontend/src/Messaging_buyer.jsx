@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Style from "./Messaging.module.css";
-import Button from "./Components/Button.jsx";
 import Message from "./Components/messagebox.jsx";
 import Message2 from "./Components/messagebox_2.jsx";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,8 +10,11 @@ import { io } from "socket.io-client";
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3000")
 */
-const Messaging = () => {
+const Messaging = (props) => {
   const [socket,setsocket] = useState(null);
+  const [conversation,setconversation] = useState();
+  const [messages,setmessage] = useState();
+  const [name,setname] = useState();
   const [UserId,setUser] = useState(sessionStorage.getItem("buyer_id"));
   const id = "651c5377783c0719018cd17f"
   useEffect(()=>{
@@ -29,7 +31,24 @@ const Messaging = () => {
   },[socket])
 
   const [isLeftHovered, setIsLeftHovered] = useState(false);
-
+  useEffect(()=>{
+    axios.get(`http://localhost:3000/message/conversation/${UserId}`)
+    .then((res)=>{
+      console.log(res.data)
+      const mappedUser = res.data.map((order, index) => ({
+        User_ID: order.user.id,
+        name: order.user.fullName,
+        email: order.user.email,
+        img:order.user.image,
+        conversation:order.conversationId
+      }));
+      setconversation(mappedUser)
+      console.log("MAP: ", mappedUser)
+    })
+    .catch((err)=>{
+      console.error(err);
+    })
+  },[])
   const handleLeftHover = () => {
     setIsLeftHovered(true);
   };
@@ -37,23 +56,36 @@ const Messaging = () => {
   const handleLeftHoverOut = () => {
     setIsLeftHovered(false);
   };
+  const ConBegin = (id,name)=>{
+    axios.get(`http://localhost:3000/message/${id}`)
+    .then((res)=>{
+      console.log(res.data)
+      setmessage(res.data)
+      setname(name);
+    })
+    .catch((err)=>{
+      console.error(err);
+    })
+  }
 
   return (
     <>
       <div className={Style.container}>
         <div className={Style.top}>
-          <div className={Style.left}></div>
           <div
             className={Style.right}
-            style={{
-              width: isLeftHovered ? "80%" : "90%", // Increase the width of right div when left is hovered
-            }}
+
           >
-            <p>Shahabuddin Akhon</p>
+            {(name)? (<p>{name}</p>):<div><p style={{
+              "font-size": "22px",
+              "margin-left": "68px",
+              "margin-top": "7px"}}
+             >Not selected any message</p></div>}
+            <div className={Style.btn}>
+              <button onClick={props.closemessage} style={{textAlign: "right"}}>X</button>
+            </div>
           </div>
-          <div className={Style.btn}>
-            <button>X</button>
-          </div>
+          
         </div>
         <div className={Style.middle}>
           <div
@@ -64,19 +96,31 @@ const Messaging = () => {
               width: isLeftHovered ? "37%" : "17%", // Increase the width of left div when hovered
             }}
           >
-            <div className={Style.image} style={{ backgroundColor: "#E9E9E9" }}>
-              <img src="./images/361962641_824993792357321_2542727162223495145_n.jpg" alt="" />
-              <p>Shahabuddin</p>
-            </div>
-            <div className={Style.image}>
-              <img src="./images/383763472_302080962517792_2973636626530534800_n.jpg" alt="" />
-            </div>
-            <div className={Style.image}>
-              <img src="./images/384140582_169297479551263_3491688258618327277_n.jpg" alt="" />
-            </div>
-            <div className={Style.image}>
-              <img src="./images/361962641_824993792357321_2542727162223495145_n.jpg" alt="" />
-            </div>
+            {(conversation && conversation.length > 0 )? (
+              conversation.map((order, index) => (
+                <div key={index} style={{
+                      border: "1px solid #999DEE",
+                      overflow: "hidden"
+                  }}  >
+                  <div className={Style.image}  onClick={()=>ConBegin(order.conversation,order.name)}>
+                    <img src={order.img} alt="" />
+                    <p>{order.name}</p>
+                  </div>
+                </div>
+              ))
+            ):<div><h1>No Conversation</h1></div>}
+
+
+
+
+
+
+
+
+
+
+
+
           </div>
           <div
             className={Style.right}
@@ -85,14 +129,38 @@ const Messaging = () => {
             }}
           >
                 <div className={Style.up}>
-                <Message text={"Hello"} />
-                <Message2 text={"Hi"} />
+                {messages? (messages.map((message, index) => (
+                  <div key={index}>
+                    {message.message ? (
+                      message.user.tag === 'seller' ? (
+                        <Message text={message.message} />
+                      ) : (
+                        <Message2 text={message.message} />
+                      )
+                    ) : (
+                      <div>
+                        <p style={{
+                          "font-size": "22px"
+                        }}>Not selected any message</p>
+                      </div>
+                    )}
+                  </div>
+                ))
+                ): (<><p>Loading..........</p></>)}
 
-                <Message
-                    text={
-                    "nglknfkldhnlhglnjhnglbnrojrphgipe'wprgjr'ghjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"
-                    }
-                />
+
+
+                  {/*
+                  <Message text={"Hello"} />
+                  <Message2 text={"Hi"} />
+                  <Message2 text={"Hi"} />
+                  <Message text={"Hinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"} />
+                  <Message2 text={"Hinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"} />
+                  <Message text={"Hinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"} />
+                  <Message2 text={"Hinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"} />
+                  <Message text={"Hinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"} />
+                  <Message2 text={"Hinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"} />
+                  */}
                 </div>
             <div className={Style.down}>
               <input type="text" />

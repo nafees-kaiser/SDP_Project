@@ -29,6 +29,7 @@ ChartJS.register(
 )
 const Home_seller = ()=>{
     const [auth,setAuth]= useState(false);
+    const [messageModel,setmessageModel]= useState(false);
     const [salesDatatable, setSalesData] = useState([]);
     const [salescount, setSalescount] = useState([]);
     const [salesData] = useState([
@@ -42,6 +43,12 @@ const Home_seller = ()=>{
     }
     const closemodel = ()=>{
         setAuth(false);
+    }
+    const openmessage = ()=>{
+        setmessageModel(true);
+    }
+    const closemessage = ()=>{
+        setmessageModel(false);
     }
 
     // const sellerId = sessionStorage.getItem("seller_id");

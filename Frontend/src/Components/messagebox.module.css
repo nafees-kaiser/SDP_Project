@@ -6,7 +6,10 @@
     --text: White;
     --font: 'Han ken Grotesk', sans-serif;
 }
-
+.another {
+  width: 100%;
+  height: auto;
+}
 .box {
     border: 1px solid #ccc;
     padding: 10px;
@@ -17,7 +20,8 @@
     word-wrap: break-word; 
     white-space: normal; 
     min-width: 50px;
-    max-width: 90%; 
+    max-width: 75%; 
+    margin: 10px;
   }
   
 

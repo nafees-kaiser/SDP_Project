@@ -8,6 +8,7 @@ app.use(cors())
 const Message = require('../Model/MessageSchema');
 const Conversation = require('../Model/ConversationSchema');
 const Seller = require('../Model/SellerSchema');
+const Buyer = require('../Model/BuyerSchema');
 const io= require('socket.io')(8080,{
     cors: {
         origin: 'http://localhost:5173',
@@ -46,6 +47,30 @@ router.post('/',async (req,res)=>{
     }
 })
 
+router.get('/:id',async (req,res)=>{
+    try {
+        const userId = req.params.id;
+        
+        if(!userId) return res.status(200).send('Conversation Id is required')
+        const Conversation = await Message.find({conversationId:userId});
+        console.log(Conversation)
+        const messageData = Promise.all(Conversation.map(async (message) =>{
+            const seller = await Seller.findById(message.senderId)
+            const buyer = await Buyer.findById(message.senderId)
+            if(seller) {
+                return { user: {email: seller.email,name:seller.name,tag:"seller"},message:message.message  }
+            }
+            else {
+                return { user: {email: buyer.email,name:buyer.name,tag:"buyer"},message:message.message  }
+            }
+            
+        }))
+
+        res.send(await messageData);
+    } catch (error) {
+        console.log(error,"Error")
+    }
+})
 
 router.post('/conversation', async (req, res) => {
     try {
@@ -68,7 +93,7 @@ router.get('/conversation/:id', async (req, res) => {//id holo buyer er
             const receiverId = await conversation.members.find((member) => member !== userId);
             const user= await Seller.findById(receiverId);
             return {
-                user:{email:user.email,fullName:user.name },
+                user:{id:user.id,email:user.email,fullName:user.name, image:user.img},
                 conversationId: conversation._id
             }
         }))

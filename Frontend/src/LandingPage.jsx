@@ -10,26 +10,28 @@ import KnowAboutCrafts from "./components/KnowAboutCrafts";
 import NewArrival from "./components/NewArrival";
 import Category from "./components/Category";
 import GoToProduct from "./components/GoToProduct";
+import BuyerProfileBox from "./BuyerProfileBox.jsx";
+import { useState } from "react";
+import Messaging from "./Messaging_buyer";
 
 const LandingPageFinal = () => {
-  
+  const [messageset,setmessagesetter] = useState(false);
   const buyerId = sessionStorage.getItem("buyer_id");
-
-  // const communityRef = useRef(null);
-
-  // // Function to scroll to the Community component
-  // const scrollToCommunity = () => {
-  //   if (communityRef.current) {
-  //     communityRef.current.scrollIntoView({ behavior: "smooth" });
-  //   }
-  // };
-
+  const callbackmessage_land = (data)=>{
+    console.log("Land ", data);
+    setmessagesetter(data);
+  }
+  const closemessage = ()=>{
+    setmessagesetter(false)
+  }
 
     return (
 
       <>
-      {buyerId ? <CraftForm /> : <Navbar />}
+      {buyerId ? <CraftForm  callback2 = {callbackmessage_land}/> : <Navbar />}
+      {/* messageset && <Messaging />*/}
       {/* <Navbar /> */}
+      
       <div className={styles.landingPageFinal}>
         
        
@@ -49,6 +51,7 @@ const LandingPageFinal = () => {
           <Footer />
         </div> */}
       </div>
+      {messageset && <Messaging closemessage={closemessage}/>}
       <Footer />
       </>
     );

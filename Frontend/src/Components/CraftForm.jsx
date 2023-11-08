@@ -6,33 +6,41 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import BuyerProfileBox from '../BuyerProfileBox';
 import {FaSearch} from 'react-icons/fa'
+import Message from './messagebox';
 
-const Navbar = () =>{
+const CraftForm = (props) =>{
 
     const [data, setData] = useState({});
+    const [mess_hook,setmess_hook] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const buyerId = sessionStorage.getItem("buyer_id");
     const overlayRef = useRef(null);
+    console.log("Value ",props.value)
+    const level_message = (data)=>{
+        setmess_hook(true);
+        console.log("Profile ", data); 
+        props.callback2(data)
+    }
 
-  useEffect(() => {
-    axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
-      .then((response) => {
-        setData(response.data);
-        
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [buyerId]);
+    useEffect(() => {
+        axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
+        .then((response) => {
+            setData(response.data);
+            
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }, [buyerId]);
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
 
-    if (!isModalOpen) {
-        document.body.style.overflow = 'auto';
-      }
-    // document.body.style.overflow = isModalOpen ? 'auto' : 'hidden';
-  };
+        if (!isModalOpen) {
+            document.body.style.overflow = 'auto';
+        }
+        // document.body.style.overflow = isModalOpen ? 'auto' : 'hidden';
+    };
 
   const handleOverlayClick = (e) => {
     if (e.target === overlayRef.current) {
@@ -89,18 +97,11 @@ const Navbar = () =>{
             </div>
             {isModalOpen && (
                 <div className={Style.overlay} onClick={handleOverlayClick} ref={overlayRef}>
-                 <BuyerProfileBox />
+                 <BuyerProfileBox callback={level_message} />
                 </div>
             )}
 
-            {/* {isModalOpen && (
-                <div className={Style.overlay} onClick={toggleModal}>
-                    <BuyerProfileBox closemodel={toggleModal} />
-                    <BuyerProfileBox />
-                </div>
-             
-            )} */}
         </>
     );
 }
-export default Navbar;
+export default CraftForm;
