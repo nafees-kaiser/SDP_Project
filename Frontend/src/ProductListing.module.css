@@ -117,3 +117,11 @@
     display: flex;
     gap: 15px;
 }
+.sort-and-filter{
+    display: flex;
+    border: 2px solid var(--border-color);
+    gap: 20px;
+    padding: 5px 15px;
+    border-radius: 7px;
+    width: 100%;
+}
