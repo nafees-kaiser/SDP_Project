@@ -74,11 +74,12 @@ const Navbar = () =>{
                     <div className={Style.middle}>
                         <Link to={`/`} className={Style.link}> Home</Link>
                         <Link to={`/product-listing`} className={Style.link}> Product</Link>
+                        <a href="#">Community</a>
+                        <Link to={`/know-the-craft`} className={Style.link}> Know about craft</Link>
                         {/* <button onClick={scrollToCommunity}>Community</button> */}
                         {/* <button className={Style.link} onClick="document.getElementById('middle').scrollIntoView();"> Community</button> */}
                         {/*<Link to={`/community`} className={Style.link}> Community</Link>*/}
-                        <a href="#">Community</a>
-                        <a href="#">Know about craft</a>
+                        {/* <a href="#">Know about craft</a> */}
                     </div>
                     <div className={Style.right}>
                         <input type="text" className={Style.search} placeholder="Search..."></input>

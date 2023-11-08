@@ -6,6 +6,10 @@
     --Background: #E9E9E9;
     --text: White;
 }
+.font-weight-700{
+    font-weight: 700;
+}
+
 .card{
     width: fit-content;
     max-width: 232px;
@@ -21,6 +25,7 @@
     max-width: calc(100% - 10px);
     margin: 2px 5px 10px 5px;
     overflow: hidden;
+    
 }
 .card img{
     width: 228px;

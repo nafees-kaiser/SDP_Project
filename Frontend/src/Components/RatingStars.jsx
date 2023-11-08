@@ -15,7 +15,7 @@ export function ShowStar({rating, sz}){
             {/* <br /> */}
             {[...Array(5)].map((star,index)=>{
                 return <FaStar size={sz} key={index}
-                color={index<=(ratingColor||rating-1)?"gold":"grey"}
+                color={index<=(ratingColor||rating-1)?"#FD7E14":"grey"}
                 />
             })}
         </div>
@@ -41,7 +41,7 @@ export function RatingStar() {
                             setRating(currentRate);
                         }}/>
                         <FaStar style={styling}
-                        color={currentRate <= (ratingColor || rating)? "gold":"grey"} />
+                        color={currentRate <= (ratingColor || rating)? "#FD7E14":"grey"} />
                         </label>
                     </>
                 );

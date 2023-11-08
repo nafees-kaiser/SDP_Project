@@ -105,7 +105,8 @@ const Navbar = () => {
               Product
             </Link>
             <a href="#com">Community</a>
-            <a href="#craft">Know about craft</a>
+            {/* <a href="#craft">Know about craft</a> */}
+            <Link to={`/know-the-craft`} className={Style.link}> Know about craft</Link>
           </div>
           <div className={Style.right}>
             <input type="text" className={Style.search} placeholder="Search..." />
