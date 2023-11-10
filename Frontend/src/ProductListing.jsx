@@ -12,9 +12,10 @@ import Button from "./Components/Button";
 import Footer from "./Components/Footer";
 import Division from "./Classes/divisionDistrict";
 import { ShowStar } from "./Components/RatingStars";
-
+import Messaging from "./Messaging_buyer";
 
 export default function ProductListing() {
+    const [messageset,setmessagesetter] = useState(false);
     //For storing the products from database
     const [productCount, setCount] = useState(0)
     const [products, setProducts] = useState([])
@@ -27,6 +28,14 @@ export default function ProductListing() {
     // For location dropdown
     const [divisionValue, setDivisionValue] = useState('');
     const [districtValue, setDistrictValue] = useState('');
+
+    const callbackmessage_land = (data)=>{
+        console.log("Land ", data);
+        setmessagesetter(data);
+      }
+      const closemessage = ()=>{
+        setmessagesetter(false)
+      }
 
     const toggleCategory = () => {
         setCategoryOpen(!isCategoryOpen);
@@ -89,7 +98,7 @@ export default function ProductListing() {
     }, [])
     return (
         <>
-            {buyerId ? <CraftForm /> : <Navbar />}
+            {buyerId ? <CraftForm  callback2 = {callbackmessage_land} /> : <Navbar />}
             <div className={style.container}>
                 <div className={style['hero-section']}>
                     <h1>Handicraft Products</h1>
@@ -250,6 +259,7 @@ export default function ProductListing() {
                     </div>
                 </div>
             </div>
+            {messageset && <Messaging closemessage={closemessage}/>}
             <Footer />
         </>
     );
