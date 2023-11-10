@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Style from "./Navbar_seller.module.css"; // Import your CSS module
 import { Link } from "react-router-dom";
-import Button from "./Button";
+
 const Navbar = ({openmodel}) => {
   const [isProductMenuOpen, setProductMenuOpen] = useState(false);
 

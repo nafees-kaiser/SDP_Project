@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Style from "./Messaging.module.css";
 import Message from "./Components/messagebox.jsx";
 import Message2 from "./Components/messagebox_2.jsx";
@@ -13,10 +13,17 @@ const socket = io.connect("http://localhost:3000")
 const Messaging = (props) => {
   const [socket,setsocket] = useState(null);
   const [conversation,setconversation] = useState();
-  const [messages,setmessage] = useState();
+  const [messages,setmessages] = useState();
+  const [message,setmessage] = useState();
+  const [conversationId,setconversationId]= useState();
+  const [receiver,setreceiver] = useState();
   const [name,setname] = useState();
   const [UserId,setUser] = useState(sessionStorage.getItem("buyer_id"));
+  const [userName,setuserName] = useState();
+  const [userEmail,setuserEmail] = useState();
   const id = "651c5377783c0719018cd17f"
+  const messageref = useRef(null);
+  console.log(messages)
   useEffect(()=>{
     setsocket(io("http://localhost:8080"))
     console.log(UserId)
@@ -26,6 +33,43 @@ const Messaging = (props) => {
     socket?.emit('addUser',UserId)
     socket?.on('getUsers',users =>{
       console.log('Buyer_activeUsers:  ',users)
+    })
+    axios.get(`http://localhost:3000/buyer_profile/${UserId}`)
+    .then((res)=>{
+      socket?.on('getMessage',data => {
+        console.log("GETMESSAGE: ",data)
+        setmessages((prevMessages) => {
+          const messagesCopy = [...prevMessages.messagesCopy];
+          messagesCopy.push({
+            user: { email: res.data.email, name: res.data.name, tag: 'buyer' },
+            message: data.message
+          });
+          console.log("Hook :",messagesCopy);
+          return {
+            ...prevMessages,
+            messagesCopy:messagesCopy
+          };
+        });
+        //console.log("Hook :",messages.messagesCopy); 
+      })
+      socket?.on('getMessage_seller',data => {
+        console.log("GETMESSAGE_seller: ",res.data)
+        setmessages((prevMessages) => {
+          const messagesCopy = [...prevMessages.messagesCopy];
+          messagesCopy.push({
+            user: { email: res.data.email, name: res.data.name, tag: 'seller' },
+            message: data.message
+          });
+          console.log("Hook :",messagesCopy);
+          return {
+            ...prevMessages,
+            messagesCopy:messagesCopy
+          };
+        }); 
+      })
+    })
+    .catch((err)=>{
+      console.error(err)
     })
     
   },[socket])
@@ -49,6 +93,20 @@ const Messaging = (props) => {
       console.error(err);
     })
   },[])
+  useEffect(()=>{
+    axios.get(`http://localhost:3000/buyer_profile/${UserId}`)
+    .then((res)=>{
+      console.log("SSSSSSSSSSS: ",res.data)
+      setuserName(res.data.name)
+      setuserEmail(res.data.email)
+    })
+    .catch((err)=>{
+      console.error(err)
+    })
+  },[])
+  useEffect(()=>{
+    messageref?.current?.scrollIntoView({behavior:'smooth'})
+  },[messages])
   const handleLeftHover = () => {
     setIsLeftHovered(true);
   };
@@ -56,16 +114,45 @@ const Messaging = (props) => {
   const handleLeftHoverOut = () => {
     setIsLeftHovered(false);
   };
-  const ConBegin = (id,name)=>{
+  const MessageChange = (e)=>{
+    const {value} = e.target;
+    setmessage(value)
+  }
+  const ConBegin = (id,name,rec)=>{
     axios.get(`http://localhost:3000/message/${id}`)
     .then((res)=>{
-      console.log(res.data)
-      setmessage(res.data)
+      console.log("Database: ",res.data)
+      setconversationId(id);
+      
+      setmessages({messagesCopy:res.data})
       setname(name);
+      setreceiver(rec)
     })
     .catch((err)=>{
       console.error(err);
     })
+  }
+
+  const Sendmessage = ()=>{
+
+    socket?.emit('sendMessage', {
+      senderId:UserId,
+      receiverId:receiver,
+      conversationId,
+      message
+    });
+    axios.post('http://localhost:3000/message', {
+    conversationId,
+    senderId:UserId,
+    message
+  })
+  .then(response => {
+    console.log(response.data);
+    setmessage('')
+  })
+  .catch(error => {
+    console.error(error);
+  });
   }
 
   return (
@@ -102,24 +189,13 @@ const Messaging = (props) => {
                       border: "1px solid #999DEE",
                       overflow: "hidden"
                   }}  >
-                  <div className={Style.image}  onClick={()=>ConBegin(order.conversation,order.name)}>
+                  <div className={Style.image}  onClick={()=>ConBegin(order.conversation,order.name,order.User_ID)}>
                     <img src={order.img} alt="" />
                     <p>{order.name}</p>
                   </div>
                 </div>
               ))
             ):<div><h1>No Conversation</h1></div>}
-
-
-
-
-
-
-
-
-
-
-
 
           </div>
           <div
@@ -129,10 +205,10 @@ const Messaging = (props) => {
             }}
           >
                 <div className={Style.up}>
-                {messages? (messages.map((message, index) => (
+                {messages? (messages.messagesCopy.map((message, index) => (
                   <div key={index}>
                     {message.message ? (
-                      message.user.tag === 'seller' ? (
+                      message.user.tag === 'buyer' ? (
                         <Message text={message.message} />
                       ) : (
                         <Message2 text={message.message} />
@@ -146,8 +222,11 @@ const Messaging = (props) => {
                     )}
                   </div>
                 ))
-                ): (<><p>Loading..........</p></>)}
-
+                ): (<><p style={{
+                  "fontSize": "1.5em",
+                  "textAlign": "center"
+                }} >Loading..........</p></>)}
+                  <div ref={messageref}></div>
 
 
                   {/*
@@ -163,8 +242,13 @@ const Messaging = (props) => {
                   */}
                 </div>
             <div className={Style.down}>
-              <input type="text" />
-              <button type="submit">Send</button>
+              <input 
+                  type="text"
+                  placeholder="Write message"
+                  value={message}
+                  onChange={MessageChange}
+             />
+              <button type="submit" onClick={()=>Sendmessage() }>Send</button>
             </div>
           </div>
         </div>

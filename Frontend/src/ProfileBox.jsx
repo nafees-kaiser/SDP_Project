@@ -5,12 +5,16 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const ProfileBox = () => {
+const ProfileBox = (props) => {
 
   const [data, setData] = useState({});
+  const [messagebox,setmessagebox] = useState(false);
   const sellerId = sessionStorage.getItem("seller_id");
   const navigate = useNavigate();
-
+  const callbackmessage = () => {
+    setmessagebox(true);
+    props.callback(true)
+  }
   useEffect(() => {
     axios.get(`http://localhost:3000/seller_profile/${sellerId}`)
       .then((response) => {
@@ -73,7 +77,7 @@ const ProfileBox = () => {
           alt=""
           src="./images/-icon-communication-bubble-texting-chat-comment-talk-speech-icon.svg"
         />
-        <div className={styles.messages}><Link to={`/message_seller`}>Messages</Link></div>
+        <div className={styles.messages} onClick={callbackmessage}>Messages</div>
       </button>
       <button className={styles.notification}>
         <div className={styles.cartChild} />

@@ -8,10 +8,11 @@ import Button from "./Components/Button";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import { ShowStar } from "./Components/RatingStars";
-
+import Messaging from "./Messaging_buyer";
 
 
 export default function IndividualProduct() {
+    const [messageset,setmessagesetter] = useState(false);
     const { id } = useParams();
     const buyerId = sessionStorage.getItem("buyer_id");
     let [product, setProduct] = useState({})
@@ -23,7 +24,13 @@ export default function IndividualProduct() {
     {
         setReviewData(e.target.value);
     };
-
+    const callbackmessage_land = (data)=>{
+        console.log("Land ", data);
+        setmessagesetter(data);
+      }
+      const closemessage = ()=>{
+        setmessagesetter(false)
+      }
     function setvalue()
     {
         const DataofForm ={
@@ -113,7 +120,7 @@ export default function IndividualProduct() {
     return (
         <>
             {/* <Navbar/> */}
-            {buyerId ? <CraftForm /> : <Navbar />}
+            {buyerId ? <CraftForm  callback2 = {callbackmessage_land}/> : <Navbar />}
             <div className={style.container}>
                 {/* <div>navbar</div> */}
                 <div className={style['product-wrapper']}>
@@ -200,6 +207,7 @@ export default function IndividualProduct() {
                 </form>
 
             </div>
+            {messageset && <Messaging closemessage={closemessage}/>}
             <Footer/>
         </>
     );

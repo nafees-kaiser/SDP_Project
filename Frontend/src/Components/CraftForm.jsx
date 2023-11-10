@@ -19,6 +19,7 @@ const CraftForm = (props) =>{
     const level_message = (data)=>{
         setmess_hook(true);
         console.log("Profile ", data); 
+        toggleModal();
         props.callback2(data)
     }
 

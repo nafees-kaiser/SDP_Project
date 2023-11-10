@@ -7,8 +7,17 @@ import CraftForm from "./Components/CraftForm"
 import Footer from "./Components/Footer";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
+import Messaging from "./Messaging_buyer";
 
 const Checkout = () => {
+    const [messageset,setmessagesetter] = useState(false);
+    const callbackmessage_land = (data)=>{
+        console.log("Land ", data);
+        setmessagesetter(data);
+      }
+      const closemessage = ()=>{
+        setmessagesetter(false)
+      }
     const DownloadBill = () => {
         const doc = new jsPDF();
         let yPos = 20;
@@ -178,7 +187,7 @@ const Checkout = () => {
 
     return (
         <>
-            {id ? <CraftForm /> : <Navbar />}
+            {id ? <CraftForm  callback2 = {callbackmessage_land}/> : <Navbar />}
             <div className={styles.checkout}>
                 <div className={styles.contactInfoFrame} id="contact_info">
                     <div className={styles.contactInformation}>Contact Information</div>
@@ -422,6 +431,7 @@ const Checkout = () => {
                 <div className={styles.tk2}>tk</div>
                 
             </div>
+            {messageset && <Messaging closemessage={closemessage}/>}
             <Footer />
         </>
     );
