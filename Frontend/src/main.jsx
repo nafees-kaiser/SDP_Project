@@ -7,11 +7,9 @@ import { Provider } from 'react-redux'
 //import store from './Store'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <Provider >
-        <React.StrictMode>
-            <BrowserRouter>
-                <Routing/>
-            </BrowserRouter>
-        </React.StrictMode>
-    </Provider>,
+    <React.StrictMode>
+        <BrowserRouter>
+            <Routing/>
+        </BrowserRouter>
+    </React.StrictMode>
 )
