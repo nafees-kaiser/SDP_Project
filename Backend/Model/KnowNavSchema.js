@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const KnowNavSchema = new mongoose.Schema({
     SellerId: {
-        type: mongoose.Types.ObjectId,
-        ref: "Seller"
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "SELLER"
     },
     Product_type: {
         type:String,

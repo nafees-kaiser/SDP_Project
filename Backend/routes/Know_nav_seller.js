@@ -1,8 +1,10 @@
 const express = require('express');
+const mongoose = require('mongoose')
 const router = express.Router();
 const KnowNav = require('../Model/KnowNavSchema');
 const multer = require('multer');
 const cloudinary = require('../cloudinary');
+const ObjectId = mongoose.Types.ObjectId;
 
 const storage = multer.diskStorage({
   filename: function (req, file, cb) {
@@ -43,7 +45,7 @@ router.post('/', upload.fields([
         Front_url = results[2];
 
         const newKnowNav = new KnowNav({
-          SellerId,
+          SellerId: new ObjectId(SellerId),
           Product_Type,
           Product_District,
           Product_Division,

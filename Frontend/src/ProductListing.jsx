@@ -240,11 +240,11 @@ export default function ProductListing() {
                         </div>
                         <div className={style['product-cards']}>
                             {products.map((product, index) => {
-                                const { _id, productName, district, division, price } = product;
+                                const { _id, productName, district, division, price, Product_img1 } = product;
                                 return (
                                     <Link to={`/product-listing/${_id}`} key={_id}>
                                         <Card
-                                            image={nakshiKathaImage}
+                                            image={Product_img1 ? Product_img1: nakshiKathaImage}
                                             rating={4}
                                             productName={productName}
                                             location={`${district}, ${division}`}

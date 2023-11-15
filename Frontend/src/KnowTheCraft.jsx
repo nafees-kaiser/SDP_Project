@@ -13,8 +13,9 @@ import Division from "./Classes/divisionDistrict";
 
 
 export default function KnowTheCraft() {
-    const [productCount, setCount] = useState(0)
-    const [products, setProducts] = useState([])
+    const [productCount, setCount] = useState(0);
+    const [products, setProducts] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
     const buyerId = sessionStorage.getItem("buyer_id");
 
     const [divisionValue, setDivisionValue] = useState('');
@@ -37,7 +38,9 @@ export default function KnowTheCraft() {
                     <div className={style['hero-heading']}><h1>Find the traditional art and crafts of different districts in Bangladesh</h1></div>
                     {/* <p>Buy the traditional handicraft items from various categories.</p> */}
                     <div className={style['hero-search']}>
-                        <input type="text" placeholder="Search by district or name of the product" />
+                        <input style={{color: "black"}} type="text" placeholder="Search by district or name of the product" value={searchValue}
+                        onChange={(e)=>setSearchValue(e.target.value)}
+                        />
                         <button className={style.button}>
                             <i className="fa-solid fa-magnifying-glass fa-lg" style={{ color: "#ffffff", }}></i>
                         </button>
