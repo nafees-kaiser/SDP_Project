@@ -96,6 +96,9 @@ app.use("/matchemailseller", matchmail2);
 const changePass2 = require('./routes/forgotpass_seller');
 app.use("/forgotpass_seller", changePass2);
 
+const addProduct = require('./routes/addproduct');
+app.use("/addproduct", addProduct);
+
 //----APIs for Review----
 //code for add review for product
 app.post('/add/review', async (req, res) => {
