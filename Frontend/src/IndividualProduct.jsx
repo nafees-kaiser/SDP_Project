@@ -8,6 +8,8 @@ import Button from "./Components/Button";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import { ShowStar } from "./Components/RatingStars";
+import { Link } from "react-router-dom";
+
 import Messaging from "./Messaging_buyer";
 
 
@@ -16,12 +18,12 @@ export default function IndividualProduct() {
     const { id } = useParams();
     const buyerId = sessionStorage.getItem("buyer_id");
     let [product, setProduct] = useState({})
+    const [seller, setSeller] = useState({});
     const [reviewDescription, setReviewData] = useState();
     const [reviews, setreview] = useState([]);
     const [amount, setAmount] = useState(0)
     const navigate = useNavigate();
-    const handleChange= (e) => 
-    {
+    const handleChange = (e) => {
         setReviewData(e.target.value);
     };
     const callbackmessage_land = (data)=>{
@@ -40,29 +42,45 @@ export default function IndividualProduct() {
         return DataofForm;
     }
 
-    function setWishlist()
-    {
-        const productData ={
+    function setWishlist() {
+        const productData = {
             'buyerid': buyerId,
-            'productid' : id
-            };
-            return productData;
+            'productid': id
+        };
+        return productData;
     }
     useEffect(() => {
         axios.get(`http://localhost:3000/product-listing/${id}`)
             .then((response) => {
-                // console.log(response.data);
-                setProduct(response.data);
+                console.log(response.data);
+                setProduct(response.data[0].productId);
+                setSeller(response.data[0].sellerId);
             })
-        
+
         axios.get(`http://localhost:3000/reviews/${id}`)
             .then((response) => {
-                if(response.data.reviews != 0)
-                {
+                if (response.data.reviews != 0) {
                     setreview(response.data.reviews);
                 }
             })
     }, []);
+
+    const handleChat = () => {
+        const { _id: SellerId } = seller;
+
+        axios.post('http://localhost:3000/message/conversation', {
+            receiverId: SellerId,
+            senderId: buyerId
+        })
+            .then(response => {
+                console.log(response.data);
+                setmessage('')
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+    }
     const routeChange = () => {
         if (product) {
             // const buyerId = sessionStorage.getItem("buyer_id");
@@ -71,7 +89,7 @@ export default function IndividualProduct() {
                 amount,
                 buyerId
             }
-            const saveData = async ()=>{
+            const saveData = async () => {
                 const savedData = await axios.post(`http://localhost:3000/checkout`, product, {
                     headers: {
                         'Content-Type': 'application/json',
@@ -116,7 +134,7 @@ export default function IndividualProduct() {
             })
     }
 
-    const { productName, district, division, price, seller, description } = product
+    const { productName, district, division, price, description, Product_img1 } = product
     return (
         <>
             {/* <Navbar/> */}
@@ -127,7 +145,7 @@ export default function IndividualProduct() {
                     <div className={style.product}>
                         <div className={style['product-picture']}>
                             <div className={style['one-picture']}>
-                                <img src={nakshikathaImage} alt="" />
+                                <img src={Product_img1 ? Product_img1 : nakshikathaImage} alt="" />
                             </div>
                             {/* <div className={style['more-pictures']}>
                             <img src="" alt="" />
@@ -141,16 +159,17 @@ export default function IndividualProduct() {
                                 <h1>{productName}</h1>
                                 <p>{`${district}, ${division}`}</p>
                                 <div className={style['seller-info']}>
-                                    <p>{seller}</p>
-                                    <a href="#">Chat with seller</a>
+                                    <p>{seller.name}</p>
+                                    {/* <a href="#">Chat with seller</a> */}
+                                    <Link onClick={handleChat}>Chat with seller</Link>
                                 </div>
                                 {/* <p>5 star</p> */}
-                                <ShowStar rating={4} sz={35}/>
+                                <ShowStar rating={4} sz={35} />
                                 <p>{`${price} Tk`}</p>
                                 <p></p>
                                 <button onClick={addToWishlist} type="button" class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 text-4xl font-medium focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2 w-32 h-12">
-                                    Wishlist    
-                                </button>                               
+                                    Wishlist
+                                </button>
                             </div>
                             <br />
                             <div className={style['buttons-link']}>
@@ -164,7 +183,7 @@ export default function IndividualProduct() {
                                     </div>
                                     <Button text="Add to cart" change={routeChange} />
                                 </div>
-                                <a href="#">To learn more about this handicraft</a>
+                                {/* <a href="#">To learn more about this handicraft</a> */}
                             </div>
                         </div>
                     </div>
@@ -191,7 +210,7 @@ export default function IndividualProduct() {
                     </article>
                 ))}
                 <br /><br />
-                
+
                 <form onSubmit={handleReviewSubmit}>
                     <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                         <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
