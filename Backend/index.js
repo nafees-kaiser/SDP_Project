@@ -98,6 +98,10 @@ app.use("/forgotpass_seller", changePass2);
 
 const addProduct = require('./routes/addproduct');
 app.use("/addproduct", addProduct);
+
+const sellerList = require('./routes/seller_product_list');
+app.use("/seller_product_list", sellerList);
+
 const knowTheCraftRouting = require('./routes/knowTheCraft');
 app.use("/know-the-craft",knowTheCraftRouting);
 

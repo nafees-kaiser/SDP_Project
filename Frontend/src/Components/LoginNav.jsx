@@ -94,8 +94,8 @@ const Navbar = (props) =>{
                         Product
                         {isProductMenuOpen && (
                         <ul className={Style['dropdown-menu']}>
-                        <li className={Style['dropdown-item']}>View Product</li>
-                        <li className={Style['dropdown-item']}>Add Product</li>
+                        <Link to={`/sellerProductListing`}><li className={Style['dropdown-item']}>View Product</li></Link>
+                        <Link to={`/AddAProductPage`}><li className={Style['dropdown-item']}>Add Product</li></Link>
                         <Link to={`/Add_Know`}><li className={Style['dropdown-item']}>Add Craft</li></Link>
                         </ul>
                         )}

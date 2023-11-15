@@ -30,6 +30,10 @@ const ProfileBox = (props) => {
       navigate('/AddAProductPage');
   }
 
+  const handleChange2 = ()=>{
+    navigate('/sellerProductListing');
+}
+
   const handleSignOut = () => {
     // Clear sessionStorage when the "Sign Out" button is clicked
     sessionStorage.clear();
@@ -60,7 +64,7 @@ const ProfileBox = (props) => {
         />
         <div className={styles.myCart}>Add Products</div>
       </button>
-      <button className={styles.wishlist}>
+      <button className={styles.wishlist} onClick={handleChange2}>
         <div className={styles.cartChild} />
         <img
           className={styles.iconActionHeartLoveLikeR}
