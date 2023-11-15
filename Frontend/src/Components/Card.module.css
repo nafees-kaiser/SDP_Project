@@ -29,7 +29,7 @@
 }
 .card img{
     width: 228px;
-    max-height: 304px;
+    height: 304px;
 }
 .card p {
     overflow: hidden; /* Hide overflow content */

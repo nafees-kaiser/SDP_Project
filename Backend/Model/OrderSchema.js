@@ -13,11 +13,11 @@ const orderSchema = new mongoose.Schema({
     }],
     buyerId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Buyer'
+        ref: 'BUYER'
     },
     sellerId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Seller'
+        ref: 'SELLER'
     },
     date: {
         type: Date,

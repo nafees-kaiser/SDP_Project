@@ -7,7 +7,7 @@ const sellsSchema = new mongoose.Schema({
     },
     sellerId: {
         type: mongoose.Types.ObjectId,
-        ref: "Seller"
+        ref: "SELLER"
     },
 });
 
