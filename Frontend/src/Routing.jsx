@@ -70,7 +70,7 @@ const Routing = ()=>{
                 <Route path='/sendmailseller' element={<SendMailSeller/>}></Route>
                 <Route path='/forgotpass_seller' element={<ForgotpassSeller/>}></Route>
                 <Route path='/passChangeVerify_seller' element={<PassChangeVerifySeller/>}></Route>
-                <Route path='/Community' element={<Community_home/>}></Route>
+
                 <Route path='/Add_know' element={<Add_Know/>}></Route>
                 <Route path='/sellerProductListing' element={<SellerProductListing/>}></Route>
                 {/* <Route path='/star' element={<RatingStar/>}></Route> */}

@@ -38,6 +38,7 @@ export function SellerCard({image,rating,productName,location,price,storedQuanti
             <div className={style['div-info']}>
                 {/* <p>{rating}</p> */}
                 <ShowStar rating={rating} sz={25}/>
+                <p>{review}</p>
                 <p>{productName}</p>
                 <p>{location}</p>
                 <p>{price}</p>
