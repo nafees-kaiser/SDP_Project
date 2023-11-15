@@ -30,6 +30,7 @@ import SendMail from "./SendMail.jsx";
 import SendMailSeller from "./SendMailSeller.jsx";
 import ForgotpassSeller from "./ForgotpassSeller.jsx";
 import PassChangeVerifySeller from "./PassChangeVerifySeller.jsx";
+import SellerProductListing from "./SellerProductListing.jsx";
 
 
 
@@ -65,7 +66,8 @@ const Routing = ()=>{
                 <Route path='/sendmailseller' element={<SendMailSeller/>}></Route>
                 <Route path='/forgotpass_seller' element={<ForgotpassSeller/>}></Route>
                 <Route path='/passChangeVerify_seller' element={<PassChangeVerifySeller/>}></Route>
-
+                <Route path='/sellerProductListing' element={<SellerProductListing/>}></Route>
+                
                 <Route path='/Add_know' element={<Add_Know/>}></Route>
             </Routes>
         </>
