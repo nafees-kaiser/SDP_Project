@@ -34,6 +34,7 @@ import ForgotpassSeller from "./ForgotpassSeller.jsx";
 import PassChangeVerifySeller from "./PassChangeVerifySeller.jsx";
 import Community_home from "./Community_home.jsx"
 // import {RatingStar} from "./Components/RatingStars.jsx";
+import IndividualKnowTheCraft from "./IndividualKnowTheCraft.jsx";
 
 
 const Routing = ()=>{
@@ -59,6 +60,7 @@ const Routing = ()=>{
                 <Route path='/buyer_profile_box' element={<BuyerProfileBox/>}></Route>
                 <Route path='/buyer_profile' element={<BuyerProfile/>}></Route>
                 <Route path='/know-the-craft' element={<KnowTheCraft/>}></Route>
+                <Route path='/know-the-craft/:id' element={<IndividualKnowTheCraft/>}></Route>
                 <Route path='/seller_profile' element={<SellerProfile/>}></Route>
                 <Route path='/login_nav' element={<LoginNav/>}></Route>
                 <Route path='/Wishlist' element={<ViewWishlist/>}></Route>
