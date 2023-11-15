@@ -85,7 +85,7 @@ const CraftForm = (props) =>{
                     <div className={Style.middle}>
                         <Link to={`/`} className={Style.link}> Home</Link>
                         <Link to={`/product-listing`} className={Style.link}> Product</Link>
-                        <a href="#">Community</a>
+                        <Link to={`/Community`} className={Style.link}> Community</Link>
                         <Link to={`/know-the-craft`} className={Style.link}> Know about craft</Link>
                         {/* <button onClick={scrollToCommunity}>Community</button> */}
                         {/* <button className={Style.link} onClick="document.getElementById('middle').scrollIntoView();"> Community</button> */}
