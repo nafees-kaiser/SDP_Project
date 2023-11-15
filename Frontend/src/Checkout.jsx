@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Checkout.module.css";
@@ -7,8 +8,17 @@ import CraftForm from "./Components/CraftForm"
 import Footer from "./Components/Footer";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
+import Messaging from "./Messaging_buyer";
 
 const Checkout = () => {
+    const [messageset,setmessagesetter] = useState(false);
+    const callbackmessage_land = (data)=>{
+        console.log("Land ", data);
+        setmessagesetter(data);
+      }
+      const closemessage = ()=>{
+        setmessagesetter(false)
+      }
     const DownloadBill = () => {
         const doc = new jsPDF();
         let yPos = 20;
@@ -175,10 +185,47 @@ const Checkout = () => {
         }
         DownloadBill();
     }
+    const handleIncreaseQuantity = (productId) => {
+        const updatedProducts = buyerProducts.map(item => {
+            if (item.productId._id === productId) {
+                return {
+                    ...item,
+                    quantity: item.quantity + 1
+                };
+            }
+            return item;
+        });
+        setBuyerProducts(updatedProducts);
+    };
+    const handleDecreaseQuantity = (productId) => {
+        const updatedProducts = buyerProducts.map(item => {
+            if (item.productId._id === productId) {
+                const newQuantity = item.quantity > 1 ? item.quantity - 1 : item.quantity;
+                return {
+                    ...item,
+                    quantity: newQuantity,
+                };
+            }
+            return item;
+        });
+        setBuyerProducts(updatedProducts);
+    };
+    const removeItem =async (productId) => {
+        const updatedProducts = buyerProducts.filter(item => item.productId._id !== productId);
+        const response = await axios.put(`http://localhost:3000/get-buyer-info/${productId}`);
+        console.log(response);
+        setBuyerProducts(updatedProducts);
+
+    };
+    
+    
 
     return (
         <>
-            {id ? <CraftForm /> : <Navbar />}
+            {id ? <CraftForm callback2 = {callbackmessage_land} /> : <Navbar />}
+
+            {
+                    buyerProducts.length ? (
             <div className={styles.checkout}>
                 <div className={styles.contactInfoFrame} id="contact_info">
                     <div className={styles.contactInformation}>Contact Information</div>
@@ -292,7 +339,7 @@ const Checkout = () => {
                                     alt=""
                                     src="/images/rectangle-42@2x.png"
                                 />
-                                <button className={styles.trash} id="cancel_button">
+                                <button className={styles.trash} id="cancel_button" onClick={()=>{removeItem(productId._id)}}>
                                     <img className={styles.trashChild} alt="" src="/images/vector-8.svg" />
                                     <img className={styles.trashItem} alt="" src="/images/vector-8.svg" />
                                     <img className={styles.trashInner} alt="" src="/images/rectangle-41.svg" />
@@ -315,9 +362,13 @@ const Checkout = () => {
                                 </div>
                                 <b className={styles.benaroshiSaree}>{productId.productName}</b>
                                 <div className={styles.component71}>
-                                    <button className={styles.minus} id="minus_button" />
+                                    <button className={styles.minus} id="minus_button"onClick={() => handleDecreaseQuantity(productId._id)} />
                                     <div className={styles.count}>{quantity}</div>
-                                    <button className={styles.plus} id="plus_button" />
+                                    <button 
+                                        className={styles.plus} 
+                                        id="plus_button"
+                                        onClick={() => handleIncreaseQuantity(productId._id)}
+                                    />
                                     <img
                                         className={styles.component71Child}
                                         alt=""
@@ -401,6 +452,7 @@ const Checkout = () => {
                         </div>
                     </div>
                 </div>
+                
                 <div className={styles.fields} id="total_cost">
                     <div className={styles.totalField}>
                         <div className={styles.content1}>
@@ -422,6 +474,14 @@ const Checkout = () => {
                 <div className={styles.tk2}>tk</div>
                 
             </div>
+        ) : (
+            <div className={styles.checkout}>
+                <p>There are no items in the list.</p>
+            </div>
+        )
+    }
+            
+            {messageset && <Messaging closemessage={closemessage}/>}
             <Footer />
         </>
     );

@@ -41,6 +41,14 @@ h1{
   font-size: 2em;
   font-weight: 700;
 }
+[type=checkbox]{
+  color: var(--accent-color) !important;
+  cursor: pointer;
+}
+[type=checkbox]:focus{
+  outline: none;
+  box-shadow: none;
+}
 
 /*
 body {

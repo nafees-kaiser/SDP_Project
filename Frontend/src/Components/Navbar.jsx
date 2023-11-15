@@ -2,6 +2,7 @@ import React, { useState,useEffect } from "react";
 import Style from "./Navbar.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navbar = () => {
     const [showNotification, setShowNotification] = useState(false);
@@ -61,6 +62,7 @@ const Navbar = () => {
             &ensp;
             
             <div onClick={toggleNotification}>
+            <LanguageSwitcher />
             <button class="text-white">Notifications</button>
             </div>
             {showNotification && (
@@ -105,7 +107,8 @@ const Navbar = () => {
               Product
             </Link>
             <a href="#com">Community</a>
-            <a href="#craft">Know about craft</a>
+            {/* <a href="#craft">Know about craft</a> */}
+            <Link to={`/know-the-craft`} className={Style.link}> Know about craft</Link>
           </div>
           <div className={Style.right}>
             <input type="text" className={Style.search} placeholder="Search..." />

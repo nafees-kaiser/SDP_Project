@@ -2,13 +2,11 @@ const mongoose = require('mongoose');
 
 const messageSchema = new mongoose.Schema({
     
-    buyerId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Buyer'
+    conversationId: {
+        type: String,
     },
-    sellerId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Seller'
+    senderId: {
+        type: String,
     },
     message: {
         type: String,

@@ -5,9 +5,10 @@ const message = ({text})=>{
     
     return (
         <>
-            
-            <div className={Style.box}>
-                <p>{text}</p>
+            <div className={Style.another}>
+                <div className={Style.box}>
+                    <p>{text}</p>
+                </div>
             </div>
         </>
     )

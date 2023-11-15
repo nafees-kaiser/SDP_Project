@@ -98,6 +98,8 @@ app.use("/forgotpass_seller", changePass2);
 
 const addProduct = require('./routes/addproduct');
 app.use("/addproduct", addProduct);
+const knowTheCraftRouting = require('./routes/knowTheCraft');
+app.use("/know-the-craft",knowTheCraftRouting);
 
 //----APIs for Review----
 //code for add review for product

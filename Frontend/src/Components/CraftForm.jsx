@@ -5,33 +5,44 @@ import axios from "axios";
 // import Button from './Button.jsx';
 import { Link } from "react-router-dom";
 import BuyerProfileBox from '../BuyerProfileBox';
+import {FaSearch} from 'react-icons/fa'
+import LanguageSwitcher from './LanguageSwitcher';
+import Message from './messagebox';
 
-const Navbar = () =>{
+const CraftForm = (props) =>{
 
     const [data, setData] = useState({});
+    const [mess_hook,setmess_hook] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const buyerId = sessionStorage.getItem("buyer_id");
     const overlayRef = useRef(null);
+    console.log("Value ",props.value)
+    const level_message = (data)=>{
+        setmess_hook(true);
+        console.log("Profile ", data); 
+        toggleModal();
+        props.callback2(data)
+    }
 
-  useEffect(() => {
-    axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
-      .then((response) => {
-        setData(response.data);
-        
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [buyerId]);
+    useEffect(() => {
+        axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
+        .then((response) => {
+            setData(response.data);
+            
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }, [buyerId]);
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
 
-    if (!isModalOpen) {
-        document.body.style.overflow = 'auto';
-      }
-    // document.body.style.overflow = isModalOpen ? 'auto' : 'hidden';
-  };
+        if (!isModalOpen) {
+            document.body.style.overflow = 'auto';
+        }
+        // document.body.style.overflow = isModalOpen ? 'auto' : 'hidden';
+    };
 
   const handleOverlayClick = (e) => {
     if (e.target === overlayRef.current) {
@@ -51,6 +62,7 @@ const Navbar = () =>{
                     <div className={Style.right}>
                     {/* <Link to={`/login`} className={Style.link}> Login</Link> */}
                         {/* <Button text="Logged in"/> */}
+                        <LanguageSwitcher />
                         <button className={Style.icons} onClick={toggleModal}>
                             <i class="fas fa-user"></i>
                             <p>{data.name}</p>
@@ -73,32 +85,27 @@ const Navbar = () =>{
                     <div className={Style.middle}>
                         <Link to={`/`} className={Style.link}> Home</Link>
                         <Link to={`/product-listing`} className={Style.link}> Product</Link>
+                        <a href="#">Community</a>
+                        <Link to={`/know-the-craft`} className={Style.link}> Know about craft</Link>
                         {/* <button onClick={scrollToCommunity}>Community</button> */}
                         {/* <button className={Style.link} onClick="document.getElementById('middle').scrollIntoView();"> Community</button> */}
                         {/*<Link to={`/community`} className={Style.link}> Community</Link>*/}
-                        <a href="#">Community</a>
-                        <a href="#">Know about craft</a>
+                        {/* <a href="#">Know about craft</a> */}
                     </div>
                     <div className={Style.right}>
                         <input type="text" className={Style.search} placeholder="Search..."></input>
-                        <i class="fa fa-search icon"></i>   
+                        {/* <i className="fa fa-search icon"></i>    */}
+                        <button><FaSearch/></button>
                     </div> 
                 </div>
             </div>
             {isModalOpen && (
                 <div className={Style.overlay} onClick={handleOverlayClick} ref={overlayRef}>
-                 <BuyerProfileBox />
+                 <BuyerProfileBox callback={level_message} />
                 </div>
             )}
 
-            {/* {isModalOpen && (
-                <div className={Style.overlay} onClick={toggleModal}>
-                    <BuyerProfileBox closemodel={toggleModal} />
-                    <BuyerProfileBox />
-                </div>
-             
-            )} */}
         </>
     );
 }
-export default Navbar;
+export default CraftForm;

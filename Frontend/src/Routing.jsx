@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 
 
@@ -11,7 +12,8 @@ import Footer from "./Components/Footer.jsx";
 import { Routes,Route } from "react-router";
 import Home_seller from "./Home_seller.jsx";
 import Authentication from "./Authentication.jsx";
-import Messaging from "./Messaging.jsx";
+import Messaging_sell from "./Messaging_seller.jsx";
+import Messaging_buyer from "./Messaging_buyer.jsx";
 import Seller_Registration from "./Seller_Registration.jsx";
 import SellerLogin from "./SellerLogin.jsx"
 import LandingPage from "./LandingPage.jsx";
@@ -30,7 +32,8 @@ import SendMail from "./SendMail.jsx";
 import SendMailSeller from "./SendMailSeller.jsx";
 import ForgotpassSeller from "./ForgotpassSeller.jsx";
 import PassChangeVerifySeller from "./PassChangeVerifySeller.jsx";
-
+import Community_home from "./Community_home.jsx"
+// import {RatingStar} from "./Components/RatingStars.jsx";
 
 
 const Routing = ()=>{
@@ -48,7 +51,8 @@ const Routing = ()=>{
                 <Route path='/become_seller' element={<Become_seller/>}></Route>
                 <Route path='/home_seller' element={<Home_seller/>}></Route>
                 <Route path='/auth' element={<Authentication/>}></Route>
-                <Route path='/message' element={<Messaging/>}></Route>
+                <Route path='/message_seller' element={<Messaging_sell/>}></Route>
+                <Route path='/message_buyer' element={<Messaging_buyer/>}></Route>
                 <Route path='/seller_reg' element={<Seller_Registration/>}></Route>
                 <Route path='/seller_login' element={<SellerLogin/>}></Route>
                 <Route path='/profile_box' element={<ProfileBox/>}></Route>
@@ -65,8 +69,9 @@ const Routing = ()=>{
                 <Route path='/sendmailseller' element={<SendMailSeller/>}></Route>
                 <Route path='/forgotpass_seller' element={<ForgotpassSeller/>}></Route>
                 <Route path='/passChangeVerify_seller' element={<PassChangeVerifySeller/>}></Route>
-
+                <Route path='/Community' element={<Community_home/>}></Route>
                 <Route path='/Add_know' element={<Add_Know/>}></Route>
+                {/* <Route path='/star' element={<RatingStar/>}></Route> */}
             </Routes>
         </>
     )

@@ -17,6 +17,7 @@ import Navbar from "./Components/Navbar_seller";
 import LoginNav from "./Components/LoginNav";
 import Card from "./Components/Card";
 import Footer from "./Components/Footer";
+import Messaging from "./Messaging_seller.jsx";
 
 ChartJS.register(
     LineElement,
@@ -29,6 +30,7 @@ ChartJS.register(
 )
 const Home_seller = ()=>{
     const [auth,setAuth]= useState(false);
+    const [messageset,setmessagesetter] = useState(false);
     const [salesDatatable, setSalesData] = useState([]);
     const [salescount, setSalescount] = useState([]);
     const [salesData] = useState([
@@ -43,6 +45,13 @@ const Home_seller = ()=>{
     const closemodel = ()=>{
         setAuth(false);
     }
+    const callbackmessage_land = (data)=>{
+        console.log("Land ", data);
+        setmessagesetter(data);
+      }
+      const closemessage = ()=>{
+        setmessagesetter(false)
+      }
 
     // const sellerId = sessionStorage.getItem("seller_id");
 
@@ -122,7 +131,7 @@ const Home_seller = ()=>{
     return (
         <>
             {/* {sellerId ? <LoginNav /> :<Navbar /> } */}
-            <LoginNav />
+            <LoginNav callback2 = {callbackmessage_land} />
             {/* <Navbar openmodel={openmodel}/> */}
             { auth && <ProfileBox closemodel={closemodel}/> }
             <div className={Style.line}></div>
@@ -273,6 +282,7 @@ const Home_seller = ()=>{
                     </div>
                 </div>
             </div>
+            {messageset && <Messaging closemessage={closemessage}/>}
             <Footer/>
         </>
     );

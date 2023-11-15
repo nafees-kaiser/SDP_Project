@@ -7,13 +7,20 @@ import axios from "axios";
 // import { Link } from "react-router-dom";
 import ProfileBox from '../ProfileBox';
 
-const Navbar = () =>{
+const Navbar = (props) =>{
 
     const [data, setData] = useState({});
+    const [mess_hook,setmess_hook] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const sellerId = sessionStorage.getItem("seller_id");
     const overlayRef = useRef(null);
 
+    const level_message = (data)=>{
+      setmess_hook(true);
+      console.log("Profile ", data); 
+      toggleModal();
+      props.callback2(data)
+    }
   useEffect(() => {
     axios.get(`http://localhost:3000/seller_profile/${sellerId}`)
       .then((response) => {
@@ -107,7 +114,7 @@ const Navbar = () =>{
 
         {isModalOpen && (
                 <div className={Style.overlay} onClick={handleOverlayClick} ref={overlayRef}>
-                 <ProfileBox />
+                 <ProfileBox callback={level_message} />
                 </div>
             )}
         </>

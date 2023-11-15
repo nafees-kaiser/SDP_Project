@@ -7,10 +7,12 @@ import nakshikathaImage from '../images/nakshi_katha(1).jpg'
 import Button from "./Components/Button";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
-
+import { ShowStar } from "./Components/RatingStars";
+import Messaging from "./Messaging_buyer";
 
 
 export default function IndividualProduct() {
+    const [messageset,setmessagesetter] = useState(false);
     const { id } = useParams();
     const buyerId = sessionStorage.getItem("buyer_id");
     let [product, setProduct] = useState({})
@@ -22,7 +24,13 @@ export default function IndividualProduct() {
     {
         setReviewData(e.target.value);
     };
-
+    const callbackmessage_land = (data)=>{
+        console.log("Land ", data);
+        setmessagesetter(data);
+      }
+      const closemessage = ()=>{
+        setmessagesetter(false)
+      }
     function setvalue()
     {
         const DataofForm ={
@@ -112,7 +120,7 @@ export default function IndividualProduct() {
     return (
         <>
             {/* <Navbar/> */}
-            {buyerId ? <CraftForm /> : <Navbar />}
+            {buyerId ? <CraftForm  callback2 = {callbackmessage_land}/> : <Navbar />}
             <div className={style.container}>
                 {/* <div>navbar</div> */}
                 <div className={style['product-wrapper']}>
@@ -136,7 +144,8 @@ export default function IndividualProduct() {
                                     <p>{seller}</p>
                                     <a href="#">Chat with seller</a>
                                 </div>
-                                <p>5 star</p>
+                                {/* <p>5 star</p> */}
+                                <ShowStar rating={4} sz={35}/>
                                 <p>{`${price} Tk`}</p>
                                 <p></p>
                                 <button onClick={addToWishlist} type="button" class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 text-4xl font-medium focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2 w-32 h-12">
@@ -198,6 +207,7 @@ export default function IndividualProduct() {
                 </form>
 
             </div>
+            {messageset && <Messaging closemessage={closemessage}/>}
             <Footer/>
         </>
     );

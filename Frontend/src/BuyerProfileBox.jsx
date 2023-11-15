@@ -4,13 +4,19 @@ import styles from "./BuyerProfileBox.module.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-const BuyerProfileBox = () => {
+
+const BuyerProfileBox = (props) => {
 
   const [data, setData] = useState({});
+  const [messagebox,setmessagebox] = useState(false);
   const buyerId = sessionStorage.getItem("buyer_id");
-
+  console.log(props.value); 
   const navigate = useNavigate();
-
+  const callbackmessage = () => {
+    setmessagebox(true);
+    props.callback(true)
+  }
+  
 
   useEffect(() => {
     axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
@@ -31,12 +37,12 @@ const BuyerProfileBox = () => {
 
 
   return (
-
+    <>
     <div className={styles.buyerProfileDropdown}>
       {/* <button className={styles.b}onClick={closemodel}>X</button> */}
       <div className={styles.border} />
       <Link to={`/buyer_profile`} className={styles.header}>
-        <img className={styles.pictureIcon} alt="" src="/images/avatar.jpg" />
+        <img className={styles.pictureIcon} alt="" src={data.img} />
       </Link>
       <div className={styles.name}>{data.name}</div>
       <div className={styles.welcome}>
@@ -69,7 +75,7 @@ const BuyerProfileBox = () => {
           alt=""
           src="/images/-icon-communication-bubble-texting-chat-comment-talk-speech-icon.svg"
         />
-        <div className={styles.messages}>Messages</div>
+        <div className={styles.messages} onClick={callbackmessage}>Messages</div>
       </button>
       <button className={styles.notification}>
         <div className={styles.cartChild} />
@@ -105,6 +111,7 @@ const BuyerProfileBox = () => {
         <div className={styles.goToCraft}>Sign Out</div>
       </button>
     </div>
+    </>
 
   );
 };

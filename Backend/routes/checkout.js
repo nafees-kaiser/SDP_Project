@@ -61,7 +61,7 @@ router.post("/", async (req, res) => {
                 quantity: amount
             })
             const data = await cart.save();
-            console.log(data);
+            // console.log(data);
         }
 
     } catch (error) {
