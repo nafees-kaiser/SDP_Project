@@ -334,6 +334,21 @@ app.delete('/delete/notifications/:userID', async (req, res) => {
   }
 });
 
+app.get('/api/orders/:buyerId', async (req, res) => {
+  try {
+    const buyerId = req.params.buyerId;
+
+    // Find all orders with the given buyerId and populate the 'product' field
+    const orders = await Order.find({ 'buyerId': buyerId }).populate('product.productId');
+
+    // Return the orders in the response
+    res.json({ orders });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 
 

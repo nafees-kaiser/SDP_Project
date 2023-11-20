@@ -22,6 +22,12 @@ const Checkout = () => {
     const DownloadBill = () => {
         const doc = new jsPDF();
         let yPos = 20;
+
+        // Add background image
+        const backgroundImage = "./images/pdf style.png"; // Replace with the path to your background image
+        const bgWidth = doc.internal.pageSize.getWidth();
+        const bgHeight = doc.internal.pageSize.getHeight();
+        doc.addImage(backgroundImage, "PNG", 0, 0, bgWidth, bgHeight);
     
         // Add image
         const imgData = "./images/384165997_332969559130939_1111385360839973004_n.png";
@@ -35,7 +41,7 @@ const Checkout = () => {
     
         // Add Title and Subtitle
         doc.setFont("helvetica", "bold");
-        doc.setTextColor("#4285F4"); // Set text color to blue
+        doc.setTextColor("#00f7ff"); // Set text color to blue
         doc.setFontSize(26);
         doc.text("Heritage Craft Connect", 105, yPos, null, null, "center");
         doc.setFontSize(18);
@@ -92,21 +98,36 @@ const Checkout = () => {
         // Adjust the yPos after adding the table
         yPos = doc.lastAutoTable.finalY + 10;
     
-        // Add sub-total and delivery charge
-        doc.setFont("helvetica", "normal");
-        doc.setTextColor("#4285F4"); // Set text color to blue
-        doc.text(145, yPos, `Sub Total: ${totalPrice} TK`);
+        // Add sub-total and delivery charge in blue-bordered rectangles with smaller text
+        const blueRectWidth = 45;
+        const blueRectHeight = 10;
+
+        // Sub-total
+        doc.setDrawColor("#4285F4"); // Set border color to blue
+        doc.rect(145, yPos, blueRectWidth, blueRectHeight);
+
+        doc.setFontSize(10);
+        doc.setTextColor("#046e08"); // Set text color to blue
+        doc.text(145, yPos + 7, `Sub Total: ${totalPrice} TK`);
+
+        // Delivery charge
         yPos += 10;
-        doc.text(145, yPos, `Delivery Charge: ${60} TK`);
-    
-        // Adjust the yPos after adding sub-total and delivery charge
+        doc.setDrawColor("#4285F4"); // Set border color to blue
+        doc.rect(145, yPos, blueRectWidth, blueRectHeight);
+
+        doc.setFontSize(10);
+        doc.setTextColor("#046e08"); // Set text color to blue
+        doc.text(145, yPos + 7, `Delivery Charge: ${60} TK`);
+
+        // Total bill
         yPos += 10;
-    
-        // Add total bill
-        doc.setFont("helvetica", "normal");
-        doc.setTextColor("#008000"); // Set text color to green
-        doc.text(145, yPos, `Total Bill: ${totalPrice + 60} TK`);
-    
+        doc.setDrawColor("#4285F4"); // Set border color to blue
+        doc.rect(145, yPos, blueRectWidth, blueRectHeight);
+
+        doc.setFontSize(10);
+        doc.setTextColor("#046e08"); // Set text color to blue
+        doc.text(145, yPos + 7, `Total Bill: ${totalPrice + 60} TK`);
+
         // Save the PDF
         doc.save("Bill.pdf");
     };
