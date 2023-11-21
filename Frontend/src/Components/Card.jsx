@@ -1,7 +1,7 @@
 import style from './Card.module.css'
 import { ShowStar } from './RatingStars';
 
-export function KnowCraftCard({image, desc, title}){
+export function KnowCraftCard({ image, desc, title }) {
     return (
         <div className={style.card}>
             <img src={image} alt={title} />
@@ -16,14 +16,15 @@ export function KnowCraftCard({image, desc, title}){
     );
 }
 
-export default function Card({image,rating,productName,location,price}) {
+export default function Card({ image, rating, productName, location, price, category }) {
     return (
         <div className={style.card}>
             <img src={image} alt={productName} />
             <div className={style['div-info']}>
                 {/* <p>{rating}</p> */}
-                <ShowStar rating={rating} sz={25}/>
-                <p>{productName}</p>
+                <ShowStar rating={rating} sz={25} />
+                <p className={style['font-weight-700']}>{productName}</p>
+                <p>{category}</p>
                 <p>{location}</p>
                 <p>{price}</p>
             </div>
@@ -31,13 +32,13 @@ export default function Card({image,rating,productName,location,price}) {
     );
 }
 
-export function SellerCard({image,rating,productName,location,price,storedQuantity}) {
+export function SellerCard({ image, rating, productName, location, price, storedQuantity }) {
     return (
         <div className={style.card}>
             <img src={image} alt={productName} />
             <div className={style['div-info']}>
                 {/* <p>{rating}</p> */}
-                <ShowStar rating={rating} sz={25}/>
+                <ShowStar rating={rating} sz={25} />
                 <p>{productName}</p>
                 <p>{location}</p>
                 <p>{price}</p>

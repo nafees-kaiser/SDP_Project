@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Notification from "./Notification.jsx";
 
 export default function ProductListing() {
-    const [messageset,setmessagesetter] = useState(false);
+    const [messageset, setmessagesetter] = useState(false);
     //For storing the products from database
     const [productCount, setCount] = useState(0)
     const [products, setProducts] = useState([])
@@ -25,21 +25,17 @@ export default function ProductListing() {
     const [isCategoryOpen, setCategoryOpen] = useState(false);
     const [isLocationOpen, setLocationOpen] = useState(false);
     const [isRatingOpen, setRatingOpen] = useState(false);
-    // const [isSizeOpen, setSizeOpen] = useState(false);
     const [isPriceOpen, setPriceOpen] = useState(false);
     // For location dropdown
     const [divisionValue, setDivisionValue] = useState('');
     const [districtValue, setDistrictValue] = useState('');
-    const notification = useSelector(state => state.toggle)
 
-    const callbackmessage_land = (data)=>{
-        console.log("Land ", data);
-        setmessagesetter(data);
-      }
-      const closemessage = ()=>{
-        setmessagesetter(false)
-      }
+    const notification = useSelector(state => state.toggle);
 
+    // For selecting category
+    const [selectedCategory, setCategory] = useState([]);
+    const [selectedRating, setRating] = useState([]);
+    // Collapsible menu toggle functions 
     const toggleCategory = () => {
         setCategoryOpen(!isCategoryOpen);
     }
@@ -49,12 +45,18 @@ export default function ProductListing() {
     const toggleRating = () => {
         setRatingOpen(!isRatingOpen);
     }
-    // const toggleSize = () => {
-    //     setSizeOpen(!isSizeOpen);
-    // }
     const togglePrice = () => {
         setPriceOpen(!isPriceOpen);
     }
+    // For notification
+    const callbackmessage_land = (data) => {
+        console.log("Land ", data);
+        setmessagesetter(data);
+    }
+    const closemessage = () => {
+        setmessagesetter(false)
+    }
+
     // For the categories
     const categories = [
         "Cap/Hat/Pagri",
@@ -88,21 +90,46 @@ export default function ProductListing() {
     // For rating checkbox
     const [ratingCheckbox, setRatingCheckbox] = useState(new Array(5).fill(false));
     const buyerId = sessionStorage.getItem("buyer_id");
+    // Category => thik korte hbe
+    // district = districtValue
+    // division = divisionValue
+    // price[gte]=minPrice&price[lte]=maxPrice
+    // rating => thik korte hbe
 
+    // useEffect(()=>{
+    //     categoryCheckbox.forEach((catCheck, index)=>{
+    //         if(catCheck){
+    //             let newCategory = [...selectedCategory];
+    //             newCategory[index] = categories[index];
+    //             setCategory(newCategory);
+    //         }
+    //         console.log("The selected categories are:\n", selectedCategory);
+    //     })
+    // },[categoryCheckbox])
+
+    const filtering = () => {
+        axios.get(`http://localhost:3000/product-listing?category=${selectedCategory}&district=${districtValue}&division=${divisionValue}&rating=${selectedRating}&price[gte]=${minPrice}&price[lte]=${maxPrice}`)
+            .then((response) => {
+                // console.log("The filtered response is\n", response);
+                // console.log("The filtered data is\n", response.data);
+                setProducts(response.data);
+                setCount(response.data.length);
+            })
+    }
 
     useEffect(() => {
-        axios.get('http://localhost:3000/product-listing')
+        axios.get(`http://localhost:3000/product-listing`)
             .then((response) => {
                 // console.log(response.data);
                 setProducts(response.data);
                 setCount(response.data.length);
-                console.log("from product:" + sessionStorage.getItem("uid"));
+                // console.log("from product:" + sessionStorage.getItem("uid"));
             })
     }, [])
     return (
         <>
-            {buyerId ? <CraftForm  callback2 = {callbackmessage_land} /> : <Navbar />}
-            {notification.toggle && <Notification/>}
+            {buyerId ? <CraftForm callback2={callbackmessage_land} /> : <Navbar />}
+            {notification.toggle && <Notification />}
             <div className={style.container}>
                 <div className={style['hero-section']}>
                     <h1>Handicraft Products</h1>
@@ -134,11 +161,20 @@ export default function ProductListing() {
                                         }
                                         return <li key={index}>
                                             <label style={styling}>
-                                                <input type="checkbox" checked={categoryCheckbox[index]} onChange={() => {
+                                                <input type="checkbox" checked={categoryCheckbox[index]} onChange={(e) => {
+                                                    e.preventDefault;
                                                     const updatedCheckbox = [...categoryCheckbox];
                                                     updatedCheckbox[index] = !categoryCheckbox[index];
                                                     // console.log("Checkbox state updated:", updatedCheckbox);
                                                     setCategoryCheckbox(updatedCheckbox);
+                                                    console.log("Before setting the category\n", selectedCategory);
+                                                    if (updatedCheckbox[index]) {
+                                                        setCategory((prev) => [...prev, categories[index]]);
+                                                    } else {
+                                                        setCategory((prev) => prev.filter((cat) => cat !== categories[index]));
+                                                    }
+                                                    console.log("After setting the category\n", selectedCategory);
+
                                                 }} />
                                                 {'  ' + cat}
                                             </label>
@@ -160,13 +196,13 @@ export default function ProductListing() {
                             {isLocationOpen &&
                                 <>
                                     <select onChange={(e) => setDivisionValue(e.target.value)} value={divisionValue}>
-                                        <option value="">Select a division</option>
+                                        <option value=''>Select a division</option>
                                         {Division.getDivision()?.map(div => {
                                             return <option value={div}>{div}</option>
                                         })}
                                     </select>
                                     <select value={districtValue} onChange={(e) => setDistrictValue(e.target.value)}>
-                                        <option value="">Select a district</option>
+                                        <option value=''>Select a district</option>
                                         {Division.getDistrict(divisionValue)?.map((dist) => {
                                             return <option value={dist}>{dist}</option>
                                         })}
@@ -201,6 +237,12 @@ export default function ProductListing() {
                                                         const updatedCheckbox = [...ratingCheckbox];
                                                         updatedCheckbox[index] = !ratingCheckbox[index];
                                                         setRatingCheckbox(updatedCheckbox);
+
+                                                        if (updatedCheckbox[index]) {
+                                                            setRating((prev) => [...prev, 5 - index]);
+                                                        } else {
+                                                            setRating((prev) => prev.filter((rat) => rat !== (5 - index)));
+                                                        }
                                                     }}
                                                 />
                                                 <ShowStar rating={5 - index} sz={20} />
@@ -234,6 +276,7 @@ export default function ProductListing() {
                         </div>
                         <Button
                             text="Apply"
+                            change={filtering}
                         />
                     </div>
                     <div className={style['product-list']}>
@@ -244,13 +287,14 @@ export default function ProductListing() {
                         </div>
                         <div className={style['product-cards']}>
                             {products.map((product, index) => {
-                                const { _id, productName, district, division, price, Product_img1 } = product;
+                                const { _id, productName, district, division, price, Product_img1,category } = product;
                                 return (
                                     <Link to={`/product-listing/${_id}`} key={_id}>
                                         <Card
-                                            image={Product_img1 ? Product_img1: nakshiKathaImage}
+                                            image={Product_img1 ? Product_img1 : nakshiKathaImage}
                                             rating={4}
                                             productName={productName}
+                                            category={category}
                                             location={`${district}, ${division}`}
                                             price={`${price} Tk`}
                                         />
@@ -263,7 +307,7 @@ export default function ProductListing() {
                     </div>
                 </div>
             </div>
-            {messageset && <Messaging closemessage={closemessage}/>}
+            {messageset && <Messaging closemessage={closemessage} />}
             <Footer />
         </>
     );
