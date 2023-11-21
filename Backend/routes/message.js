@@ -121,15 +121,22 @@ router.get('/:id',async (req,res)=>{
 
 router.post('/conversation', async (req, res) => {
     try {
-        //const id = "651adc5c7bea3ef7b5ff632f";
         const { senderId, receiverId } = req.body;
-        const newConversation = new Conversation({ members: [senderId,receiverId] });
-        await newConversation.save()
-        res.status(200).send('Conversation created successfully')
+        const check = await Conversation.find({ members: [senderId, receiverId] });
+
+        if (check.length > 0) {
+            res.status(409).send('Conversation already exists');
+        } else {
+            const newConversation = new Conversation({ members: [senderId, receiverId] });
+            await newConversation.save();
+            res.status(201).send('Conversation created successfully');
+        }
     } catch (error) {
-        console.log(`Error while posting conversation\n ${error}`)
+        console.error(`Error while posting conversation\n ${error}`);
+        res.status(500).send('Internal Server Error');
     }
 });
+
 router.get('/conversation/:id', async (req, res) => {//id holo buyer er
     try {
         const userId = req.params.id;

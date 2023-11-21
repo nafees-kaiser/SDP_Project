@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import style from "./Notification.module.css"
 import Notification_txt from "./Components/Notification_txt"
 import {get_notification_request,notification_delete} from "./Actions/notification_redux"
+import axios from 'axios';
 const Notification = ()=>{
-    const buyerId = sessionStorage.getItem("buyer_id");
+    const buyerId = sessionStorage.getItem("seller_id");
     const {isLoading,error,info} = useSelector((state)=> state.notificationvalue)
     const dispatch = useDispatch()
     console.log(info)
@@ -14,6 +15,7 @@ const Notification = ()=>{
     const deleteNotification = () => {
         dispatch(notification_delete(buyerId))
     };
+    
     return (
         <>
             <div className={style.container}>
@@ -33,7 +35,7 @@ const Notification = ()=>{
 
                     </div>
                 </div>
-                <div className={style.lower} onClick={deleteNotification} >
+                <div className={style.lower} onClick={deleteNotification}>
                     <p>Mark as Read</p>
                 </div>
             </div>

@@ -6,7 +6,8 @@ import axios from "axios";
 // import Button from './Button.jsx';
 // import { Link } from "react-router-dom";
 import ProfileBox from '../ProfileBox';
-
+import { useDispatch, useSelector } from 'react-redux';
+import notification  from '../Actions/notification'
 const Navbar = (props) =>{
 
     const [data, setData] = useState({});
@@ -14,7 +15,8 @@ const Navbar = (props) =>{
     const [isModalOpen, setIsModalOpen] = useState(false);
     const sellerId = sessionStorage.getItem("seller_id");
     const overlayRef = useRef(null);
-
+    const value = useSelector(state => state.toggle)
+    const dispatch = useDispatch();
     const level_message = (data)=>{
       setmess_hook(true);
       console.log("Profile ", data); 
@@ -41,7 +43,10 @@ const Navbar = (props) =>{
       }
     // document.body.style.overflow = isModalOpen ? 'auto' : 'hidden';
   };
-
+  const notificationTogg = ()=>{
+    dispatch(notification())
+    console.log("TOGGLE: ",value.toggle)
+  }
   const handleOverlayClick = (e) => {
     if (e.target === overlayRef.current) {
       toggleModal();
@@ -72,7 +77,7 @@ const Navbar = (props) =>{
                     {/* <div className={Style.profile}>
                         <img src="./images/icons8-male-user-50.png" alt="" onClick={openmodel} />
                         </div> */}
-                    <div className={Style.icons}>
+                    <div className={Style.icons} onClick={notificationTogg} >
                         <i className="fa-regular fa-bell"></i>
                         <p>Notifications</p>
                     </div>

@@ -13,7 +13,7 @@ const socket = io.connect("http://localhost:3000")
 const Messaging = (props) => {
   const [socket,setsocket] = useState(null);
   const [conversation,setconversation] = useState();
-  const [messages,setmessages] = useState();
+  const [messages,setmessages] = useState({ messagesCopy: [] });
   const [message,setmessage] = useState();
   const [conversationId,setconversationId]= useState();
   const [receiver,setreceiver] = useState();

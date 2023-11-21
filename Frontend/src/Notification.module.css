@@ -11,7 +11,7 @@
 .container {
     width: 450px;
     height: auto;
-    position: fixed;
+    position: absolute;
     border: 1px solid black;
     border-radius: 10px;
     z-index: 100;
@@ -44,10 +44,11 @@
     height: 7%;
     box-shadow: 1px -2px var(--primary-color);
     bottom: 0;
+    cursor: pointer;
 }
 .container .lower  > p {
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-family: var(--text);
     color: rgb(32, 184, 174);
     bottom: 0;

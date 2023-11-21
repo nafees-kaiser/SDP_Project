@@ -3,6 +3,8 @@ import { Line, Pie } from 'react-chartjs-2';
 import axios from 'axios';
 import { io } from "socket.io-client";
 import ProfileBox from "./ProfileBox.jsx";
+import { useDispatch, useSelector } from 'react-redux';
+import Notification from "./Notification_seller.jsx";
 import {
     Chart as ChartJS,
     LineElement,
@@ -36,6 +38,7 @@ const Home_seller = ()=>{
     const [messageset,setmessagesetter] = useState(false);
     const [salesDatatable, setSalesData] = useState([]);
     const [salescount, setSalescount] = useState([]);
+    const notification = useSelector(state => state.toggle)
     const [salesData] = useState([
         { no: 1, customerName: 'Customer 1', productName: 'Product A', quantity: 5, price: 10 },
         { no: 2, customerName: 'Customer 2', productName: 'Product B', quantity: 3, price: 15 },
@@ -151,6 +154,7 @@ const Home_seller = ()=>{
             {/* {sellerId ? <LoginNav /> :<Navbar /> } */}
             <LoginNav callback2 = {callbackmessage_land} />
             {/* <Navbar openmodel={openmodel}/> */}
+            {notification.toggle && <Notification/>}
             { auth && <ProfileBox closemodel={closemodel}/> }
             <div className={Style.line}></div>
             <div className={Style.header}>

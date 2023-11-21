@@ -150,10 +150,10 @@ router.get('/:userID', async (req, res) => {
 //delete notification of a user
 router.delete('/:userID', async (req, res) => {
     try {
-      const userID = req.params.userID;
+      const receiverId = req.params.userID;
   
       // Delete all notifications that belong to the given userID
-      const result = await Notification.deleteMany({ userID });
+      const result = await Notification.deleteMany({ receiverId });
   
       res.json({ message: 'Delete notifications' });
     } catch (error) {

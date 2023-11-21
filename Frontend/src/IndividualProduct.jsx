@@ -74,13 +74,24 @@ export default function IndividualProduct() {
             receiverId: SellerId,
             senderId: buyerId
         })
-            .then(response => {
-                console.log(response.data);
-                setmessage('')
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        .then(response => {
+            console.log(response.data);
+            setmessage('')
+        })
+        .catch(error => {
+            console.error(error);
+        });
+        axios.post(`http://localhost:3000/notifications`,{
+            senderId: buyerId,
+            receiverId: SellerId,
+            notificationDescription: ' Messaged you'
+          })
+          .then((res)=>{
+            console.log(res);
+          })
+          .catch((err)=>{
+            console.error(err);
+          })
 
     }
     const routeChange = () => {
