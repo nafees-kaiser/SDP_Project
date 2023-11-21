@@ -8,9 +8,10 @@
 .container {
     width: 1300px;
     height: 90vh;
-    border: 1px solid red;
     margin: auto;
-    box-shadow: -3px 3px 3px red;
+    border: 2px solid #E9E9E9;
+    border-radius: 10px;
+    margin-top: 10px;
 }
 .container .up {
     width: 100%;

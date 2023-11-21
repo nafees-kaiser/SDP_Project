@@ -5,12 +5,14 @@ import { useParams } from "react-router-dom";
 import CraftForm from "./Components/CraftForm";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
-
+import { useDispatch, useSelector } from 'react-redux';
+import Notification from "./Notification.jsx";
 export default function IndividualKnowTheCraft() {
     const { id } = useParams();
     const [data, setData] = useState([]);
     const [sellerName, setSellerName] = useState('');
     const buyerId = sessionStorage.getItem("buyer_id");
+    const notification = useSelector(state => state.toggle)
     useEffect(() => {
         axios.get(`http://localhost:3000/know-the-craft/${id}`)
             .then(response => {
@@ -34,6 +36,7 @@ export default function IndividualKnowTheCraft() {
     return (
         <>
             {buyerId ? <CraftForm /> : <Navbar />}
+            {notification && <Notification/>}
             <div className={style.container}>
 
                 <div className={style['hero-section']} style={imageStyle}>

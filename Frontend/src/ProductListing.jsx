@@ -13,6 +13,8 @@ import Footer from "./Components/Footer";
 import Division from "./Classes/divisionDistrict";
 import { ShowStar } from "./Components/RatingStars";
 import Messaging from "./Messaging_buyer";
+import { useDispatch, useSelector } from 'react-redux';
+import Notification from "./Notification.jsx";
 
 export default function ProductListing() {
     const [messageset,setmessagesetter] = useState(false);
@@ -28,6 +30,7 @@ export default function ProductListing() {
     // For location dropdown
     const [divisionValue, setDivisionValue] = useState('');
     const [districtValue, setDistrictValue] = useState('');
+    const notification = useSelector(state => state.toggle)
 
     const callbackmessage_land = (data)=>{
         console.log("Land ", data);
@@ -99,6 +102,7 @@ export default function ProductListing() {
     return (
         <>
             {buyerId ? <CraftForm  callback2 = {callbackmessage_land} /> : <Navbar />}
+            {notification.toggle && <Notification/>}
             <div className={style.container}>
                 <div className={style['hero-section']}>
                     <h1>Handicraft Products</h1>

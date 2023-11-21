@@ -221,6 +221,7 @@ app.delete('/review/delete/:reviewId', async (req, res) => {
 
 //-------Wishlist APIs-------
 //whistlist create
+
 app.post('/create/wishlist', async (req, res) => {
   try {
     const { buyerid, productid } = req.body;
@@ -281,81 +282,8 @@ app.delete('/delete/wishlist/:buyerID', async (req, res) => {
 
 //-----Notification APIs-----
 //create notification using id
-app.post('/add/notifications', async (req, res) => {
-  try {
-    const { userID, notificationDescription } = req.body;
-
-    // Create a new notification object
-    const newNotification = new Notifications({
-      userID,
-      notificationDescription
-    });
-
-    // Save the notification to the database
-    await newNotification.save();
-
-    res.status(201).json({ notification: newNotification });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
-
-//view notification using user ID
-app.get('/get/notifications/:userID', async (req, res) => {
-  try {
-    const userID = req.params.userID;
-
-    // Find notifications that belong to the given userID
-    const notifications = await Notifications.find({ userID });
-
-    if (notifications.length === 0) 
-    {
-      res.status(200).json({ notifications: 0 });
-    } 
-    else 
-    {
-      res.status(200).json({ notifications });
-    }
-  } catch (error) {
-    console.error(error);
-    res.json({ message: 'Server Error' });
-  }
-});
-
-//delete notification of a user
-app.delete('/delete/notifications/:userID', async (req, res) => {
-  try {
-    const userID = req.params.userID;
-
-    // Delete all notifications that belong to the given userID
-    const result = await Notifications.deleteMany({ userID });
-
-    res.json({ message: 'Delete notifications' });
-  } catch (error) {
-    console.error(error);
-    res.json({ message: 'Server Error' });
-  }
-});
-
-app.get('/api/orders/:buyerId', async (req, res) => {
-  try {
-    const buyerId = req.params.buyerId;
-
-    // Find all orders with the given buyerId and populate the 'product' field
-    const orders = await Order.find({ 'buyerId': buyerId }).populate('product.productId');
-
-    // Return the orders in the response
-    res.json({ orders });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
-
-
-
+const Notification = require('./routes/notification.js')
+app.use('/notifications',Notification)
 
 
 const checkoutRouter = require('./routes/checkout');

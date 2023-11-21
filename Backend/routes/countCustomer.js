@@ -9,7 +9,7 @@ router.get('/:id', async (req, res) => {
     try {
       const id = req.params.id;
     // Find and populate the orders
-    console.log(`in count customer, The id of seller is ${id}`);
+    //console.log(`in count customer, The id of seller is ${id}`);
     const orders = await Order
       .find({ sellerId: id })
       .populate('product.productId')

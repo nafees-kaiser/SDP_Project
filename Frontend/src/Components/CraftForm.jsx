@@ -8,6 +8,8 @@ import BuyerProfileBox from '../BuyerProfileBox';
 import {FaSearch} from 'react-icons/fa'
 import LanguageSwitcher from './LanguageSwitcher';
 import Message from './messagebox';
+import { useDispatch, useSelector } from 'react-redux';
+import notification  from '../Actions/notification'
 
 const CraftForm = (props) =>{
 
@@ -16,7 +18,9 @@ const CraftForm = (props) =>{
     const [isModalOpen, setIsModalOpen] = useState(false);
     const buyerId = sessionStorage.getItem("buyer_id");
     const overlayRef = useRef(null);
-    console.log("Value ",props.value)
+    const value = useSelector(state => state.toggle)
+    const dispatch = useDispatch();
+
     const level_message = (data)=>{
         setmess_hook(true);
         console.log("Profile ", data); 
@@ -43,6 +47,10 @@ const CraftForm = (props) =>{
         }
         // document.body.style.overflow = isModalOpen ? 'auto' : 'hidden';
     };
+    const notificationTogg = ()=>{
+        dispatch(notification())
+        console.log("TOGGLE: ",value.toggle)
+    }
 
   const handleOverlayClick = (e) => {
     if (e.target === overlayRef.current) {
@@ -67,7 +75,7 @@ const CraftForm = (props) =>{
                             <i class="fas fa-user"></i>
                             <p>{data.name}</p>
                         </button>
-                        <button className={Style.icons}>
+                        <button className={Style.icons} onClick={notificationTogg}>
                             <i class="fa-regular fa-bell"></i>
                             <p>Notifications</p>
                         </button>

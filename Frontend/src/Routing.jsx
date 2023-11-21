@@ -38,6 +38,7 @@ import SellerProductListing from "./SellerProductListing.jsx";
 import IndividualKnowTheCraft from "./IndividualKnowTheCraft.jsx";
 import Order_History from "./Order_History.jsx";
 
+import Notification from "./Notification.jsx";
 
 const Routing = ()=>{
     return (
@@ -73,9 +74,10 @@ const Routing = ()=>{
                 <Route path='/sendmailseller' element={<SendMailSeller/>}></Route>
                 <Route path='/forgotpass_seller' element={<ForgotpassSeller/>}></Route>
                 <Route path='/passChangeVerify_seller' element={<PassChangeVerifySeller/>}></Route>
-
+                <Route path='/community' element={<Community_home/>}></Route>
                 <Route path='/Add_know' element={<Add_Know/>}></Route>
                 <Route path='/sellerProductListing' element={<SellerProductListing/>}></Route>
+                <Route path='/Notification' element={<Notification/>}></Route>
                 {/* <Route path='/star' element={<RatingStar/>}></Route> */}
                 <Route path='/Order_History' element={<Order_History/>}></Route>
             </Routes>

@@ -13,10 +13,12 @@ import GoToProduct from "./components/GoToProduct";
 import BuyerProfileBox from "./BuyerProfileBox.jsx";
 import { useState } from "react";
 import Messaging from "./Messaging_buyer";
-
+import { useDispatch, useSelector } from 'react-redux';
+import Notification from "./Notification.jsx";
 const LandingPageFinal = () => {
   const [messageset,setmessagesetter] = useState(false);
   const buyerId = sessionStorage.getItem("buyer_id");
+  const notification = useSelector(state => state.toggle)
   const callbackmessage_land = (data)=>{
     console.log("Land ", data);
     setmessagesetter(data);
@@ -31,7 +33,7 @@ const LandingPageFinal = () => {
       {buyerId ? <CraftForm  callback2 = {callbackmessage_land}/> : <Navbar />}
       {/* messageset && <Messaging />*/}
       {/* <Navbar /> */}
-      
+      {notification.toggle && <Notification/>}
       <div className={styles.landingPageFinal}>
         
        
