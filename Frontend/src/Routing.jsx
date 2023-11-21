@@ -36,7 +36,7 @@ import Community_home from "./Community_home.jsx";
 import SellerProductListing from "./SellerProductListing.jsx";
 // import {RatingStar} from "./Components/RatingStars.jsx";
 import IndividualKnowTheCraft from "./IndividualKnowTheCraft.jsx";
-
+import Notification from "./Notification.jsx";
 
 const Routing = ()=>{
     return (
@@ -72,9 +72,10 @@ const Routing = ()=>{
                 <Route path='/sendmailseller' element={<SendMailSeller/>}></Route>
                 <Route path='/forgotpass_seller' element={<ForgotpassSeller/>}></Route>
                 <Route path='/passChangeVerify_seller' element={<PassChangeVerifySeller/>}></Route>
-
+                <Route path='/community' element={<Community_home/>}></Route>
                 <Route path='/Add_know' element={<Add_Know/>}></Route>
                 <Route path='/sellerProductListing' element={<SellerProductListing/>}></Route>
+                <Route path='/Notification' element={<Notification/>}></Route>
                 {/* <Route path='/star' element={<RatingStar/>}></Route> */}
             </Routes>
         </>

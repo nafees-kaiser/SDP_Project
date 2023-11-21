@@ -1,6 +1,7 @@
 import React,{ useState,useEffect } from "react";
 import { Line, Pie } from 'react-chartjs-2';
 import axios from 'axios';
+import { io } from "socket.io-client";
 import ProfileBox from "./ProfileBox.jsx";
 import {
     Chart as ChartJS,
@@ -29,6 +30,8 @@ ChartJS.register(
     Legend
 )
 const Home_seller = ()=>{
+    const [socket,setsocket] = useState();
+
     const [auth,setAuth]= useState(false);
     const [messageset,setmessagesetter] = useState(false);
     const [salesDatatable, setSalesData] = useState([]);
@@ -52,6 +55,21 @@ const Home_seller = ()=>{
       const closemessage = ()=>{
         setmessagesetter(false)
       }
+
+
+
+
+    useEffect(()=>{
+        setsocket(io("http://localhost:8085"))
+    },[])
+    useEffect(()=>{
+        const id = sessionStorage.getItem("seller_id");
+        socket?.emit('addUser',id)
+        socket?.on('getUsers',users =>{
+        console.log('Buyer_activeUsers:  ',users)
+        })
+    },[socket])  
+
 
     // const sellerId = sessionStorage.getItem("seller_id");
 

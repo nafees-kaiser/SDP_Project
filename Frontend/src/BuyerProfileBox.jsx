@@ -89,7 +89,7 @@ const BuyerProfileBox = (props) => {
           alt=""
           src="/images/-icon-nav-icon-list-a.svg"
         />
-        <div className={styles.myOrders1}>My Orders</div>
+        <div className={styles.myOrders1} >My Orders</div>
       </button>
       {/* <button className={styles.track}>
         <div className={styles.trackChild} />

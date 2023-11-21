@@ -10,14 +10,15 @@ import { Link } from "react-router-dom";
 import Button from "./Components/Button";
 import Footer from "./Components/Footer";
 import Division from "./Classes/divisionDistrict";
-
+import { useDispatch, useSelector } from 'react-redux';
+import Notification from "./Notification.jsx";
 
 export default function KnowTheCraft() {
     const [productCount, setCount] = useState(0);
     const [products, setProducts] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const buyerId = sessionStorage.getItem("buyer_id");
-
+    const notification = useSelector(state => state.toggle)
     const [divisionValue, setDivisionValue] = useState('');
     const [districtValue, setDistrictValue] = useState('');
 
@@ -32,6 +33,7 @@ export default function KnowTheCraft() {
     return (
         <>
             {buyerId ? <CraftForm /> : <Navbar />}
+            {notification.toggle && <Notification/>}
             <div className={style.container}>
                 {/* <div>navbar</div> */}
                 <div className={style['hero-section']}>

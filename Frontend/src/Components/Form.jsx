@@ -9,7 +9,7 @@ import PassChangeVerify from '../PassChangeVerify';
 const EditableInput = ({ defaultValue, onSave }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(defaultValue);
-
+  const user = sessionStorage.getItem('buyer_id');
   useEffect(() => {
     setValue(defaultValue);
   }, [defaultValue]);
@@ -27,6 +27,13 @@ const EditableInput = ({ defaultValue, onSave }) => {
     // Send the updated data to the server
     onSave(value);
     setIsEditing(false);
+    // useEffect(()=>{
+    //   axios.post(`http://localhost:3000//notifications`,{
+    //     senderId: user,
+    //     receiverId: user,
+    //     notificationDescription: 'Changed your Profile'
+    //   })
+    // },[])
     window.location.reload();
   };
 

@@ -9,7 +9,8 @@ import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import { ShowStar } from "./Components/RatingStars";
 import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from 'react-redux';
+import Notification from "./Notification.jsx";
 import Messaging from "./Messaging_buyer";
 
 
@@ -22,6 +23,7 @@ export default function IndividualProduct() {
     const [reviewDescription, setReviewData] = useState();
     const [reviews, setreview] = useState([]);
     const [amount, setAmount] = useState(0)
+    const notification = useSelector(state => state.toggle)
     const navigate = useNavigate();
     const handleChange = (e) => {
         setReviewData(e.target.value);
@@ -139,6 +141,7 @@ export default function IndividualProduct() {
         <>
             {/* <Navbar/> */}
             {buyerId ? <CraftForm  callback2 = {callbackmessage_land}/> : <Navbar />}
+            {notification.toggle && <Notification/>}
             <div className={style.container}>
                 {/* <div>navbar</div> */}
                 <div className={style['product-wrapper']}>
