@@ -21,6 +21,15 @@ const CraftForm = (props) =>{
     const value = useSelector(state => state.toggle)
     const dispatch = useDispatch();
 
+    const [searchText, setSearchText] = useState('');
+
+    const changeSearchText = (e)=>{
+        const {searchTextCallback} = props;
+        setSearchText(e.target.value);
+        // console.log(searchText);
+        searchTextCallback(e.target.value);
+    }
+
     const level_message = (data)=>{
         setmess_hook(true);
         console.log("Profile ", data); 
@@ -101,9 +110,9 @@ const CraftForm = (props) =>{
                         {/* <a href="#">Know about craft</a> */}
                     </div>
                     <div className={Style.right}>
-                        <input type="text" className={Style.search} placeholder="Search..."></input>
+                        <input type="text" className={Style.search} value={searchText} placeholder="Search..." onChange={changeSearchText}></input>
                         {/* <i className="fa fa-search icon"></i>    */}
-                        <button><FaSearch/></button>
+                        <button onClick={props.searchCallback}><FaSearch/></button>
                     </div> 
                 </div>
             </div>

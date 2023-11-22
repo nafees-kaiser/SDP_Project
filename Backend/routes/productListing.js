@@ -7,27 +7,42 @@ const Sells = require('../Model/SellsSchema')
 router.get('/', async (req, res) => {
     try {
         // const filtering = req.query;
-        const { category, district, division, rating, price } = req.query; // Replace with your actual object
+        const { category, district, division, rating, price, search } = req.query; // Replace with your actual object
 
         // Clear district if division is empty
         const adjustedDistrict = division ? new RegExp(`^${district}$`, 'i') : '';
 
         const query = {
-            ...(category ? { category: { $in: category.split(',').map(cat=>new RegExp(`^${cat}$`, 'i')) } } : {}),
+            ...(category ? { category: { $in: category.split(',').map(cat => new RegExp(`^${cat}$`, 'i')) } } : {}),
             ...(adjustedDistrict ? { district: adjustedDistrict } : {}),
-            ...(division ? { division:new RegExp(`^${division}$`, 'i') } : {}),
+            ...(division ? { division: new RegExp(`^${division}$`, 'i') } : {}),
             ...(rating ? { rating: { $in: rating.split(',') } } : {}),
             ...(price && price.gte && price.lte ? { price: { $gte: price.gte, $lte: price.lte } } : {}),
+            ...(
+                search
+                    ? {
+                        $or: [
+                            { productName: { $regex: search, $options: 'i' } },
+                            { category: { $regex: search, $options: 'i' } },
+                            { district: { $regex: search, $options: 'i' } },
+                            { division: { $regex: search, $options: 'i' } },
+                            // Add more fields as needed
+                        ],
+                    }
+                    : {}
+            ),
         };
         // console.log("Before formatting\n", req.query);
         // console.log("After formatting\n", query);
+        // console.log(typeof query);
+        // console.log(query.$or[0]);
 
 
         const result = await Products.find(query);
-        // console.log(`Products are ${result}`)
+        // console.log(`Products are ${result}`);
         res.json(result);
     } catch (error) {
-        console.log(`Error while fetching products ${error}`)
+        console.log(`Error while fetching products ${error}`);
     }
 });
 
