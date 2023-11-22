@@ -30,7 +30,7 @@ const EditableInput = ({ defaultValue, onSave }) => {
     axios.post(`http://localhost:3000/notifications`,{
       senderId: user,
       receiverId: user,
-      notificationDescription: 'Changed your Profile'
+      notificationDescription: ' Changed your Profile'
     })
     .then((res)=>{
       console.log(res);
@@ -138,7 +138,17 @@ const closemodel = () => {
                 },
             });
             setCode(verify_code.data.data);
-
+            axios.post(`http://localhost:3000/notifications`,{
+              senderId: user,
+              receiverId: user,
+              notificationDescription: ' Changed your Password'
+            })
+            .then((res)=>{
+              console.log(res);
+            })
+            .catch((err)=>{
+              console.error(err);
+            })
             if (verify_code.status !== 200) {
                 alert('Error sending verification code');
                 closemodel();

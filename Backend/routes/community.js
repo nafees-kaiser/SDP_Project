@@ -94,22 +94,20 @@ router.post('/',async (req,res)=>{
         console.log(error,"Error")
     }
 })
-/*
-router.get('/:id',async (req,res)=>{
+
+router.get('/',async (req,res)=>{
     try {
-        const userId = req.params.id;
-        
-        if(!userId) return res.status(200).send('Conversation Id is required')
-        const Conversation = await Message.find({conversationId:userId});
+
+        const community = await Community.find();
         //console.log(Conversation)
-        const messageData = Promise.all(Conversation.map(async (message) =>{
+        const messageData = Promise.all(community.map(async (message) =>{
             const seller = await Seller.findById(message.senderId)
             const buyer = await Buyer.findById(message.senderId)
             if(seller) {
-                return { user: {email: seller.email,name:seller.name,tag:"seller"},message:message.message  }
+                return { user: {email: seller.email,name:seller.name,tag:"seller"},message:message.message,attachment:message.attachment,date:message.date  }
             }
             else {
-                return { user: {email: buyer.email,name:buyer.name,tag:"buyer"},message:message.message  }
+                return { user: {email: buyer.email,name:buyer.name,tag:"buyer"},message:message.message,attachment:message.attachment,date:message.date  }
             }
             
         }))
@@ -119,7 +117,7 @@ router.get('/:id',async (req,res)=>{
         console.log(error,"Error")
     }
 })
-
+/*
 router.post('/conversation', async (req, res) => {
     try {
         const { senderId, receiverId } = req.body;
