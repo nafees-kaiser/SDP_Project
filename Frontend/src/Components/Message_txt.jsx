@@ -17,6 +17,9 @@ const message = ({text})=>{
                     <div className={Style.box}>
                         <p>{text}</p>
                     </div>
+                    <div className={Style.like}>
+                        <i class="fa-regular fa-thumbs-up"></i>
+                    </div>
                 </div>
             </div>
         </>
