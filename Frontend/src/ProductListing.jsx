@@ -167,13 +167,13 @@ export default function ProductListing() {
                                                     updatedCheckbox[index] = !categoryCheckbox[index];
                                                     // console.log("Checkbox state updated:", updatedCheckbox);
                                                     setCategoryCheckbox(updatedCheckbox);
-                                                    console.log("Before setting the category\n", selectedCategory);
+                                                    // console.log("Before setting the category\n", selectedCategory);
                                                     if (updatedCheckbox[index]) {
                                                         setCategory((prev) => [...prev, categories[index]]);
                                                     } else {
                                                         setCategory((prev) => prev.filter((cat) => cat !== categories[index]));
                                                     }
-                                                    console.log("After setting the category\n", selectedCategory);
+                                                    // console.log("After setting the category\n", selectedCategory);
 
                                                 }} />
                                                 {'  ' + cat}
