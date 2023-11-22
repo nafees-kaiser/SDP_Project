@@ -285,6 +285,10 @@ app.delete('/delete/wishlist/:buyerID', async (req, res) => {
 const Notification = require('./routes/notification.js')
 app.use('/notifications',Notification)
 
+///Community
+const Community = require('./routes/community.js')
+app.use('/community',Community);
+
 
 const checkoutRouter = require('./routes/checkout');
 app.use("/checkout", checkoutRouter);
