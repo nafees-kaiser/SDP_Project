@@ -11,7 +11,7 @@ const Forgotpass = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const email = localStorage.getItem('email');
-
+  const user = sessionStorage.getItem('buyer_id');
   useEffect(() => {
     console.log("reset pass page:", email);
 }, [email]);
@@ -39,6 +39,19 @@ const Forgotpass = () => {
         .catch((error) => {
           console.error("API request failed:", error);
         });
+
+        axios.post(`http://localhost:3000/notifications`,{
+          senderId: user,
+          receiverId: user,
+          notificationDescription: ' Changed your Password'
+        })
+        .then((res)=>{
+          console.log(res);
+        })
+        .catch((err)=>{
+          console.error(err);
+        })
+
     } else {
       console.log("Passwords do not match");
     }

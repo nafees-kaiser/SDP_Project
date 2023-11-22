@@ -1,7 +1,7 @@
 import React from "react";
 import Style from "./message_pic.module.css"
 
-const message = ({text})=>{
+const message = ({name,text,attachment,time})=>{
     
     return (
         <>
@@ -11,15 +11,15 @@ const message = ({text})=>{
                     </div>
                     <div className={Style.anotherone}>
                         <div className={Style.text}>
-                            <p>Shahabuddin Akhon</p>
-                            <h5>Today at 4:30 PM</h5>
+                            <p>{name}</p>
+                            <h5>{time}</h5>
                         </div>
 
                         <div className={Style.box}>
                             <p>{text}</p>
                         </div>
                         <div className={Style.inner_pic}>
-                            <img src=".\images\384194017_640104084770772_829708242717613349_n.jpg" alt="" />
+                            <img src={attachment} alt="" />
                         </div>
                         
                         <div className={Style.like}>

@@ -109,7 +109,7 @@ const CraftForm = (props) =>{
             </div>
             {isModalOpen && (
                 <div className={Style.overlay} onClick={handleOverlayClick} ref={overlayRef}>
-                 <BuyerProfileBox callback={level_message} />
+                 {value? (<BuyerProfileBox callback={level_message} />):(<p></p>)}
                 </div>
             )}
 

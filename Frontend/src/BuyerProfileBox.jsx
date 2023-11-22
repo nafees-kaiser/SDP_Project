@@ -3,13 +3,16 @@ import { useState, useEffect } from "react";
 import styles from "./BuyerProfileBox.module.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from 'react-redux';
+import notification  from './Actions/notification'
 
 const BuyerProfileBox = (props) => {
 
   const [data, setData] = useState({});
   const [messagebox,setmessagebox] = useState(false);
   const buyerId = sessionStorage.getItem("buyer_id");
+  const value = useSelector(state => state.toggle)
+  const dispatch = useDispatch();
   console.log(props.value); 
   const navigate = useNavigate();
   const callbackmessage = () => {
@@ -29,6 +32,10 @@ const BuyerProfileBox = (props) => {
       });
   }, [buyerId]);
 
+  const notificationTogg = ()=>{
+    dispatch(notification())
+    console.log("TOGGLE: ",value.toggle)
+  }
   const handleSignOut = () => {
     // Clear sessionStorage when the "Sign Out" button is clicked
     sessionStorage.clear();
@@ -80,7 +87,7 @@ const BuyerProfileBox = (props) => {
       <button className={styles.notification}>
         <div className={styles.cartChild} />
         <img className={styles.iconBell} alt="" src="/images/-icon-bell.svg" />
-        <div className={styles.notification1}>Notification</div>
+        <div className={styles.notification1} onClick={notificationTogg} >Notification</div>
       </button>
       <button className={styles.myOrders}>
         <div className={styles.myOrdersChild} />
