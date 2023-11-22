@@ -10,10 +10,12 @@ import { Link } from "react-router-dom";
 import Button from "./Components/Button";
 import Footer from "./Components/Footer";
 import Division from "./Classes/divisionDistrict";
+import Messaging from "./Messaging_buyer";
 import { useDispatch, useSelector } from 'react-redux';
 import Notification from "./Notification.jsx";
 
 export default function KnowTheCraft() {
+    const [messageset, setmessagesetter] = useState(false);
     const [productCount, setCount] = useState(0);
     const [products, setProducts] = useState([]);
     const [searchValue, setSearchValue] = useState('');
@@ -25,6 +27,13 @@ export default function KnowTheCraft() {
     const [isDistrictOpen, toggleDistrict] = useState(false);
     const [districtCheckbox, setDistrictCheckbox] = useState([]);
     const [districtValue, setDistrict] = useState([]);
+    const callbackmessage_land = (data) => {
+        console.log("Land ", data);
+        setmessagesetter(data);
+    }
+    const closemessage = () => {
+        setmessagesetter(false)
+    }
     useEffect(()=>{
         
         setDistrictCheckbox(new Array(Division.getDistrict(divisionValue).length).fill(false));
@@ -50,7 +59,7 @@ export default function KnowTheCraft() {
     }, [])
     return (
         <>
-            {buyerId ? <CraftForm /> : <Navbar />}
+            {buyerId ? <CraftForm callback2={callbackmessage_land} /> : <Navbar />}
             {notification.toggle && <Notification />}
             <div className={style.container}>
                 {/* <div>navbar</div> */}
@@ -172,6 +181,7 @@ export default function KnowTheCraft() {
                     </div>
                 </div>
             </div>
+            {messageset && <Messaging closemessage={closemessage} />}
             <Footer />
         </>
     );
