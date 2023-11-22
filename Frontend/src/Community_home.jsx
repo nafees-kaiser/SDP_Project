@@ -26,9 +26,9 @@ const Community_home = ()=>{
                 <div className={style.up}>
                     {isLoading && <h1>Loading.............</h1>}
                     {Array.isArray(data)? ( data.map((value) => (
-                            <div key={value.id}>
+                            value.attachment? (<div key={value.id}>
                                 <Message_pic name={value.user.name} attachment={value.attachment} text={value.message} time={value.date}/>
-                            </div>
+                            </div>):(<Message_txt name={value.user.name} text={value.message} time={value.date}/>)
                         )) ):(<p>No Notification</p>)}
 
                 </div>
