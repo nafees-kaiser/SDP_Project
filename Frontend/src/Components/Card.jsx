@@ -1,7 +1,7 @@
 import style from './Card.module.css'
 import { ShowStar } from './RatingStars';
 
-export function KnowCraftCard({ image, desc, title }) {
+export function KnowCraftCard({ image, desc, title, location }) {
     return (
         <div className={style.card}>
             <img src={image} alt={title} />
@@ -9,7 +9,7 @@ export function KnowCraftCard({ image, desc, title }) {
                 {/* <p>{rating}</p> */}
                 {/* <ShowStar rating={rating} sz={25}/> */}
                 <p className={`${style['font-weight-700']}`}>{title}</p>
-                {/* <p>{location}</p> */}
+                <p>{location}</p>
                 <p>{desc}</p>
             </div>
         </div>

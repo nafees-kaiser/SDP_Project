@@ -90,25 +90,26 @@ export default function ProductListing() {
     // For rating checkbox
     const [ratingCheckbox, setRatingCheckbox] = useState(new Array(5).fill(false));
     const buyerId = sessionStorage.getItem("buyer_id");
-    // Category => thik korte hbe
-    // district = districtValue
-    // division = divisionValue
-    // price[gte]=minPrice&price[lte]=maxPrice
-    // rating => thik korte hbe
 
-    // useEffect(()=>{
-    //     categoryCheckbox.forEach((catCheck, index)=>{
-    //         if(catCheck){
-    //             let newCategory = [...selectedCategory];
-    //             newCategory[index] = categories[index];
-    //             setCategory(newCategory);
-    //         }
-    //         console.log("The selected categories are:\n", selectedCategory);
-    //     })
-    // },[categoryCheckbox])
+    // For searching:
+    const [searchText, setSearchText] = useState('');
+    const handleSearch = (value) => {
+        setSearchText(value);
+        // console.log("The search value in productlisting is\n", searchText);
+    }
+
+    const searching = () => {
+        axios.get(`http://localhost:3000/product-listing?search=${searchText}`)
+            .then((response) => {
+                // console.log("The filtered response is\n", response);
+                // console.log("The filtered data is\n", response.data);
+                setProducts(response.data);
+                setCount(response.data.length);
+            })
+    }
 
     const filtering = () => {
-        axios.get(`http://localhost:3000/product-listing?category=${selectedCategory}&district=${districtValue}&division=${divisionValue}&rating=${selectedRating}&price[gte]=${minPrice}&price[lte]=${maxPrice}`)
+        axios.get(`http://localhost:3000/product-listing?search=${searchText}&category=${selectedCategory}&district=${districtValue}&division=${divisionValue}&rating=${selectedRating}&price[gte]=${minPrice}&price[lte]=${maxPrice}`)
             .then((response) => {
                 // console.log("The filtered response is\n", response);
                 // console.log("The filtered data is\n", response.data);
@@ -128,7 +129,15 @@ export default function ProductListing() {
     }, [])
     return (
         <>
-            {buyerId ? <CraftForm callback2={callbackmessage_land} /> : <Navbar />}
+            {buyerId ?
+                <CraftForm
+                    callback2={callbackmessage_land}
+                    searchTextCallback={handleSearch}
+                    searchCallback={searching} />
+                : <Navbar
+                    searchTextCallback={handleSearch}
+                    searchCallback={searching}
+                />}
             {notification.toggle && <Notification />}
             <div className={style.container}>
                 <div className={style['hero-section']}>
@@ -167,13 +176,13 @@ export default function ProductListing() {
                                                     updatedCheckbox[index] = !categoryCheckbox[index];
                                                     // console.log("Checkbox state updated:", updatedCheckbox);
                                                     setCategoryCheckbox(updatedCheckbox);
-                                                    console.log("Before setting the category\n", selectedCategory);
+                                                    // console.log("Before setting the category\n", selectedCategory);
                                                     if (updatedCheckbox[index]) {
                                                         setCategory((prev) => [...prev, categories[index]]);
                                                     } else {
                                                         setCategory((prev) => prev.filter((cat) => cat !== categories[index]));
                                                     }
-                                                    console.log("After setting the category\n", selectedCategory);
+                                                    // console.log("After setting the category\n", selectedCategory);
 
                                                 }} />
                                                 {'  ' + cat}
@@ -287,7 +296,7 @@ export default function ProductListing() {
                         </div>
                         <div className={style['product-cards']}>
                             {products.map((product, index) => {
-                                const { _id, productName, district, division, price, Product_img1,category } = product;
+                                const { _id, productName, district, division, price, Product_img1, category } = product;
                                 return (
                                     <Link to={`/product-listing/${_id}`} key={_id}>
                                         <Card

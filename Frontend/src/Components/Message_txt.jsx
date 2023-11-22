@@ -1,7 +1,7 @@
 import React from "react";
 import Style from "./message_txt.module.css"
 
-const message = ({text})=>{
+const message = ({name,text,time})=>{
     
     return (
         <>
@@ -11,11 +11,14 @@ const message = ({text})=>{
                 </div>
                 <div className={Style.anotherone}>
                     <div className={Style.text}>
-                        <p>Shahabuddin Akhon</p>
-                        <h5>Today at 4:30 PM</h5>
+                        <p>{name}</p>
+                        <h5>{time}</h5>
                     </div>
                     <div className={Style.box}>
                         <p>{text}</p>
+                    </div>
+                    <div className={Style.like}>
+                        <i class="fa-regular fa-thumbs-up"></i>
                     </div>
                 </div>
             </div>
