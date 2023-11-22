@@ -178,7 +178,7 @@ const styles = {
     marginBottom: '20px',
   },
   reorderButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#7f33b5',
     color: 'white',
     padding: '12px 20px', // Rectangular shape
     border: 'none',
@@ -190,7 +190,7 @@ const styles = {
     transition: 'background-color 0.3s', // Transition for a smooth hover effect
   },
   reorderButtonHover: {
-    backgroundColor: '#45a049', // Darker color on hover
+    backgroundColor: '#5c009e', // Darker color on hover
   },
 };
 
