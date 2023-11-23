@@ -358,7 +358,7 @@ const Checkout = () => {
                                 <img
                                     className={styles.product2Item}
                                     alt=""
-                                    src="/images/rectangle-42@2x.png"
+                                    src={buyerProducts.Product_img1}
                                 />
                                 <button className={styles.trash} id="cancel_button" onClick={()=>{removeItem(productId._id)}}>
                                     <img className={styles.trashChild} alt="" src="/images/vector-8.svg" />
