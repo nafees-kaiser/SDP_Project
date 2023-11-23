@@ -10,13 +10,15 @@ import { Link } from "react-router-dom";
 import Button from "./Components/Button";
 import Footer from "./Components/Footer";
 import Division from "./Classes/divisionDistrict";
+import Messaging from "./Messaging_buyer";
 import { useDispatch, useSelector } from 'react-redux';
 import Notification from "./Notification.jsx";
 
 export default function KnowTheCraft() {
+    const [messageset, setmessagesetter] = useState(false);
     const [productCount, setCount] = useState(0);
     const [products, setProducts] = useState([]);
-    const [searchValue, setSearchValue] = useState('');
+
     const buyerId = sessionStorage.getItem("buyer_id");
     const notification = useSelector(state => state.toggle)
     const [divisionValue, setDivisionValue] = useState('');
@@ -25,13 +27,39 @@ export default function KnowTheCraft() {
     const [isDistrictOpen, toggleDistrict] = useState(false);
     const [districtCheckbox, setDistrictCheckbox] = useState([]);
     const [districtValue, setDistrict] = useState([]);
-    useEffect(()=>{
-        
+    const callbackmessage_land = (data) => {
+        console.log("Land ", data);
+        setmessagesetter(data);
+    }
+    const closemessage = () => {
+        setmessagesetter(false)
+    }
+
+
+
+    // searching
+    const [searchText, setSearchText] = useState('');
+    const handleSearch = (value) => {
+        setSearchText(value);
+        // console.log("The search value in productlisting is\n", searchText);
+    }
+
+    const searching = () => {
+        axios.get(`http://localhost:3000/know-the-craft?search=${searchText}`)
+            .then((response) => {
+                // console.log("The filtered response is\n", response);
+                // console.log("The filtered data is\n", response.data);
+                setProducts(response.data);
+                setCount(response.data.length);
+            })
+    }
+    useEffect(() => {
+
         setDistrictCheckbox(new Array(Division.getDistrict(divisionValue).length).fill(false));
         setDistrict([]);
-    },[divisionValue])
+    }, [divisionValue])
 
-    const filtering = ()=>{
+    const filtering = () => {
         axios.get(`http://localhost:3000/know-the-craft?division=${divisionValue}&district=${districtValue}`)
             .then((response) => {
                 // console.log(response.data);
@@ -50,21 +78,29 @@ export default function KnowTheCraft() {
     }, [])
     return (
         <>
-            {buyerId ? <CraftForm /> : <Navbar />}
+            {buyerId ?
+                <CraftForm
+                    callback2={callbackmessage_land}
+                    searchTextCallback={handleSearch}
+                    searchCallback={searching} />
+                : <Navbar
+                    searchTextCallback={handleSearch}
+                    searchCallback={searching}
+                />}
             {notification.toggle && <Notification />}
             <div className={style.container}>
                 {/* <div>navbar</div> */}
                 <div className={style['hero-section']}>
                     <div className={style['hero-heading']}><h1>Find the traditional art and crafts of different districts in Bangladesh</h1></div>
                     {/* <p>Buy the traditional handicraft items from various categories.</p> */}
-                    <div className={style['hero-search']}>
+                    {/* <div className={style['hero-search']}>
                         <input style={{ color: "black" }} type="text" placeholder="Search by district or name of the product" value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                         />
                         <button className={style.button}>
                             <i className="fa-solid fa-magnifying-glass fa-lg" style={{ color: "#ffffff", }}></i>
                         </button>
-                    </div>
+                    </div> */}
                 </div>
                 {/* <div className={style['division-button']}>
                     {Division.getDivision().map((div,index)=>{
@@ -108,10 +144,10 @@ export default function KnowTheCraft() {
                                                 setDistrictCheckbox(updatedCheckbox);
                                                 // console.log(updatedCheckbox);
 
-                                                if(updatedCheckbox[index]){
-                                                    setDistrict(prev=>[...prev, dist]);
-                                                } else{
-                                                    setDistrict(prev=> prev.filter(prevDis=> prevDis !== dist));
+                                                if (updatedCheckbox[index]) {
+                                                    setDistrict(prev => [...prev, dist]);
+                                                } else {
+                                                    setDistrict(prev => prev.filter(prevDis => prevDis !== dist));
                                                 }
 
                                                 // console.log(districtValue);
@@ -129,7 +165,7 @@ export default function KnowTheCraft() {
                                 return <option value={dist}>{dist}</option>
                             })}
                         </select> */}
-                         <Button
+                        <Button
                             text="Apply"
                             change={filtering}
                         />
@@ -172,6 +208,7 @@ export default function KnowTheCraft() {
                     </div>
                 </div>
             </div>
+            {messageset && <Messaging closemessage={closemessage} />}
             <Footer />
         </>
     );

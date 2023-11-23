@@ -28,9 +28,13 @@
     background-color: white;
 }
 .container .down .image {
-    width: 5%;
-    height: auto;
-    margin: auto 24px;
+    width: 100%;
+    height: 100%;
+    margin: auto 7px;
+}
+.container .down .image > img {
+    width: 100%;
+    height: 100%;
 }
 .container .down .image > i {
     font-size: 40px;
@@ -44,7 +48,10 @@
     margin: auto;
     border: 1px solid rgb(0, 0, 0);
 }
-
+.imgClick {
+    width: 10%;
+    height: 97%;
+}
 .container .down > button {
     margin: auto;
     width: 20%;
@@ -52,4 +59,7 @@
     border-radius: 10px;
     background-color: var(--button);
     color: var(--text-color);
+}
+.imgbox {
+    display: none;
 }

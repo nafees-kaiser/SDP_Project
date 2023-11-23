@@ -210,7 +210,6 @@ const Registration = () => {
                                         className={style.imgbox}
                                         type="file"
                                         ref={inputRef}
-                                       
                                         onChange={handleChange2}
                                     />
                                     <div className={style.pic}>

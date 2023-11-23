@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
             ...(adjustedDistrict ? { district: adjustedDistrict } : {}),
             ...(division ? { division: new RegExp(`^${division}$`, 'i') } : {}),
             ...(rating ? { rating: { $in: rating.split(',') } } : {}),
-            ...(price && price.gte && price.lte ? { price: { $gte: price.gte, $lte: price.lte } } : {}),
+            ...(price && price.gte && price.lte ? { price: { $gte: parseFloat(price.gte), $lte: parseFloat(price.lte)} } : {}),
             ...(
                 search
                     ? {
