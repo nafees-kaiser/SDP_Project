@@ -7,7 +7,7 @@ const Sells = require('../Model/SellsSchema')
 router.get('/', async (req, res) => {
     try {
         // const filtering = req.query;
-        const { category, district, division, rating, price, search } = req.query; // Replace with your actual object
+        const { category, district, division, rating, price, search, sort } = req.query; // Replace with your actual object
 
         // Clear district if division is empty
         const adjustedDistrict = division ? new RegExp(`^${district}$`, 'i') : '';
@@ -36,9 +36,18 @@ router.get('/', async (req, res) => {
         // console.log("After formatting\n", query);
         // console.log(typeof query);
         // console.log(query.$or[0]);
+        // console.log(sort);
+        let sortBy = {};
+        if(sort){
+            const sortOrder = sort.startsWith('-') ? -1 : 1;
+            const sortField = sort.replace(/^-/,'');
+            sortBy[sortField] = sortOrder;
+        } else{
+            sortBy = {'productName': 1};
+        }
+        // console.log(sortBy);
 
-
-        const result = await Products.find(query);
+        const result = await Products.find(query).sort(sortBy);
         // console.log(`Products are ${result}`);
         res.json(result);
     } catch (error) {
