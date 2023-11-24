@@ -19,8 +19,11 @@ import Notification from "./Notification.jsx";
 export default function ProductListing() {
     const [messageset, setmessagesetter] = useState(false);
     //For storing the products from database
-    const [productCount, setCount] = useState(0)
-    const [products, setProducts] = useState([])
+    const [productCount, setCount] = useState(0);
+
+    const perPage = 4;
+    const [showCount, setShowCount] = useState(perPage);
+    const [products, setProducts] = useState([]);
     // For collapsible menu in filtering
     const [isCategoryOpen, setCategoryOpen] = useState(false);
     const [isLocationOpen, setLocationOpen] = useState(false);
@@ -130,6 +133,7 @@ export default function ProductListing() {
                 // console.log("The filtered data is\n", response.data);
                 setProducts(response.data);
                 setCount(response.data.length);
+                setShowCount(perPage);
             })
 
     }
@@ -141,6 +145,7 @@ export default function ProductListing() {
                 // console.log("The filtered data is\n", response.data);
                 setProducts(response.data);
                 setCount(response.data.length);
+                // setShowCount(perPage);
             })
     }
 
@@ -154,6 +159,7 @@ export default function ProductListing() {
                 setProducts(response.data);
                 setCount(response.data.length);
                 // console.log("from product:" + sessionStorage.getItem("uid"));
+                // setShowCount(perPage);
             })
     }, [sortBy]);
 
@@ -163,6 +169,8 @@ export default function ProductListing() {
                 // console.log(response.data);
                 setProducts(response.data);
                 setCount(response.data.length);
+
+                setShowCount(perPage);
                 // console.log("from product:" + sessionStorage.getItem("uid"));
             })
     }, []);
@@ -345,7 +353,7 @@ export default function ProductListing() {
                             </select>
                         </div>
                         <div className={style['product-cards']}>
-                            {products.map((product, index) => {
+                            {products.slice(0, showCount).map((product, index) => {
                                 const { _id, productName, district, division, price, Product_img1, category } = product;
                                 return (
                                     <Link to={`/product-listing/${_id}`} key={_id}>
@@ -362,7 +370,11 @@ export default function ProductListing() {
                             })}
 
                         </div>
-                        <Button text="Load more" />
+                        {showCount < productCount && (
+                            <Button text="Load more" change={()=>{
+                                setShowCount(prev => prev + perPage);
+                            }}/>
+                        )}
                     </div>
                 </div>
             </div>
