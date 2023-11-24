@@ -91,14 +91,39 @@ export default function ProductListing() {
     const [ratingCheckbox, setRatingCheckbox] = useState(new Array(5).fill(false));
     const buyerId = sessionStorage.getItem("buyer_id");
 
+    // For sorting
+    const [sortBy, setSortBy] = useState('');
+
     // For searching:
     const [searchText, setSearchText] = useState('');
     const handleSearch = (value) => {
         setSearchText(value);
         // console.log("The search value in productlisting is\n", searchText);
     }
+    const clearSorting = () => {
+        setSortBy('');
+    }
+    const clearFiltering = () => {
+        setMinPrice('');
+        setMaxPrice('');
 
+        setDistrictValue('');
+        setDivisionValue('');
+
+        const resetCategory = [...categoryCheckbox];
+        resetCategory.fill(false);
+        setCategoryCheckbox(resetCategory);
+        setCategory([]);
+
+        const resetRating = [...ratingCheckbox];
+        resetRating.fill(false);
+        setRatingCheckbox(resetRating);
+        setRating([]);
+
+    }
     const searching = () => {
+        clearFiltering();
+        clearSorting();
         axios.get(`http://localhost:3000/product-listing?search=${searchText}`)
             .then((response) => {
                 // console.log("The filtered response is\n", response);
@@ -106,10 +131,11 @@ export default function ProductListing() {
                 setProducts(response.data);
                 setCount(response.data.length);
             })
+
     }
 
     const filtering = () => {
-        axios.get(`http://localhost:3000/product-listing?search=${searchText}&category=${selectedCategory}&district=${districtValue}&division=${divisionValue}&rating=${selectedRating}&price[gte]=${minPrice}&price[lte]=${maxPrice}`)
+        axios.get(`http://localhost:3000/product-listing?search=${searchText}&category=${selectedCategory}&district=${districtValue}&division=${divisionValue}&rating=${selectedRating}&price[gte]=${minPrice}&price[lte]=${maxPrice}&sort=${sortBy}`)
             .then((response) => {
                 // console.log("The filtered response is\n", response);
                 // console.log("The filtered data is\n", response.data);
@@ -117,6 +143,19 @@ export default function ProductListing() {
                 setCount(response.data.length);
             })
     }
+
+    // For sorting:
+
+    useEffect(() => {
+        // console.log("The sort by is: ", sortBy);
+        axios.get(`http://localhost:3000/product-listing?search=${searchText}&category=${selectedCategory}&district=${districtValue}&division=${divisionValue}&rating=${selectedRating}&price[gte]=${minPrice}&price[lte]=${maxPrice}&sort=${sortBy}`)
+            .then((response) => {
+                // console.log(response.data);
+                setProducts(response.data);
+                setCount(response.data.length);
+                // console.log("from product:" + sessionStorage.getItem("uid"));
+            })
+    }, [sortBy]);
 
     useEffect(() => {
         axios.get(`http://localhost:3000/product-listing`)
@@ -126,7 +165,7 @@ export default function ProductListing() {
                 setCount(response.data.length);
                 // console.log("from product:" + sessionStorage.getItem("uid"));
             })
-    }, [])
+    }, []);
     return (
         <>
             {buyerId ?
@@ -283,16 +322,27 @@ export default function ProductListing() {
                                 </div>
                             }
                         </div>
-                        <Button
-                            text="Apply"
-                            change={filtering}
-                        />
+                        <div className={style['button-and-clear']}>
+                            <Button
+                                text="Apply"
+                                change={filtering}
+                            />
+                            {/* <button className={style['clear-button']}>Clear</button> */}
+                        </div>
                     </div>
                     <div className={style['product-list']}>
                         <div className={style['sort-and-filter']}>
                             <p>{`${productCount} Products`}</p>
-                            {/* <button>Filter</button>
-                            <button>Sort by</button> */}
+                            <select value={sortBy} className={style['sort-selection']} onChange={(e) => {
+                                e.preventDefault;
+                                setSortBy(e.target.value);
+                            }}>
+                                <option value="productName">Sort</option>
+                                <option value="price">Price {'(low to high)'}</option>
+                                <option value="-price">Price {'(high to low)'}</option>
+                                <option value="rating">Rating {'(low to high)'}</option>
+                                <option value="-rating">Rating {'(high to low)'}</option>
+                            </select>
                         </div>
                         <div className={style['product-cards']}>
                             {products.map((product, index) => {
