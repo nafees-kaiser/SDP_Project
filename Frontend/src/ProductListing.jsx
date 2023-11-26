@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import style from "./ProductListing.module.css"
-import nakshiKathaImage from '../images/nakshi_katha(1).jpg'
+import fillerImage from '/images/image_filler.png'
 import Card from "./Components/Card";
 import Navbar from './Components/Navbar';
 import CraftForm from "./Components/CraftForm";
@@ -358,7 +358,7 @@ export default function ProductListing() {
                                 return (
                                     <Link to={`/product-listing/${_id}`} key={_id}>
                                         <Card
-                                            image={Product_img1 ? Product_img1 : nakshiKathaImage}
+                                            image={Product_img1 ? Product_img1 : fillerImage}
                                             rating={4}
                                             productName={productName}
                                             category={category}
