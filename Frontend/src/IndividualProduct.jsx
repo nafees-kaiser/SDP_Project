@@ -24,9 +24,11 @@ export default function IndividualProduct() {
     const [seller, setSeller] = useState({});
     const [reviewDescription, setReviewData] = useState();
     const [reviews, setreview] = useState([]);
-    const [amount, setAmount] = useState(0)
+    const [amount, setAmount] = useState(1)
     const notification = useSelector(state => state.toggle)
     const navigate = useNavigate();
+
+    const [wishlistButton, setWishlistButton] = useState(<FaRegHeart size={30} color="var(--accent-color)" />);
 
     const [imageDiv, setImage] = useState('');
     const handleChange = (e) => {
@@ -42,7 +44,8 @@ export default function IndividualProduct() {
     function setvalue() {
         const DataofForm = {
             'reviewDescription': reviewDescription,
-            'productId': id
+            'productId': id,
+            'buyerId': buyerId
         };
         return DataofForm;
     }
@@ -65,7 +68,9 @@ export default function IndividualProduct() {
 
         axios.get(`http://localhost:3000/reviews/${id}`)
             .then((response) => {
+                console.log("The reviews are:", response.data.reviews);
                 if (response.data.reviews != 0) {
+                    
                     setreview(response.data.reviews);
                 }
             })
@@ -106,25 +111,40 @@ export default function IndividualProduct() {
                 amount,
                 buyerId
             }
-            const saveData = async () => {
-                const savedData = await axios.post(`http://localhost:3000/checkout`, product, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-            }
-            saveData();
-            alert("Data added to cart");
+            // const saveData = async () => {
+            //     const savedData = await axios.post(`http://localhost:3000/checkout`, product, {
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //         },
+            //     });
+            //     // console.log("Already added to cart data", savedData);
+            //     return savedData;
+            // }
+            axios.post(`http://localhost:3000/checkout`, product, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(savedData => {
+                    console.log("Already added to cart data", savedData);
+                    alert(savedData.data.message);
+                })
+                .catch(err => console.log(err))
+            // saveData().then(savedData => {
+
+            // })
+
+            // alert("Data added to cart");
             // navigate(`/checkout`);
         }
     }
 
     const decrease = () => {
-        if (amount) {
+        if (amount !== 1) {
             setAmount(amount - 1)
         }
         else {
-            setAmount(0)
+            setAmount(1)
         }
     }
     const increase = () => {
@@ -147,6 +167,7 @@ export default function IndividualProduct() {
         axios.post('http://localhost:3000/create/wishlist', wishlistData)
             .then((response) => {
                 alert('Product added to wishlist successfully');
+                setWishlistButton(<FaHeart size={30} color="var(--accent-color)" />);
                 console.log(response.data);
             })
     }
@@ -166,28 +187,40 @@ export default function IndividualProduct() {
                                 <img src={imageDiv} alt="" />
                             </div>
                             <div className={style['more-pictures']}>
-                                <div className={style['image-gallary']}
-                                    onClick={() => setImage(Product_img1 ? Product_img1 : fillerImage)}
-                                    style={imageDiv === Product_img1 ? { border: '4px solid var(--accent-color)' } : {}}>
-                                    <img src={Product_img1 ? Product_img1 : fillerImage} alt="" />
-                                </div>
-                                <div className={style['image-gallary']}
-                                    onClick={() => setImage(Product_img2 ? Product_img2 : fillerImage)}
-                                    style={imageDiv === Product_img2 ? { border: '4px solid var(--accent-color)' } : {}}>
-                                    <img src={Product_img2 ? Product_img2 : fillerImage} alt="" />
-                                </div>
-                                <div className={style['image-gallary']}
-                                    onClick={() => setImage(Product_img3 ? Product_img3 : fillerImage)}
-                                    style={imageDiv === Product_img3 ? { border: '5px solid var(--accent-color)' } : {}}>
-                                    <img src={Product_img3 ? Product_img3 : fillerImage} alt="" />
-                                </div>
+                                {Product_img1 &&
+
+                                    <div className={style['image-gallary']}
+                                        onClick={() => setImage(Product_img1)}
+                                        style={imageDiv === Product_img1 ? { border: '5px solid var(--accent-color)' } : {}}>
+                                        <img src={Product_img1} alt="" />
+                                    </div>
+                                }
+                                {Product_img2 &&
+
+                                    <div className={style['image-gallary']}
+                                        onClick={() => setImage(Product_img2)}
+                                        style={imageDiv === Product_img2 ? { border: '5px solid var(--accent-color)' } : {}}>
+                                        <img src={Product_img2} alt="" />
+                                    </div>
+                                }
+                                {Product_img3 &&
+
+                                    <div className={style['image-gallary']}
+                                        onClick={() => setImage(Product_img3)}
+                                        style={imageDiv === Product_img3 ? { border: '5px solid var(--accent-color)' } : {}}>
+                                        <img src={Product_img3} alt="" />
+                                    </div>
+                                }
                             </div>
                         </div>
                         <div className={style['product-info']}>
                             <div className={style['basic-info']}>
 
                                 <h1>{productName}</h1>
-                                <p>{`${district}, ${division}`}</p>
+                                <p style={{
+                                    fontSize: '1.25em',
+                                    fontWeight: '700'
+                                }}>{`${district}, ${division}`}</p>
                                 <div className={style['seller-info']}>
                                     <p>{seller.name}</p>
                                     {/* <a href="#">Chat with seller</a> */}
@@ -198,8 +231,9 @@ export default function IndividualProduct() {
                                 <p>{`${price} Tk`}</p>
                                 <p></p>
                                 <button onClick={addToWishlist} type="button" className={style.wishlist}>
-                                    <FaRegHeart size={30} color="var(--accent-color)"/>
+                                    {/* <FaRegHeart size={30} color="var(--accent-color)" /> */}
                                     {/* <FaHeart size={30} color="var(--accent-color)"/> */}
+                                    {wishlistButton}
                                     Wishlist
                                 </button>
                             </div>
@@ -220,21 +254,27 @@ export default function IndividualProduct() {
                         </div>
                     </div>
                     <div className={style['product-description']}>
-                        <h2><b>Description</b></h2>
+                        <h2 style={{
+                            fontSize: '2em',
+                            fontWeight: '700'
+                        }}>Description</h2>
                         <div className={style.description}>
                             {description}
                         </div>
                     </div>
                 </div>
-                <h2><b>Reviews</b></h2>
+                <h2 style={{
+                    fontSize: '2em',
+                    fontWeight: '700'
+                }}>Reviews</h2>
                 <br /> <br />
 
                 {reviews.map((review) => (
                     <article>
                         <div class="flex items-center mb-4 space-x-4">
-                            <img class="w-10 h-10 rounded-full" src="/anonymous.png" alt=""></img>
+                            <img class="w-10 h-10 rounded-full" src={review.buyer? review.buyer.img:"/anonymous.png"} alt=""></img>
                             <div class="space-y-1 font-medium dark:text-white">
-                                <p>Anonymous </p>
+                                <p>{review.buyer? review.buyer.name :'Anonymous'} </p>
                             </div>
                         </div>
                         <p class="mb-2 text-gray-500 dark:text-gray-400">{review.reviewDescription}</p>
@@ -242,20 +282,23 @@ export default function IndividualProduct() {
                     </article>
                 ))}
                 <br /><br />
+                {buyerId &&
 
-                <form onSubmit={handleReviewSubmit}>
-                    <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-                        <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
-                            <label for="comment" class="sr-only">Your comment</label>
-                            <textarea name="reviewDescription" id="comment" onChange={handleChange} rows="4" class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a Review..." required></textarea>
-                        </div>
-                        <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
-                            <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                    <form onSubmit={handleReviewSubmit}>
+                        <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                            <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
+                                <label for="comment" class="sr-only">Your comment</label>
+                                <textarea name="reviewDescription" id="comment" onChange={handleChange} rows="4" class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a Review..." required></textarea>
+                            </div>
+                            <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
+                                {/* <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
                                 Post Review
-                            </button>
+                            </button> */}
+                                <Button type="submit" text="Post Review" />
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                }
 
             </div>
             {messageset && <Messaging closemessage={closemessage} />}

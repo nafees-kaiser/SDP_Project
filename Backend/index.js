@@ -110,7 +110,7 @@ app.use("/know-the-craft",knowTheCraftRouting);
 //code for add review for product
 app.post('/add/review', async (req, res) => {
   try {
-    const { reviewDescription, productId } = req.body;
+    const { reviewDescription, productId, buyerId } = req.body;
 
     // Check if the productId exists in your "Products" model.
     const product = await Products.findById(productId);
@@ -122,7 +122,9 @@ app.post('/add/review', async (req, res) => {
     // Create a new review object
     const newReview = new Reviews({
       reviewDescription,
-      product: productId, // Use the "products" reference as specified in your schema
+      product: productId,
+      buyer: new mongoose.Types.ObjectId(buyerId)
+       // Use the "products" reference as specified in your schema
     });
 
     // Save the review to the database
@@ -155,7 +157,7 @@ app.get('/reviews/:productId', async (req, res) => {
     const productId = req.params.productId;
 
     // Find reviews that are associated with the given product ID
-    const reviews = await Reviews.find({ product: productId });
+    const reviews = await Reviews.find({ product: productId }).populate('buyer');
 
     if (reviews.length === 0) 
     {

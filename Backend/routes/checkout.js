@@ -61,7 +61,10 @@ router.post("/", async (req, res) => {
                 quantity: amount
             })
             const data = await cart.save();
+            res.json({message: 'Added to cart successfully'});
             // console.log(data);
+        } else {
+            res.json({message: 'Already added to cart'});
         }
 
     } catch (error) {
