@@ -46,8 +46,8 @@ router.post("/:id",async(req, res)=>{
         });
         const savedData = await order.save();
         // console.log("saved data");
-        // console.log(savedData);
-        res.status(200).json({message:true});
+        // console.log(savedData,"shohan");
+        res.status(200).json({message:true, orderId:savedData._id});
 
     } catch (error) {
         console.log(error);
