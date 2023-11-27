@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import style from "./IndividualProduct.module.css"
 import CraftForm from "./Components/CraftForm";
-import nakshikathaImage from '../images/nakshi_katha(1).jpg'
+import fillerImage from '/images/image_filler.png'
 import Button from "./Components/Button";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
@@ -12,10 +12,12 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import Notification from "./Notification.jsx";
 import Messaging from "./Messaging_buyer";
+import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 
 
 export default function IndividualProduct() {
-    const [messageset,setmessagesetter] = useState(false);
+    const [messageset, setmessagesetter] = useState(false);
     const { id } = useParams();
     const buyerId = sessionStorage.getItem("buyer_id");
     let [product, setProduct] = useState({})
@@ -25,21 +27,22 @@ export default function IndividualProduct() {
     const [amount, setAmount] = useState(0)
     const notification = useSelector(state => state.toggle)
     const navigate = useNavigate();
+
+    const [imageDiv, setImage] = useState('');
     const handleChange = (e) => {
         setReviewData(e.target.value);
     };
-    const callbackmessage_land = (data)=>{
+    const callbackmessage_land = (data) => {
         console.log("Land ", data);
         setmessagesetter(data);
-      }
-      const closemessage = ()=>{
+    }
+    const closemessage = () => {
         setmessagesetter(false)
-      }
-    function setvalue()
-    {
-        const DataofForm ={
-        'reviewDescription':reviewDescription,
-        'productId' : id
+    }
+    function setvalue() {
+        const DataofForm = {
+            'reviewDescription': reviewDescription,
+            'productId': id
         };
         return DataofForm;
     }
@@ -54,9 +57,10 @@ export default function IndividualProduct() {
     useEffect(() => {
         axios.get(`http://localhost:3000/product-listing/${id}`)
             .then((response) => {
-                console.log(response.data);
+                console.log("The data is", response.data);
                 setProduct(response.data[0].productId);
                 setSeller(response.data[0].sellerId);
+                setImage(response.data[0].productId.Product_img1);
             })
 
         axios.get(`http://localhost:3000/reviews/${id}`)
@@ -74,24 +78,24 @@ export default function IndividualProduct() {
             receiverId: SellerId,
             senderId: buyerId
         })
-        .then(response => {
-            console.log(response.data);
-            setmessage('')
-        })
-        .catch(error => {
-            console.error(error);
-        });
-        axios.post(`http://localhost:3000/notifications`,{
+            .then(response => {
+                console.log(response.data);
+                setmessage('')
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        axios.post(`http://localhost:3000/notifications`, {
             senderId: buyerId,
             receiverId: SellerId,
             notificationDescription: ' Messaged you'
-          })
-          .then((res)=>{
-            console.log(res);
-          })
-          .catch((err)=>{
-            console.error(err);
-          })
+        })
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.error(err);
+            })
 
     }
     const routeChange = () => {
@@ -147,25 +151,37 @@ export default function IndividualProduct() {
             })
     }
 
-    const { productName, district, division, price, description, Product_img1 } = product
+    const { productName, district, division, price, description, Product_img1, Product_img2, Product_img3 } = product
     return (
         <>
             {/* <Navbar/> */}
-            {buyerId ? <CraftForm  callback2 = {callbackmessage_land}/> : <Navbar />}
-            {notification.toggle && <Notification/>}
+            {buyerId ? <CraftForm callback2={callbackmessage_land} /> : <Navbar />}
+            {notification.toggle && <Notification />}
             <div className={style.container}>
                 {/* <div>navbar</div> */}
                 <div className={style['product-wrapper']}>
                     <div className={style.product}>
                         <div className={style['product-picture']}>
                             <div className={style['one-picture']}>
-                                <img src={Product_img1 ? Product_img1 : nakshikathaImage} alt="" />
+                                <img src={imageDiv} alt="" />
                             </div>
-                            {/* <div className={style['more-pictures']}>
-                            <img src="" alt="" />
-                            <img src="" alt="" />
-                            <img src="" alt="" />
-                        </div> */}
+                            <div className={style['more-pictures']}>
+                                <div className={style['image-gallary']}
+                                    onClick={() => setImage(Product_img1 ? Product_img1 : fillerImage)}
+                                    style={imageDiv === Product_img1 ? { border: '4px solid var(--accent-color)' } : {}}>
+                                    <img src={Product_img1 ? Product_img1 : fillerImage} alt="" />
+                                </div>
+                                <div className={style['image-gallary']}
+                                    onClick={() => setImage(Product_img2 ? Product_img2 : fillerImage)}
+                                    style={imageDiv === Product_img2 ? { border: '4px solid var(--accent-color)' } : {}}>
+                                    <img src={Product_img2 ? Product_img2 : fillerImage} alt="" />
+                                </div>
+                                <div className={style['image-gallary']}
+                                    onClick={() => setImage(Product_img3 ? Product_img3 : fillerImage)}
+                                    style={imageDiv === Product_img3 ? { border: '5px solid var(--accent-color)' } : {}}>
+                                    <img src={Product_img3 ? Product_img3 : fillerImage} alt="" />
+                                </div>
+                            </div>
                         </div>
                         <div className={style['product-info']}>
                             <div className={style['basic-info']}>
@@ -181,7 +197,9 @@ export default function IndividualProduct() {
                                 <ShowStar rating={4} sz={35} />
                                 <p>{`${price} Tk`}</p>
                                 <p></p>
-                                <button onClick={addToWishlist} type="button" class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 text-4xl font-medium focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2 w-32 h-12">
+                                <button onClick={addToWishlist} type="button" className={style.wishlist}>
+                                    <FaRegHeart size={30} color="var(--accent-color)"/>
+                                    {/* <FaHeart size={30} color="var(--accent-color)"/> */}
                                     Wishlist
                                 </button>
                             </div>
@@ -240,8 +258,8 @@ export default function IndividualProduct() {
                 </form>
 
             </div>
-            {messageset && <Messaging closemessage={closemessage}/>}
-            <Footer/>
+            {messageset && <Messaging closemessage={closemessage} />}
+            <Footer />
         </>
     );
 }

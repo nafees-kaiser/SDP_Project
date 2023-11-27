@@ -17,6 +17,10 @@ import Notification from "./Notification.jsx";
 export default function KnowTheCraft() {
     const [messageset, setmessagesetter] = useState(false);
     const [productCount, setCount] = useState(0);
+
+    const perPage = 4;
+    const [showCount, setShowCount] = useState(perPage);
+
     const [products, setProducts] = useState([]);
 
     const buyerId = sessionStorage.getItem("buyer_id");
@@ -27,6 +31,9 @@ export default function KnowTheCraft() {
     const [isDistrictOpen, toggleDistrict] = useState(false);
     const [districtCheckbox, setDistrictCheckbox] = useState([]);
     const [districtValue, setDistrict] = useState([]);
+
+    const [sortBy, setSortBy] = useState('');
+
     const callbackmessage_land = (data) => {
         console.log("Land ", data);
         setmessagesetter(data);
@@ -44,13 +51,27 @@ export default function KnowTheCraft() {
         // console.log("The search value in productlisting is\n", searchText);
     }
 
+    const clearSorting = () => {
+        setSortBy('');
+    }
+    const clearFiltering = () => {
+        
+        setDistrict([]);
+        setDistrictCheckbox([]);
+        setDivisionValue('');
+
+    }
+
     const searching = () => {
+        clearFiltering();
+        clearSorting();
         axios.get(`http://localhost:3000/know-the-craft?search=${searchText}`)
             .then((response) => {
                 // console.log("The filtered response is\n", response);
                 // console.log("The filtered data is\n", response.data);
                 setProducts(response.data);
                 setCount(response.data.length);
+                setShowCount(perPage);
             })
     }
     useEffect(() => {
@@ -60,13 +81,28 @@ export default function KnowTheCraft() {
     }, [divisionValue])
 
     const filtering = () => {
-        axios.get(`http://localhost:3000/know-the-craft?division=${divisionValue}&district=${districtValue}`)
+        axios.get(`http://localhost:3000/know-the-craft?search=${searchText}&division=${divisionValue}&district=${districtValue}&sort=${sortBy}`)
             .then((response) => {
                 // console.log(response.data);
                 setProducts(response.data);
                 setCount(response.data.length);
+                // setShowCount(perPage);
             })
     }
+
+    
+
+    useEffect(()=>{
+        // console.log("The sort by is: ", sortBy);
+        axios.get(`http://localhost:3000/know-the-craft?search=${searchText}&division=${divisionValue}&district=${districtValue}&sort=${sortBy}`)
+            .then((response) => {
+                // console.log(response.data);
+                setProducts(response.data);
+                setCount(response.data.length);
+                // setShowCount(perPage);
+                // console.log("from product:" + sessionStorage.getItem("uid"));
+            })
+    },[sortBy]);
 
     useEffect(() => {
         axios.get('http://localhost:3000/know-the-craft')
@@ -74,6 +110,7 @@ export default function KnowTheCraft() {
                 // console.log(response.data);
                 setProducts(response.data);
                 setCount(response.data.length);
+                setShowCount(perPage);
             })
     }, [])
     return (
@@ -181,11 +218,17 @@ export default function KnowTheCraft() {
                         <div className={style['sort-and-filter']}>
                             {/* <p style={{ fontWeight: "700" }}>Faridpur</p> */}
                             <p>{`${productCount} Crafts`}</p>
-                            {/* <button>Filter</button>
-                            <button>Sort by</button> */}
+                            <select value={sortBy} className={style['sort-selection']} onChange={(e)=>{
+                                e.preventDefault;
+                                setSortBy(e.target.value);
+                            }}>
+                                <option value="Artisan_Title">Sort</option>
+                                <option value="Product_District">District {'(A to Z)'}</option>
+                                <option value="-Product_District">District {'(Z to A)'}</option>
+                            </select>
                         </div>
                         <div className={style['product-cards']}>
-                            {products.map((product, index) => {
+                            {products.slice(0, showCount).map((product, index) => {
                                 const { _id, Artisan_Title, Hero_img, Artisan_Description, Product_Division, Product_District } = product;
                                 return (
                                     <Link to={`/know-the-craft/${_id}`} key={_id}>
@@ -204,7 +247,11 @@ export default function KnowTheCraft() {
                             })}
 
                         </div>
-                        <Button text="Load more" />
+                        {showCount < productCount && (
+                            <Button text="Load more" change={()=>{
+                                setShowCount(prev => prev + perPage);
+                            }}/>
+                        )}
                     </div>
                 </div>
             </div>

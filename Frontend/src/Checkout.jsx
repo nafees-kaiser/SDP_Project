@@ -1,3 +1,4 @@
+/* eslint-disable no-const-assign */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,7 +12,9 @@ import "jspdf-autotable";
 import Messaging from "./Messaging_buyer";
 
 const Checkout = () => {
-    const [messageset,setmessagesetter] = useState(false);
+    const [messageset, setmessagesetter] = useState(false);
+    const [isDownloadButtonEnabled, setDownloadButtonEnabled] = useState(false);
+    
     const callbackmessage_land = (data)=>{
         console.log("Land ", data);
         setmessagesetter(data);
@@ -138,6 +141,7 @@ const Checkout = () => {
     const [buyer, setBuyer] = useState({});
     // const [products, setProducts] = useState({});
     const [buyerProducts, setBuyerProducts] = useState([]);
+    const [buyerProducts1,setBuyerProducts1] = useState([]);
     let [totalPrice, setTotalPrice] = useState(0)
     const id = sessionStorage.getItem("buyer_id");
     const navigate = useNavigate();
@@ -155,6 +159,9 @@ const Checkout = () => {
 
             })
     }, []);
+    
+
+
     let total = 0
     buyerProducts.forEach(p=>{
         total += p.productId.price * p.quantity;
@@ -204,7 +211,8 @@ const Checkout = () => {
         if (saveData() === 200) {
             navigate('/confirmation');
         }
-        DownloadBill();
+        setDownloadButtonEnabled(true);
+       
     }
     const handleIncreaseQuantity = (productId) => {
         const updatedProducts = buyerProducts.map(item => {
@@ -358,7 +366,7 @@ const Checkout = () => {
                                 <img
                                     className={styles.product2Item}
                                     alt=""
-                                    src="/images/rectangle-42@2x.png"
+                                    src={productId.Product_img1}
                                 />
                                 <button className={styles.trash} id="cancel_button" onClick={()=>{removeItem(productId._id)}}>
                                     <img className={styles.trashChild} alt="" src="/images/vector-8.svg" />
@@ -484,11 +492,26 @@ const Checkout = () => {
                                 <div className={styles.totalBill2}>{`${60}`}</div>
                                 <div className={styles.label}>Total</div>
                                 <div className={styles.totalBill}>{`${totalPrice+60} `}</div>
-                                
+                               
 
                             </div>
                         </div>
                     </div>
+                              <button
+                                style={{
+                                    backgroundColor: '#9594f2',
+                                    color: 'white',
+                                    padding: '10px 20px',
+                                    border: 'none',
+                                    borderRadius: '5px',
+                                    cursor: 'pointer',
+                                    marginTop: '90px', // Adjust the spacing from the Total
+                                }}
+                                onClick={DownloadBill}
+                                disabled={!isDownloadButtonEnabled}
+                              >
+                                Download Bill
+                              </button>
                 </div>
                 <div className={styles.tk}>tk</div>
                 <div className={styles.tk1}>tk</div>

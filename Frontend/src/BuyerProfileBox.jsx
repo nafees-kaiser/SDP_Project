@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 // import React, {useState, useEffect} from "react";
 import { useState, useEffect } from "react";
 import styles from "./BuyerProfileBox.module.css";
@@ -40,6 +41,10 @@ const BuyerProfileBox = (props) => {
     // Clear sessionStorage when the "Sign Out" button is clicked
     sessionStorage.clear();
     navigate('/');
+  };
+
+  const handleButtonClick = () => {
+    navigate('/Order_History');
   };
 
 
@@ -89,7 +94,7 @@ const BuyerProfileBox = (props) => {
         <img className={styles.iconBell} alt="" src="/images/-icon-bell.svg" />
         <div className={styles.notification1} onClick={notificationTogg} >Notification</div>
       </button>
-      <button className={styles.myOrders}>
+      <button className={styles.myOrders}onClick={handleButtonClick}>
         <div className={styles.myOrdersChild} />
         <img
           className={styles.iconNavIconListA}

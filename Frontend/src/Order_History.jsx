@@ -38,18 +38,27 @@ const Order_History = () => {
       try {
         const buyerInfoResponse = await axios.get(`http://localhost:3000/get-buyer-info/${id}`);
         setBuyer(buyerInfoResponse.data.buyer);
-
+  
         if (id) {
           const ordersResponse = await axios.get(`http://localhost:3000/api/orders/${id}`);
-          setBuyerProducts(ordersResponse.data.orders);
+          const sortedOrders = ordersResponse.data.orders.sort((a, b) => {
+            // Convert date strings to Date objects for proper comparison
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+  
+            // Sort in descending order (from new to old)
+            return dateB - dateA;
+          });
+  
+          setBuyerProducts(sortedOrders);
           // Calculate total price if needed
-          // setTotalPrice(calculateTotalPrice(ordersResponse.data.orders));
+          // setTotalPrice(calculateTotalPrice(sortedOrders));
         }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
+  
     fetchData();
   }, [id]);
 
@@ -62,6 +71,10 @@ const Order_History = () => {
     return total;
   };
 
+  const handleButtonClick = () => {
+    navigate('/Checkout');
+  };
+
   return (
     <>
       {id ? (
@@ -71,46 +84,65 @@ const Order_History = () => {
           <div style={styles.container}>
             <h2 style={styles.heading}>Your Order History</h2>
             {buyerProducts.map((order) => (
-              <div key={order._id} style={styles.orderContainer}>
-                <div style={styles.cart}>
-                  <div style={styles.orderDetails}>
-                    <p style={styles.orderId}>Order ID: {order._id}</p>
-                    <p style={styles.orderTime}>Date: {order.date}</p>
-                    <p style={styles.orderTotal}>Total Bill: {order.totalPrice}</p>
-                  </div>
-                  <div style={styles.productContainer}>
-                    {order.product.map((product) => (
-                      <div key={product.productId._id} style={styles.productItem}>
-                        <p style={styles.productName}>Name: {product.productId.productName}</p>
-                        <p style={styles.productPrice}>Price: {product.productId.price} Taka</p>
-                        <img
-                          src={product.productId.Product_img1}
-                          alt={product.productId.productName}
-                          style={styles.productImage}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                  <button
-                    style={{
-                      ...styles.reorderButton,
-                      ...(hoveredButton === order._id ? styles.reorderButtonHover : {}),
-                    }}
-                    onMouseEnter={() => setHoveredButton(order._id)}
-                    onMouseLeave={() => setHoveredButton(null)}
-                    onClick={() => handleReorder(order)}
-                  >
-                    Reorder
-                  </button>
+            <div key={order._id} style={styles.orderContainer}>
+              <div style={styles.cart}>
+                {/* Left side - Order ID, Time, and Total Price */}
+                <div style={styles.orderDetails}>
+                  <p style={styles.orderId}>Order ID: {order._id}</p>
+                  <p style={styles.orderTime}>Date: {order.date}</p>
+                  <p style={styles.orderTotal}>Total Bill: {order.totalPrice}</p>
                 </div>
+
+                {/* Right side - Table for product details */}
+                <table style={styles.productTable}>
+                <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {order.product.map((product) => (
+                  <tr key={product.productId._id} style={styles.productTableRow}>
+                    <td style={styles.productTableCell}>
+                      <img
+                        src={product.productId.Product_img1}
+                        alt={product.productId.productName}
+                        style={styles.productImage}
+                      />
+                    </td>
+                    <td style={styles.productTableCell}>{product.productId.productName}</td>
+                    <td style={styles.productTableCell}>{product.quantity}</td>
+                    <td style={styles.productTableCell}>{product.productId.price} Taka</td>
+                  </tr>
+                ))}
+              </tbody>
+              
+            </table>
+
+                {/* Reorder Button */}
+                <button
+                  style={{
+                    ...styles.reorderButton,
+                    ...(hoveredButton === order._id ? styles.reorderButtonHover : {}),
+                  }}
+                  onMouseEnter={() => setHoveredButton(order._id)}
+                  onMouseLeave={() => setHoveredButton(null)}
+                  onClick={handleButtonClick}
+                >
+                  Reorder
+                </button>
               </div>
-            ))}
+            </div>
+          ))}
           </div>
         </>
       ) : (
         <Navbar />
       )}
-
+  
       {messageset && <Messaging closemessage={closemessage} />}
       <Footer />
     </>
@@ -122,7 +154,7 @@ const styles = {
     padding: '30px', // Increased padding
     border: '1px solid #e0e0e0',
     marginBottom: '30px', // Increased margin
-    maxWidth: '900px', // Increased max width
+    maxWidth: '1024px', // Increased max width
     margin: '0 auto',
   },
   heading: {
@@ -145,6 +177,9 @@ const styles = {
     fontWeight: 'bold',
     marginBottom: '15px', // Increased margin
   },
+  productTableCell: {
+    padding: '15px', // Add padding to create a gap
+  },
   productContainer: {
     display: 'flex',
     flexDirection: 'column', // Vertical arrangement
@@ -160,8 +195,8 @@ const styles = {
     fontSize: '16px', // Increased font size
   },
   productImage: {
-    maxWidth: '120px', // Increased max width
-    maxHeight: '120px', // Increased max height
+    maxWidth: '80px', // Adjust the maximum width
+    maxHeight: '80px', // Adjust the maximum height
     borderRadius: '8px', // Increased border radius
     marginTop: '15px', // Increased margin
   },
@@ -178,7 +213,7 @@ const styles = {
     marginBottom: '20px',
   },
   reorderButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#7f33b5',
     color: 'white',
     padding: '12px 20px', // Rectangular shape
     border: 'none',
@@ -190,7 +225,7 @@ const styles = {
     transition: 'background-color 0.3s', // Transition for a smooth hover effect
   },
   reorderButtonHover: {
-    backgroundColor: '#45a049', // Darker color on hover
+    backgroundColor: '#5c009e', // Darker color on hover
   },
 };
 

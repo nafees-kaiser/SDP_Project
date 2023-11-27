@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import style from "./ProductListing.module.css"
-import nakshiKathaImage from '../images/nakshi_katha(1).jpg'
+import fillerImage from '/images/image_filler.png'
 import Card from "./Components/Card";
 import Navbar from './Components/Navbar';
 import CraftForm from "./Components/CraftForm";
@@ -19,8 +19,11 @@ import Notification from "./Notification.jsx";
 export default function ProductListing() {
     const [messageset, setmessagesetter] = useState(false);
     //For storing the products from database
-    const [productCount, setCount] = useState(0)
-    const [products, setProducts] = useState([])
+    const [productCount, setCount] = useState(0);
+
+    const perPage = 4;
+    const [showCount, setShowCount] = useState(perPage);
+    const [products, setProducts] = useState([]);
     // For collapsible menu in filtering
     const [isCategoryOpen, setCategoryOpen] = useState(false);
     const [isLocationOpen, setLocationOpen] = useState(false);
@@ -91,32 +94,74 @@ export default function ProductListing() {
     const [ratingCheckbox, setRatingCheckbox] = useState(new Array(5).fill(false));
     const buyerId = sessionStorage.getItem("buyer_id");
 
+    // For sorting
+    const [sortBy, setSortBy] = useState('');
+
     // For searching:
     const [searchText, setSearchText] = useState('');
     const handleSearch = (value) => {
         setSearchText(value);
         // console.log("The search value in productlisting is\n", searchText);
     }
+    const clearSorting = () => {
+        setSortBy('');
+    }
+    const clearFiltering = () => {
+        setMinPrice('');
+        setMaxPrice('');
 
+        setDistrictValue('');
+        setDivisionValue('');
+
+        const resetCategory = [...categoryCheckbox];
+        resetCategory.fill(false);
+        setCategoryCheckbox(resetCategory);
+        setCategory([]);
+
+        const resetRating = [...ratingCheckbox];
+        resetRating.fill(false);
+        setRatingCheckbox(resetRating);
+        setRating([]);
+
+    }
     const searching = () => {
+        clearFiltering();
+        clearSorting();
         axios.get(`http://localhost:3000/product-listing?search=${searchText}`)
             .then((response) => {
                 // console.log("The filtered response is\n", response);
                 // console.log("The filtered data is\n", response.data);
                 setProducts(response.data);
                 setCount(response.data.length);
+                setShowCount(perPage);
             })
+
     }
 
     const filtering = () => {
-        axios.get(`http://localhost:3000/product-listing?search=${searchText}&category=${selectedCategory}&district=${districtValue}&division=${divisionValue}&rating=${selectedRating}&price[gte]=${minPrice}&price[lte]=${maxPrice}`)
+        axios.get(`http://localhost:3000/product-listing?search=${searchText}&category=${selectedCategory}&district=${districtValue}&division=${divisionValue}&rating=${selectedRating}&price[gte]=${minPrice}&price[lte]=${maxPrice}&sort=${sortBy}`)
             .then((response) => {
                 // console.log("The filtered response is\n", response);
                 // console.log("The filtered data is\n", response.data);
                 setProducts(response.data);
                 setCount(response.data.length);
+                // setShowCount(perPage);
             })
     }
+
+    // For sorting:
+
+    useEffect(() => {
+        // console.log("The sort by is: ", sortBy);
+        axios.get(`http://localhost:3000/product-listing?search=${searchText}&category=${selectedCategory}&district=${districtValue}&division=${divisionValue}&rating=${selectedRating}&price[gte]=${minPrice}&price[lte]=${maxPrice}&sort=${sortBy}`)
+            .then((response) => {
+                // console.log(response.data);
+                setProducts(response.data);
+                setCount(response.data.length);
+                // console.log("from product:" + sessionStorage.getItem("uid"));
+                // setShowCount(perPage);
+            })
+    }, [sortBy]);
 
     useEffect(() => {
         axios.get(`http://localhost:3000/product-listing`)
@@ -124,9 +169,11 @@ export default function ProductListing() {
                 // console.log(response.data);
                 setProducts(response.data);
                 setCount(response.data.length);
+
+                setShowCount(perPage);
                 // console.log("from product:" + sessionStorage.getItem("uid"));
             })
-    }, [])
+    }, []);
     return (
         <>
             {buyerId ?
@@ -283,24 +330,35 @@ export default function ProductListing() {
                                 </div>
                             }
                         </div>
-                        <Button
-                            text="Apply"
-                            change={filtering}
-                        />
+                        <div className={style['button-and-clear']}>
+                            <Button
+                                text="Apply"
+                                change={filtering}
+                            />
+                            {/* <button className={style['clear-button']}>Clear</button> */}
+                        </div>
                     </div>
                     <div className={style['product-list']}>
                         <div className={style['sort-and-filter']}>
                             <p>{`${productCount} Products`}</p>
-                            {/* <button>Filter</button>
-                            <button>Sort by</button> */}
+                            <select value={sortBy} className={style['sort-selection']} onChange={(e) => {
+                                e.preventDefault;
+                                setSortBy(e.target.value);
+                            }}>
+                                <option value="productName">Sort</option>
+                                <option value="price">Price {'(low to high)'}</option>
+                                <option value="-price">Price {'(high to low)'}</option>
+                                <option value="rating">Rating {'(low to high)'}</option>
+                                <option value="-rating">Rating {'(high to low)'}</option>
+                            </select>
                         </div>
                         <div className={style['product-cards']}>
-                            {products.map((product, index) => {
+                            {products.slice(0, showCount).map((product, index) => {
                                 const { _id, productName, district, division, price, Product_img1, category } = product;
                                 return (
                                     <Link to={`/product-listing/${_id}`} key={_id}>
                                         <Card
-                                            image={Product_img1 ? Product_img1 : nakshiKathaImage}
+                                            image={Product_img1 ? Product_img1 : fillerImage}
                                             rating={4}
                                             productName={productName}
                                             category={category}
@@ -312,7 +370,11 @@ export default function ProductListing() {
                             })}
 
                         </div>
-                        <Button text="Load more" />
+                        {showCount < productCount && (
+                            <Button text="Load more" change={()=>{
+                                setShowCount(prev => prev + perPage);
+                            }}/>
+                        )}
                     </div>
                 </div>
             </div>
