@@ -18,6 +18,7 @@ const Seller = require('./Model/SellerSchema');
 const Reviews = require('./Model/ProductReviewSchema');
 const Wishlist = require('./Model/WishlistSchema');
 const Notifications = require('./Model/NotificationSchema');
+const Cart = require('./Model/CartSchema.js');
 
 const PORT = process.env.PORT;
 app.use(bodyParser.json());
@@ -294,6 +295,44 @@ app.get('/api/orders/:buyerId', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+app.delete('/delete-cart/:buyerId', async (req, res) => {
+  try {
+    // console.log("shovo");
+    const buyerId = req.params.buyerId;
+
+    // Remove all cart items for the given buyerId
+    const result = await Cart.deleteMany({ buyerId: buyerId });
+
+    res.json({ message: `Deleted ${result.deletedCount} products from the cart` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+app.post('/reorder/:buyerId', async (req, res) => {
+  const { buyerId } = req.params;
+  const order = req.body;
+
+  try {
+    const productItems = order.product;
+    for (const productItem of productItems) {
+      const cartItem = {
+        productId: productItem.productId._id,
+        buyerId: buyerId,
+        quantity: productItem.quantity,
+      };
+      const newCartItem = new Cart(cartItem);
+      await newCartItem.save();
+    }
+
+    res.status(200).json({ message: 'Reorder successful' });
+  } catch (error) {
+    console.error('Error reordering:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 
 //-----Notification APIs-----
