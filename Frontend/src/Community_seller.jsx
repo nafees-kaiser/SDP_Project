@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Notification from "./Notification.jsx";
 import { get_community_data } from "./Actions/community.jsx";
 import { io } from "socket.io-client";
-
+import LoginNav from "./Components/LoginNav.jsx"
 
 
 const Community_home = ()=>{
@@ -19,7 +19,8 @@ const Community_home = ()=>{
     const [socket,setsocket] = useState(null);
     const inputRef = useRef(null)
     const [message,setmessage] = useState();
-    const buyerId = sessionStorage.getItem("buyer_id");
+    const [messageset,setmessagesetter] = useState(false);
+    const buyerId = sessionStorage.getItem("seller_id");
     const notification = useSelector(state => state.toggle)
     const {isLoading,error,data} = useSelector(state => state.communityValue)
     console.log(data)
@@ -37,13 +38,13 @@ const Community_home = ()=>{
         })
         socket?.on('communityMessage', ({ senderId, message, attachment, date }) => {
             console.log('Received community message:', { senderId, message, attachment, date });
-            axios.get(`http://localhost:3000/buyer_profile/${senderId}`)
+            axios.get(`http://localhost:3000/seller_profile/${senderId}`)
             .then((res)=>{
                 console.log("DATA: ",value.valueCopy);
                 setvalue((prevMessages) => {
                     const valueCopy = [...prevMessages.valueCopy];
                     valueCopy.push({
-                        user: { email: res.data.email, name: res.data.name,img:res.data.img, tag: 'buyer' },
+                        user: { email: res.data.email, name: res.data.name, tag: 'buyer' },
                         message: message,
                         attachment: attachment,
                         date: date
@@ -122,9 +123,13 @@ const Community_home = ()=>{
         }
         
     }
+    const callbackmessage_land = (data)=>{
+        console.log("Land ", data);
+        setmessagesetter(data);
+      }
     return (
         <>
-            {buyerId ? <CraftForm /> : <Navbar />}
+            <LoginNav callback2 = {callbackmessage_land} />
             {notification.toggle && <Notification/>}
             <div className={style.container}>
                 <div className={style.down} >
@@ -137,7 +142,7 @@ const Community_home = ()=>{
                             onChange={handleChange2}
                         />
                         <div className={style.image}>
-                            {img? <img src={URL.createObjectURL(img)} alt=''  />          :<i className="fa-solid fa-circle-plus" style={{ transform: "translate(80%, 105%)" }}></i>}
+                            {img? <img src={URL.createObjectURL(img)} alt=''  />          :<i className="fa-solid fa-circle-plus" style={{ transform: "translate(80%, 105%)",color:"#999DEE" }}></i>}
                         </div>
                     </div>
                     <input
@@ -156,10 +161,10 @@ const Community_home = ()=>{
                     value.valueCopy.slice().reverse().map((value) => (
                         value.attachment ? (
                         <div key={value.id}>
-                            <Message_pic user={buyerId} post={value.user.id} name={value.user.name} pic={value.user.img} attachment={value.attachment} text={value.message} time={value.date} />
+                            <Message_pic user={buyerId} post={value.user.id} name={value.user.name} attachment={value.attachment} text={value.message} time={value.date} id={value.id} like={value.like} />
                         </div>
                         ) : (
-                        <Message_txt user={buyerId} post={value.user.id} name={value.user.name} pic={value.user.img} text={value.message} time={value.date} />
+                        <Message_txt user={buyerId} post={value.user.id} name={value.user.name} text={value.message} time={value.date} id={value.id} like={value.like}/>
                         )
                     ))
                     ) : (

@@ -94,7 +94,7 @@ const Navbar = (props) =>{
                 <div className={Style.middle}>
                     <nav className={Style.navbar}>
                     <ul className={Style['nav-list']}>
-                        <li className={Style['nav-item']}>Home</li>
+                        <Link to={`/home_seller`}><li className={Style['nav-item']}>Home</li></Link>
                         <li className={Style['nav-item']} onMouseEnter={toggleProductMenu} onMouseLeave={toggleProductMenu}>
                         Product
                         {isProductMenuOpen && (
@@ -105,7 +105,7 @@ const Navbar = (props) =>{
                         </ul>
                         )}
                         </li>
-                        <li className={Style['nav-item']}>Community</li>
+                        <Link to={`/Community_seller`} ><li className={Style['nav-item']}>Community</li></Link>
                         <li className={Style['nav-item']}>Orderlist</li>
                     </ul>
                     </nav>

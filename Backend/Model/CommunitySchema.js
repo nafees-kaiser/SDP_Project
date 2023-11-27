@@ -13,6 +13,9 @@ const communitySchema = new mongoose.Schema({
         type: String,
         require: false
     },
+    likes: {
+        type: Number
+    },
     date: {
         type: Date,
         required: true 
