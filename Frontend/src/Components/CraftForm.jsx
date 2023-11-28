@@ -97,7 +97,7 @@ const CraftForm = (props) =>{
                 </div>
                 <div className={Style.lower}>
                     <div className={Style.left}>
-                    <Link to={`/product-listing`}><img src="/images/384165997_332969559130939_1111385360839973004_n.png" alt="" /></Link>
+                    <Link to={`/product-listing`}><img src="https://res.cloudinary.com/dkotituzn/image/upload/v1701181973/oi3hbp6e9isxhlgmg5nc.png" alt="" /></Link>
                     </div>
                     <div className={Style.middle}>
                         <Link to={`/`} className={Style.link}> Home</Link>

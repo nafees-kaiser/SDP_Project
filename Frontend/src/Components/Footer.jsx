@@ -8,18 +8,18 @@ export default function Footer() {
             <div className={style.wrapper}>
                 <div className={style['logo-and-motto']}>
                     <div className={style.logo}>
-                        <img src="/images/logo.png" alt="Logo" />
+                        <img src="https://res.cloudinary.com/dkotituzn/image/upload/v1701181973/oi3hbp6e9isxhlgmg5nc.png" alt="Logo" />
                     </div>
                     <div>Preserving Tradition, Empowering Artisans, and Celebrating Craftsmanship.</div>
                     <div className={style.icons}>
                         <a href="https://www.facebook.com" target='_blank' rel="noopener noreferrer">
-                            <img src="/images/facebook_icon.svg" alt="facebook icon" />
+                            <img src="https://res.cloudinary.com/dkotituzn/image/upload/v1701181446/goiyok0onncgoddcrjqc.svg" alt="facebook icon" />
                         </a>
                         <a href="https://www.twitter.com" target='_blank' rel="noopener noreferrer">
-                            <img src="/images/twitter_icon.svg" alt="twitter icon" />
+                            <img src="https://res.cloudinary.com/dkotituzn/image/upload/v1701181446/qeldxfnnt1pttkiqodbv.svg" alt="twitter icon" />
                         </a>
                         <a href="https://www.instagram.com" target='_blank' rel="noopener noreferrer">
-                            <img src="/images/instagram_icon.svg" alt="instagram icon" />
+                            <img src="https://res.cloudinary.com/dkotituzn/image/upload/v1701181446/tsyhedmjxumterbvmhsm.svg" alt="instagram icon" />
                         </a>
 
                     </div>

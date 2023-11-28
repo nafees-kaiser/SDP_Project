@@ -15,7 +15,7 @@
 
 .hero-section::before {
     content: "";
-    background: url('../images/shop_page_logo.jpg') no-repeat center center/cover;
+    background: url('https://res.cloudinary.com/dkotituzn/image/upload/v1701184643/dcbhawh0zzvjoy31ywdl.jpg') no-repeat center center/cover;
     position: absolute;
     width: 100%;
     height: 100%;
