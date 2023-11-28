@@ -224,7 +224,7 @@ const AddAProductPage = () => {
               }
           const config = {
             method: 'post',
-            url: 'http://localhost:3000/addproduct',
+            url: 'https://heritage-u8vo.onrender.com/addproduct',
             headers: {
               'Content-Type': 'multipart/form-data',
             },
