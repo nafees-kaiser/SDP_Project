@@ -218,9 +218,9 @@ const Messaging = (props) => {
                   <div key={index}>
                     {message.message ? (
                       message.user.tag === 'seller' ? (
-                        <Message text={message.message} />
-                      ) : (
                         <Message2 text={message.message} />
+                      ) : (
+                        <Message text={message.message} />
                       )
                     ) : (
                       <div>

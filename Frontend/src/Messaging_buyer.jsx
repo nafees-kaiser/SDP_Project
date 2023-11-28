@@ -186,7 +186,6 @@ const Messaging = (props) => {
             {(conversation && conversation.length > 0 )? (
               conversation.map((order, index) => (
                 <div key={index} style={{
-                      border: "1px solid #999DEE",
                       overflow: "hidden"
                   }}  >
                   <div className={Style.image}  onClick={()=>ConBegin(order.conversation,order.name,order.User_ID)}>
@@ -209,9 +208,9 @@ const Messaging = (props) => {
                   <div key={index}>
                     {message.message ? (
                       message.user.tag === 'buyer' ? (
-                        <Message text={message.message} />
-                      ) : (
                         <Message2 text={message.message} />
+                      ) : (
+                        <Message text={message.message} />
                       )
                     ) : (
                       <div>

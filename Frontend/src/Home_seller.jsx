@@ -1,4 +1,4 @@
-import React,{ useState,useEffect } from "react";
+import React,{ useState,useEffect, useLayoutEffect } from "react";
 import { Line, Pie } from 'react-chartjs-2';
 import axios from 'axios';
 import { io } from "socket.io-client";
@@ -33,7 +33,7 @@ ChartJS.register(
 )
 const Home_seller = ()=>{
     const [socket,setsocket] = useState();
-
+    const [stat,setstat] = useState();
     const [auth,setAuth]= useState(false);
     const [messageset,setmessagesetter] = useState(false);
     const [salesDatatable, setSalesData] = useState([]);
@@ -98,21 +98,34 @@ const Home_seller = ()=>{
           });
         
         axios.get(`http://localhost:3000/count_customer/${id}`)
-            .then((response) => {
-                const mappedData = response.data.map((order, index) => ({
-                    no: index + 1,
-                    BuyerName: order.buyerName,
-                    count: order.orderCount
-                }));
-                console.log(mappedData);
-                setSalescount(mappedData);
-            })
-            .catch((error) => {
-                console.error("Error while fetching data:", error);
-            });
+        .then((response) => {
+            const mappedData = response.data.map((order, index) => ({
+                no: index + 1,
+                BuyerName: order.buyerName,
+                count: order.orderCount
+            }));
+            console.log(mappedData);
+            setSalescount(mappedData);
+        })
+        .catch((error) => {
+            console.error("Error while fetching data:", error);
+        });
+
+      
 
 
     }, []);
+    useLayoutEffect(()=>{
+        const id = sessionStorage.getItem("seller_id");
+        axios.get(`http://localhost:3000/HomeSeller/stat/${id}`)
+        .then((res) => {
+          setstat(res.data);
+          console.log("A", res.data);
+        })
+        .catch((err) => {
+          console.error("Error fetching data:", err);
+        });
+    },[])
     
     const data = {
         labels: ['January', 'February', 'March', 'April', 'May','June','July','August','September','October','November','December'],
@@ -164,9 +177,9 @@ const Home_seller = ()=>{
                             <p>Total Customers</p>
                             <i class="fa-solid fa-users"></i>
                         </div>
-                        <p>5648</p>
+                        <p>{stat && stat.totalCustomers}</p>
                         <div className={Style.first}>
-                            <p>+23%</p>
+                            <p>{stat && stat.DayPercentage}%</p>
                             <p>Since last month</p>
                         </div>
                     </div>
@@ -176,10 +189,10 @@ const Home_seller = ()=>{
                             <p>Sales Today</p>
                             <i class="fa-solid fa-users"></i>
                         </div>
-                        <p>7916</p>
+                        <p>{stat && stat.dailyIncome}</p>
                         <div className={Style.first}>
-                            <p>+21%</p>
-                            <p>Since last month</p>
+                            <p>{stat && stat.DayIncomePercentage}%</p>
+                            <p>Since last day</p>
                         </div>
                     </div>
 
@@ -188,9 +201,9 @@ const Home_seller = ()=>{
                             <p>Monthly Sales</p>
                             <i class="fa-solid fa-users"></i>
                         </div>
-                        <p>59525</p>
+                        <p>{stat && stat.monthlyIncome}</p>
                         <div className={Style.first}>
-                            <p>+5%</p>
+                            <p>{stat && stat.LastMonthIncomePercentage}%</p>
                             <p>Since last month</p>
                         </div>
                     </div>
@@ -200,10 +213,10 @@ const Home_seller = ()=>{
                             <p>Yearly Sales</p>
                             <i class="fa-solid fa-users"></i>
                         </div>
-                        <p>65152</p>
+                        <p>{stat && stat.yearlyIncome}</p>
                         <div className={Style.first}>
-                            <p>+43%</p>
-                            <p>Since last month</p>
+                            <p>{stat && stat.LastYearIncomePErcentage}%</p>
+                            <p>Since last year</p>
                         </div>
                     </div>
                     

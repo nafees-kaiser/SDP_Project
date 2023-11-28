@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Style from "./notification_txt.module.css"
 
-const Notification = ({name,pic,text,time})=>{
-    
+const Notification = ({name,receiverName,pic,text,time})=>{
+    const [user,setuser]= useState();
+    useEffect(()=>{
+        if(name==receiverName) {
+            setuser("You")
+        }
+        else {
+            setuser(name)
+        }
+    },[])
     return (
         <>
             <div className={Style.another}>
@@ -11,7 +19,7 @@ const Notification = ({name,pic,text,time})=>{
                 </div>
                 <div className={Style.anotherone}>
                     <div className={Style.box}>
-                        <p><span>{name}</span>{text}</p>
+                        <p><span>{user}</span>{text}</p>
                         <h5>{time}</h5>
                     </div>
                 </div>

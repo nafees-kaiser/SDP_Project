@@ -127,6 +127,35 @@ router.post('/', upload.single('img'),async (req,res)=>{
         console.log(error,"Error")
     }
 })
+router.post('/:id', async (req, res) => {
+    const id = req.params.id;
+  
+    try {
+      // Find the community by ID
+      const community = await Community.findById(id);
+  
+      if (!community) {
+        return res.status(404).json({ error: 'Community not found' });
+      }
+  
+      if(community.likes >=1) {
+        community.likes += 1;
+      }
+      else {
+        community.likes = 1;
+      }
+      
+  
+      // Save the updated community to the database
+      await community.save();
+  
+      return res.status(200).json({ message: 'Like updated successfully', community });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 router.get('/',async (req,res)=>{
     try {
@@ -137,10 +166,10 @@ router.get('/',async (req,res)=>{
             const seller = await Seller.findById(message.senderId)
             const buyer = await Buyer.findById(message.senderId)
             if(seller) {
-                return { user: {email: seller.email,name:seller.name,tag:"seller"},message:message.message,attachment:message.attachment,date:message.date  }
+                return { user: {id:seller.id,pic:seller.img,email: seller.email,name:seller.name,tag:"seller"},id:message.id,message:message.message,attachment:message.attachment,date:message.date,like:message.likes  }
             }
             else {
-                return { user: {email: buyer.email,name:buyer.name,tag:"buyer"},message:message.message,attachment:message.attachment,date:message.date  }
+                return { user: {id:buyer.id,pic:buyer.img,email: buyer.email,name:buyer.name,tag:"buyer"},id:message.id,message:message.message,attachment:message.attachment,date:message.date,like:message.likes  }
             }
             
         }))

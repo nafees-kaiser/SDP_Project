@@ -25,7 +25,7 @@ const Notification = ()=>{
                         {isLoading && <p style={{"textAlign":"center","fontSize":"1.5em"}}>Loading.........</p>}
                         {Array.isArray(info)? ( info.map((value) => (
                             <div key={value.id}>
-                                <Notification_txt name={value.senderName} pic={value.senderPic} text={value.notification} time={value.date}/>
+                                <Notification_txt name={value.senderName} receiverName={value.receiverName} pic={value.senderPic} text={value.notification} time={value.date}/>
                             </div>
                         )) ):(<p>No Notification</p>)}
 

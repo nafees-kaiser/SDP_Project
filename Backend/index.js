@@ -59,6 +59,8 @@ app.use("/order_seller", orderSellerRouter);
 const practiceRouter = require('./routes/practice');
 app.use("/practice", practiceRouter);
 
+const HomeSeller = require('./routes/HomeSeller.js');
+app.use("/HomeSeller",HomeSeller)
 
 const countCustomerRouter = require('./routes/countCustomer');
 app.use("/count_customer", countCustomerRouter);

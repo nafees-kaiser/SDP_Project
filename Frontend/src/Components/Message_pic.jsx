@@ -1,13 +1,41 @@
-import React from "react";
+import React,{useState} from "react";
 import Style from "./message_pic.module.css"
-
-const message = ({name,text,attachment,time})=>{
+import axios from "axios";
+const message = ({user,post,name,text,pic,attachment,time,id,like})=>{
+    const [isLiked, setIsLiked] = useState(false);
+    const increaseLike = () => {
+      setIsLiked(true);  // Set state to true when liked
+      
+      if(!isLiked){
+          axios.post(`http://localhost:3000/community/${id}`)
+            .then((res) => {
+              console.log("Updated");
+            })
+            .catch((err) => {
+              console.log(err);
+        });
+        axios.post(`http://localhost:3000/notifications`,{
+            senderId: user,
+            receiverId: post,
+            notificationDescription: ' Liked your Post'
+        })
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+            console.error(err);
+        })
+      }
+      else {
+          setIsLiked(false)
+      }
+    };
     
     return (
         <>
                 <div className={Style.another}>
                     <div className={Style.round}>
-                        <img src=".\images\384194017_640104084770772_829708242717613349_n.jpg" alt="" />
+                        <img src={pic} alt="" />
                     </div>
                     <div className={Style.anotherone}>
                         <div className={Style.text}>
@@ -21,9 +49,17 @@ const message = ({name,text,attachment,time})=>{
                         <div className={Style.inner_pic}>
                             <img src={attachment} alt="" />
                         </div>
+                        <div style={{color:"#8b8b8b"}}>
+                                {isLiked?<p>{like} likes including you</p>:<p>{like} likes</p>}
+                        </div>
                         
                         <div className={Style.like}>
-                            <i class="fa-regular fa-thumbs-up"></i>
+                           <i
+                            className={`fa-regular fa-thumbs-up ${isLiked ? Style.liked : ''}`}
+                            style={{ color: isLiked ? 'blue' : '#795AAC' }}
+                            onClick={increaseLike}
+                            ></i>
+                            <i class="fa-solid fa-reply" style={{color: "#795AAC"}}></i>
                         </div>
                     </div>
                 </div>

@@ -32,42 +32,42 @@ const Products = require('../Model/ProductsSchema')
       
     */
 
-router.get('/:id', async (req, res) => {
-  try {
-    const id = req.params.id;
-    console.log(`in order seller, The id of seller is ${id}`);
-    const orders = await Order
-      .find({ sellerId: id })
-      .populate('product.productId')
-      .sort({ Date: -1 })
-      .exec();
-
-    console.log(orders);
-    res.json(
-      await Promise.all(
-        orders.map(async (order, index) => {
-          const product = await Products.findById(order.product[index]?.productId).exec();
-          console.log(index + ": " + order.product[0]?.productId);
-          const buyer = await Buyer.findById(order.buyerId).exec();
-          const seller = await Seller.findById(order.sellerId).exec();
-          return {
-            buyerId: order.buyerId,
-            productName: order.product[0]?.productId.productName,
-            quantity: order.product[0]?.quantity,
-            price: order.product[0]?.productId.price,
-            Date: order.date,
-            Buyer: buyer,
-            Seller: seller
-          };
-        })
-      )
-    );
-
-
-  } catch (error) {
-    console.error("ERROR: " + error);
-    res.status(500).json({ error: "Error retrieving orders" });
-  }
-});
+    router.get('/:id', async (req, res) => {
+      try {
+        const id = req.params.id;
+        console.log(`in order seller, The id of seller is ${id}`);
+        const orders = await Order
+          .find({ sellerId: id })
+          .populate('product.productId')
+          .sort({ Date: -1 })
+          .limit(7)  
+          .exec();
+    
+        console.log(orders);
+        res.json(
+          await Promise.all(
+            orders.map(async (order) => {
+              const product = await Products.findById(order.product[0]?.productId).exec();
+              console.log("Product ID: " + order.product[0]?.productId);
+              const buyer = await Buyer.findById(order.buyerId).exec();
+              const seller = await Seller.findById(order.sellerId).exec();
+              return {
+                buyerId: order.buyerId,
+                productName: order.product[0]?.productId.productName,
+                quantity: order.product[0]?.quantity,
+                price: order.product[0]?.productId.price,
+                Date: order.date,
+                Buyer: buyer,
+                Seller: seller
+              };
+            })
+          )
+        );
+      } catch (error) {
+        console.error("ERROR: " + error);
+        res.status(500).json({ error: "Error retrieving orders" });
+      }
+    });
+    
 
 module.exports = router

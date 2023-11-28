@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef  } from "react";
 import Style from "./Navbar_seller.module.css"; // Import your CSS module
 import { Link } from "react-router-dom";
-
-const Navbar = ({openmodel}) => {
+import axios from "axios";
+import ProfileBox from '../ProfileBox';
+import { useDispatch, useSelector } from 'react-redux';
+import notification  from '../Actions/notification'
+const Navbar = (props) => {
   const [isProductMenuOpen, setProductMenuOpen] = useState(false);
 
   const toggleProductMenu = () => {
