@@ -37,6 +37,8 @@ const Home_seller = ()=>{
     const [auth,setAuth]= useState(false);
     const [messageset,setmessagesetter] = useState(false);
     const [salesDatatable, setSalesData] = useState([]);
+    const [top_product,settop_product] = useState();
+    const [top_product_list,settop_product_list] = useState();
     const [salescount, setSalescount] = useState([]);
     const notification = useSelector(state => state.toggle)
     const [salesData] = useState([
@@ -111,6 +113,15 @@ const Home_seller = ()=>{
             console.error("Error while fetching data:", error);
         });
 
+
+        axios.get(`http://localhost:3000/HomeSeller/top_product_list/${id}`)
+        .then((response) => {
+            settop_product_list(response.data)
+            console.log(response)
+        })
+        .catch((error) => {
+            console.error("Error while fetching data:", error);
+        });
       
 
 
@@ -127,17 +138,23 @@ const Home_seller = ()=>{
         });
     },[])
     
+    const totalPriceByMonthArray = stat?.totalPriceByMonth ? Object.values(stat.totalPriceByMonth) : [];
+    const labels = stat?.totalPriceByMonth ? Object.keys(stat.totalPriceByMonth) : [];
+    
     const data = {
-        labels: ['January', 'February', 'March', 'April', 'May','June','July','August','September','October','November','December'],
-        datasets: [
-          {
-            data: [12, 19, 3, 5, 2,24,14,34,45,6,26,34],
-            backgroundColor: 'transparent',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 4,
-            tension: 0.5
-          }]
+      labels: labels,
+      datasets: [
+        {
+          data: totalPriceByMonthArray,
+          backgroundColor: 'transparent',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 4,
+          tension: 0.5
+        }
+      ]
     };
+    
+    
     const options = {
         Plugin:{
             legend: true,
@@ -150,16 +167,28 @@ const Home_seller = ()=>{
         }
 
     }
+    useLayoutEffect(()=>{
+        const id = sessionStorage.getItem("seller_id");
+        axios.get(`http://localhost:3000/HomeSeller/top_product/${id}`)
+        .then((res) => {
+          settop_product(res.data);
+
+        })
+        .catch((err) => {
+          console.error("Error fetching data:", err);
+        });
+    },[])
     const pieChartData = {
-        labels: ['January', 'February', 'March', 'April', 'May'],
+        labels: top_product? top_product.map(item => item.name) : [],
         datasets: [
             {
-                data: [12, 19, 3, 5, 2],
+                data: top_product? top_product.map(item => item.count) : [],
                 backgroundColor: ['#eb9360', '#d9bb6a', '#b359eb', '#e866c1', '#66e87e'],
                 borderWidth: 1
             }
         ]
     };
+    
     
 
     return (
@@ -231,27 +260,17 @@ const Home_seller = ()=>{
                 <div className={Style.left}>
                     <p>Top Tranding Product</p>
                     <div className={Style.inner}>
-                        <Card
-                            image={'./images/262766466_414622610232846_4583703495738761399_n.jpg'}
-                            review={'cdfhfhf'}
-                            productName={'bfhjbjc'}
-                            location={'ffbhffh'}
-                            price={'jhcjbhdcbj'}
-                        />
-                        <Card
-                            image={'./images/262766466_414622610232846_4583703495738761399_n.jpg'}
-                            review={'cdfhfhf'}
-                            productName={'bfhjbjc'}
-                            location={'ffbhffh'}
-                            price={'jhcjbhdcbj'}
-                        />
-                        <Card
-                            image={'./images/262766466_414622610232846_4583703495738761399_n.jpg'}
-                            review={'cdfhfhf'}
-                            productName={'bfhjbjc'}
-                            location={'ffbhffh'}
-                            price={'jhcjbhdcbj'}
-                        />
+                    
+                        {top_product_list && top_product_list.map(product => (
+                            <Card
+                                key={product.name}
+                                image={product.pic}
+                                productName={product.name}
+                                review={`Quantity: ${product.quantity}`}
+                                price={`Price: ${product.price}`}
+                            />
+                        ))}
+
                     </div>
                 </div>
                 <div className={Style.right}>

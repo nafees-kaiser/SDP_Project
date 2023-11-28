@@ -47,3 +47,17 @@ export function SellerCard({ image, rating, productName, location, price, stored
         </div>
     );
 }
+
+export function SellerHomeCard({ image, rating, productName, price }) {
+    return (
+        <div className={style.card}>
+            <img src={image} alt={productName} />
+            <div className={style['div-info']}>
+                {/* <p>{rating}</p> */}
+                <ShowStar rating={rating} sz={25} />
+                <p>{productName}</p>
+                <p>{price}</p>
+            </div>
+        </div>
+    );
+}

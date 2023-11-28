@@ -6,174 +6,108 @@ const app=express();
 app.use(cors())
 const Order = require('../Model/OrderSchema');
 const Buyer = require('../Model/BuyerSchema');
+const Product = require('../Model/ProductsSchema')
 
-
-router.get('/total_customer/:id', async (req, res) => {
-    try {
+router.get('/top_product/:id', async (req, res) => {
+  try {
       const id = req.params.id;
       const orders = await Order
-        .find({ sellerId: id })
-        .populate('product.productId')
-        .exec();
-  
+          .find({ sellerId: id })
+          .populate('product.productId')
+          .exec();
+
       if (!orders || orders.length === 0) {
-        console.log("No results found.");
-        return res.status(404).json({ message: "No results found." });
+          console.log("No results found.");
+          return res.status(404).json({ message: "No results found." });
       }
-      let count=0;
-      const uniqueBuyerIds = {};
+
+      const productCountMap = {};
+
       for (const order of orders) {
-        if(!uniqueBuyerIds[order.buyerId]){
-            uniqueBuyerIds[order.buyerId]=1;
-            count++;
-        }
+          for (const productItem of order.product) {
+              const productId = productItem.productId._id;
+              const productName = productItem.productId.productName;
+              const productType = productItem.productId.productType;
+
+              if (!productCountMap[productId]) {
+                  productCountMap[productId] = {
+                      name: productName,
+                      type: productType,
+                      count: 1
+                  };
+              } else {
+                  productCountMap[productId].count += 1;
+              }
+          }
       }
-      console.log(count)
-      res.json(orders);
-    } catch (error) {
+
+      // Convert the productCountMap object to an array
+      const topProducts = Object.values(productCountMap);
+
+      // Sort the array by the count in descending order
+      topProducts.sort((a, b) => b.count - a.count);
+
+      res.json(topProducts);
+  } catch (error) {
       console.error(`Error while fetching products: ${error}`);
       res.status(500).json({ message: "Internal Server Error" });
-    }
+  }
 });
 
-router.get('/daily_income/:id', async (req, res) => {
-    try {
-        const id = req.params.id;
-      const orders = await Order
-        .find({ sellerId: id })
-        .populate('product.productId')
-        .exec();
-  
-      if (!orders || orders.length === 0) {
-        console.log("No results found.");
-        return res.status(404).json({ message: "No results found." });
-      }
-      const totalPriceByDate = new Map();
-  
-      for (const order of orders) {
-        const orderDate = new Date(order.date).toLocaleDateString();
-        if (!totalPriceByDate.has(orderDate)) {
-          totalPriceByDate.set(orderDate, 0);
-        }
-        totalPriceByDate.set(orderDate, totalPriceByDate.get(orderDate) + order.totalPrice);
-      }
-      const totalPriceByDateObject = {};
-      for (const [date, totalPrice] of totalPriceByDate) {
-        totalPriceByDateObject[date] = totalPrice;
-      }
-      const today = new Date().toLocaleDateString();
-      let Today_Sell=0;
-      if(!totalPriceByDateObject[today]){
-        Today_Sell=0;
-      }
-      else {
-        Today_Sell=totalPriceByDateObject[today];
-      }
-      console.log(Today_Sell)
-      console.log("Total Price by Date:", totalPriceByDateObject);
-  
-      res.json(totalPriceByDateObject);
-    } catch (error) {
-      console.error(`Error while fetching products: ${error}`);
-      res.status(500).json({ message: "Internal Server Error" });
-    }
-  });
- 
-  router.get('/monthly_income/:id', async (req, res) => {
-    try {
-      const id = req.params.id;
-      const orders = await Order
-        .find({ sellerId: id })
-        .populate('product.productId')
-        .exec();
-  
-      if (!orders || orders.length === 0) {
-        console.log("No results found.");
-        return res.status(404).json({ message: "No results found." });
-      }
-  
-      const totalPriceByMonth = new Map();
-  
-      for (const order of orders) {
-        const orderDate = new Date(order.date);
-        const yearMonth = orderDate.getFullYear() + '-' + (orderDate.getMonth() + 1);
-  
-        if (!totalPriceByMonth.has(yearMonth)) {
-          totalPriceByMonth.set(yearMonth, 0);
-        }
-  
-        totalPriceByMonth.set(yearMonth, totalPriceByMonth.get(yearMonth) + order.totalPrice);
-      }
-  
-      const totalPriceByMonthObject = {};
-      for (const [month, totalPrice] of totalPriceByMonth) {
-        totalPriceByMonthObject[month] = totalPrice;
-      }
-  
-      const currentYearMonth = new Date().toISOString().slice(0, 7);
-      let monthlySell = 0;
-  
-      if (totalPriceByMonthObject[currentYearMonth]) {
-        monthlySell = totalPriceByMonthObject[currentYearMonth];
-      }
-  
-      console.log("Monthly Sell:", monthlySell);
-      console.log("Total Price by Month:", totalPriceByMonthObject);
-  
-      res.json({ monthlySell, totalPriceByMonthObject });
-    } catch (error) {
-      console.error(`Error while fetching products: ${error}`);
-      res.status(500).json({ message: "Internal Server Error" });
-    }
-  });
 
-router.get('/yearly_income/:id', async (req, res) => {
-    try {
+router.get('/top_product_list/:id', async (req, res) => {
+  try {
       const id = req.params.id;
       const orders = await Order
-        .find({ sellerId: id })
-        .populate('product.productId')
-        .exec();
-  
+          .find({ sellerId: id })
+          .populate('product.productId')
+          .exec();
+
       if (!orders || orders.length === 0) {
-        console.log("No results found.");
-        return res.status(404).json({ message: "No results found." });
+          console.log("No results found.");
+          return res.status(404).json({ message: "No results found." });
       }
-  
-      const totalPriceByYear = new Map();
-  
+
+      const productCountMap = {};
+
       for (const order of orders) {
-        const orderDate = new Date(order.date);
-        const year = orderDate.getFullYear();
-  
-        if (!totalPriceByYear.has(year)) {
-          totalPriceByYear.set(year, 0);
-        }
-  
-        totalPriceByYear.set(year, totalPriceByYear.get(year) + order.totalPrice);
+          for (const productItem of order.product) {
+              const productId = productItem.productId._id;
+              const productName = productItem.productId.productName;
+              const productType = productItem.productId.productType;
+              const product = await Product.findById(productId);
+              console.log(product)
+              if (!productCountMap[productId]) {
+                  productCountMap[productId] = {
+                      name: productName,
+                      pic: product.Product_img1,
+                      quantity: product.storedQuantity,
+                      category: product.category,
+                      price:product.price,
+                      type: productType,
+                      count: 1
+                  };
+              } else {
+                  productCountMap[productId].count += 1;
+              }
+          }
       }
-  
-      const totalPriceByYearObject = {};
-      for (const [year, totalPrice] of totalPriceByYear) {
-        totalPriceByYearObject[year] = totalPrice;
-      }
-  
-      const currentYear = new Date().getFullYear();
-      let yearlySell = 0;
-  
-      if (totalPriceByYearObject[currentYear]) {
-        yearlySell = totalPriceByYearObject[currentYear];
-      }
-  
-      console.log("Yearly Sell:", yearlySell);
-      console.log("Total Price by Year:", totalPriceByYearObject);
-  
-      res.json({ yearlySell, totalPriceByYearObject });
-    } catch (error) {
+
+      // Convert the productCountMap object to an array
+      const topProducts = Object.values(productCountMap);
+
+      // Sort the array by the count in descending order
+      topProducts.sort((a, b) => b.count - a.count);
+      const top3=topProducts.slice(0,3);
+
+      res.json(top3);
+  } catch (error) {
       console.error(`Error while fetching products: ${error}`);
       res.status(500).json({ message: "Internal Server Error" });
-    }
-  });
+  }
+});
+
+
  
   router.get('/stat/:id', async (req, res) => {
     try {
