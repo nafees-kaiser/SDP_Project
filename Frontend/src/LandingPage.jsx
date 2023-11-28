@@ -4,7 +4,8 @@ import CraftForm from "./Components/CraftForm";
 import Footer from "./Components/Footer.jsx"
 import styles from "./LandingPage.module.css"
 // import Button from "./Components/Button.jsx"
-import JoinCommunity from "./components/JoinCommunity";
+// import JoinCommunity from "./components/JoinCommunity";
+import JoinCommunity from "./components/JoinCommunity.jsx";
 import Community from "./components/Community";
 import KnowAboutCrafts from "./components/KnowAboutCrafts";
 import NewArrival from "./components/NewArrival";
