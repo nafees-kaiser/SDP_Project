@@ -6,87 +6,87 @@ import 'slick-carousel/slick/slick-theme.css';
 const categories = [
   {
     title: 'Pottery',
-    image: './images/beautifulclaypotshandmadepotterydisplayroadsidehandicraftshopdhakabangladesh53840651-2@2x.png',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179095/qqxhvifkdgvazlox348p.gif',
   },
   {
     title: 'Bedsheets and Katha',
-    image: './images/handwoventextilesforsaleonthesidewalkinbuceriasnayaritmexicom23a3f-2@2x.png',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179177/hgh7sjxkvbfjtrovadfw.jpg',
   },
   {
     title: 'Furniture',
-    image: './images/furniture.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179226/i598ili73kvus9yvysda.jpg',
   },
   {
     title: 'Saree',
-    image: './images/384207015_834271585101077_2032535910196640642_n.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179275/qlfuldexzuijmwc3ksfu.jpg',
   },
   {
     title: 'Utensils',
-    image: './images/utensil.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179381/wtn9zok4lllj1ziwtqtq.jpg',
   },
   {
     title: 'Jewelry',
-    image: './images/jewelry.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179425/yfiscqdsarmkzbcbdvz9.jpg',
   },
   {
     title: 'Mats and Rugs',
-    image: './images/mat.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179482/ltczhbxbxd6to9zmz9v0.jpg',
   },
   {
     title: 'Home Decor',
-    image: './images/homedecor.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179571/w8vpkypwnm0we8yfjczy.jpg',
   },
   {
-    title: 'Mufler/Scurf',
-    image: './images/muffler.jpg',
+    title: 'Mufler/Scarf',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179614/w9ipqirbybnkguo3sgto.jpg',
   },
   {
     title: 'Kurta/Punjabi',
-    image: './images/Panjabi.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179655/tsh6jrsak8nhfhxdzeck.jpg',
   },
   {
     title: 'Fotua/Salware Kameez',
-    image: './images/Salwar-Kameez.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179715/rtydcgozfxubq71dxyor.jpg',
   },
   {
     title: 'Pant/Pajama',
-    image: './images/pant.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179749/t17pacggaskceezx6cks.jpg',
   },
   {
     title: 'Lungi',
-    image: './images/lungi.jpeg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179944/gtjzib8ds8q6revghi1v.jpg',
   },
   {
     title: 'Flower Vase',
-    image: './images/flowervase.webp',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179944/qtqcrfuehmdhc2pdrv8c.webp',
   },
   {
     title: 'Footwear',
-    image: './images/juta.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179945/p17pd3pfbijzd5voropv.jpg',
   },
   {
     title: 'Musical Instrument',
-    image: './images/music.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179945/h9vhxajgg6ksdu3ffgxa.jpg',
   },
   {
     title: 'Painting',
-    image: './images/arts.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179942/roavedsg1epw4d73c3hs.jpg',
   },
   {
     title: 'Cap/Hat/Pagri',
-    image: './images/Cap.png',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179944/dysxdssb1qbsilhgkbyc.png',
   },
   {
     title: 'Bags',
-    image: './images/bag.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179942/ypqlmvei6jsiqcn3ticu.jpg',
   },
   {
     title: 'WoodBlock Printing',
-    image: './images/woodblock.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179944/wwxgwxrwihz0wfiutdeb.jpg',
   },
   {
     title: 'Conch Shell Craft',
-    image: './images/conchshell.jpg',
+    image: 'https://res.cloudinary.com/dkotituzn/image/upload/v1701179943/hvg8uqwotwqmjtm4cwsm.jpg',
   },
 ];
 

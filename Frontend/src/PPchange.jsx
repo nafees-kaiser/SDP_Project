@@ -2,11 +2,13 @@
 import { useState, useRef } from 'react';
 import styles from './PPchange.module.css';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 const ProfilePictureChange = () => {
   const buyerId = sessionStorage.getItem("buyer_id");
   const [selectedImage, setSelectedImage] = useState(null);
   const fileInputRef = useRef(null);
+  const navigate= useNavigate();
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -28,6 +30,9 @@ const ProfilePictureChange = () => {
         .then(response => {
           // Handle the response from the server
           console.log('Server response:', response.data);
+          alert('Your profile picture has been updated');
+          navigate('/buyer_profile');
+          // window.location.reload();
         })
         .catch(error => {
           // Handle errors
