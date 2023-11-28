@@ -15,6 +15,8 @@ import { ShowStar } from "./Components/RatingStars";
 import Messaging from "./Messaging_buyer";
 import { useDispatch, useSelector } from 'react-redux';
 import Notification from "./Notification.jsx";
+import { FaAngleDown } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa";
 
 export default function ProductListing() {
     const [messageset, setmessagesetter] = useState(false);
@@ -198,11 +200,11 @@ export default function ProductListing() {
                             <div style={{ cursor: "pointer", marginBottom: "5px" }} onClick={toggleCategory}>
                                 {isCategoryOpen ?
                                     <div>
-                                        <img src={"/images/down.svg"} alt="down" style={{ display: "inline" }} />
+                                        <FaAngleDown style={{ display: "inline" }}/>
                                         <div style={{ display: "inline" }}>Categories</div>
                                     </div>
                                     : <div>
-                                        <img src="/images/right.svg" alt="down" style={{ display: "inline" }} />
+                                        <FaAngleRight style={{ display: "inline" }}/>
                                         <div style={{ display: "inline" }}>Categories</div>
                                     </div>}
                             </div>
@@ -241,11 +243,11 @@ export default function ProductListing() {
                             <div style={{ cursor: "pointer", marginBottom: "5px" }} onClick={toggleLocation}>
                                 {isLocationOpen ?
                                     <div>
-                                        <img src="/images/down.svg" alt="down" style={{ display: "inline" }} />
+                                        <FaAngleDown style={{ display: "inline" }}/>
                                         <div style={{ display: "inline" }}>Location</div>
                                     </div>
                                     : <div>
-                                        <img src="/images/right.svg" alt="down" style={{ display: "inline" }} />
+                                        <FaAngleRight style={{ display: "inline" }}/>
                                         <div style={{ display: "inline" }}>Location</div>
                                     </div>}
                             </div>
@@ -268,11 +270,11 @@ export default function ProductListing() {
                             <div style={{ cursor: "pointer", marginBottom: "5px" }} onClick={toggleRating}>
                                 {isRatingOpen ?
                                     <div>
-                                        <img src="/images/down.svg" alt="down" style={{ display: "inline" }} />
+                                        <FaAngleDown style={{ display: "inline" }}/>
                                         <div style={{ display: "inline" }}>Rating</div>
                                     </div>
                                     : <div>
-                                        <img src="/images/right.svg" alt="down" style={{ display: "inline" }} />
+                                        <FaAngleRight style={{ display: "inline" }}/>
                                         <div style={{ display: "inline" }}>Rating</div>
                                     </div>}
                             </div>
@@ -311,11 +313,11 @@ export default function ProductListing() {
                             <div style={{ cursor: "pointer", marginBottom: "5px" }} onClick={togglePrice}>
                                 {isPriceOpen ?
                                     <div>
-                                        <img src="/images/down.svg" alt="down" style={{ display: "inline" }} />
+                                        <FaAngleDown style={{ display: "inline" }}/>
                                         <div style={{ display: "inline" }}>Price Range</div>
                                     </div>
                                     : <div>
-                                        <img src="/images/right.svg" alt="down" style={{ display: "inline" }} />
+                                        <FaAngleRight style={{ display: "inline" }}/>
                                         <div style={{ display: "inline" }}>Price Range</div>
                                     </div>}
                             </div>

@@ -60,7 +60,7 @@ const LogIn = () => {
                     <div className={style.title}>
                         <div className={style.heading}>
                             <div className={style.logo}>
-                                <img src="./images/logo.png" alt="Logo" />
+                                <img src="https://res.cloudinary.com/dkotituzn/image/upload/v1701181973/oi3hbp6e9isxhlgmg5nc.png" alt="Logo" />
                             </div>
                             <h2 className={`${style['text-color']} ${style['font-family-header']} ${style['text-alignment']}`}>Welcome</h2>
                             <span className={`${style['text-color']} ${style['text-alignment']}`}>

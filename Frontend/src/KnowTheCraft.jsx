@@ -13,6 +13,8 @@ import Division from "./Classes/divisionDistrict";
 import Messaging from "./Messaging_buyer";
 import { useDispatch, useSelector } from 'react-redux';
 import Notification from "./Notification.jsx";
+import { FaAngleRight } from "react-icons/fa";
+import { FaAngleDown } from "react-icons/fa";
 
 export default function KnowTheCraft() {
     const [messageset, setmessagesetter] = useState(false);
@@ -156,11 +158,11 @@ export default function KnowTheCraft() {
                         <div style={{ cursor: "pointer", marginBottom: "5px" }} onClick={() => toggleDistrict(!isDistrictOpen)}>
                             {isDistrictOpen ?
                                 <div>
-                                    <img src="/images/down.svg" alt="down" style={{ display: "inline" }} />
+                                    <FaAngleDown style={{ display: "inline" }}/>
                                     <div style={{ display: "inline" }}>District</div>
                                 </div>
                                 : <div>
-                                    <img src="/images/right.svg" alt="down" style={{ display: "inline" }} />
+                                    <FaAngleRight style={{ display: "inline" }}/>
                                     <div style={{ display: "inline" }}>District</div>
                                 </div>}
                         </div>

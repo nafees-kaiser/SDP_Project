@@ -36,7 +36,7 @@ const KnowAboutCrafts = () => {
             <img
               className={styles.iconarrowRight}
               alt=""
-              src="./images/iconarrowright.svg"
+              src="https://res.cloudinary.com/dkotituzn/image/upload/v1701180286/zpn8ueeyv6qp4iuipbrh.svg"
             />
           </button>
         </div>
@@ -45,11 +45,11 @@ const KnowAboutCrafts = () => {
             <img
               className={styles.nakshiKatha1Icon}
               alt=""
-              src="./images/nakshi-katha-1@2x.png"
+              src="https://res.cloudinary.com/dkotituzn/image/upload/v1701180331/xji1updzmnixdrip6loc.png"
             />
           </div>
           <div className={styles.imagePlaceholder1}>
-            <img className={styles.saree11Icon} alt="" src="./images/saree1-1@2x.png" />
+            <img className={styles.saree11Icon} alt="" src="https://res.cloudinary.com/dkotituzn/image/upload/v1701180385/g1c6cvib0osask4etwaw.png" />
           </div>
         </div>
       </div>

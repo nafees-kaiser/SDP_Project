@@ -63,7 +63,7 @@ export default function IndividualProduct() {
                 console.log("The data is", response.data);
                 setProduct(response.data[0].productId);
                 setSeller(response.data[0].sellerId);
-                setImage(response.data[0].productId.Product_img1);
+                setImage(response.data[0].productId.Product_img1?response.data[0].productId.Product_img1:fillerImage);
             })
 
         axios.get(`http://localhost:3000/reviews/${id}`)

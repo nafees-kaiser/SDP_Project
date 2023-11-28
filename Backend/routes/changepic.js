@@ -17,49 +17,70 @@ router.post('/:buyerId', upload.single('img'), async (req, res) => {
   try {
     const { buyerId } = req.params;
 
-    // Check if the buyer exists
     const result = await Buyer.findById(buyerId);
     if (!result) {
       return res.status(404).json({ error: 'User not found' });
     }
     if (!req.file) {
-        return res.status(400).json({ error: 'No file uploaded' });
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+
+    console.log(req.file.path);
+    const imgPath = req.file.path;
+    
+    async function run(img) {
+      try {
+        const response = await cloudinary.uploader.upload(img);
+        return response.url;
+      } catch (error) {
+        console.error('Error uploading to Cloudinary:', error);
+        return null;
+      }
+    }
+
+    try {
+      const cloudinaryUrl = await run(imgPath);
+      if (!cloudinaryUrl) {
+        return res.status(500).json({ error: 'Error uploading to Cloudinary' });
       }
 
-    //   console.log('Image Buffer Size:', req.file.buffer.length);
-      async function run(imgBuffer) {
-        try {
-          // Upload the image to Cloudinary
-          const response = await cloudinary.uploader.upload_stream(
-            (error, result) => {
-              if (error) {
-                console.error('Error uploading to Cloudinary:', error);
-                throw new Error('Image upload to Cloudinary failed');
-              }
-              return result;
-            }
-          ).end(imgBuffer);
-  
-          // Extract and return the Cloudinary URL from the response
-          return response.secure_url;
-        } catch (error) {
-          console.error('Error uploading to Cloudinary:', error);
-          throw new Error('Image upload to Cloudinary failed');
-        }
-      }
-  
-      const cloudinaryUrl = await run(req.file.buffer); // Use req.file.buffer instead of req.file.originalname
+      console.log(cloudinaryUrl);
       result.img = cloudinaryUrl;
-  
-      console.log('Uploaded image URL:', cloudinaryUrl);
+
       await result.save();
-  
-      res.status(200).json({ success: true });
-  
+
+      console.log(result);
+
+      res.json({ success: true });
     } catch (error) {
       console.error('Error handling image upload:', error);
       res.status(500).json({ error: 'Internal server error' });
     }
-  });
+  } catch (error) {
+    console.error('Error handling image upload:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+        // .then((imgPath)=>{
+        //   console.log(imgPath)
+        //   result.img=imgPath;
+        //   console.log(result);
+          
+        // })
+        // .catch((err)=>{
+        //   console.log(err)
+        // })
+
+    //     await result.save();
+    //     console.log(result);
+    //     res.json({ success: true });
+    // }
+    // catch (error) {
+    //   console.error('Error handling image upload:', error);
+    //   res.status(500).json({ error: 'Internal server error' });
+    // }
+  // });
 
 module.exports = router;
