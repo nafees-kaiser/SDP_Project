@@ -90,7 +90,7 @@ const CraftForm = (props) =>{
                         </button>
                         <div className={Style.icons}>
                             <i class="fa-solid fa-cart-plus"></i>
-                            <p>Cart</p>
+                            <Link to={`/checkout`}><p>Cart</p></Link>
                         </div>
 
                     </div>

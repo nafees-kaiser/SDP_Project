@@ -6,13 +6,22 @@ import CraftForm from "./Components/CraftForm";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import { useDispatch, useSelector } from 'react-redux';
+import Messaging from "./Messaging_buyer";
 import Notification from "./Notification.jsx";
 export default function IndividualKnowTheCraft() {
+    const [messageset, setmessagesetter] = useState(false);
     const { id } = useParams();
     const [data, setData] = useState([]);
     const [sellerName, setSellerName] = useState('');
     const buyerId = sessionStorage.getItem("buyer_id");
     const notification = useSelector(state => state.toggle)
+    const callbackmessage_land = (data) => {
+        console.log("Land ", data);
+        setmessagesetter(data);
+    }
+    const closemessage = () => {
+        setmessagesetter(false)
+    }
     useEffect(() => {
         axios.get(`http://localhost:3000/know-the-craft/${id}`)
             .then(response => {
@@ -35,7 +44,7 @@ export default function IndividualKnowTheCraft() {
 
     return (
         <>
-            {buyerId ? <CraftForm /> : <Navbar />}
+            {buyerId ? <CraftForm  callback2={callbackmessage_land}  /> : <Navbar />}
             {notification.toggle && <Notification/>}
             <div className={style.container}>
 
@@ -71,6 +80,7 @@ export default function IndividualKnowTheCraft() {
                     </div>
                 </div>
             </div>
+            {messageset && <Messaging closemessage={closemessage} />}
             <Footer />
         </>
     );
