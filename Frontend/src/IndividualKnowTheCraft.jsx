@@ -36,7 +36,7 @@ export default function IndividualKnowTheCraft() {
     return (
         <>
             {buyerId ? <CraftForm /> : <Navbar />}
-            {notification && <Notification/>}
+            {notification.toggle && <Notification/>}
             <div className={style.container}>
 
                 <div className={style['hero-section']} style={imageStyle}>
