@@ -37,8 +37,10 @@ import SellerProductListing from "./SellerProductListing.jsx";
 // import {RatingStar} from "./Components/RatingStars.jsx";
 import IndividualKnowTheCraft from "./IndividualKnowTheCraft.jsx";
 import Order_History from "./Order_History.jsx";
-
+import SellerIndividualProduct from "./SellerIndividualProduct.jsx";
+import OrderSellerList from "./OrderListSeller.jsx";
 import Notification from "./Notification.jsx";
+import ProfilePictureChange from "./PPchange.jsx";
 
 const Routing = ()=>{
     return (
@@ -80,6 +82,9 @@ const Routing = ()=>{
                 <Route path='/Notification' element={<Notification/>}></Route>
                 {/* <Route path='/star' element={<RatingStar/>}></Route> */}
                 <Route path='/Order_History' element={<Order_History/>}></Route>
+                <Route path='/SellerIndividualProduct/:id' element={<SellerIndividualProduct/>}></Route>
+                <Route path='/Order_Seller_List' element={<OrderSellerList/>}></Route>
+                <Route path='/pic_change' element={<ProfilePictureChange/>}></Route>
             </Routes>
         </>
     )

@@ -1,147 +1,50 @@
 import styles from "./NewArrival.module.css";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Link } from 'react-router-dom';
 
 const NewArrival = () => {
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/new_arrival')
+      .then(response => {
+        setProducts(response.data);
+        // console.log(products[0]);
+      })
+      .catch(error => console.error(error));
+  }, []);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1
+  };
+
   return (
-  <div className={styles.newArrival}>
-      <div className={styles.carouselTitle}>
-        <b className={styles.newArrivalsIn}>
-          New Arrivals in Creative Craftsmanship
-        </b>
+    <div className={styles.carouselContainer}>
+      <div className={styles.titleContainer}>
+        <h2 className={styles.title}>New Arrivals in Creative Craftsmanship</h2>
       </div>
-      <div className={styles.carouselbutton}>
-        <div className={styles.cards}>
-          <div className={styles.elementscard}>
-            <button className={styles.image}>
-              <div className={styles.imagePlaceholder}>
-                <img
-                  className={styles.nomadsHandFan1507545247338Icon}
-                  alt=""
-                  src="./images/nomadshandfan15075452473382748-1@2x.png"
-                />
-              </div>
-            </button>
-            <div className={styles.content}>
-              <div className={styles.content}>
-                <div className={styles.textprice}>
-                  <div className={styles.haatpakha}>{`HaatPakha `}</div>
-                  <div className={styles.price}>
-                    <div className={styles.div}>৳ 200</div>
-                  </div>
-                </div>
-              </div>
+      <Slider {...settings} className={styles.slider}>
+        {products.map((product) => (
+          <div key={product._id} className={styles.productCard}>
+            <Link to={`/product-listing/${product._id}`} className={styles.productButton}>
+            <img className={styles.productImage} src={product.Product_img1} alt="picture not available" />
+            </Link>
+            <div className={styles.productInfo}>
+              <p className={styles.productName}>{product.productName}</p>
+              <p className={styles.productPrice}>৳ {product.price}</p>
             </div>
           </div>
-          <div className={styles.elementscard}>
-            <button className={styles.image}>
-              <div className={styles.imagePlaceholder}>
-                <img
-                  className={styles.nomadsHandFan1507545247338Icon}
-                  alt=""
-                  src="./images/banggerchataredcolournakshinatebook1-1@2x.png"
-                />
-              </div>
-            </button>
-            <div className={styles.content}>
-              <div className={styles.content}>
-                <div className={styles.textprice}>
-                  <div className={styles.haatpakha}>Handcrafted Notebook</div>
-                  <div className={styles.price}>
-                    <div className={styles.div}>৳ 450</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={styles.elementscard}>
-            <button className={styles.image}>
-              <div className={styles.imagePlaceholder}>
-                <img
-                  className={styles.nomadsHandFan1507545247338Icon}
-                  alt=""
-                  src="./images/49-1@2x.png"
-                />
-              </div>
-            </button>
-            <div className={styles.content}>
-              <div className={styles.content}>
-                <div className={styles.textprice}>
-                  <div className={styles.haatpakha}>Jute Flower Hanger</div>
-                  <div className={styles.price}>
-                    <div className={styles.div}>৳ 350</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={styles.elementscard}>
-            <button className={styles.image}>
-              <div className={styles.imagePlaceholder}>
-                <img
-                  className={styles.nomadsHandFan1507545247338Icon}
-                  alt=""
-                  src="./images/0ea79588b43865c7d65da868e8d4af7f-1@2x.png"
-                />
-              </div>
-            </button>
-            <div className={styles.content}>
-              <div className={styles.content7}>
-                <div className={styles.textprice}>
-                  <img
-                    className={styles.ratingratingGroupIcon}
-                    alt=""
-                    src="./images/ratingrating-group.svg"
-                  />
-                  <div className={styles.haatpakha}>Crochet Table Mat</div>
-                  <div className={styles.price3}>
-                    <div className={styles.div}>৳ 700</div>
-                    <div className={styles.div4}>$165.00</div>
-                  </div>
-                </div>
-                <div className={styles.elementsswatchesgroupcolor}>
-                  <div className={styles.items}>
-                    <img
-                      className={styles.elementsswatchessinglecolorIcon}
-                      alt=""
-                      src="./images/elementsswatchessinglecolor.svg"
-                    />
-                    <img
-                      className={styles.elementsswatchessinglecolorIcon1}
-                      alt=""
-                      src="./images/elementsswatchessinglecolor1.svg"
-                    />
-                    <img
-                      className={styles.elementsswatchessinglecolorIcon1}
-                      alt=""
-                      src="./images/elementsswatchessinglecolor2.svg"
-                    />
-                    <img
-                      className={styles.elementsswatchessinglecolorIcon1}
-                      alt=""
-                      src="./images/elementsswatchessinglecolor3.svg"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className={styles.arrows}>
-            <button className={styles.button}>
-              <img
-                className={styles.iconarrowRight}
-                alt=""
-                src="./images/iconarrowright5.svg"
-              />
-            </button>
-            <button className={styles.button1}>
-              <img
-                className={styles.iconarrowRight}
-                alt=""
-                src="./images/iconarrowleft.svg"
-              />
-            </button>
-          </div>
+        ))}
+      </Slider>
     </div>
   );
 };

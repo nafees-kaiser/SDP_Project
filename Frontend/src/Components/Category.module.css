@@ -1,211 +1,67 @@
-.category {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  top: 770px;
-  height: 719px;
-  font-size: 64px;
-  color: var(--white);
-}
-.category1,
-.groupChild {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: var(--bg);
-  width: 100%;
-  height: 719px;
-}
-.groupChild {
-  left: 18.62px;
-  border-radius: var(--br-mini);
-  background-color: var(--color-darkslateblue);
-  width: 304.74px;
-  height: 657px;
-}
-.shopBy {
-  margin: 0;
-  font-family: "Space Grotesk", sans-serif;
-  font-weight: bold;
-  font-size: 64px;
-  line-height: 38px;
-}
 .shopByCategoryContainer {
-  position: absolute;
-  top: 278px;
-  left: -12px;
-  line-height: 28px;
-  display: inline-block;
-  width: 341px;
-  height: 101px;
+  position: relative;
+  top: 625px;
+  height: 719px;
+  background-color: #D9D9D9;
 }
 
-.rectangleParent {
-  position: absolute;
+.titleBox {
+  position: relative;
   border-radius: 10px;
   top: 28px;
   left: 25px;
   width: 315px;
-  height: 657px;
+  height: 630px;
   background-color: #795aac;
+  padding: 15px;
 }
 
-.beautifulClayPotsHandMadeIcon,
-.potteryChild {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: var(--br-3xs);
-  width: 307px;
-}
-.potteryChild {
-  background-color: var(--bg);
-  height: 614px;
-}
-.beautifulClayPotsHandMadeIcon {
-  height: 497px;
-  object-fit: cover;
-}
-.potteryCeramics {
+.title {
+  color: white;
+  font-weight: bold;
+  font-size: '2em';
+  top: 200px;
   position: relative;
-  font-size: 20px;
-  /* font-size: var(--font-size-xl); */
-  line-height: 28px;
-  display: inline-block;
-  /* font-family: var(--heading-03); */
-  color: var(--text);
-  text-align: center;
-  width: 192px;
 }
-.piecescategoryTag {
-  cursor: pointer;
-  border: 0;
-  padding: var(--padding-xs);
-  background-color: var(--button);
-  position: absolute;
-  top: calc(50% + 221px);
-  left: calc(50% - 108.5px);
-  border-radius: 5px;
-  width: 220px;
-  height: 55px;
+
+.carousel {
+  margin-top: 20px;
+  position: relative;
+  top: -87%; 
+  left: 61.5%; 
+  width: 70%;
+  transform: translate(-50%, 0);
+  
+}
+
+.carouselItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
+  padding: 10px;
 }
-.pottery {
-  position: absolute;
-  top: 21px;
-  left: 15px;
-  width: 307px;
-  height: 614px;
-}
-.piecescategoryTag1 {
-  cursor: pointer;
-  border: 0;
-  padding: var(--padding-xs);
-  background-color: var(--button);
-  position: absolute;
-  bottom: 34px;
-  left: calc(50% - 108.5px);
-  border-radius: 5px;
-  width: 216px;
-  height: 52px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-}
-.handwovenTextilesForSaleOnIcon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: var(--br-3xs);
-  width: 307px;
-  height: 501.9px;
-  object-fit: cover;
-}
-.textiles {
-  position: absolute;
-  top: 21px;
-  left: 362px;
-  width: 307px;
-  height: 614px;
-}
-.rattanProducts {
-  position: relative;
-  /* font-size: var(--font-size-xl); */
-  font-size: 20px;
-  line-height: 28px;
-  display: inline-block;
-  /* font-family: var(--heading-03); */
-  color: var(--text);
-  text-align: center;
-  width: 180px;
-}
-.categoryyyy,
-.rattan {
-  position: absolute;
-  top: 21px;
-  left: 705px;
-  width: 307px;
-  height: 614px;
-}
-.categoryyyy {
-  top: 28px;
-  left: 430px;
-  width: 1100px;
-  height: 657px;
-}
-.iconarrowRight {
-  position: absolute;
-  top: calc(50% - 16px);
-  left: calc(50% - 16px);
-  width: 40px;
-  height: 32px;
-}
-.button {
-  cursor: pointer;
-  border: 0;
-  padding: 0;
-  background-color: var(--white);
-  top: calc(50% - 26px);
-  right: 28px;
-  border-radius: var(--br-81xl);
-  box-shadow: var(--shadow-01);
-  width: 52px;
-}
-.arrows,
-.button,
-.button1 {
-  position: absolute;
-  height: 52px;
-}
-.button1 {
-  cursor: pointer;
-  border: 0;
-  padding: 0;
-  background-color: var(--white);
-  top: calc(50% - 26px);
-  left: 28px;
-  border-radius: var(--br-81xl);
-  box-shadow: var(--shadow-01);
-  width: 52px;
-}
-.arrows {
-  width: calc(100% - 315px);
-  top: 333px;
-  right: -18px;
-  left: 333px;
-}
-.category {
+
+.carouselItem img {
   width: 100%;
-  top: 628px;
-  height: 719px;
-  text-align: center;
-  font-size: var(--font-size-45xl);
-  color: var(--white);
-  font-family: var(--heading-03);
+  height: 550px; /* Adjust the height as needed */
+  object-fit: cover;
+  border-radius: 10px;
 }
+
+.productButton {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #999dee;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* .slick-arrow .slick-prev .slick-next {
+  background-color: #000000 !important;
+  color: #0000 !important;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+} */

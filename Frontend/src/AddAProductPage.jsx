@@ -116,7 +116,14 @@ const AddAProductPage = () => {
         division: '',
         description: '',
         category: '',
-        size: '' ,
+        // size: '' ,
+        size: {
+          dimension: [
+            { length: '', width: '', height: '', diameter: '' },
+            
+          ],
+          other: [], // Array to store multiple other sizes
+        },
       //   size: {
       //     dimension: {
       //         length: '',
@@ -126,7 +133,7 @@ const AddAProductPage = () => {
       //     },
       //     other: [],
       // },
-        color: ''
+        color: []
     });
 
     
@@ -160,7 +167,25 @@ const AddAProductPage = () => {
   //     }
   // };
   
+  const handleColorChange = (e) => {
+    const { value } = e.target;
+    setData((prevData) => ({ ...prevData, color: [...prevData.color, value] }));
+  };
 
+  const handleSizeChange = (e, index, sizeType) => {
+    const { name, value } = e.target;
+    setData((prevData) => {
+      const newSizes = [...prevData.size.dimension];
+      newSizes[index][name] = value;
+      return { ...prevData, size: { ...prevData.size, dimension: newSizes } };
+    });
+  };
+
+
+  const handleOtherSizeChange = (e) => {
+    const { value } = e.target;
+    setData((prevData) => ({ ...prevData, size: { ...prevData.size, other: [...prevData.size.other, value] } }));
+  };
     const ChangeHandle = (e) => {
     const { name, value } = e.target;
 
@@ -403,13 +428,13 @@ const AddAProductPage = () => {
                 value={data.color}
                 placeholder="e.g. Red"
                 type="text"
-                onChange={ChangeHandle}
+                onChange={handleColorChange}
               />
             </div>
             
           </div>
           
-          {/* <div className={styles.color2}>
+          <div className={styles.color2}>
             <div className={styles.elementsfilterSectiontitle1}>
               <div className={styles.categories2}>Size in Dimensions
               </div>
@@ -419,7 +444,83 @@ const AddAProductPage = () => {
                 src="./images/iconchevronup3.svg"
               />
             </div>
-                <div className={styles.elementsswatchesgroupbutton}>
+            {/* abc */}
+          <div className={styles.elementsswatchesbutton}>
+          {data.size.dimension.map((size, index) => (
+            <div key={index} className={styles.elementsswatchesgroupbuttonParent}>
+              <div className={styles.elementsswatchesgroupbutton}>
+                <div className={styles.hello}>
+                  <input
+                    className={styles.input}
+                    name="length"
+                    id="length"
+                    value={size.length}
+                    placeholder="Length in cm"
+                    type="text"
+                    onChange={(e) => handleSizeChange(e, index, 'dimension')}
+                  />
+                </div>
+                <div className={styles.hello}>
+                  <input
+                    className={styles.input}
+                    name="height"
+                    id="height"
+                    value={size.height}
+                    placeholder="Height in cm"
+                    type="text"
+                    onChange={(e) => handleSizeChange(e, index, 'dimension')}
+                  />
+                </div>
+                
+                <div className={styles.hello}>
+                  <input
+                    className={styles.input}
+                    name="width"
+                    id="width"
+                    value={size.width}
+                    placeholder="Width in cm"
+                    type="text"
+                    onChange={(e) => handleSizeChange(e, index, 'dimension')}
+                  />
+                </div>
+                <div className={styles.hello}>
+                  <input
+                    className={styles.input}
+                    name="diameter"
+                    id="diameter"
+                    value={size.diameter}
+                    placeholder="Diameter in cm"
+                    type="text"
+                    onChange={(e) => handleSizeChange(e, index, 'dimension')}
+                  />
+                </div>
+                {/* ... (similar fields for width, height, and diameter) */}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className={styles.color3}>
+        <div className={styles.productName}>
+          <div className={styles.formelementstitle1}>Other Sizes</div>
+          <select
+                id="size"
+                name="size"
+                placeholder=""
+                value={data.size}
+                onChange={handleOtherSizeChange}
+              >
+                <option value="" disabled>Select a size</option>
+                {others.map((size, index) => (
+                <option key={index} value={size}>
+                {size}
+                </option>
+                ))}
+              </select>
+          
+        </div>
+  
+                {/* <div className={styles.elementsswatchesgroupbutton}>
                 
                     <div className={styles.hello}>
                       <input
@@ -490,8 +591,8 @@ const AddAProductPage = () => {
                 </option>
                 ))}
               </select>
-            </div>
-          </div> */}
+            </div> */}
+          </div>
         </div>
         <div className={styles.location}>
           <div className={styles.location1}>

@@ -48,12 +48,13 @@
   align-self: stretch;
   position: relative;
   letter-spacing: -0.02em;
-  line-height: 28px;
+  line-height: 25px;
 }
 .handmadeJewelleryIs {
   align-self: stretch;
   position: relative;
   font-size: var(--font-size-mini);
+  /* font-size: 10; */
   line-height: 19px;
   color: var(--opal);
 }
