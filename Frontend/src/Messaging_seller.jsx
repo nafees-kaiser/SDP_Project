@@ -24,7 +24,7 @@ const Messaging = (props) => {
   const id = "651c5377783c0719018cd17f"
   const messageref = useRef(null);
   useEffect(()=>{
-    setsocket(io("http://localhost:8080"))
+    setsocket(io("https://heritage-u8vo.onrender.com"))
     console.log(UserId)
   },[])
   useEffect(()=>{

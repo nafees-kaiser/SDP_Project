@@ -8,6 +8,7 @@ const cloudinary = require('../cloudinary');
 const router = express.Router();
 const app=express()
 app.use(cors())
+const server = http.createServer(app);
 const Community = require('../Model/CommunitySchema');
 const Seller = require('../Model/SellerSchema');
 const Buyer = require('../Model/BuyerSchema');
@@ -18,9 +19,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-const io= require('socket.io')(8090,{
+const io= require('socket.io')(server,{
     cors: {
-        origin: 'http://localhost:5173',
+        origin: 'https://bright-manatee-0cc824.netlify.app/',
     }
 });
 let users = []

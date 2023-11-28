@@ -4,16 +4,18 @@ const http = require('http')
 const cors = require('cors')
 const router = express.Router();
 const app=express()
+const server = http.createServer(app);
 app.use(cors())
 const Message = require('../Model/MessageSchema');
 const Conversation = require('../Model/ConversationSchema');
 const Seller = require('../Model/SellerSchema');
 const Buyer = require('../Model/BuyerSchema');
-const io= require('socket.io')(8080,{
+const io = require('socket.io')(server, {
     cors: {
-        origin: 'http://localhost:5173',
+      origin: 'https://bright-manatee-0cc824.netlify.app',
+      methods: ['GET', 'POST']
     }
-});
+  });
 let users = []
 io.on("connection",(socket) =>{
     console.log('User Connected ',socket.id)
