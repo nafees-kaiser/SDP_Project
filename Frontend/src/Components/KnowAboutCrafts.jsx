@@ -1,6 +1,12 @@
 import styles from "./KnowAboutCrafts.module.css";
+import { useNavigate } from "react-router-dom";
 
 const KnowAboutCrafts = () => {
+  const navigate = useNavigate();
+  const handleChange = () => {
+    navigate('/know-the-craft');
+  };
+
   return (
     <div className={styles.knowAboutCrafts} id="craft">
       <div className={styles.content}>
@@ -25,7 +31,7 @@ const KnowAboutCrafts = () => {
           </div>
           <button className={styles.button}>
             <div className={styles.content2}>
-              <div className={styles.getStarted}>{`Know More `}</div>
+              <button className={styles.getStarted} onClick={handleChange}>{`Know More `}</button>
             </div>
             <img
               className={styles.iconarrowRight}

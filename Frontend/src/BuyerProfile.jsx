@@ -5,12 +5,14 @@ import Footer from "./Components/Footer";
 import CraftForm from "./Components/CraftForm.jsx"
 import Form from "./Components/Form";
 import styles from "./BuyerProfile.module.css";
+import { useNavigate } from "react-router-dom";
 
 const BuyerProfile = () => {
 
   
   const [data, setData] = useState({});
   const buyerId = sessionStorage.getItem("buyer_id");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`http://localhost:3000/buyer_profile/${buyerId}`)
@@ -22,6 +24,12 @@ const BuyerProfile = () => {
         console.error(error);
       });
   }, [buyerId]);
+
+  
+
+  const handleChange = ()=>{
+    navigate('/pic_change');
+}
 
 
   return (
@@ -58,7 +66,7 @@ const BuyerProfile = () => {
           src="./images/avatar.jpg"
           // src="./images/ellipse-909@2x.png"
         />
-        <button className={styles.pictureNameInner}> + Change photo</button>
+        <button className={styles.pictureNameInner} onClick={handleChange}> + Change photo</button>
       </div>
       
       

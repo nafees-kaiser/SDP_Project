@@ -34,7 +34,7 @@ const Community_home = ()=>{
                 </div>
                 <div className={style.down}>
                     <div className={style.image}>
-                        <i class="fa-solid fa-circle-plus"></i>
+                        <i className="fa-solid fa-circle-plus"></i>
                     </div>
                     <input 
                         type="text"

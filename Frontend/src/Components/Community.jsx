@@ -1,15 +1,46 @@
+import { useState, useEffect } from "react";
 import styles from "./Community.module.css";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Community = () => {
+  const navigate = useNavigate();
+  const handleChange = () => {
+    navigate('/community');
+  };
+  const [communities, setCommunities] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/community_summary')
+      .then(response => setCommunities(response.data))
+      .catch(error => console.error(error));
+  }, []);
+
   return (
     <div className={styles.community} id="com">
       <div className={styles.allCommunity}>
-        <button className={styles.buttons}>
+        <button className={styles.buttons} onClick={handleChange}>
           <b className={styles.seeAllArticles}>SEE ALL ARTICLES</b>
         </button>
       </div>
       <div className={styles.articles}>
-        <div className={styles.groupParent}>
+      {communities.map(community => (
+        <div key={community._id} className={styles.groupParent}>
+          <div className={styles.images1Wrapper}>
+            <img className={styles.images1Icon} src={community.attachment} />
+          </div>
+          <div className={styles.wearYourStoryHandmadeJeweParent}>
+            {/* <div className={styles.wearYourStory}>
+              {community.community.date}
+            </div> */}
+            <div className={styles.handmadeJewelleryIs}>
+              " {community.message} "
+            </div>
+            {/* <button className={styles.readArticle}>READ ARTICLE</button> */}
+          </div>
+        </div>
+         ))}
+        {/* <div className={styles.groupParent}>
           <div className={styles.images1Wrapper}>
             <img className={styles.images1Icon} alt="" src="./images/images-1@2x.png" />
           </div>
@@ -66,7 +97,7 @@ const Community = () => {
             </div>
             <button className={styles.readArticle}>READ ARTICLE</button>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className={styles.header}>
         <b className={styles.communityHubFueling}>

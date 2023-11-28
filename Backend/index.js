@@ -105,6 +105,21 @@ app.use("/seller_product_list", sellerList);
 const knowTheCraftRouting = require('./routes/knowTheCraft');
 app.use("/know-the-craft",knowTheCraftRouting);
 
+const orderlist = require('./routes/orderlist');
+app.use("/orderlist", orderlist);
+
+const update_product = require('./routes/update_product');
+app.use("/update_product", update_product);
+
+const comm_summary = require('./routes/community_summary');
+app.use("/community_summary", comm_summary);
+
+const new_arrival = require('./routes/new_arrival');
+app.use("/new_arrival", new_arrival);
+
+const changepic = require('./routes/changepic');
+app.use("/changepic", changepic);
+
 //----APIs for Review----
 //code for add review for product
 app.post('/add/review', async (req, res) => {

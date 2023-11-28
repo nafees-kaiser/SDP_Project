@@ -1,135 +1,118 @@
 import styles from "./Category.module.css";
-// import React from 'react';
-// import Slider from 'react-slick';
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-// const categories = [
-//   {
-//     title: 'Pottery & Ceramics',
-//     image: './images/beautifulclaypotshandmadepotterydisplayroadsidehandicraftshopdhakabangladesh53840651-2@2x.png',
-//   },
-//   {
-//     title: 'Handwoven Textiles',
-//     image: './images/handwoventextilesforsaleonthesidewalkinbuceriasnayaritmexicom23a3f-2@2x.png',
-//   },
-//   {
-//     title: 'Rattan Products',
-//     image: './images/dsc-0424-585230-2@2x.png',
-//   },
-//   {
-//     title: 'Jamdani saree',
-//     image: './images/dsc-0424-585230-2@2x.png',
-//   },
-//   {
-//     title: 'Wooden work',
-//     image: './images/dsc-0424-585230-2@2x.png',
-//   },
-//   {
-//     title: 'embroidered quilts',
-//     image: './images/dsc-0424-585230-2@2x.png',
-//   },
-//   {
-//     title: 'carpets',
-//     image: './images/dsc-0424-585230-2@2x.png',
-//   },
-// ];
+const categories = [
+  {
+    title: 'Pottery',
+    image: './images/beautifulclaypotshandmadepotterydisplayroadsidehandicraftshopdhakabangladesh53840651-2@2x.png',
+  },
+  {
+    title: 'Bedsheets and Katha',
+    image: './images/handwoventextilesforsaleonthesidewalkinbuceriasnayaritmexicom23a3f-2@2x.png',
+  },
+  {
+    title: 'Furniture',
+    image: './images/furniture.jpg',
+  },
+  {
+    title: 'Saree',
+    image: './images/384207015_834271585101077_2032535910196640642_n.jpg',
+  },
+  {
+    title: 'Utensils',
+    image: './images/utensil.jpg',
+  },
+  {
+    title: 'Jewelry',
+    image: './images/jewelry.jpg',
+  },
+  {
+    title: 'Mats and Rugs',
+    image: './images/mat.jpg',
+  },
+  {
+    title: 'Home Decor',
+    image: './images/homedecor.jpg',
+  },
+  {
+    title: 'Mufler/Scurf',
+    image: './images/muffler.jpg',
+  },
+  {
+    title: 'Kurta/Punjabi',
+    image: './images/Panjabi.jpg',
+  },
+  {
+    title: 'Fotua/Salware Kameez',
+    image: './images/Salwar-Kameez.jpg',
+  },
+  {
+    title: 'Pant/Pajama',
+    image: './images/pant.jpg',
+  },
+  {
+    title: 'Lungi',
+    image: './images/lungi.jpeg',
+  },
+  {
+    title: 'Flower Vase',
+    image: './images/flowervase.webp',
+  },
+  {
+    title: 'Footwear',
+    image: './images/juta.jpg',
+  },
+  {
+    title: 'Musical Instrument',
+    image: './images/music.jpg',
+  },
+  {
+    title: 'Painting',
+    image: './images/arts.jpg',
+  },
+  {
+    title: 'Cap/Hat/Pagri',
+    image: './images/Cap.png',
+  },
+  {
+    title: 'Bags',
+    image: './images/bag.jpg',
+  },
+  {
+    title: 'WoodBlock Printing',
+    image: './images/woodblock.jpg',
+  },
+  {
+    title: 'Conch Shell Craft',
+    image: './images/conchshell.jpg',
+  },
+];
 
 const Category = () => {
 
-  // const settings = {
-  //   dots: false,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 3,
-  //   slidesToScroll: 1,
-  // };
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+  };
 
   return (
-    <div className={styles.category}>
-      <div className={styles.category1} />
-      <div className={styles.rectangleParent}>
-
-        <b className={styles.shopByCategoryContainer}>
-          {/* <p className={styles.shopBy}><h4>Shop By</h4></p>
-          <p className={styles.shopBy}>&nbsp;</p>
-          <p className={styles.shopBy}> Category</p> */}
-          <h1 style={
-              {fontSize: '2em'}
-            }>Shop By</h1>
-          <br/>
-          <h1 style={
-              {fontSize: '2em'}
-            }>Category</h1>
-        </b>
+    <div className={styles.shopByCategoryContainer}>
+      <div className={styles.titleBox}>
+        <h1 className={styles.title}>Shop by Category</h1>
       </div>
-
-      <div className={styles.categoryyyy}>
-      {/* <Slider {...settings}>
-        {categories.map((category, index) => (
-          <div key={index} className={styles.pottery}>
-            <div className={styles.potteryChild} />
-            <img
-             className={styles.beautifulClayPotsHandMadeIcon}
-             alt=""
-             src={category.image}
-            />
-            <button className={styles.piecescategoryTag}>
-              <b className={styles.potteryCeramics}>{category.title}</b>
-            </button>
+      <Slider {...settings} className={styles.carousel}>
+        {categories.map((item, index) => (
+          <div key={index} className={styles.carouselItem}>
+            <img src={item.image} alt={item.title} />
+            <button className={styles.productButton}>{item.title}</button>
           </div>
         ))}
-        </Slider> */}
-        <div className={styles.pottery}>
-          <div className={styles.potteryChild} />
-          <img
-            className={styles.beautifulClayPotsHandMadeIcon}
-            alt=""
-            src="./images/beautifulclaypotshandmadepotterydisplayroadsidehandicraftshopdhakabangladesh53840651-2@2x.png"
-          />
-          <button className={styles.piecescategoryTag}>
-            <b className={styles.potteryCeramics}>Pottery & Ceramics</b>
-          </button>
-        </div>
-        <div className={styles.textiles}>
-          <div className={styles.potteryChild} />
-          <button className={styles.piecescategoryTag1}>
-            <b className={styles.potteryCeramics}>Handwoven Textiles</b>
-          </button>
-          <img
-            className={styles.handwovenTextilesForSaleOnIcon}
-            alt=""
-            src="./images/handwoventextilesforsaleonthesidewalkinbuceriasnayaritmexicom23a3f-2@2x.png"
-          />
-        </div>
-        <div className={styles.rattan}>
-          <div className={styles.potteryChild} />
-          <img
-            className={styles.beautifulClayPotsHandMadeIcon}
-            alt=""
-            src="./images/dsc-0424-585230-2@2x.png"
-          />
-          <button className={styles.piecescategoryTag1}>
-            <b className={styles.rattanProducts}>Rattan Products</b>
-          </button>
-        </div>
-      </div>
-      <div className={styles.arrows}>
-        <button className={styles.button}>
-          <img
-            className={styles.iconarrowRight}
-            alt=""
-            src="./images/iconarrowright1.svg"
-          />
-        </button>
-        <button className={styles.button1}>
-          <img
-            className={styles.iconarrowRight}
-            alt=""
-            src="./images/iconarrowleft1.svg"
-          />
-        </button>
-      </div>
+      </Slider>
     </div>
   );
 };

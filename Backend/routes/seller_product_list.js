@@ -18,16 +18,16 @@ router.get('/:id', async(req, res)=>{
     }
 });
 
-// router.get('/:id', async(req, res)=>{
-//     try {
-//         const id = req.params.id;
-//         // console.log(id);
-//         const result = await Products.findById(id);
-//         // console.log(`The singular product is ${result}`)
-//         res.json(result);
-//     } catch (error) {
-//         console.log(`Error while fetching singular product\n ${error}`)
-//     }
-// })
+router.get('/:sellerId/:id', async(req, res)=>{
+    try {
+        const id = req.params.id;
+        console.log(id);
+        const result = await Products.findById(id);
+        console.log(`The singular product is ${result}`)
+        res.json(result);
+    } catch (error) {
+        console.log(`Error while fetching singular product\n ${error}`)
+    }
+})
 
 module.exports = router

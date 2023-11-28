@@ -33,6 +33,9 @@ const ProfileBox = (props) => {
   const handleChange2 = ()=>{
     navigate('/sellerProductListing');
 }
+const handleChange3 = ()=>{
+  navigate('/Order_Seller_List');
+}
 
   const handleSignOut = () => {
     // Clear sessionStorage when the "Sign Out" button is clicked
@@ -83,10 +86,10 @@ const ProfileBox = (props) => {
         />
         <div className={styles.messages} onClick={callbackmessage}>Messages</div>
       </button>
-      <button className={styles.notification}>
+      <button className={styles.notification} onClick={handleChange3}>
         <div className={styles.cartChild} />
         <img className={styles.iconBell} alt="" src="./images/-icon-clipboard-list.svg" />
-        <div className={styles.notification1}>New Orders</div>
+        <div className={styles.notification1}>My Orders</div>
       </button>
       <button className={styles.myOrders}>
         <div className={styles.myOrdersChild} />

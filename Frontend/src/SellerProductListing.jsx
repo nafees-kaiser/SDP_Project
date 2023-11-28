@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import style from "./SellerProductListing.module.css"
-import nakshiKathaImage from '../images/nakshi_katha(1).jpg'
+// import nakshiKathaImage from '../images/nakshi_katha(1).jpg'
 import { SellerCard } from "./Components/Card";
 import LoginNav from "./Components/LoginNav";
 import Footer from "./Components/Footer";
@@ -49,8 +49,10 @@ export default function SellerProductListing() {
                         <div className={style['product-cards']}>
                             {products.map((product, index) => {
                                 const { _id, productName, district, division, price, storedQuantity, Product_img1 } = product;
+                                
                                 return (
-                                    <Link to={`/seller_product-listing/${_id}`} key={_id}>
+                                    
+                                    <Link to={`/SellerIndividualProduct/${_id}`} key={_id}>
                                         <SellerCard
                                             // image={nakshiKathaImage}
                                             image={Product_img1}

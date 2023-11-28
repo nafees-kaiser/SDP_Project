@@ -26,6 +26,8 @@
     "nodemailer": "^6.9.5",
     "nodemon": "^3.0.1",
     "path": "^0.12.7",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2"
   },
