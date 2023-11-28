@@ -9,7 +9,7 @@ const GoToProduct = () => {
   return (
     <div className={styles.sliderSection}>
       <div className={styles.imagePlaceholder}>
-        <img className={styles.picture1Icon} alt="" src="./images/picture-1@2x.png" />
+        <img className={styles.picture1Icon} alt="" src="https://res.cloudinary.com/dkotituzn/image/upload/v1701160121/wfcfrfxw3filqrxnti72.png" />
       </div>
       <div className={styles.content}>
         <div className={styles.text}>

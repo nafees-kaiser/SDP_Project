@@ -50,7 +50,7 @@ const handleChange3 = ()=>{
       {/* <button className={styles.b}onClick={closemodel}>X</button> */}
       <div className={styles.border} />
       <Link to={`/seller_profile`} className={styles.header}>
-        <img className={styles.pictureIcon} alt="" src={data.img} />
+        <img className={styles.pictureIcon} alt="https://res.cloudinary.com/dkotituzn/image/upload/v1701183215/teoixr5thophrnzexjec.jpg" src={data.img} />
         </Link>
         <div className={styles.name}>{data.name}</div>
         <div className={styles.welcome}>
@@ -63,7 +63,7 @@ const handleChange3 = ()=>{
         <img
           className={styles.iconShoppingBag}
           alt=""
-          src="./images/-icon-add-circled-outline.svg"
+          src="https://res.cloudinary.com/dkotituzn/image/upload/v1701183415/oi6uokgzgxzki9gjeqaz.svg"
         />
         <div className={styles.myCart}>Add Products</div>
       </button>
@@ -72,7 +72,7 @@ const handleChange3 = ()=>{
         <img
           className={styles.iconActionHeartLoveLikeR}
           alt=""
-          src="./images/-icon-products.svg"
+          src="https://res.cloudinary.com/dkotituzn/image/upload/v1701183417/q6k3htiadqnpiuuedbnd.svg"
         />
         <div className={styles.wishlist1}>My Products</div>
       </button>
@@ -82,13 +82,13 @@ const handleChange3 = ()=>{
         <img
           className={styles.iconCommunicationBubbleTex}
           alt=""
-          src="./images/-icon-communication-bubble-texting-chat-comment-talk-speech-icon.svg"
+          src="https://res.cloudinary.com/dkotituzn/image/upload/v1701183415/rhxbei5gsuphrac0uv0e.svg"
         />
         <div className={styles.messages} onClick={callbackmessage}>Messages</div>
       </button>
       <button className={styles.notification} onClick={handleChange3}>
         <div className={styles.cartChild} />
-        <img className={styles.iconBell} alt="" src="./images/-icon-clipboard-list.svg" />
+        <img className={styles.iconBell} alt="" src="https://res.cloudinary.com/dkotituzn/image/upload/v1701184053/v6xcycbsiueuzchjs4vy.svg" />
         <div className={styles.notification1}>My Orders</div>
       </button>
       <button className={styles.myOrders}>
@@ -96,7 +96,7 @@ const handleChange3 = ()=>{
         <img
           className={styles.iconNavIconListA}
           alt=""
-          src="./images/-icon-bell.svg"
+          src="https://res.cloudinary.com/dkotituzn/image/upload/v1701183415/zdmzzvftlkwe0u3cezvz.svg"
         />
         <div className={styles.myOrders1}>Notification</div>
       </button>
@@ -110,13 +110,13 @@ const handleChange3 = ()=>{
         <img
           className={styles.iconPeopleCommunity}
           alt=""
-          src="./images/-icon-people-community.svg"
+          src="https://res.cloudinary.com/dkotituzn/image/upload/v1701183417/ycnikb4vzllfjfqxrbpz.svg"
         />
         <div className={styles.trackingOrders}>Go to Craft Community</div>
       </button>
       <button className={styles.community} onClick={handleSignOut}>
         <div className={styles.myOrdersChild} />
-        <img className={styles.iconPeopleCommunity} alt="" src="./images/-icon-logout.svg" />
+        <img className={styles.iconPeopleCommunity} alt="" src="https://res.cloudinary.com/dkotituzn/image/upload/v1701183415/ojo6zscjn3upjokcme32.svg" />
         <div className={styles.goToCraft}>Sign Out</div>
       </button>
     </div>

@@ -332,7 +332,7 @@ const AddAProductPage = () => {
         <img
           className={styles.handicraft768x4321Icon}
           alt=""
-          src="./images/639291handicraft768x432-1@2x.png"
+          src="https://res.cloudinary.com/dkotituzn/image/upload/v1701184335/lug3widwpklaochcqw4a.png"
         />
         <div className={styles.header}>
           <b className={styles.productList}>Add a product</b>
@@ -445,7 +445,7 @@ const AddAProductPage = () => {
               />
             </div>
             {/* abc */}
-          <div className={styles.elementsswatchesbutton}>
+          {/* <div className={styles.elementsswatchesbutton}>
           {data.size.dimension.map((size, index) => (
             <div key={index} className={styles.elementsswatchesgroupbuttonParent}>
               <div className={styles.elementsswatchesgroupbutton}>
@@ -494,7 +494,6 @@ const AddAProductPage = () => {
                     onChange={(e) => handleSizeChange(e, index, 'dimension')}
                   />
                 </div>
-                {/* ... (similar fields for width, height, and diameter) */}
               </div>
             </div>
           ))}
@@ -518,9 +517,9 @@ const AddAProductPage = () => {
                 ))}
               </select>
           
-        </div>
+        </div> */}
   
-                {/* <div className={styles.elementsswatchesgroupbutton}>
+                <div className={styles.elementsswatchesgroupbutton}>
                 
                     <div className={styles.hello}>
                       <input
@@ -591,7 +590,8 @@ const AddAProductPage = () => {
                 </option>
                 ))}
               </select>
-            </div> */}
+            </div>
+            {/* abc */}
           </div>
         </div>
         <div className={styles.location}>

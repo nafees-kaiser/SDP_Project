@@ -54,7 +54,7 @@ const BuyerProfileBox = (props) => {
       {/* <button className={styles.b}onClick={closemodel}>X</button> */}
       <div className={styles.border} />
       <Link to={`/buyer_profile`} className={styles.header}>
-        <img className={styles.pictureIcon} alt="" src={data.img} />
+        <img className={styles.pictureIcon} alt="https://res.cloudinary.com/dkotituzn/image/upload/v1701183215/teoixr5thophrnzexjec.jpg" src={data.img} />
       </Link>
       <div className={styles.name}>{data.name}</div>
       <div className={styles.welcome}>
@@ -66,7 +66,7 @@ const BuyerProfileBox = (props) => {
         <img
           className={styles.iconShoppingBag}
           alt=""
-          src="/images/-icon-shoppingbag.svg"
+          src="https://res.cloudinary.com/dkotituzn/image/upload/v1701183418/ymmrk4xjhgjk5sxzbfqe.svg"
         />
         <div className={styles.myCart}>My Cart</div>
       </button>
@@ -76,7 +76,7 @@ const BuyerProfileBox = (props) => {
         <img
           className={styles.iconActionHeartLoveLikeR}
           alt=""
-          src="/images/-icon-action-heart-love-like-romantic-icon.svg"
+          src="https://res.cloudinary.com/dkotituzn/image/upload/v1701183413/jsef2kyvwqnihrvhgtzq.svg"
         />
         <div className={styles.wishlist1}><Link to={`/Wishlist`}>Wishlist</Link></div>
       </button>
@@ -85,13 +85,13 @@ const BuyerProfileBox = (props) => {
         <img
           className={styles.iconCommunicationBubbleTex}
           alt=""
-          src="/images/-icon-communication-bubble-texting-chat-comment-talk-speech-icon.svg"
+          src="https://res.cloudinary.com/dkotituzn/image/upload/v1701183415/rhxbei5gsuphrac0uv0e.svg"
         />
         <div className={styles.messages} onClick={callbackmessage}>Messages</div>
       </button>
       <button className={styles.notification}>
         <div className={styles.cartChild} />
-        <img className={styles.iconBell} alt="" src="/images/-icon-bell.svg" />
+        <img className={styles.iconBell} alt="" src="https://res.cloudinary.com/dkotituzn/image/upload/v1701183415/zdmzzvftlkwe0u3cezvz.svg" />
         <div className={styles.notification1} onClick={notificationTogg} >Notification</div>
       </button>
       <button className={styles.myOrders}onClick={handleButtonClick}>
@@ -99,7 +99,7 @@ const BuyerProfileBox = (props) => {
         <img
           className={styles.iconNavIconListA}
           alt=""
-          src="/images/-icon-nav-icon-list-a.svg"
+          src="https://res.cloudinary.com/dkotituzn/image/upload/v1701183416/ognqnlkwk5qkbf8jmjcw.svg"
         />
         <div className={styles.myOrders1} >My Orders</div>
       </button>
@@ -113,13 +113,13 @@ const BuyerProfileBox = (props) => {
         <img
           className={styles.iconPeopleCommunity}
           alt=""
-          src="/images/-icon-people-community.svg"
+          src="https://res.cloudinary.com/dkotituzn/image/upload/v1701183417/ycnikb4vzllfjfqxrbpz.svg"
         />
         <div className={styles.trackingOrders}>Go to Craft Community</div>
       </button>
       <button className={styles.community} onClick={handleSignOut}>
         <div className={styles.myOrdersChild} />
-        <img className={styles.iconPeopleCommunity} alt="" src="/images/-icon-logout.svg" />
+        <img className={styles.iconPeopleCommunity} alt="" src="https://res.cloudinary.com/dkotituzn/image/upload/v1701183415/ojo6zscjn3upjokcme32.svg" />
         <div className={styles.goToCraft}>Sign Out</div>
       </button>
     </div>
