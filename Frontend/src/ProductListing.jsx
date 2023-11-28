@@ -198,7 +198,7 @@ export default function ProductListing() {
                             <div style={{ cursor: "pointer", marginBottom: "5px" }} onClick={toggleCategory}>
                                 {isCategoryOpen ?
                                     <div>
-                                        <img src="/images/down.svg" alt="down" style={{ display: "inline" }} />
+                                        <img src={"/images/down.svg"} alt="down" style={{ display: "inline" }} />
                                         <div style={{ display: "inline" }}>Categories</div>
                                     </div>
                                     : <div>

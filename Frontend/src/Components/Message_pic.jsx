@@ -1,10 +1,9 @@
 import React,{useState} from "react";
 import Style from "./message_pic.module.css"
 import axios from "axios";
-const message = ({name,text,pic,attachment,time,id,like})=>{
+const message = ({user,post,name,text,pic,attachment,time,id,like})=>{
     const [isLiked, setIsLiked] = useState(false);
     const increaseLike = () => {
-      console.log(pic)
       setIsLiked(true);  // Set state to true when liked
       
       if(!isLiked){
@@ -14,7 +13,18 @@ const message = ({name,text,pic,attachment,time,id,like})=>{
             })
             .catch((err) => {
               console.log(err);
-            });
+        });
+        axios.post(`http://localhost:3000/notifications`,{
+            senderId: user,
+            receiverId: post,
+            notificationDescription: ' Liked your Post'
+        })
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+            console.error(err);
+        })
       }
       else {
           setIsLiked(false)
@@ -39,8 +49,8 @@ const message = ({name,text,pic,attachment,time,id,like})=>{
                         <div className={Style.inner_pic}>
                             <img src={attachment} alt="" />
                         </div>
-                        <div>
-                            <p>{like} likes</p>
+                        <div style={{color:"#8b8b8b"}}>
+                                {isLiked?<p>{like} likes including you</p>:<p>{like} likes</p>}
                         </div>
                         
                         <div className={Style.like}>

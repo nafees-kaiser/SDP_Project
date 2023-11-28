@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Notification from "./Notification.jsx";
 import { get_community_data } from "./Actions/community.jsx";
 import { io } from "socket.io-client";
-
+import LoginNav from "./Components/LoginNav.jsx"
 
 
 const Community_home = ()=>{
@@ -19,6 +19,7 @@ const Community_home = ()=>{
     const [socket,setsocket] = useState(null);
     const inputRef = useRef(null)
     const [message,setmessage] = useState();
+    const [messageset,setmessagesetter] = useState(false);
     const buyerId = sessionStorage.getItem("buyer_id");
     const notification = useSelector(state => state.toggle)
     const {isLoading,error,data} = useSelector(state => state.communityValue)
@@ -43,7 +44,7 @@ const Community_home = ()=>{
                 setvalue((prevMessages) => {
                     const valueCopy = [...prevMessages.valueCopy];
                     valueCopy.push({
-                        user: { email: res.data.email, name: res.data.name,img:res.data.img, tag: 'buyer' },
+                        user: { email: res.data.email, name: res.data.name,pic:res.data.img, tag: 'buyer' },
                         message: message,
                         attachment: attachment,
                         date: date
@@ -103,11 +104,23 @@ const Community_home = ()=>{
         formDataToSend.append('img',img);
         setmessage("")
         setimg(null)
+        axios.post(`http://localhost:3000/notifications`,{
+            senderId: buyerId,
+            receiverId: buyerId,
+            notificationDescription: ' Posted on community'
+          })
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+            console.error(err);
+        })
         const response = await axios.post('http://localhost:3000/community', formDataToSend, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         });
+
         if(response.status === 200) {
             console.log("Success");
             socket?.emit('sendCommunity',{
@@ -156,10 +169,10 @@ const Community_home = ()=>{
                     value.valueCopy.slice().reverse().map((value) => (
                         value.attachment ? (
                         <div key={value.id}>
-                            <Message_pic user={buyerId} post={value.user.id} name={value.user.name} pic={value.user.img} attachment={value.attachment} text={value.message} time={value.date} />
+                            <Message_pic user={buyerId} post={value.user.id} name={value.user.name} pic={value.user.pic} attachment={value.attachment} text={value.message} time={value.date} id={value.id} like={value.like}/>
                         </div>
                         ) : (
-                        <Message_txt user={buyerId} post={value.user.id} name={value.user.name} pic={value.user.img} text={value.message} time={value.date} />
+                        <Message_txt user={buyerId} post={value.user.id} name={value.user.name} pic={value.user.pic} text={value.message} time={value.date} id={value.id} like={value.like}/>
                         )
                     ))
                     ) : (

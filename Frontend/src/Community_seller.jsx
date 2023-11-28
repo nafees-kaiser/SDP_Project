@@ -44,7 +44,7 @@ const Community_home = ()=>{
                 setvalue((prevMessages) => {
                     const valueCopy = [...prevMessages.valueCopy];
                     valueCopy.push({
-                        user: { email: res.data.email, name: res.data.name, tag: 'buyer' },
+                        user: { email: res.data.email, name: res.data.name,pic:res.data.img, tag: 'buyer' },
                         message: message,
                         attachment: attachment,
                         date: date
@@ -104,6 +104,17 @@ const Community_home = ()=>{
         formDataToSend.append('img',img);
         setmessage("")
         setimg(null)
+        axios.post(`http://localhost:3000/notifications`,{
+            senderId: buyerId,
+            receiverId: buyerId,
+            notificationDescription: ' Posted on community'
+          })
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+            console.error(err);
+        })
         const response = await axios.post('http://localhost:3000/community', formDataToSend, {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -161,10 +172,10 @@ const Community_home = ()=>{
                     value.valueCopy.slice().reverse().map((value) => (
                         value.attachment ? (
                         <div key={value.id}>
-                            <Message_pic user={buyerId} post={value.user.id} name={value.user.name} attachment={value.attachment} text={value.message} time={value.date} id={value.id} like={value.like} />
+                            <Message_pic user={buyerId} post={value.user.id} name={value.user.name} pic={value.user.pic} attachment={value.attachment} text={value.message} time={value.date} id={value.id} like={value.like} />
                         </div>
                         ) : (
-                        <Message_txt user={buyerId} post={value.user.id} name={value.user.name} text={value.message} time={value.date} id={value.id} like={value.like}/>
+                        <Message_txt user={buyerId} post={value.user.id} name={value.user.name} pic={value.user.pic} text={value.message} time={value.date} id={value.id} like={value.like}/>
                         )
                     ))
                     ) : (

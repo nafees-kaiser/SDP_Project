@@ -138,7 +138,7 @@ router.post('/:id', async (req, res) => {
         return res.status(404).json({ error: 'Community not found' });
       }
   
-      if(community.likes >1) {
+      if(community.likes >=1) {
         community.likes += 1;
       }
       else {
@@ -166,10 +166,10 @@ router.get('/',async (req,res)=>{
             const seller = await Seller.findById(message.senderId)
             const buyer = await Buyer.findById(message.senderId)
             if(seller) {
-                return { user: {id:seller.id,img:seller.img,email: seller.email,name:seller.name,tag:"seller"},id:message.id,message:message.message,attachment:message.attachment,date:message.date,like:message.likes  }
+                return { user: {id:seller.id,pic:seller.img,email: seller.email,name:seller.name,tag:"seller"},id:message.id,message:message.message,attachment:message.attachment,date:message.date,like:message.likes  }
             }
             else {
-                return { user: {id:buyer.id,img:buyer.img,email: buyer.email,name:buyer.name,tag:"buyer"},id:message.id,message:message.message,attachment:message.attachment,date:message.date,like:message.likes  }
+                return { user: {id:buyer.id,pic:buyer.img,email: buyer.email,name:buyer.name,tag:"buyer"},id:message.id,message:message.message,attachment:message.attachment,date:message.date,like:message.likes  }
             }
             
         }))
